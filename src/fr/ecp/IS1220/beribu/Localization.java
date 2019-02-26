@@ -3,7 +3,7 @@ package fr.ecp.IS1220.beribu;
 public class Localization {
 	private double latitude;
 	private double longitude;
-	
+
 	public Localization(double latitude, double longitude) {
 		super();
 		this.latitude = latitude;
@@ -58,7 +58,12 @@ public class Localization {
 			return false;
 		return true;
 	}
-	
+
+	/**
+	 * This method returns the distance between two Localization.
+	 * @param loc	the Localization target to compare with
+	 * @return 		the distance between the two Locazation
+	 */
 	public double distanceTo(Localization loc) {
 		double lat = this.latitude - loc.getLatitude();
 		double lon = this.longitude - loc.getLongitude();
