@@ -65,8 +65,8 @@ public class Localization {
 	 * @return 		the distance between the two Locazation
 	 */
 	public double distanceTo(Localization loc) {
-		double lat = this.latitude - loc.getLatitude();
-		double lon = this.longitude - loc.getLongitude();
+		double lat = loc.getLatitude() - this.latitude;
+		double lon = loc.getLongitude() - this.longitude;
 		return Math.sqrt(lat * lat + lon * lon);
 	}
 }
