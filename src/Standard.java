@@ -1,8 +1,8 @@
 
-public class VmaxCard implements Card{
+public class Standard implements Card{
 	private User user;
 	
-	public VmaxCard(User user) {
+	public Standard(User user) {
 		super();
 		this.user = user;
 	}
@@ -15,10 +15,7 @@ public class VmaxCard implements Card{
 	@Override
 	public double cost(double duration, String bicycleType) {
 		// TODO Auto-generated method stub
-		this.user.setTimeCreditBalance(0);
 		return 0;
-		
 	}
 	
 }
-
