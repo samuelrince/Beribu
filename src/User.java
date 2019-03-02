@@ -1,30 +1,31 @@
+import java.util.ArrayList;
+import java.util.Date;
 
 public class User {
-	private static int uniqId = 00001;
+	private static int uniqId;
 	private int id;
 	private String name;
-	private double[] localisation;
-	private double timeCreditBalance;
-	private Card card;
+	private Localization localization;
+	private double timeCreditBalance = 0;
+	private Card card = null;
 	private Ride[] listOfRides;
 	
 	public User(String name) {
 		super();
 		this.name = name;
-		this.id = uniqId;
-		uniqId += 1;
+		this.id = uniqId++;
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
-	public double[] getLocalisation() {
-		return localisation;
+	public Localization getLocalization() {
+		return this.localization;
 	}
 
 	public void setLocalisation(double[] localisation) {
@@ -32,7 +33,7 @@ public class User {
 	}
 
 	public double getTimeCreditBalance() {
-		return timeCreditBalance;
+		return this.timeCreditBalance;
 	}
 
 	public void setTimeCreditBalance(double timeCreditBalance) {
@@ -40,22 +41,34 @@ public class User {
 	}
 
 	public Card getCard() {
-		return card;
+		return this.card;
 	}
 
-	public void setCard(Card card) {
+	public void subscribe(Card card) {
 		this.card = card;
 	}
 
 	public Ride[] getListOfRides() {
-		return listOfRides;
+		return this.listOfRides;
 	}
 
 	public void setListOfRides(Ride[] listOfRides) {
 		this.listOfRides = listOfRides;
 	}
 	
-	public void newRide() {
+	public void newRide(Station station, String bicyleType) {
+		if (station.isAvailable(bicycleType)) {
+			Bicycle bicycle;
+			Date time;
+			Ride ride = new Ride(this,bicycle,station,time);
+		}
+		else {
+			System.out.println("Désolé, le type de vélo souhaité n'est pas disponible.");
+		}
 	}
 	 
+	public void newTravel(double[] source, double[] destination, 
+			String bicyleType, PathStrategy pathStrategy) {
+		
+	}
 }

@@ -1,5 +1,5 @@
 
 public interface Card {
-	public String getType();
-	public double getUserId();
+	public User getUser();
+	public double cost(double duration, String bicycleType);
 }

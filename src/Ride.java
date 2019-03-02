@@ -1,6 +1,6 @@
-import java.util.Date;
 
 public class Ride {
+	private static int uniqId;
 	private int id;
 	private User user;
 	private Bicycle bicyle;
@@ -8,15 +8,31 @@ public class Ride {
 	private Date startTime;
 	private Station endStation;
 	private Date endTime;
-	private boolean planned;
+	private boolean current;
 	private double price;
 	
-	public void takeBicycle(Station station) {
-		
+	public Ride(User user, Bicycle bicyle, Station startStation, Date startTime) {
+		super();
+		this.user = user;
+		this.bicyle = bicyle;
+		this.startStation = startStation;
+		this.startTime = startTime;
+		this.current = true;
+		this.id = uniqId++;
 	}
-	
-	public void dropBicycle(ParkingSlot parkingSlot) {
-		
+
+	public void end(ParkingSlot parkingSlot) {
+		if (parkingSlot.isAvailable()) {
+			Date time;
+			Station station;
+			this.endTime = time;
+			this.endStation = station;
+			this.current = false;
+			this.pay();
+		}
+		else {
+			throw new Exception("Cette place est déjà prise ou hors-service.");
+		}
 	}
 	
 	public void pay() {

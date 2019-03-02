@@ -1,8 +1,8 @@
 
-public class VmaxCard implements Card{
+public class Vlibre implements Card{
 	private User user;
 	
-	public VmaxCard(User user) {
+	public Vlibre(User user) {
 		super();
 		this.user = user;
 	}
@@ -17,8 +17,6 @@ public class VmaxCard implements Card{
 		// TODO Auto-generated method stub
 		this.user.setTimeCreditBalance(0);
 		return 0;
-		
 	}
 	
 }
-

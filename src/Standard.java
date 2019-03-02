@@ -16,6 +16,6 @@ public class Standard implements Card{
 	public double cost(double duration, String bicycleType) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
+	}	
 	
 }
