@@ -74,7 +74,7 @@ public class User {
 			System.out.println("Désolé, le type de vélo souhaité n'est pas disponible.");
 		}
 	}
-	 
+	
 	public void newTravel(double[] source, double[] destination, 
 			String bicyleType, PathStrategy pathStrategy) {
 		
@@ -82,5 +82,6 @@ public class User {
 	
 	public static void main(String[] args) {
 		User user1 = new User("Robert Downey Jr.");
+		System.out.println(user1);
 	}
 }
