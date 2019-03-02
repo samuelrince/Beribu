@@ -62,7 +62,7 @@ public class Localization {
 	/**
 	 * This method returns the distance between two Localization.
 	 * @param loc	the Localization target to compare with
-	 * @return 		the distance between the two Locazation
+	 * @return 		the distance between the two Localization
 	 */
 	public double distanceTo(Localization loc) {
 		double lat = loc.getLatitude() - this.latitude;
