@@ -3,18 +3,19 @@ public class Ride {
 	private static long uniqId;
 	private long id;
 	private User user;
-	private Bicycle bicyle;
+	private Bicycle bicycle;
 	private Station startStation;
 	private Date startTime;
 	private Station endStation;
 	private Date endTime;
+	private Duration duration;
 	private boolean current;
 	private double price;
 	
-	public Ride(User user, Bicycle bicyle, Station startStation) {
+	public Ride(User user, Bicycle bicycle, Station startStation) {
 		Date startTime = new Date();
 		this.user = user;
-		this.bicyle = bicyle;
+		this.bicyle = bicycle;
 		this.startStation = startStation;
 		this.startTime = startTime;
 		this.current = true;
@@ -28,6 +29,7 @@ public class Ride {
 			this.endTime = endTime;
 			this.endStation = station;
 			this.current = false;
+			this.duration = new Duration(this.startTime,this.endTime);
 			this.pay();
 		}
 		else {
@@ -36,9 +38,6 @@ public class Ride {
 	}
 	
 	public void pay() {
-		double duration;
-		//compute duration
-		//choice costStrategy
-		this.price = 0;
+		this.price = this.user.getCard().cost(this.duration, this.bicycle.getType());
 	}
 }

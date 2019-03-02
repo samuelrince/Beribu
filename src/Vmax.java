@@ -13,9 +13,9 @@ public class Vmax implements Card{
 		return this.user;
 	}
 	@Override
-	public double cost(double duration, String bicycleType) {
+	public double cost(Duration duration, String bicycleType) {
 		// TODO Auto-generated method stub
-		this.user.setTimeCreditBalance(0);
+		this.user.addTimeCreditBalance(0);
 		return 0;
 		
 	}

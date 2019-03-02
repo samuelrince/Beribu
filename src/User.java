@@ -6,7 +6,7 @@ public class User {
 	private long id;
 	private String name;
 	private Localization localization;
-	private double timeCreditBalance = 0;
+	private Duration timeCreditBalance = new Duration();
 	private Card card = null;
 	private Ride[] listOfRides;
 	
@@ -16,7 +16,7 @@ public class User {
 		this.id = uniqId++;
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
@@ -28,16 +28,24 @@ public class User {
 		return this.localization;
 	}
 
-	public void setLocalisation(double[] localisation) {
-		this.localisation = localisation;
+	public void setLocalisation(double[] localization) {
+		this.localization = localization;
 	}
 
-	public double getTimeCreditBalance() {
+	public Duration getTimeCreditBalance() {
 		return this.timeCreditBalance;
 	}
 
-	public void setTimeCreditBalance(double timeCreditBalance) {
-		this.timeCreditBalance = timeCreditBalance;
+	public void addTimeCreditBalance(int minutes) {
+		this.timeCreditBalance.add(minutes);
+	}
+	
+	public void addTimeCreditBalance(int minutes, int seconds) {
+		this.timeCreditBalance.add(minutes, seconds);
+	}
+	
+	public void addTimeCreditBalance(int hours, int minutes, int seconds) {
+		this.timeCreditBalance.add(hours, minutes, seconds);
 	}
 
 	public Card getCard() {

@@ -1,7 +1,11 @@
 
 public class Duration {
+	//duration in seconds
 	private int duration;
 
+	public Duration() {
+		this.duration = 0;
+	}
 	public Duration(Date startDate, Date endDate) {
 		int yearInSeconds = (endDate.getYear()-startDate.getYear())*32140800;
 		int monthInSeconds = (endDate.getMonth()-startDate.getMonth())*2678400;
@@ -17,6 +21,16 @@ public class Duration {
 		return duration;
 	}
 
+	public void add(int minutes) {
+		this.duration += 60*minutes;
+	}
+	public void add(int minutes, int seconds) {
+		this.duration += 60*minutes + seconds;
+	}
+	public void add(int hours, int minutes, int seconds) {
+		this.duration += 3600*hours + 60*minutes + seconds;
+	}
+	
 	@Override
 	public String toString() {
 		int hours = this.duration/3600;
@@ -31,7 +45,7 @@ public class Duration {
 		SD.setTime(12,24,36);
 		Date date1 = new Date();
 		SD.setDay(2019,03,02);
-		SD.setTime(13,36,60);
+		SD.setTime(13,36,50);
 		Date date2 = new Date();
 		Duration duration = new Duration(date1,date2);
 		System.out.println(duration);

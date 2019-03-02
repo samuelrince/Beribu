@@ -13,7 +13,7 @@ public class Standard implements Card{
 		return this.user;
 	}
 	@Override
-	public double cost(double duration, String bicycleType) {
+	public double cost(Duration duration, String bicycleType) {
 		// TODO Auto-generated method stub
 		return 0;
 	}	
