@@ -1,7 +1,7 @@
 
 public class Ride {
-	private static int uniqId;
-	private int id;
+	private static long uniqId;
+	private long id;
 	private User user;
 	private Bicycle bicyle;
 	private Station startStation;

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
-	private static int uniqId;
-	private int id;
+	private static long uniqId;
+	private long id;
 	private String name;
 	private Localization localization;
 	private double timeCreditBalance = 0;
