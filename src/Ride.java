@@ -11,8 +11,8 @@ public class Ride {
 	private boolean current;
 	private double price;
 	
-	public Ride(User user, Bicycle bicyle, Station startStation, Date startTime) {
-		super();
+	public Ride(User user, Bicycle bicyle, Station startStation) {
+		Date startTime = new Date();
 		this.user = user;
 		this.bicyle = bicyle;
 		this.startStation = startStation;
@@ -23,9 +23,9 @@ public class Ride {
 
 	public void end(ParkingSlot parkingSlot) {
 		if (parkingSlot.isAvailable()) {
-			Date time;
+			Date endTime = new Date();
 			Station station;
-			this.endTime = time;
+			this.endTime = endTime;
 			this.endStation = station;
 			this.current = false;
 			this.pay();
