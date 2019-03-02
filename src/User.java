@@ -79,4 +79,8 @@ public class User {
 			String bicyleType, PathStrategy pathStrategy) {
 		
 	}
+	
+	public static void main(String[] args) {
+		User user1 = new User("Robert Downey Jr.");
+	}
 }
