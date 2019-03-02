@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 

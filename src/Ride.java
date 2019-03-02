@@ -39,5 +39,7 @@ public class Ride {
 	
 	public void pay() {
 		this.price = this.user.getCard().cost(this.duration, this.bicycle.getType());
+		this.user.getCard().updateTimeCreditBalance(this.duration, 
+				this.bicycle.getType(),	this.endStation.getIsPlus());
 	}
 }

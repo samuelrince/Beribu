@@ -20,6 +20,10 @@ public class Duration {
 	public int getDuration() {
 		return duration;
 	}
+	
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 
 	public void add(int minutes) {
 		this.duration += 60*minutes;

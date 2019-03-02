@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+
 
 public class Localization {
 	private double latitude;
@@ -12,7 +12,7 @@ public class Localization {
 
 	@Override
 	public String toString() {
-		return "GPS (" + latitude + ", " + longitude + ")";
+		return "GPS (" + latitude + "°, " + longitude + "°)";
 	}
 
 	public double getLatitude() {
@@ -62,11 +62,19 @@ public class Localization {
 	/**
 	 * This method returns the distance between two Localization.
 	 * @param loc	the Localization target to compare with
-	 * @return 		the distance between the two Locazation
+	 * @return 		the distance between the two Localization
 	 */
 	public double distanceTo(Localization loc) {
-		double lat = loc.getLatitude() - this.latitude;
-		double lon = loc.getLongitude() - this.longitude;
-		return Math.sqrt(lat * lat + lon * lon);
+		double rayonTerre = 6371000;
+		double deltaLat = (loc.getLatitude() - this.latitude)*Math.PI/180;
+		double deltaLong = (loc.getLongitude() - this.longitude)*Math.PI/180;
+		return Math.sqrt(deltaLat*deltaLat + Math.pow(Math.cos(this.latitude),2)
+				*deltaLong * deltaLong)*rayonTerre;
+	}
+	
+	public static void main(String[] args) {
+		Localization loc1 = new Localization(0,-180);
+		Localization loc2 = new Localization(0,180);
+		System.out.println(loc1.distanceTo(loc2)/1000+" km");
 	}
 }

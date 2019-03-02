@@ -7,7 +7,7 @@ public class User {
 	private String name;
 	private Localization localization;
 	private Duration timeCreditBalance = new Duration();
-	private Card card = null;
+	private Card card = new Standard(this);
 	private Ride[] listOfRides;
 	
 	public User(String name) {
@@ -28,7 +28,7 @@ public class User {
 		return this.localization;
 	}
 
-	public void setLocalisation(double[] localization) {
+	public void setLocalisation(Localization localization) {
 		this.localization = localization;
 	}
 
@@ -47,6 +47,10 @@ public class User {
 	public void addTimeCreditBalance(int hours, int minutes, int seconds) {
 		this.timeCreditBalance.add(hours, minutes, seconds);
 	}
+	
+	public void setTimeCreditBalance(int duration) {
+		this.timeCreditBalance.setDuration(duration);
+	}
 
 	public Card getCard() {
 		return this.card;
@@ -64,20 +68,31 @@ public class User {
 		this.listOfRides = listOfRides;
 	}
 	
-	public void newRide(Station station, String bicyleType) {
+	public void newRide(Station station, String bicycleType) {
 		if (station.isAvailable(bicycleType)) {
 			Bicycle bicycle;
-			Date time;
-			Ride ride = new Ride(this,bicycle,station,time);
+			Date startTime = new Date();
+			Ride ride = new Ride(this,bicycle,station,startTime);
 		}
 		else {
 			System.out.println("Désolé, le type de vélo souhaité n'est pas disponible.");
 		}
 	}
 	
-	public void newTravel(double[] source, double[] destination, 
-			String bicyleType, PathStrategy pathStrategy) {
-		
+	public void planRide(Localization source, Localization destination) {
+		Travel travel = new Travel(this,source,destination);
+	}
+	public void planRide(Localization source, Localization destination,
+			PathStrategy pathStrategy) {
+		Travel travel = new Travel(this,source,destination,pathStrategy);
+	}
+	public void planRide(Localization source, Localization destination, 
+			String bicycleType, PathStrategy pathStrategy) {
+		Travel travel = new Travel(this,source,destination,pathStrategy,bicycleType);
+	}
+	public void planRide(Localization source, Localization destination, 
+			String bicycleType) {
+		Travel travel = new Travel(this,source,destination,bicycleType);
 	}
 	
 	public static void main(String[] args) {
