@@ -15,19 +15,19 @@ public class Ride {
 	public Ride(User user, Bicycle bicycle, Station startStation) {
 		Date startTime = new Date();
 		this.user = user;
-		this.bicyle = bicycle;
+		this.bicycle = bicycle;
 		this.startStation = startStation;
 		this.startTime = startTime;
 		this.current = true;
 		this.id = uniqId++;
 	}
 
-	public void end(ParkingSlot parkingSlot) {
-		if (parkingSlot.isAvailable()) {
+	public void end(ParkingSlot parkingSlot) throws Exception {
+		if (parkingSlot.getBicycle() == null) {
 			Date endTime = new Date();
 			Station station;
 			this.endTime = endTime;
-			this.endStation = station;
+			this.endStation = parkingSlot.getStation();
 			this.current = false;
 			this.duration = new Duration(this.startTime,this.endTime);
 			this.pay();
@@ -40,6 +40,6 @@ public class Ride {
 	public void pay() {
 		this.price = this.user.getCard().cost(this.duration, this.bicycle.getType());
 		this.user.getCard().updateTimeCreditBalance(this.duration, 
-				this.bicycle.getType(),	this.endStation.getIsPlus());
+				this.bicycle.getType(),	this.endStation.isPlus());
 	}
 }

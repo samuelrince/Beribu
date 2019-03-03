@@ -8,7 +8,7 @@ public class User {
 	private Localization localization;
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
-	private Ride[] listOfRides;
+	private ArrayList<Ride> listOfRides;
 	
 	public User(String name) {
 		super();
@@ -60,22 +60,28 @@ public class User {
 		this.card = card;
 	}
 
-	public Ride[] getListOfRides() {
+	public ArrayList<Ride> getListOfRides() {
 		return this.listOfRides;
 	}
-
-	public void setListOfRides(Ride[] listOfRides) {
-		this.listOfRides = listOfRides;
+	
+	public void newRide(Station station) {
+		try {
+			Bicycle bicycle = station.getBicycle();
+			this.listOfRides.add(new Ride(this,bicycle,station));
+		}
+		catch(RuntimeException exception) {
+			System.err.println("Please change to another station.");
+		}
 	}
 	
 	public void newRide(Station station, String bicycleType) {
-		if (station.isAvailable(bicycleType)) {
-			Bicycle bicycle;
-			Date startTime = new Date();
-			Ride ride = new Ride(this,bicycle,station,startTime);
+		try {
+			Bicycle bicycle = station.getBicycle(bicycleType);
+			this.listOfRides.add(new Ride(this,bicycle,station));
 		}
-		else {
-			System.out.println("Désolé, le type de vélo souhaité n'est pas disponible.");
+		catch(RuntimeException exception) {
+			System.err.println("Please try another bicycle type"
+					+ "or change to another station.");
 		}
 	}
 	
