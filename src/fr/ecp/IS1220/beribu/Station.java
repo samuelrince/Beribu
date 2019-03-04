@@ -98,7 +98,7 @@ public class Station {
 	public void updateStatus() {
 		for (int i = 0; i < this.targetOf.size(); i++) {
 			if (this.isFull()) {
-			this.targetOf.get(i).updateRide();
+			this.targetOf.get(i).update();
 			}
 		}
 	}

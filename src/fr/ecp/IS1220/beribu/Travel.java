@@ -1,13 +1,17 @@
 package fr.ecp.IS1220.beribu;
 
+import java.util.ArrayList;
 
 public class Travel {
 	User user;
 	Localization source;
 	Localization destination;
 	String bicycleType;
-	Ride ride;
 	PathStrategy pathStrategy;
+	Station suggestedStartStation;
+	Station suggestedEndStation;
+	double previsionCost;
+	Duration previsionDuration;
 	
 	//If no pathStrategy is given, then MinimalWalking by default.
 	public Travel(User user,Localization source, Localization destination) {
@@ -41,8 +45,14 @@ public class Travel {
 	}
 	
 	public void findRide() {
-		this.ride = this.pathStrategy.findRide(this.source, this.destination,
-				this.bicycleType);
+		ArrayList<Station> startEnd = this.pathStrategy.findPath(
+				this.source, this.destination, this.bicycleType);
+		this.suggestedStartStation = startEnd.get(0);
+		this.suggestedEndStation = startEnd.get(1);
+		this.previsionDuration = new Duration(this.suggestedStartStation.getLocalization(),
+				this.suggestedEndStation.getLocalization(), this.bicycleType);
+		this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);		
+				
 	}
 	public User getUser() {
 		return user;
@@ -71,15 +81,12 @@ public class Travel {
 	public void setPathStrategy(PathStrategy pathStrategy) {
 		this.pathStrategy = pathStrategy;
 	}
-	public void setRide(Ride ride) {
-		this.ride = ride;
 	}
-	public Ride getRide() {
-		return ride;
-	}
-	public void updateRide() {
+	public void update() {
+		
 		this.ride = this.pathStrategy.findRide(this.source, this.destination,
 				this.bicycleType);
+		
 		this.user.notify();
 	}
 	
