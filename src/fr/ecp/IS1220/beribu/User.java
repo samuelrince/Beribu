@@ -103,9 +103,14 @@ public class User {
 			String bicycleType) {
 		Travel travel = new Travel(this,source,destination,bicycleType);
 	}
+
+	public void notifyUser() {
+		System.out.println("Your travel has been updated.");
+	}
 	
 	public static void main(String[] args) {
 		User user1 = new User("Robert Downey Jr.");
 		System.out.println(user1);
 	}
+	
 }

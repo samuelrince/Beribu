@@ -40,8 +40,47 @@ public class Travel {
 		this.bicycleType = bicycleType;		
 	}
 	
-	public void getRide() {
-		this.ride = this.pathStrategy.getRide(this.source, this.destination,
+	public void findRide() {
+		this.ride = this.pathStrategy.findRide(this.source, this.destination,
 				this.bicycleType);
 	}
+	public User getUser() {
+		return user;
+	}
+	public Localization getSource() {
+		return source;
+	}
+	public void setSource(Localization source) {
+		this.source = source;
+	}
+	public Localization getDestination() {
+		return destination;
+	}
+	public void setDestination(Localization destination) {
+		this.destination = destination;
+	}
+	public String getBicycleType() {
+		return bicycleType;
+	}
+	public void setBicycleType(String bicycleType) {
+		this.bicycleType = bicycleType;
+	}
+	public PathStrategy getPathStrategy() {
+		return pathStrategy;
+	}
+	public void setPathStrategy(PathStrategy pathStrategy) {
+		this.pathStrategy = pathStrategy;
+	}
+	public void setRide(Ride ride) {
+		this.ride = ride;
+	}
+	public Ride getRide() {
+		return ride;
+	}
+	public void updateRide() {
+		this.ride = this.pathStrategy.findRide(this.source, this.destination,
+				this.bicycleType);
+		this.user.notify();
+	}
+	
 }
