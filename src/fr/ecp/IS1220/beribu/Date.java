@@ -12,6 +12,13 @@ public class Date {
 	public Date() {
 		this.currentDate();
 	}
+	
+	public Date(int year, int month, int day, int hour, int minute, int second) {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(year, month, day);
+		SD.setTime(hour, minute, second);
+		this.currentDate();
+	}
 
 	public int getYear() {
 		return year;
