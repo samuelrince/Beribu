@@ -8,8 +8,8 @@ public class Ride {
 	private Bicycle bicycle;
 	private Station startStation;
 	private Date startTime;
-	private Station endStation;
-	private Date endTime;
+	private Station endStation = null;
+	private Date endTime = null;
 	private Duration duration;
 	private boolean current;
 	private double price;
@@ -87,6 +87,11 @@ public class Ride {
 
 	public double getPrice() {
 		return price;
+	}
+
+	@Override
+	public String toString() {
+		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
 	}
 	
 }
