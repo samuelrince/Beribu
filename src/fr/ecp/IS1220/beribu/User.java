@@ -11,7 +11,7 @@ public class User {
 	private Localization localization;
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
-	private ArrayList<Ride> listOfRides;
+	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
 	
 	public User(String name) {
 		super();
@@ -67,24 +67,52 @@ public class User {
 		return this.listOfRides;
 	}
 	
-	public void newRide(Station station) {
-		try {
-			Bicycle bicycle = station.getBicycle();
-			this.listOfRides.add(new Ride(this,bicycle,station));
+	private boolean isOnRide() {
+		if (!this.listOfRides.isEmpty()) {
+			Ride lastRide = this.listOfRides.get(this.listOfRides.size() - 1);
+			if (lastRide.getEndStation() == null || lastRide.getEndTime() == null) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		catch(RuntimeException exception) {
-			System.err.println("Please change to another station.");
+		
+	}
+	
+	public void newRide(Station station) throws RuntimeException {
+		if (!this.isOnRide()) {
+			try {
+				Bicycle bicycle = station.getBicycle();
+				this.listOfRides.add(new Ride(this,bicycle,station));
+			}
+			catch(RuntimeException exception) {
+				System.err.println("Please change to another station.");
+			}
+		} else {
+			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
 	
 	public void newRide(Station station, String bicycleType) {
-		try {
-			Bicycle bicycle = station.getBicycle(bicycleType);
-			this.listOfRides.add(new Ride(this,bicycle,station));
+		if (!this.isOnRide()) {
+			try {
+				Bicycle bicycle = station.getBicycle(bicycleType);
+				this.listOfRides.add(new Ride(this,bicycle,station));
+			}
+			catch(RuntimeException exception) {
+				System.err.println("Please try another bicycle type"
+						+ "or change to another station.");
+			}
 		}
-		catch(RuntimeException exception) {
-			System.err.println("Please try another bicycle type"
-					+ "or change to another station.");
+	}
+	
+	public Ride getCurrentRide() {
+		if (this.isOnRide()) {
+			return this.listOfRides.get(this.listOfRides.size() - 1);
+		} else {
+			return null;
 		}
 	}
 	
