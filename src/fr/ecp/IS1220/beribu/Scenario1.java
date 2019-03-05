@@ -7,6 +7,7 @@ public class Scenario1 {
 		User user1 = new User("Robert Downey Jr.");
 		Vmax vmax1 = new Vmax(user1);
 		Station station1 = new Station(new Localization(0,0),false);
+		Station station2 = new Station(new Localization(0.001,0),true);
 		new ParkingSlot(station1);
 		new ParkingSlot(station1);
 		new ParkingSlot(station1);
@@ -17,7 +18,7 @@ public class Scenario1 {
 		station1.getParkingSlots().get(1).setBicycle(mBike1);
 		station1.getParkingSlots().get(2).setBicycle(eBike2);
 		station1.getParkingSlots().get(2).setOffline(true);
-		System.out.println(user1.getCard());
+		System.out.println(Station.allStations());
 		user1.newRide(station1);
 	}
 }

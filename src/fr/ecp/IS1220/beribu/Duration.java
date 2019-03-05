@@ -18,7 +18,12 @@ public class Duration {
 		this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds
 				+minuteInSeconds+secondsInSeconds;
 	}
-
+	public Duration(Station startStation, Station endStation, String bicycleType) {
+		double distance = startStation.getLocalization().distanceTo(
+				endStation.getLocalization());
+		this.duration = (int) (distance/Bicycle.getSpeed(bicycleType));
+	}
+	
 	public int getDuration() {
 		return duration;
 	}

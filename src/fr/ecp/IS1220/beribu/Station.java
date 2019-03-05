@@ -4,17 +4,24 @@ import java.util.ArrayList;
 
 public class Station {
 	private static long uniqId;
+	private static ArrayList<Station> allStations = new ArrayList<Station>();
 	private long id;
 	private Localization localization;
 	private Boolean isOffline;
 	private Boolean isPlus;
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
+	private ArrayList<Travel> targetOf = new ArrayList<Travel>();
 	
 	public Station(Localization localization, Boolean isPlus) {
 		super();
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
+		allStations.add(this);
+	}
+	
+	public static ArrayList<Station> allStations(){
+		return allStations;
 	}
 	
 	public boolean isFull() {
@@ -89,6 +96,11 @@ public class Station {
 	}
  
 	public void updateStatus() {
+		for (int i = 0; i < this.targetOf.size(); i++) {
+			if (this.isFull()) {
+			this.targetOf.get(i).update();
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
