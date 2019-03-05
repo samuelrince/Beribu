@@ -104,8 +104,8 @@ public class User {
 		Travel travel = new Travel(this,source,destination,bicycleType);
 	}
 
-	public void notifyUser() {
-		System.out.println("Your travel has been updated.");
+	public void notifyUser(String message) {
+		System.out.println(message);
 	}
 	
 	public static void main(String[] args) {

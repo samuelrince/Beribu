@@ -49,8 +49,8 @@ public class Travel {
 				this.source, this.destination, this.bicycleType);
 		this.suggestedStartStation = startEnd.get(0);
 		this.suggestedEndStation = startEnd.get(1);
-		this.previsionDuration = new Duration(this.suggestedStartStation.getLocalization(),
-				this.suggestedEndStation.getLocalization(), this.bicycleType);
+		this.previsionDuration = new Duration(this.suggestedStartStation,
+				this.suggestedEndStation, this.bicycleType);
 		this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);		
 				
 	}
@@ -81,13 +81,35 @@ public class Travel {
 	public void setPathStrategy(PathStrategy pathStrategy) {
 		this.pathStrategy = pathStrategy;
 	}
+	public Station getSuggestedStartStation() {
+		return suggestedStartStation;
 	}
+	public Station getSuggestedEndStation() {
+		return suggestedEndStation;
+	}
+	public double getPrevisionCost() {
+		return previsionCost;
+	}
+	public Duration getPrevisionDuration() {
+		return previsionDuration;
+	}
+	
 	public void update() {
-		
-		this.ride = this.pathStrategy.findRide(this.source, this.destination,
-				this.bicycleType);
-		
-		this.user.notify();
+		if (!this.user.getListOfRides().get(
+				this.user.getListOfRides().size()-1).isCurrent()) {
+			ArrayList<Station> startEnd = this.pathStrategy.findPath(
+					this.source, this.destination, this.bicycleType);
+			this.suggestedStartStation = startEnd.get(0);
+			this.suggestedEndStation = startEnd.get(1);
+			this.previsionDuration = new Duration(this.suggestedStartStation,
+					this.suggestedEndStation, this.bicycleType);
+			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
+
+			this.user.notifyUser("Your planned ride has been updated.");
+		}
+		else {
+			this.user.notifyUser("The destination station is not available anymore.");
+		}
 	}
 	
 }

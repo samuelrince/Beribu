@@ -44,4 +44,49 @@ public class Ride {
 		this.user.getCard().updateTimeCreditBalance(this.duration, 
 				this.bicycle.getType(),	this.endStation.isPlus());
 	}
+
+	public long getId() {
+		return id;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public Bicycle getBicycle() {
+		return bicycle;
+	}
+
+	public Station getStartStation() {
+		return startStation;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public Station getEndStation() {
+		return endStation;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public Duration getDuration() {
+		return duration;
+	}
+
+	public boolean isCurrent() {
+		return current;
+	}
+
+	public void setCurrent(boolean current) {
+		this.current = current;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+	
 }
