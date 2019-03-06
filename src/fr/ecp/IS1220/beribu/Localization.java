@@ -76,8 +76,8 @@ public class Localization {
 	
 	/**
 	 * This method browses the public list of stations and picks the 
-	 * closest one to the Localization instance containing at least 
-	 * one free parking slot.
+	 * one which is the closest to the Localization instance 
+	 * and contains at least one free parking slot.
 	 * @return 		the closest available Station
 	 */
 	public Station getClosestAvailableStation() throws RuntimeException {
@@ -100,8 +100,34 @@ public class Localization {
 	
 	/**
 	 * This method browses the public list of stations and picks the 
-	 * closest one to the Localization instance containing at least 
-	 * one bicycle.
+	 * one of specified type which is the closest to the Localization instance 
+	 * and contains at least one free parking slot.
+	 * @param isPlus	true if the Station should be Plus, false otherwise
+	 * @return 		the closest available Station
+	 */
+	public Station getClosestAvailableStation(boolean isPlus) throws RuntimeException {
+		ArrayList<Station> listOfStations = Station.allStations();
+		double shortestDistance = Double.POSITIVE_INFINITY;
+		int stationIndex = -1;
+		for (int i = 0; i < listOfStations.size(); i++) {
+			if (this.distanceTo(listOfStations.get(i).getLocalization())
+					< shortestDistance && !listOfStations.get(i).isFull()
+					&&listOfStations.get(i).isPlus() == isPlus) {
+				shortestDistance = this.distanceTo(listOfStations.get(i)
+						.getLocalization());
+				stationIndex = i;				
+			}
+		}
+		if (stationIndex == -1) {
+			throw new RuntimeException("Sorry, no available station was found.");
+		}
+		return listOfStations.get(stationIndex);
+	}
+	
+	/**
+	 * This method browses the public list of stations and picks the one 
+	 * which is the closest to the Localization instance and contains at 
+	 * least one bicycle.
 	 * @return 		the closest Station with an available Bicycle
 	 */
 	public Station getClosestStationWithBicycle() 
@@ -126,9 +152,9 @@ public class Localization {
 	}
 	
 	/**
-	 * This method browses the public list of stations and picks the 
-	 * closest one to the Localization instance containing at least 
-	 * one bicycle of the desired type.
+	 * This method browses the public list of stations and picks the one 
+	 * which is the closest to the Localization instance and contains at 
+	 * least one bicycle of specified type.
 	 * @param bicycleType 	the type of bicycle desired, 
 	 * null if indifferent to the type
 	 * @return 		the closest Station with an available Bicycle

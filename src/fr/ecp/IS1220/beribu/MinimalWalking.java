@@ -8,8 +8,8 @@ public class MinimalWalking implements PathStrategy {
 	public ArrayList<Station> findPath(Localization source, Localization destination) {
 		// TODO Auto-generated method stub
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
-		startEnd.set(0, source.getClosestAvailableStation());
-		startEnd.set(1, destination.getClosestStationWithBicycle());
+		startEnd.set(0, source.getClosestStationWithBicycle());
+		startEnd.set(1, destination.getClosestAvailableStation());
 		return startEnd;
 	}
 	
@@ -18,8 +18,8 @@ public class MinimalWalking implements PathStrategy {
 			String bicycleType) {
 		// TODO Auto-generated method stub
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
-		startEnd.set(0, source.getClosestAvailableStation());
-		startEnd.set(1, destination.getClosestStationWithBicycle(bicycleType));
+		startEnd.set(0, source.getClosestStationWithBicycle(bicycleType));
+		startEnd.set(1, destination.getClosestAvailableStation());
 		return startEnd;
 		
 	}
