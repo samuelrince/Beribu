@@ -8,7 +8,7 @@ public class Duration {
 	public Duration() {
 		this.duration = 0;
 	}
-	public Duration(Date startDate, Date endDate) {
+	public Duration(Date startDate, Date endDate) throws RuntimeException {
 		int yearInSeconds = (endDate.getYear()-startDate.getYear())*32140800;
 		int monthInSeconds = (endDate.getMonth()-startDate.getMonth())*2678400;
 		int dayInSeconds = (endDate.getDay()-startDate.getDay())*86400;
@@ -20,7 +20,7 @@ public class Duration {
 			this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
 		} else {
 			throw new RuntimeException("The duration cannot be negative");
-}
+    }
 	}
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
