@@ -60,7 +60,11 @@ public class User {
 	}
 
 	public void subscribe(Card card) {
-		this.card = card;
+		if (card.getUser() == this) {
+			this.card = card;
+		} else {
+			throw new RuntimeException("A user cannot subscribe to a card that belongs to another user");
+		}
 	}
 
 	public ArrayList<Ride> getListOfRides() {

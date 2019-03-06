@@ -26,7 +26,6 @@ class DurationTest {
 		Duration duration = new Duration(date1, date2);
 		assertTrue(duration.getDuration() == 93015);
 	}
-	
 	@Test
 	void addDuration003() throws RuntimeException {
 		Date date2 = new Date(2019, 01, 31, 19, 42, 57);
@@ -35,7 +34,6 @@ class DurationTest {
 			Duration duration = new Duration(date1, date2);
 		});
 	}
-	
 	
 	
 	/*
