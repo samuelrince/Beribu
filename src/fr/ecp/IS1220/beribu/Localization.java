@@ -99,8 +99,8 @@ public class Localization {
 	}
 	
 	public static void main(String[] args) {
-		Localization loc1 = new Localization(0,-180);
-		Localization loc2 = new Localization(0,180);
+		Localization loc1 = new Localization(0,-160);
+		Localization loc2 = new Localization(0,160);
 		System.out.println(loc1.distanceTo(loc2)/1000+" km");
 	}
 }

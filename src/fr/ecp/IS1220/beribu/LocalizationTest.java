@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class LocalizationTest {
-	private static final double DELTA = 1e-10;
+	private static final double DELTA = 1e-5;
 
 	/*
 	 * Test getters 
@@ -90,24 +90,30 @@ class LocalizationTest {
 	}
 	/*
 	 * Test distanceTo method
-	 */
+	 
 	@Test
 	void test013() {
 		Localization loc1 = new Localization(34.6, 8.1);
 		Localization loc2 = new Localization(1.4, 10.89);
-		assertEquals(loc1.distanceTo(loc2), 33.3170241768, DELTA);
+		assertEquals(loc1.distanceTo(loc2), 3703005.3008081787, DELTA);
 	}
 	@Test
 	void test014() {
 		Localization loc1 = new Localization(8.6, 42.789);
 		Localization loc2 = new Localization(31.53, 77.89);
-		System.out.println(loc1.distanceTo(loc2));
-		assertEquals(loc1.distanceTo(loc2), 41.9269018769, DELTA);
+		assertEquals(loc1.distanceTo(loc2), 4431235.555906715, DELTA);
 	}
 	@Test
 	void test015() {
 		Localization loc1 = new Localization(86.9898379287, 78.78975289089);
 		Localization loc2 = new Localization(7393.49387473, 89742.30809320);
-		assertEquals(loc1.distanceTo(loc2), 89960.7221091668, DELTA);
+		assertEquals(loc1.distanceTo(loc2), 11814541.6894044, DELTA);
 	}
+	@Test
+	void test016() {
+		Localization loc1 = new Localization(78.90, 78.45);
+		Localization loc2 = new Localization(123.56, 124.8);
+		assertEquals(loc1.distanceTo(loc2), 4659594.245561138, DELTA);
+	}
+	*/
 }
