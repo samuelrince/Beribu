@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Station {
 	private static long uniqId;
-	private static ArrayList<Station> allStations = new ArrayList<Station>();
+	private static ArrayList<Station> stationDataBase = new ArrayList<Station>();
 	private long id;
 	private Localization localization;
 	private Boolean isOffline;
@@ -17,11 +17,11 @@ public class Station {
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
-		allStations.add(this);
+		stationDataBase.add(this);
 	}
 	
 	public static ArrayList<Station> allStations(){
-		return allStations;
+		return stationDataBase;
 	}
 	
 	public int numberOfBicycles() {
