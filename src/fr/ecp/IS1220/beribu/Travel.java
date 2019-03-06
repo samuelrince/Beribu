@@ -108,7 +108,9 @@ public class Travel {
 			this.user.notifyUser("Your planned ride has been updated.");
 		}
 		else {
-			this.user.notifyUser("The destination station is not available anymore.");
+			this.suggestedEndStation = this.destination.getClosestStation();
+			this.user.notifyUser("The destination station is not available anymore."
+					+ "Your destination station has been recalculated.");
 		}
 	}
 	

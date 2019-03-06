@@ -1,5 +1,6 @@
 package fr.ecp.IS1220.beribu;
 
+import java.util.ArrayList;
 
 public class Localization {
 	private double latitude;
@@ -71,6 +72,30 @@ public class Localization {
 		double deltaLong = (loc.getLongitude() - this.longitude)*Math.PI/180;
 		return Math.sqrt(deltaLat*deltaLat + Math.pow(Math.cos(this.latitude),2)
 				*deltaLong * deltaLong)*rayonTerre;
+	}
+	
+	/**
+	 * This method browses the public list of stations and picks the 
+	 * closest one to the Localization instance containing at least 
+	 * one free parking slot.
+	 * @return 		the closest available station
+	 */
+	public Station getClosestStation() throws RuntimeException {
+		ArrayList<Station> listOfStations = Station.allStations();
+		double shortestDistance = Double.POSITIVE_INFINITY;
+		int stationIndex = -1;
+		for (int i = 0; i < listOfStations.size(); i++) {
+			if (this.distanceTo(listOfStations.get(i).getLocalization())
+					< shortestDistance && !listOfStations.get(i).isFull()) {
+				shortestDistance = this.distanceTo(listOfStations.get(i)
+						.getLocalization());
+				stationIndex = i;				
+			}
+		}
+		if (stationIndex == -1) {
+			throw new RuntimeException("Sorry, no available station was found.")
+		}
+		return listOfStations.get(stationIndex);
 	}
 	
 	public static void main(String[] args) {
