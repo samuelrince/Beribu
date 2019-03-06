@@ -78,9 +78,9 @@ public class Localization {
 	 * This method browses the public list of stations and picks the 
 	 * closest one to the Localization instance containing at least 
 	 * one free parking slot.
-	 * @return 		the closest available station
+	 * @return 		the closest available Station
 	 */
-	public Station getClosestStation() throws RuntimeException {
+	public Station getClosestAvailableStation() throws RuntimeException {
 		ArrayList<Station> listOfStations = Station.allStations();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -94,6 +94,62 @@ public class Localization {
 		}
 		if (stationIndex == -1) {
 			throw new RuntimeException("Sorry, no available station was found.");
+		}
+		return listOfStations.get(stationIndex);
+	}
+	
+	/**
+	 * This method browses the public list of stations and picks the 
+	 * closest one to the Localization instance containing at least 
+	 * one bicycle.
+	 * @return 		the closest Station with an available Bicycle
+	 */
+	public Station getClosestStationWithBicycle() 
+			throws RuntimeException {
+		ArrayList<Station> listOfStations = Station.allStations();
+		double shortestDistance = Double.POSITIVE_INFINITY;
+		int stationIndex = -1;
+		for (int i = 0; i < listOfStations.size(); i++) {
+			if (this.distanceTo(listOfStations.get(i).getLocalization())
+					< shortestDistance && 
+					listOfStations.get(i).isBicycle()) {
+				shortestDistance = this.distanceTo(listOfStations.get(i)
+						.getLocalization());
+				stationIndex = i;				
+			}
+		}
+		if (stationIndex == -1) {
+			throw new RuntimeException("Sorry, no station with an available"
+					+ " bicycle was found.");
+		}
+		return listOfStations.get(stationIndex);
+	}
+	
+	/**
+	 * This method browses the public list of stations and picks the 
+	 * closest one to the Localization instance containing at least 
+	 * one bicycle of the desired type.
+	 * @param bicycleType 	the type of bicycle desired, 
+	 * null if indifferent to the type
+	 * @return 		the closest Station with an available Bicycle
+	 */
+	public Station getClosestStationWithBicycle(String bicycleType) 
+			throws RuntimeException {
+		ArrayList<Station> listOfStations = Station.allStations();
+		double shortestDistance = Double.POSITIVE_INFINITY;
+		int stationIndex = -1;
+		for (int i = 0; i < listOfStations.size(); i++) {
+			if (this.distanceTo(listOfStations.get(i).getLocalization())
+					< shortestDistance && 
+					listOfStations.get(i).isBicycle(bicycleType)) {
+				shortestDistance = this.distanceTo(listOfStations.get(i)
+						.getLocalization());
+				stationIndex = i;				
+			}
+		}
+		if (stationIndex == -1) {
+			throw new RuntimeException("Sorry, no station with an available"
+					+ " bicycle of type "+ bicycleType +" was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}

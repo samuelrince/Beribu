@@ -60,6 +60,28 @@ public class Station {
 		throw new RuntimeException("Sorry, no bicycle of the wanted type is available");
 	}
 	
+	public boolean isBicycle() {
+		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
+			if (this.parkingSlots.get(i).getBicycle() != null 
+			&& this.parkingSlots.get(i).isOffline() == false) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isBicycle(String bicycleType) {
+		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
+			if (this.parkingSlots.get(i).getBicycle() != null 
+			&& this.parkingSlots.get(i).isOffline() == false) {
+				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public long getId() {
 		return this.id;
 	}
