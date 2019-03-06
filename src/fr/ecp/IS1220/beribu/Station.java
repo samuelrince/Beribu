@@ -24,6 +24,40 @@ public class Station {
 		return allStations;
 	}
 	
+	public int numberOfBicycles() {
+		int number = 0;
+		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
+			if (this.parkingSlots.get(i).getBicycle() != null 
+			&& this.parkingSlots.get(i).isOffline() == false) {
+				number++;
+			}
+		}
+		return number;
+	}
+	
+	public int numberOfBicycles(String bicycleType) {
+		int number = 0;
+		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
+			if (this.parkingSlots.get(i).getBicycle() != null 
+			&& this.parkingSlots.get(i).isOffline() == false) {
+				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType)
+					number++;
+			}
+		}
+		return number;
+	}
+	
+	public int numberOfFreeSlots() {
+		int number = 0;
+		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
+			if (this.parkingSlots.get(i).getBicycle() == null 
+			&& this.parkingSlots.get(i).isOffline() == false) {
+				number++;
+			}
+		}
+		return number;
+	}
+	
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (parkingSlots.get(i).getBicycle() == null 
