@@ -7,5 +7,5 @@ public interface PathStrategy {
 	public ArrayList<Station> findPath(Localization source, 
 			Localization destination);
 	public ArrayList<Station> findPath(Localization source, 
-			Localization destination, String BicycleType);
+			Localization destination, String bicycleType);
 }

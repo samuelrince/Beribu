@@ -12,7 +12,7 @@ public class AvoidPlus implements PathStrategy {
 	
 	@Override
 	public ArrayList<Station> findPath(Localization source, Localization destination,
-			String BicycleType) {
+			String bicycleType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
