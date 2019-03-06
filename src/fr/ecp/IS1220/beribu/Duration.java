@@ -20,8 +20,7 @@ public class Duration {
 			this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
 		} else {
 			throw new RuntimeException("The duration cannot be negative");
-		}
-		
+    }
 	}
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
