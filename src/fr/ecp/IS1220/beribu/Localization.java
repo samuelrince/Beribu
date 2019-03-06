@@ -124,6 +124,19 @@ public class Localization {
 		return listOfStations.get(stationIndex);
 	}
 	
+	public ArrayList<Station> getStationsInRadius(double radius) 
+			throws RuntimeException {
+		ArrayList<Station> listOfStations = Station.allStations();
+		ArrayList<Station> stationsInRadius = new ArrayList<Station>();
+		for (int i = 0; i < listOfStations.size(); i++) {
+			if (this.distanceTo(listOfStations.get(i).getLocalization())
+					<= radius) {
+				stationsInRadius.add(listOfStations.get(i));			
+			}
+		}
+		return stationsInRadius;
+	}
+	
 	/**
 	 * This method browses the public list of stations and picks the one 
 	 * which is the closest to the Localization instance and contains at 
