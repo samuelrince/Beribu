@@ -93,7 +93,7 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no available station was found.")
+			throw new RuntimeException("Sorry, no available station was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}

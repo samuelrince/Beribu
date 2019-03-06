@@ -15,8 +15,12 @@ public class Duration {
 		int hourInSeconds = (endDate.getHour()-startDate.getHour())*3600;
 		int minuteInSeconds = (endDate.getMinute()-startDate.getMinute())*60;
 		int secondsInSeconds = endDate.getSecond()-startDate.getSecond();
-		this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds
-				+minuteInSeconds+secondsInSeconds;
+		int t = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
+		if (t>=0) {
+			this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
+		} else {
+			throw new RuntimeException("The duration cannot be negative");
+}
 	}
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
