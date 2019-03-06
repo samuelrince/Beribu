@@ -105,6 +105,8 @@ public class User {
 				System.err.println("Please try another bicycle type"
 						+ "or change to another station.");
 			}
+		} else {
+			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
 	
