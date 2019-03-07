@@ -18,10 +18,10 @@ public class Standard implements Card{
 	public double cost(Duration duration, String bicycleType) {
 		// TODO Auto-generated method stub
 		double hourCost = 0;
-		if (bicycleType == "Mechanical") {
+		if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
 			hourCost = 1;
 		}
-		else if (bicycleType == "Electrical") {
+		else if (bicycleType.equalsIgnoreCase("ELECTRICAL")) {
 			hourCost = 2;
 		}
 		return hourCost*((duration.getDuration()-1)/3600 + 1);
