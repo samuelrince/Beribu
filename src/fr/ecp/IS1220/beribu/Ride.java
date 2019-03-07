@@ -25,9 +25,9 @@ public class Ride {
 	}
 
 	public void end(ParkingSlot parkingSlot) throws Exception {
-		if (parkingSlot.getBicycle() == null) {
+		if (!parkingSlot.isBicycle()) {
+			parkingSlot.setBicycle(this.bicycle);
 			Date endTime = new Date();
-			Station station;
 			this.endTime = endTime;
 			this.endStation = parkingSlot.getStation();
 			this.current = false;

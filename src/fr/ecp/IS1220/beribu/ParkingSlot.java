@@ -4,7 +4,7 @@ package fr.ecp.IS1220.beribu;
 public class ParkingSlot {
 	private static long uniqId;
 	private long id;
-	private Bicycle bicycle;
+	private Bicycle bicycle = null;
 	private boolean isOffline = false;
 	private Station station;
 	
@@ -21,6 +21,7 @@ public class ParkingSlot {
 	
 	public Bicycle getBicycle() {
 		return this.bicycle;
+		
 	}
 	
 	public void setBicycle(Bicycle bicycle) {
@@ -40,6 +41,15 @@ public class ParkingSlot {
 	public boolean isOffline() {
 		return this.isOffline;
 		
+	}
+	
+	public boolean isBicycle() {
+		if (this.getBicycle() != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 }

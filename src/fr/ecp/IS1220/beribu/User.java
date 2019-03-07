@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class User {
 	private static long uniqId;
+	private static ArrayList<User> userDataBase = new ArrayList<User>();
 	private long id;
 	private String name;
 	private Localization localization;
@@ -21,8 +22,13 @@ public class User {
 		super();
 		this.name = name;
 		this.id = uniqId++;
+		userDataBase.add(this);
 	}
 
+	public static ArrayList<User> allUsers() {
+		return userDataBase;
+	}
+	
 	public long getId() {
 		return this.id;
 	}

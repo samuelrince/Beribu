@@ -1,10 +1,13 @@
 package fr.ecp.IS1220.beribu;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Station {
 	private static long uniqId;
-	private static ArrayList<Station> allStations = new ArrayList<Station>();
+	private static ArrayList<Station> stationDataBase = new ArrayList<Station>();
+	private static ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
 	private Boolean isOffline;
@@ -17,17 +20,21 @@ public class Station {
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
-		allStations.add(this);
+		stationDataBase.add(this);
 	}
 	
 	public static ArrayList<Station> allStations(){
-		return allStations;
+		return stationDataBase;
+	}
+	
+	public static ArrayList<State> getHistory() {
+		return history;
 	}
 	
 	public int numberOfBicycles() {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() != null 
+			if (this.parkingSlots.get(i).isBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				number++;
 			}
@@ -38,7 +45,7 @@ public class Station {
 	public int numberOfBicycles(String bicycleType) {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() != null 
+			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType)
 					number++;
@@ -50,7 +57,7 @@ public class Station {
 	public int numberOfFreeSlots() {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() == null 
+			if (!this.parkingSlots.get(i).isBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				number++;
 			}
@@ -60,7 +67,7 @@ public class Station {
 	
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (parkingSlots.get(i).getBicycle() == null 
+			if (!parkingSlots.get(i).isBicycle()
 			&& parkingSlots.get(i).isOffline() == false) {
 				return true;
 			}
@@ -70,10 +77,11 @@ public class Station {
 	
 	public Bicycle getBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() != null 
+			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
 				this.parkingSlots.get(i).setBicycle(null);
+				this.updateStatus();
 				return bicycle;
 			}
 		}
@@ -82,11 +90,12 @@ public class Station {
 		
 	public Bicycle getBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() != null 
+			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
 					this.parkingSlots.get(i).setBicycle(null);
+					this.updateStatus();
 					return bicycle;
 				}
 			}
@@ -96,7 +105,7 @@ public class Station {
 	
 	public boolean isBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() != null 
+			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				return true;
 			}
@@ -106,7 +115,7 @@ public class Station {
 	
 	public boolean isBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).getBicycle() != null 
+			if (this.parkingSlots.get(i).isBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType) {
 					return true;
@@ -150,6 +159,14 @@ public class Station {
 	public void addParkingSlot(ParkingSlot parkingSlot) {
 		this.parkingSlots.add(parkingSlot);
 	}
+	
+	public ArrayList<Travel> getTargetOf() {
+		return targetOf;
+	}
+
+	public void setTargetOf(ArrayList<Travel> targetOf) {
+		this.targetOf = targetOf;
+	}
  
 	public void updateStatus() {
 		for (int i = 0; i < this.targetOf.size(); i++) {
@@ -157,8 +174,33 @@ public class Station {
 			this.targetOf.get(i).update();
 			}
 		}
+		history.add(new State());
 	}
 	
+	public class State{
+		private Date timeStamp;
+		private ArrayList<Map.Entry<Boolean, Boolean>> parkingSlotStatus 
+		= new ArrayList<Map.Entry<Boolean, Boolean>>();
+		
+		private State() {
+			super();
+			this.timeStamp = new Date();
+			for (int i = 0; i < Station.this.parkingSlots.size(); i++) {
+				ParkingSlot parkingSlot = Station.this.parkingSlots.get(i);
+				this.parkingSlotStatus.add(new AbstractMap.SimpleEntry(
+						parkingSlot.isOffline(), parkingSlot.isBicycle()));
+			}
+		}
+		
+		public Date getTimeStamp() {
+			return timeStamp;
+		}
+		public ArrayList<Map.Entry<Boolean, Boolean>> getParkingSlotStatus() {
+			return parkingSlotStatus;
+		}
+		
+	}
+
 	public static void main(String[] args) {
 		Station station1 = new Station(new Localization(0,0),false);
 		new ParkingSlot(station1);
