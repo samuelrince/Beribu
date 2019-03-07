@@ -32,8 +32,8 @@ public abstract class Bicycle {
 	
 	public static ArrayList<String> getTypeDict(){
 		ArrayList<String> typeDict = new ArrayList<String>();
-		typeDict.add("Mechanical");
-		typeDict.add("Electrical");	
+		typeDict.add("MECHANICAL");
+		typeDict.add("ELECTRICAL");	
 		return typeDict;
 	}
 	
