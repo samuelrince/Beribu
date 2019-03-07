@@ -106,7 +106,7 @@ public class User {
 				this.listOfRides.add(new Ride(this,bicycle,station));
 			}
 			catch(RuntimeException exception) {
-				System.err.println("Please try another bicycle type"
+				System.err.println("Please try another bicycle type "
 						+ "or change to another station.");
 			}
 		} else {
