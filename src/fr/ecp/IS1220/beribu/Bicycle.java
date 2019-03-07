@@ -18,10 +18,10 @@ public abstract class Bicycle {
 	public abstract double getSpeed();
 	
 	public static double getSpeed(String bicycleType) throws IllegalArgumentException {
-		if (bicycleType == "Mechanical") {
+		if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
 			return 15/3.6;
 		}
-		if (bicycleType == "Electrical") {
+		if (bicycleType.equalsIgnoreCase("ELECTRICAL")) {
 			return 20/3.6;
 		}
 		else {
