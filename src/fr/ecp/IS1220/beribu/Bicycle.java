@@ -1,5 +1,6 @@
 package fr.ecp.IS1220.beribu;
 
+import java.util.ArrayList;
 
 public abstract class Bicycle {
 	private long id;
@@ -27,6 +28,13 @@ public abstract class Bicycle {
 		else {
 			throw new IllegalArgumentException("Not a valid bicycle type.");
 		}
+	}
+	
+	public static ArrayList<String> getTypeDict(){
+		ArrayList<String> typeDict = new ArrayList<String>();
+		typeDict.add("Mechanical");
+		typeDict.add("Electrical");	
+		return typeDict;
 	}
 	
 	public static void main(String[] args) {
