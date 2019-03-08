@@ -20,7 +20,7 @@ public class Duration {
 			this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
 		} else {
 			throw new RuntimeException("The duration cannot be negative");
-    }
+		}
 	}
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
@@ -55,6 +55,27 @@ public class Duration {
 		int minutes = (this.duration%3600)/60;
 		int seconds = (this.duration%3600)%60;
 		return hours+"h"+minutes+"min"+seconds+"s";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + duration;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Duration other = (Duration) obj;
+		if (this.duration != other.duration)
+			return false;
+		return true;
 	}
 	
 	public static void main(String[] args) {

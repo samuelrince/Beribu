@@ -33,18 +33,18 @@ public class Vlibre implements Card{
 			else {
 				costDuration = 3600;
 			}
-			if (bicycleType == "Mechanical") {
+			if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
 				return (costDuration-1)/3600;
 			}
-			else if (bicycleType == "Electrical") {
+			else if (bicycleType.equalsIgnoreCase("ELECTRICAL")) {
 				return ((costDuration-1)/3600+1.0/2.0)*2;
 			}
 		}
 		else {
-			if (bicycleType == "Mechanical") {
+			if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
 				return 0;
 			}
-			else if (bicycleType == "Electrical") {
+			else if (bicycleType.equalsIgnoreCase("ELECTRICAL")) {
 				return 1;
 			}
 		}

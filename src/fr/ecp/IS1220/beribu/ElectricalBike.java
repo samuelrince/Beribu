@@ -3,7 +3,7 @@ package fr.ecp.IS1220.beribu;
 
 public class ElectricalBike extends Bicycle {
 	private long id;
-	private String type = "Electrical";
+	private String type = "ELECTRICAL";
 	private double speed = 20;
 	
 	public ElectricalBike() {

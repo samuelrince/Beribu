@@ -92,7 +92,7 @@ public class Station {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
-				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType) {
+				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
 					this.parkingSlots.get(i).setBicycle(null);
 					this.updateStatus();
@@ -213,7 +213,7 @@ public class Station {
 		station1.getParkingSlots().get(1).setBicycle(mBike1);
 		station1.getParkingSlots().get(2).setBicycle(eBike2);
 		station1.getParkingSlots().get(2).setOffline(true);
-		System.out.println(station1.getParkingSlots());
+		System.out.println(station1.getBicycle("ELECTrICAL").getType());
 	}
 	
 }	

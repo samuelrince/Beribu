@@ -19,10 +19,10 @@ public abstract class Bicycle {
 	public abstract double getSpeed();
 	
 	public static double getSpeed(String bicycleType) throws IllegalArgumentException {
-		if (bicycleType == "Mechanical") {
+		if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
 			return 15/3.6;
 		}
-		if (bicycleType == "Electrical") {
+		if (bicycleType.equalsIgnoreCase("ELECTRICAL")) {
 			return 20/3.6;
 		}
 		else {
@@ -32,8 +32,8 @@ public abstract class Bicycle {
 	
 	public static ArrayList<String> getTypeDict(){
 		ArrayList<String> typeDict = new ArrayList<String>();
-		typeDict.add("Mechanical");
-		typeDict.add("Electrical");	
+		typeDict.add("MECHANICAL");
+		typeDict.add("ELECTRICAL");	
 		return typeDict;
 	}
 	
