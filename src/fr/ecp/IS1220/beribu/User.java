@@ -117,7 +117,7 @@ public class User {
 	 * This private method asserts true if the user is currently on ride, false otherwise.
 	 * @return boolean 
 	 */
-	private boolean isOnRide() {
+	public boolean isOnRide() {
 
 		if (!this.listOfRides.isEmpty()) {
 			Ride lastRide = this.listOfRides.get(this.listOfRides.size() - 1);
