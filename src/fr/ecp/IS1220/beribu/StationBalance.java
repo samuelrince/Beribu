@@ -39,4 +39,16 @@ public class StationBalance implements Statistics {
 		return totalReturnCount;
 	}
 	
+	public static double occupationRate(Station station, Date start, Date end) 
+			throws RuntimeException {
+		int minIndex = 0;
+		int maxIndex;
+		
+		if (station.getHistory().get(minIndex).getParkingSlotStatus().size() 
+				!= station.getHistory().get(maxIndex).getParkingSlotStatus().size())
+			throw new RuntimeException("Some parking slots have been recently added "
+					+ "to this station. You cannot compute the occupation rate on "
+					+ "this time window.");
+		return 0;
+	}
 }
