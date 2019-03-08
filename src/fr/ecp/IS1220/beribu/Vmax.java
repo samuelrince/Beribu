@@ -3,6 +3,7 @@ package fr.ecp.IS1220.beribu;
 
 public class Vmax implements Card{
 	private User user;
+	private Date creationDate;
 	
 	public Vmax(User user) {
 		super();
@@ -14,6 +15,11 @@ public class Vmax implements Card{
 	public User getUser() {
 		// TODO Auto-generated method stub
 		return this.user;
+	}
+	@Override
+	public Date getCreationDate() {
+		// TODO Auto-generated method stub
+		return this.creationDate;
 	}
 	@Override
 	public double cost(Duration duration, String bicycleType) {

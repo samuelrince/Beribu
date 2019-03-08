@@ -7,6 +7,7 @@ import java.util.Date;
 public class User {
 	private static long uniqId;
 	private static ArrayList<User> userDataBase = new ArrayList<User>();
+	private Date creationDate;
 	private long id;
 	private String name;
 	private Localization localization;
@@ -18,6 +19,7 @@ public class User {
 		super();
 		this.name = name;
 		this.id = uniqId++;
+		this.creationDate = new Date();
 		userDataBase.add(this);
 	}
 
@@ -31,6 +33,10 @@ public class User {
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public Date getCreationDate() {
+		return this.creationDate;
 	}
 
 	public Localization getLocalization() {
@@ -73,7 +79,7 @@ public class User {
 		return this.listOfRides;
 	}
 	
-	private boolean isOnRide() {
+	public boolean isOnRide() {
 		if (!this.listOfRides.isEmpty()) {
 			Ride lastRide = this.listOfRides.get(this.listOfRides.size() - 1);
 			if (lastRide.getEndStation() == null || lastRide.getEndTime() == null) {
