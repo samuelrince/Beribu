@@ -65,6 +65,15 @@ public class Station {
 		return number;
 	}
 	
+	public ParkingSlot getFreeParkingSlot() throws RuntimeException {
+		for(int i = 0; i <= this.parkingSlots.size() - 1; i++) {
+			if (!this.parkingSlots.get(i).isBicycle() && this.parkingSlots.get(i).isOffline() == false) {
+				return this.parkingSlots.get(i);
+			}
+		}
+		throw new RuntimeException("No parking slot available in this station");
+	}
+	
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (!parkingSlots.get(i).isBicycle()

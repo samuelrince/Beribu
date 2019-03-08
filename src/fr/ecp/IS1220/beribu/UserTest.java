@@ -94,8 +94,6 @@ class UserTest {
 	
 	/*
 	 * Test ride creation
-	 * 		001 - 00x : Test if the ride is created
-	 * 		00x - 00x : Test Exceptions
 	 */
 	@Test
 	void newRideTest001() {
