@@ -7,7 +7,7 @@ import java.util.Map;
 public class Station {
 	private static long uniqId;
 	private static ArrayList<Station> stationDataBase = new ArrayList<Station>();
-	private static ArrayList<State> history = new ArrayList<State>();
+	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
 	private Boolean isOffline;
@@ -27,8 +27,8 @@ public class Station {
 		return stationDataBase;
 	}
 	
-	public static ArrayList<State> getHistory() {
-		return history;
+	public  ArrayList<State> getHistory() {
+		return this.history;
 	}
 	
 	public int numberOfBicycles() {
@@ -174,7 +174,7 @@ public class Station {
 			this.targetOf.get(i).update();
 			}
 		}
-		history.add(new State());
+		this.history.add(new State());
 	}
 	
 	public class State{

@@ -13,6 +13,7 @@ public class Ride {
 	private Duration duration;
 	private boolean current;
 	private double price;
+	private double timeCreditOperation = 0;
 	
 	public Ride(User user, Bicycle bicycle, Station startStation) {
 		Date startTime = new Date();
@@ -79,10 +80,6 @@ public class Ride {
 
 	public boolean isCurrent() {
 		return current;
-	}
-
-	public void setCurrent(boolean current) {
-		this.current = current;
 	}
 
 	public double getPrice() {

@@ -3,6 +3,7 @@ package fr.ecp.IS1220.beribu;
 
 public interface Card {
 	public User getUser();
+	public Date getCreationDate();
 	public double cost(Duration duration, String bicycleType);
 	public void updateTimeCreditBalance(Duration duration, String bicycleType,
 			boolean plusStation);

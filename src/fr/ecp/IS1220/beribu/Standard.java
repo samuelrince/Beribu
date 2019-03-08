@@ -3,10 +3,12 @@ package fr.ecp.IS1220.beribu;
 
 public class Standard implements Card{
 	private User user;
+	private Date creationDate;
 	
 	public Standard(User user) {
 		super();
 		this.user = user;
+		this.creationDate = new Date();
 	}
 	
 	@Override
@@ -14,6 +16,13 @@ public class Standard implements Card{
 		// TODO Auto-generated method stub
 		return this.user;
 	}
+
+	@Override
+	public Date getCreationDate() {
+		// TODO Auto-generated method stub
+		return this.creationDate;
+	}	
+	
 	@Override
 	public double cost(Duration duration, String bicycleType) {
 		// TODO Auto-generated method stub
@@ -31,6 +40,6 @@ public class Standard implements Card{
 	public void updateTimeCreditBalance(Duration duration, String bicycleType, 
 			boolean plusStation) {
 		// TODO Auto-generated method stub
-	}	
+	}
 	
 }
