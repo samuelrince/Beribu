@@ -37,9 +37,10 @@ public class Standard implements Card{
 	}
 
 	@Override
-	public void updateTimeCreditBalance(Duration duration, String bicycleType, 
+	public int timeCreditOperation(Duration duration, String bicycleType, 
 			boolean plusStation) {
 		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
