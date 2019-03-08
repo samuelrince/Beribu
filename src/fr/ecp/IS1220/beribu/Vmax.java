@@ -40,22 +40,24 @@ public class Vmax implements Card{
 	}
 
 	@Override
-	public void updateTimeCreditBalance(Duration duration, String bicycleType, 
+	public int timeCreditOperation(Duration duration, String bicycleType, 
 			boolean plusStation) {
 		// TODO Auto-generated method stub
 		int costDuration = duration.getDuration();
+		int timeCreditOperation = 0;
 		if (costDuration>3600) {
 			if (costDuration-3600 > this.user.getTimeCreditBalance().getDuration()) {
-				this.user.setTimeCreditBalance(0);
+				timeCreditOperation = -this.user.getTimeCreditBalance().getDuration();
 			}
 			else {
-				this.user.addTimeCreditBalance(0,3600-costDuration);
+				timeCreditOperation = 3600-costDuration;
 			}
 		}
 		
 		if (plusStation) {
-			this.user.addTimeCreditBalance(5);
+			timeCreditOperation += 5*60;
 		}
+		return timeCreditOperation;
 	}
 	
 }

@@ -13,7 +13,7 @@ public class Ride {
 	private Duration duration;
 	private boolean current;
 	private double price;
-	private double timeCreditOperation = 0;
+	private int timeCreditOperation = 0;
 	
 	public Ride(User user, Bicycle bicycle, Station startStation) {
 		Date startTime = new Date();
@@ -42,8 +42,8 @@ public class Ride {
 	
 	private void pay() {
 		this.price = this.user.getCard().cost(this.duration, this.bicycle.getType());
-		this.user.getCard().updateTimeCreditBalance(this.duration, 
-				this.bicycle.getType(),	this.endStation.isPlus());
+		this.user.addTimeCreditBalance(0, this.user.getCard().timeCreditOperation(
+				this.duration, this.bicycle.getType(),this.endStation.isPlus()));
 	}
 
 	public long getId() {
@@ -85,7 +85,11 @@ public class Ride {
 	public double getPrice() {
 		return price;
 	}
-
+	
+	public int getTimeCreditOperation() {
+		return timeCreditOperation;
+	}
+	
 	@Override
 	public String toString() {
 		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
