@@ -103,12 +103,57 @@ public class Date {
 		this.setSecond(currentDate.getSecond());
 	}
 	
+	public boolean isAfter(Date otherDate) {
+		if (this.year != otherDate.year) {
+			if (this.year < otherDate.year)
+				return false;
+			if (this.year > otherDate.year)
+				return true;
+		}
+		if (this.month != otherDate.month) {
+			if (this.month < otherDate.month)
+				return false;
+			if (this.month > otherDate.month)
+				return true;
+		}
+		if (this.day != otherDate.day) {
+			if (this.day < otherDate.day)
+				return false;
+			if (this.day > otherDate.day)
+				return true;
+		}
+		if (this.hour != otherDate.hour) {
+			if (this.hour < otherDate.hour)
+				return false;
+			if (this.hour > otherDate.hour)
+				return true;
+		}
+		if (this.minute != otherDate.minute) {
+			if (this.minute < otherDate.minute)
+				return false;
+			if (this.minute > otherDate.minute)
+				return true;
+		}
+		if (this.second != otherDate.second) {
+			if (this.second < otherDate.second)
+				return false;
+			if (this.second > otherDate.second)
+				return true;
+		}
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019,03,02);
 		SD.setTime(12,24,36);
 		Date date1 = new Date();
+		SD.setDay(2019,04,02);
+		SD.setTime(12,24,36);
+		Date date2 = new Date();
 		System.out.println(date1);
+		System.out.println(date2.isAfter(date1));
 	}
+	
 }
 

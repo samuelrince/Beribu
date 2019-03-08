@@ -2,6 +2,7 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class Station {
@@ -158,6 +159,7 @@ public class Station {
 
 	public void addParkingSlot(ParkingSlot parkingSlot) {
 		this.parkingSlots.add(parkingSlot);
+		this.updateStatus();
 	}
 	
 	public ArrayList<Travel> getTargetOf() {
@@ -179,23 +181,23 @@ public class Station {
 	
 	public class State{
 		private Date timeStamp;
-		private ArrayList<Map.Entry<Boolean, Boolean>> parkingSlotStatus 
-		= new ArrayList<Map.Entry<Boolean, Boolean>>();
+		private ArrayList<ArrayList<Boolean>> parkingSlotStatus 
+		= new ArrayList<ArrayList<Boolean>>();
 		
 		private State() {
 			super();
 			this.timeStamp = new Date();
 			for (int i = 0; i < Station.this.parkingSlots.size(); i++) {
 				ParkingSlot parkingSlot = Station.this.parkingSlots.get(i);
-				this.parkingSlotStatus.add(new AbstractMap.SimpleEntry(
-						parkingSlot.isOffline(), parkingSlot.isBicycle()));
+				this.parkingSlotStatus.add(new ArrayList<Boolean>(
+						Arrays.asList(parkingSlot.isOffline(), parkingSlot.isBicycle())));
 			}
 		}
 		
 		public Date getTimeStamp() {
 			return timeStamp;
 		}
-		public ArrayList<Map.Entry<Boolean, Boolean>> getParkingSlotStatus() {
+		public ArrayList<ArrayList<Boolean>> getParkingSlotStatus() {
 			return parkingSlotStatus;
 		}
 		
