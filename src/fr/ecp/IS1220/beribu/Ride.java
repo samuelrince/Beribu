@@ -85,7 +85,11 @@ public class Ride {
 	public double getPrice() {
 		return price;
 	}
-
+	
+	public int getTimeCreditOperation() {
+		return timeCreditOperation;
+	}
+	
 	@Override
 	public String toString() {
 		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();

@@ -32,4 +32,11 @@ public class UserBalance implements Statistics {
 		return totalCharges;
 	}
 
+	public double cumulatedTimeCredit() {
+		double cumulatedTimeCredit = 0;
+		for ( int i = 0; i < this.numberOfRides(); i++) {
+			cumulatedTimeCredit += this.user.getListOfRides().get(i).getTimeCreditOperation();
+		}
+		return cumulatedTimeCredit;
+	}
 }
