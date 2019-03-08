@@ -25,7 +25,7 @@ public class Ride {
 		this.id = uniqId++;
 	}
 
-	public void end(ParkingSlot parkingSlot) throws Exception {
+	public void end(ParkingSlot parkingSlot) throws RuntimeException {
 		if (!parkingSlot.isBicycle()) {
 			parkingSlot.setBicycle(this.bicycle);
 			Date endTime = new Date();
@@ -36,11 +36,11 @@ public class Ride {
 			this.pay();
 		}
 		else {
-			throw new Exception("Cette place est déjà prise ou hors-service.");
+			throw new RuntimeException("This parking slot is not available");
 		}
 	}
 	
-	public void pay() {
+	private void pay() {
 		this.price = this.user.getCard().cost(this.duration, this.bicycle.getType());
 		this.user.getCard().updateTimeCreditBalance(this.duration, 
 				this.bicycle.getType(),	this.endStation.isPlus());
