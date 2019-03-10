@@ -43,6 +43,11 @@ public class ParkingSlot {
 		
 	}
 	
+	/**
+	 * This method returns true if a bicycle is attached to the parking
+	 * slot, and false otherwise.
+	 * @return		boolean 
+	 */
 	public boolean isBicycle() {
 		if (this.getBicycle() != null) {
 			return true;
