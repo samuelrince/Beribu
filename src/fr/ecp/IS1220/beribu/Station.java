@@ -1,10 +1,13 @@
 package fr.ecp.IS1220.beribu;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
+/**
+ * This class represents a station.
+ * @author Valentin
+ *
+ */
 public class Station {
 	private static long uniqId;
 	private static ArrayList<Station> stationDataBase = new ArrayList<Station>();

@@ -14,6 +14,7 @@ public class User {
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
+	private Travel plannedRide;
 	
 	/**
 	 * Constructor of User class.
@@ -54,7 +55,7 @@ public class User {
 	public Duration getTimeCreditBalance() {
 		return this.timeCreditBalance;
 	}
-
+	
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in minutes.
@@ -145,12 +146,19 @@ public class User {
 		if (!this.isOnRide()) {
 			try {
 				Bicycle bicycle = station.getBicycle();
-				this.listOfRides.add(new Ride(this,bicycle,station));
+				Ride ride = new Ride(this,bicycle,station);
+				this.listOfRides.add(ride);
+				if (this.plannedRide != null) {
+					if (this.plannedRide.isOngoing()){
+						this.plannedRide.setSuggestedStartStation(station);
+					}
+				}
 			}
 			catch(RuntimeException exception) {
 				System.err.println("No bicycle available. Please change to another station.");
 			}
-		} else {
+		} 
+		else {
 			throw new RuntimeException("User " + this.getName() + " has not finished their current ride.");
 		}
 	}
@@ -171,13 +179,20 @@ public class User {
 		if (!this.isOnRide()) {
 			try {
 				Bicycle bicycle = station.getBicycle(bicycleType);
-				this.listOfRides.add(new Ride(this,bicycle,station));
+				Ride ride = new Ride(this,bicycle,station);
+				this.listOfRides.add(ride);
+				if (this.plannedRide != null) {
+					if (this.plannedRide.isOngoing()){
+						this.plannedRide.setSuggestedStartStation(station);
+					}
+				}
 			}
 			catch(RuntimeException exception) {
 				System.err.println("Please try another bicycle type "
 						+ "or change to another station.");
 			}
-		} else {
+		} 
+		else {
 			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
@@ -205,7 +220,7 @@ public class User {
 	 * @param destination	the destination of the user
 	 */
 	public void planRide(Localization source, Localization destination) {
-		Travel travel = new Travel(this,source,destination);
+		this.plannedRide = new Travel(this,source,destination);
 	}
 	/**
 	 * This method should be used when a user want to plan a future ride.
@@ -220,7 +235,7 @@ public class User {
 	 */
 	public void planRide(Localization source, Localization destination,
 			PathStrategy pathStrategy) {
-		Travel travel = new Travel(this,source,destination,pathStrategy);
+		this.plannedRide = new Travel(this,source,destination,pathStrategy);
 	}
 	/**
 	 * This method should be used when a user want to plan a future ride.
@@ -236,7 +251,7 @@ public class User {
 	 */
 	public void planRide(Localization source, Localization destination, 
 			String bicycleType, PathStrategy pathStrategy) {
-		Travel travel = new Travel(this,source,destination,pathStrategy,bicycleType);
+		this.plannedRide = new Travel(this,source,destination,pathStrategy,bicycleType);
 	}
 	/**
 	 * This method should be used when a user want to plan a future ride.
@@ -251,7 +266,15 @@ public class User {
 	 */
 	public void planRide(Localization source, Localization destination, 
 			String bicycleType) {
-		Travel travel = new Travel(this,source,destination,bicycleType);
+		this.plannedRide = new Travel(this,source,destination,bicycleType);
+	}
+	
+	public Travel getPlannedRide() {
+		return this.plannedRide;
+	}
+	
+	public void discardPlannedRide() {
+		this.plannedRide = null;
 	}
 
 	public void notifyUser(String message) {
