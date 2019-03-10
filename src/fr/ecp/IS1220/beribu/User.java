@@ -274,7 +274,14 @@ public class User {
 	}
 	
 	public void discardPlannedRide() {
-		this.plannedRide = null;
+		if (this.plannedRide != null) {
+			this.plannedRide.suggestedStartStation.removeTargetOf(this.plannedRide);
+			this.plannedRide.suggestedEndStation.removeTargetOf(this.plannedRide);
+			this.plannedRide = null;
+		}
+		else {
+			System.out.println("No planned ride to discard.");
+		}
 	}
 
 	public void notifyUser(String message) {

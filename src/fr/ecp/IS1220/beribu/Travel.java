@@ -11,7 +11,7 @@ public class Travel {
 	User user;
 	Localization source;
 	Localization destination;
-	String bicycleType;
+	String bicycleType = null;
 	PathStrategy pathStrategy;
 	Station suggestedStartStation;
 	Station suggestedEndStation;
@@ -89,8 +89,15 @@ public class Travel {
 	 * into account the type of subscription of the user. 
 	 */
 	public void findRide() {
-		ArrayList<Station> startEnd = this.pathStrategy.findPath(
-				this.source, this.destination, this.bicycleType);
+		ArrayList<Station> startEnd;
+		if (this.bicycleType != null) {
+			startEnd = this.pathStrategy.findPath(
+					this.source, this.destination, this.bicycleType);
+		}
+		else {
+			startEnd = this.pathStrategy.findPath(
+					this.source, this.destination);
+		}
 		this.suggestedStartStation = startEnd.get(0);
 		this.suggestedEndStation = startEnd.get(1);
 		this.suggestedStartStation.addTargetOf(this);

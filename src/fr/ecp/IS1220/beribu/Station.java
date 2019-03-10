@@ -265,14 +265,38 @@ public class Station {
 	 * This is automatically called when any operation (rental, return, offline, online, parking slot creation)
 	 * is performed in the station, including any of its parking slots. <br>
 	 * It does two things :
-	 * <br>- Notifies all the users with a planned ride Travel who were supposedly 
+	 * <br>- If the station gets empty or full as a consequence of this operation, 
+	 * notifies all the users with a planned ride Travel who were supposedly 
 	 * heading towards this station (to rent a bicycle or return one).
 	 * <br>- Creates a new instance of State and adds it to the station history
 	 */
 	public void updateStatus() {
-		for (int i = 0; i < this.targetOf.size(); i++) {
-			if (this.isFull()) {
-			this.targetOf.get(i).update();
+		if (!this.isBicycle()) {
+			for (int i = 0; i < this.targetOf.size(); i++) {
+				if (this.targetOf.get(i).getSuggestedStartStation() == this){
+					this.targetOf.get(i).update();
+				}
+			}
+		}
+		else {
+			for (int j = 0; j < Bicycle.getTypeDict().size(); j++) {
+				if (!this.isBicycle(Bicycle.getTypeDict().get(j))) {
+					for (int i = 0; i < this.targetOf.size(); i++) {
+						if (this.targetOf.get(i).getSuggestedStartStation() == this
+								&& this.targetOf.get(i).getBicycleType() == 
+								Bicycle.getTypeDict().get(j)){
+							this.targetOf.get(i).update();
+						}
+					}
+				}
+			}
+		}
+		
+		if (this.isFull()) {
+			for (int i = 0; i < this.targetOf.size(); i++) {
+				if (this.targetOf.get(i).getSuggestedEndStation() == this){
+					this.targetOf.get(i).update();
+				}
 			}
 		}
 		this.history.add(new State());
