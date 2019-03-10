@@ -175,8 +175,12 @@ public class Station {
 		return targetOf;
 	}
 
-	public void setTargetOf(ArrayList<Travel> targetOf) {
-		this.targetOf = targetOf;
+	public void addTargetOf(Travel travel) {
+		this.targetOf.add(travel); 
+	}
+	
+	public void removeTargetOf(Travel travel) {
+		this.targetOf.remove(travel); 
 	}
  
 	public void updateStatus() {
