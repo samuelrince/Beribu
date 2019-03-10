@@ -34,6 +34,11 @@ public class Ride {
 			this.current = false;
 			this.duration = new Duration(this.startTime,this.endTime);
 			this.pay();
+			if (this.user.getPlannedRide() != null) {
+				if (this.user.getPlannedRide().isOngoing()){
+					this.user.discardPlannedRide();
+				}
+			}
 		}
 		else {
 			throw new RuntimeException("This parking slot is not available");
@@ -89,7 +94,7 @@ public class Ride {
 	public int getTimeCreditOperation() {
 		return timeCreditOperation;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
