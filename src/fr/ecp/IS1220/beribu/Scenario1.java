@@ -21,7 +21,6 @@ public class Scenario1 {
 		station1.getParkingSlots().get(1).setBicycle(mBike1);
 		station1.getParkingSlots().get(2).setBicycle(eBike2);
 		station1.getParkingSlots().get(2).setOffline(true);
-		System.out.println(Station.allStations());
 		
 		SD.setDay(2019, 02, 17);
 		SD.setTime(19, 22, 37);

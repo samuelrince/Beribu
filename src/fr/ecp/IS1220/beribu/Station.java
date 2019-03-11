@@ -10,7 +10,6 @@ import java.util.Arrays;
  */
 public class Station {
 	private static long uniqId;
-	private static ArrayList<Station> stationDataBase = new ArrayList<Station>();
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
@@ -24,11 +23,6 @@ public class Station {
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
-		stationDataBase.add(this);
-	}
-	
-	public static ArrayList<Station> allStations(){
-		return stationDataBase;
 	}
 	
 	public  ArrayList<State> getHistory() {
