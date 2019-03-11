@@ -135,6 +135,46 @@ public class Date {
 		this.setSecond(currentDate.getSecond());
 	}
 	
+
+	public boolean isAfter(Date otherDate) {
+		if (this.year != otherDate.year) {
+			if (this.year < otherDate.year)
+				return false;
+			if (this.year > otherDate.year)
+				return true;
+		}
+		if (this.month != otherDate.month) {
+			if (this.month < otherDate.month)
+				return false;
+			if (this.month > otherDate.month)
+				return true;
+		}
+		if (this.day != otherDate.day) {
+			if (this.day < otherDate.day)
+				return false;
+			if (this.day > otherDate.day)
+				return true;
+		}
+		if (this.hour != otherDate.hour) {
+			if (this.hour < otherDate.hour)
+				return false;
+			if (this.hour > otherDate.hour)
+				return true;
+		}
+		if (this.minute != otherDate.minute) {
+			if (this.minute < otherDate.minute)
+				return false;
+			if (this.minute > otherDate.minute)
+				return true;
+		}
+		if (this.second != otherDate.second) {
+			if (this.second < otherDate.second)
+				return false;
+			if (this.second > otherDate.second)
+				return true;
+		}
+		return true;
+	}
 	
 	
 	@Override
@@ -220,5 +260,6 @@ public class Date {
 		}
 		return true;
 	}
+	
 }
 

@@ -14,10 +14,11 @@ public class User {
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
+	private Travel plannedRide;
 	
 	/**
 	 * Constructor of User class.
-	 * @param name	Should be a String
+	 * @param name	Name and First name of the user
 	 */
 	public User(String name) {
 		super();
@@ -54,7 +55,7 @@ public class User {
 	public Duration getTimeCreditBalance() {
 		return this.timeCreditBalance;
 	}
-
+	
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in minutes.
@@ -65,7 +66,7 @@ public class User {
 	}
 	
 	/**
-	 * This method adds time to the user credit balance.
+	 * This method adds time to the user time credit balance.
 	 * The duration to add is expressed in minutes and in seconds.
 	 * @param minutes
 	 * @param seconds
@@ -77,15 +78,12 @@ public class User {
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in hours, in minutes and in seconds.
+	 * @param hours
 	 * @param minutes
 	 * @param seconds
 	 */
 	public void addTimeCreditBalance(int hours, int minutes, int seconds) {
 		this.timeCreditBalance.add(hours, minutes, seconds);
-	}
-	
-	public void setTimeCreditBalance(int duration) {
-		this.timeCreditBalance.setDuration(duration);
 	}
 
 	public Card getCard() {
@@ -93,12 +91,12 @@ public class User {
 	}
 
 	/**
-	 * This method is used when a user subscribe to subscription program.
+	 * This method is called when a user subscribes to a subscription program.
 	 * The type of subscription is handle by the type of card the user subscribed to.
-	 * The card object call the user.subscribe method during the subscription process.
+	 * The Card object calls this method when being created at the user's name.
 	 * @param card		Should be a card
-	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card)
-	 * that belongs to another user
+	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card
+	 * that belongs to another user)
 	 */
 	public void subscribe(Card card) throws RuntimeException {
 		if (card.getUser() == this) {
@@ -114,7 +112,7 @@ public class User {
 	
 
 	/**
-	 * This private method asserts true if the user is currently on ride, false otherwise.
+	 * This private method returns true if the user is currently on a ride, false otherwise.
 	 * @return boolean 
 	 */
 	public boolean isOnRide() {
@@ -137,24 +135,31 @@ public class User {
 	 * <br><br>
 	 * <b>Use case:</b> <br>
 	 * The user approaches a station and decides to take a bike for a ride. The user has
-	 * no preference on the type bicycle. So the station "decides" for him to choose a bicycle 
-	 * and take it off from the right parking slot.
+	 * no preference on the type of bicycle. So the station "decides" for him to choose a bicycle 
+	 * and take it off from the right parking slot, or returns an error if no bike is available.
 	 * 
 	 * @param station	Should be a Station object
 	 * @throws RuntimeException		Throws RuntimeException when a user tries to start
-	 * a new ride without finishing his last ride.
+	 * a new ride without finishing his current ride.
 	 */
 	public void newRide(Station station) throws RuntimeException {
 		if (!this.isOnRide()) {
 			try {
 				Bicycle bicycle = station.getBicycle();
-				this.listOfRides.add(new Ride(this,bicycle,station));
+				Ride ride = new Ride(this,bicycle,station);
+				this.listOfRides.add(ride);
+				if (this.plannedRide != null) {
+					if (this.plannedRide.isOngoing()){
+						this.plannedRide.setSuggestedStartStation(station);
+					}
+				}
 			}
 			catch(RuntimeException exception) {
-				System.err.println("Please change to another station.");
+				System.err.println("No bicycle available. Please change to another station.");
 			}
-		} else {
-			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
+		} 
+		else {
+			throw new RuntimeException("User " + this.getName() + " has not finished their current ride.");
 		}
 	}
 	
@@ -163,31 +168,38 @@ public class User {
 	 * <br><br>
 	 * <b>Use case:</b> <br>
 	 * The user approaches a station and decides to take a bike for a ride. The user has
-	 * preference on the type bicycle. So the station deliver the right bicycle if possible
+	 * preference on the type bicycle. So the station delivers the right bicycle if possible
 	 * and return an error otherwise. 
 	 * 
 	 * @param station	Should be a Station object
 	 * @throws RuntimeException		Throws RuntimeException when a user tries to start
-	 * a new ride without finishing his last ride.
+	 * a new ride without finishing his current ride.
 	 */
 	public void newRide(Station station, String bicycleType) throws RuntimeException {
 		if (!this.isOnRide()) {
 			try {
 				Bicycle bicycle = station.getBicycle(bicycleType);
-				this.listOfRides.add(new Ride(this,bicycle,station));
+				Ride ride = new Ride(this,bicycle,station);
+				this.listOfRides.add(ride);
+				if (this.plannedRide != null) {
+					if (this.plannedRide.isOngoing()){
+						this.plannedRide.setSuggestedStartStation(station);
+					}
+				}
 			}
 			catch(RuntimeException exception) {
 				System.err.println("Please try another bicycle type "
 						+ "or change to another station.");
 			}
-		} else {
+		} 
+		else {
 			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
 	
 	/**
-	 * This method returns the current (not finished) ride of a user.
-	 * @return Ride		Should be a Ride object or return <b>null<b> otherwise
+	 * This method returns the current (not finished) ride of a user if it exists.
+	 * @return Ride		Ride object or <b>null</b> if not current ride
 	 */
 	public Ride getCurrentRide() {
 		if (this.isOnRide()) {
@@ -197,20 +209,79 @@ public class User {
 		}
 	}
 	
+	/**
+	 * This method should be used when a user want to plan a future ride.
+	 * A new object Travel associated to the user is created.
+	 * The user then has the possibility to find automatically a start station
+	 * and an end station, and to calculate the duration and cost of this ride.
+	 * By default, the start station and end station are chosen so as to minimize
+	 * the walking time. The type of bicycle is indifferent.
+	 * @param source	the initial position of the user
+	 * @param destination	the destination of the user
+	 */
 	public void planRide(Localization source, Localization destination) {
-		Travel travel = new Travel(this,source,destination);
+		this.plannedRide = new Travel(this,source,destination);
 	}
+	/**
+	 * This method should be used when a user want to plan a future ride.
+	 * A new object Travel associated to the user is created.
+	 * The user then has the possibility to find automatically a start station
+	 * and an end station according to the strategy specified by the user,
+	 * and to calculate the duration and cost of this ride. 
+	 * The type of bicycle is indifferent.
+	 * @param source	the initial position of the user
+	 * @param destination	the destination of the user
+	 * @param pathStrategy	the PathStrategy employed to chose the start and end stations
+	 */
 	public void planRide(Localization source, Localization destination,
 			PathStrategy pathStrategy) {
-		Travel travel = new Travel(this,source,destination,pathStrategy);
+		this.plannedRide = new Travel(this,source,destination,pathStrategy);
 	}
+	/**
+	 * This method should be used when a user want to plan a future ride.
+	 * A new object Travel associated to the user is created.
+	 * The user then has the possibility to find automatically a start station
+	 * and an end station according to the strategy specified by the user,
+	 * and to calculate the duration and cost of this ride.
+	 * The user should specify the desired type of bicycle.
+	 * @param source	the initial position of the user
+	 * @param destination	the destination of the user
+	 * @param bicycleType	the desired type of bicycle
+	 * @param pathStrategy	the PathStrategy employed to chose the start and end stations
+	 */
 	public void planRide(Localization source, Localization destination, 
 			String bicycleType, PathStrategy pathStrategy) {
-		Travel travel = new Travel(this,source,destination,pathStrategy,bicycleType);
+		this.plannedRide = new Travel(this,source,destination,pathStrategy,bicycleType);
 	}
+	/**
+	 * This method should be used when a user want to plan a future ride.
+	 * A new object Travel associated to the user is created.
+	 * The user then has the possibility to find automatically a start station
+	 * and an end station, and to calculate the duration and cost of this ride.
+	 * By default, the start station and end station are chosen so as to minimize
+	 * the walking time. The user should specify the desired type of bicycle.
+	 * @param source	the initial position of the user
+	 * @param destination	the destination of the user
+	 * @param bicycleType	the desired type of bicycle
+	 */
 	public void planRide(Localization source, Localization destination, 
 			String bicycleType) {
-		Travel travel = new Travel(this,source,destination,bicycleType);
+		this.plannedRide = new Travel(this,source,destination,bicycleType);
+	}
+	
+	public Travel getPlannedRide() {
+		return this.plannedRide;
+	}
+	
+	public void discardPlannedRide() {
+		if (this.plannedRide != null) {
+			this.plannedRide.suggestedStartStation.removeTargetOf(this.plannedRide);
+			this.plannedRide.suggestedEndStation.removeTargetOf(this.plannedRide);
+			this.plannedRide = null;
+		}
+		else {
+			System.out.println("No planned ride to discard.");
+		}
 	}
 
 	public void notifyUser(String message) {

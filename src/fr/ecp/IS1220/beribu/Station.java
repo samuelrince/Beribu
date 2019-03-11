@@ -1,9 +1,13 @@
 package fr.ecp.IS1220.beribu;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Arrays;
 
+/**
+ * This class represents a station.
+ * @author Valentin
+ *
+ */
 public class Station {
 	private static long uniqId;
 	private static ArrayList<Station> stationDataBase = new ArrayList<Station>();
@@ -32,10 +36,9 @@ public class Station {
 	}
 	
 	/**
-	 * This method is used to count the number of Bicycles available in the
-	 * station. To be available, a bicycle has to be parked in a parking slot 
-	 * that is not offline or out of service.
-	 * @return 	The number of bicycles available in the station
+	 * This method returns the number of available bicycles in the station.
+	 * Bicycles parked on an offline parking slot are not taken into account.
+	 * @return the number of available bicycles
 	 */
 	public int numberOfBicycles() {
 		int number = 0;
@@ -49,12 +52,9 @@ public class Station {
 	}
 	
 	/**
-	 * This method is used to count the number of Bicycles available in the
-	 * station of certain type defined by bicycleType. To be available, a 
-	 * bicycle has to be parked in a parking slot that is not offline or out
-	 * of service.
-	 * @param bicycleType	A string for the type of bicycle
-	 * @return				The number of bicycle available of the defined type
+	 * This method returns the number of available bicycles of a given type in the station.
+	 * Bicycles parked on an offline parking slot are not taken into account.
+	 * @return the number of available bicycles of given type
 	 */
 	public int numberOfBicycles(String bicycleType) {
 		int number = 0;
@@ -69,10 +69,9 @@ public class Station {
 	}
 	
 	/**
-	 * This method is used to count the number of free parking slots. A free 
-	 * parking slot is counted only if it has not bicycle attached to and if
-	 * it is online.
-	 * @return
+	 * This method returns the number of parking slots available in the station,
+	 * ie. online slots holding no bicycle.
+	 * @return the number of free slots
 	 */
 	public int numberOfFreeSlots() {
 		int number = 0;
@@ -86,12 +85,10 @@ public class Station {
 	}
 	
 	/**
-	 * This method is user to get a free parking slot. The parking slot has
-	 * to be online and has no bicycle attached to. This method return the first 
-	 * available parking slot and ignore the next ones. This function throw a 
-	 * RuntimeException if there is no parking slot available.
-	 * @return						A free ParkingSlot
-	 * @throws RuntimeException		If no ParkingSlot are available
+	 * This method returns a free parking slot (online and holding no bicycle) 
+	 * of the station if such a parking slot exists, otherwise it throws a RuntimeException.
+	 * @return a free parking slot
+	 * @throws RuntimeException
 	 */
 	public ParkingSlot getFreeParkingSlot() throws RuntimeException {
 		for(int i = 0; i <= this.parkingSlots.size() - 1; i++) {
@@ -103,11 +100,10 @@ public class Station {
 	}
 	
 	/**
-	 * This method is used to detect if the station is full or not. A station
-	 * is considered as full if there is no parking slot available. That means
-	 * all parking slots has a bicycle attached to or are offline.
-	 * @return		Boolean, true if the station has at least one free parking slot,
-	 * false if not.
+	 * This method returns true if there is no free parking slot available in the station.
+	 * If there is at least one free parking slot (online and holding no bicycle),
+	 * it returns false.
+	 * @return a boolean
 	 */
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -120,11 +116,11 @@ public class Station {
 	}
 	
 	/**
-	 * This method allows to a user to detach a bicycle from the station. In this
-	 * case it is the first available bicycle found. The bicycle type is not
-	 * considered.
-	 * @return		A Bicycle
-	 * @throws 		If no available bicycle found
+	 * This method returns an available bicycle of the station (the first available in the order
+	 * of parking slots) if it exists AND empties the corresponding parking slot. 
+	 * If no such bicycle exists, throws a RuntimeException.
+	 * @return a Bicycle
+	 * @throws RuntimeException
 	 */
 	public Bicycle getBicycle() throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -132,19 +128,18 @@ public class Station {
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
 				this.parkingSlots.get(i).setBicycle(null);
-				this.updateStatus();
 				return bicycle;
 			}
 		}
 		throw new RuntimeException("Sorry, no bicycle is available.");
 	}
 		
-	/**
-	 * This method allows to a user to detach a bicycle of certain type. The first
-	 * bicycle found that match the bicycle type is detached.
-	 * @param bicycleType			A string that gives the type of the bicycle wanted.
-	 * @return						Return a bicycle with the good type
-	 * @throws RuntimeException		Throw an RuntimeException if no bicycle is found.
+  /**
+   * This method returns an available bicycle of given type of the station (the first available in the order
+	 * of parking slots) if it exists AND empties the corresponding parking slot. 
+	 * If no such bicycle exists, throws a RuntimeException.
+	 * @return a Bicycle
+	 * @throws RuntimeException
 	 */
 	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -158,12 +153,13 @@ public class Station {
 				}
 			}
 		}
-		throw new RuntimeException("Sorry, no bicycle of the wanted type is available");
+		throw new RuntimeException("Sorry, no bicycle of the desired type is available.");
 	}
 	
 	/**
-	 * This method is used to check if there is a bicycle available
-	 * @return		True is there is a bicycle available and false otherwise
+	 * This method returns true if there is at least one available bicycle in the station.
+	 * Returns false otherwise.
+	 * @return a boolean
 	 */
 	public boolean isBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -176,8 +172,9 @@ public class Station {
 	}
 	
 	/**
-	 * This method is used to check if there is a bicycle of a certain type is available
-	 * @return		True is there is a bicycle available and false otherwise
+	 * This method returns true if there is at least one available bicycle of 
+	 * given type in the station. Returns false otherwise.
+	 * @return a boolean
 	 */
 	public boolean isBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -210,11 +207,11 @@ public class Station {
 	public Boolean isOffline() {
 		return isOffline;
 	}
-	
+
 	/**
-	 * This method is used to set Offline the station and all parking
-	 * slots.
-	 * @param isOffline
+	 * A call to this method sets all the parking slots of the station in the state
+	 * specified by input isOffline.
+	 * @param isOffline should be true to set the station offline, false to set it online
 	 */
 	public void setOffline(Boolean isOffline) {
 		this.isOffline = isOffline;
@@ -227,65 +224,111 @@ public class Station {
 	public ArrayList<ParkingSlot> getParkingSlots() {
 		return parkingSlots;
 	}
-	
+
 	/**
-	 * This method add ParkingSlot to the station. <br> <br>
-	 * <b>This method should be called by a ParkingSlot object only</b>
+	 * Adds a given parking slot to the station. This method is automatically called
+	 * when creating a parking slot associated to the station.
 	 * @param parkingSlot
 	 */
 	public void addParkingSlot(ParkingSlot parkingSlot) {
 		this.parkingSlots.add(parkingSlot);
+		this.updateStatus();
 	}
 	
 	public ArrayList<Travel> getTargetOf() {
 		return targetOf;
 	}
 
-	public void setTargetOf(ArrayList<Travel> targetOf) {
-		this.targetOf = targetOf;
+	
+	/**
+	 * This method is called when a planned ride Travel suggests this station either
+	 * as a station or end station to a user.
+	 * @param travel
+	 */
+	public void addTargetOf(Travel travel) {
+		this.targetOf.add(travel); 
+	}
+	
+	/**
+	 * This method is called when the station is no longer being targeted by a planned
+	 * ride Travel either as start station or end station.
+	 * @param travel
+	 */
+	public void removeTargetOf(Travel travel) {
+		this.targetOf.remove(travel); 
 	}
  
 	/**
-	 * This method is used to update the status of the station and notify
-	 * the Travels that are liked to. It also add all states into the history
-	 * attribute.
+	 * This is automatically called when any operation (rental, return, offline, online, parking slot creation)
+	 * is performed in the station, including any of its parking slots. <br>
+	 * It does two things :
+	 * <br>- If the station gets empty or full as a consequence of this operation, 
+	 * notifies all the users with a planned ride Travel who were supposedly 
+	 * heading towards this station (to rent a bicycle or return one).
+	 * <br>- Creates a new instance of State and adds it to the station history
 	 */
 	public void updateStatus() {
-		for (int i = 0; i < this.targetOf.size(); i++) {
-			if (this.isFull()) {
-			this.targetOf.get(i).update();
+		if (!this.isBicycle()) {
+			for (int i = 0; i < this.targetOf.size(); i++) {
+				if (this.targetOf.get(i).getSuggestedStartStation() == this){
+					this.targetOf.get(i).update();
+				}
+			}
+		}
+		else {
+			for (int j = 0; j < Bicycle.getTypeDict().size(); j++) {
+				if (!this.isBicycle(Bicycle.getTypeDict().get(j))) {
+					for (int i = 0; i < this.targetOf.size(); i++) {
+						if (this.targetOf.get(i).getSuggestedStartStation() == this
+								&& this.targetOf.get(i).getBicycleType() == 
+								Bicycle.getTypeDict().get(j)){
+							this.targetOf.get(i).update();
+						}
+					}
+				}
+			}
+		}
+		
+		if (this.isFull()) {
+			for (int i = 0; i < this.targetOf.size(); i++) {
+				if (this.targetOf.get(i).getSuggestedEndStation() == this){
+					this.targetOf.get(i).update();
+				}
 			}
 		}
 		this.history.add(new State());
 	}
 	
-	/**
-	 * A nested class State to provide states feature for stations.
-	 * A State is a dated photography of all parking slots status of 
-	 * the station. The status of parking slot is the combination of
-	 * two booleans representing is the parking isOffline and if it
-	 * has a Bicycle attached to. <br>
-	 * States are stored in a station attribute.
+  /**
+	 * A nested class of the class Station that depicts the state of the station 
+	 * at a given moment in time.
+	 * @author Valentin
 	 */
 	public class State{
 		private Date timeStamp;
-		private ArrayList<Map.Entry<Boolean, Boolean>> parkingSlotStatus 
-		= new ArrayList<Map.Entry<Boolean, Boolean>>();
+		private ArrayList<ArrayList<Boolean>> parkingSlotStatus 
+		= new ArrayList<ArrayList<Boolean>>();
 		
+		/**
+		 * Constructor of the class State. Records the time and date at the instant
+		 * of its creation, as well as the state of all the parking slots of the station :
+		 * their status (online/offline) and their occupation (holding/not holding a bicycle)
+		 * in the form of booleans.
+		 */
 		private State() {
 			super();
 			this.timeStamp = new Date();
 			for (int i = 0; i < Station.this.parkingSlots.size(); i++) {
 				ParkingSlot parkingSlot = Station.this.parkingSlots.get(i);
-				this.parkingSlotStatus.add(new AbstractMap.SimpleEntry(
-						parkingSlot.isOffline(), parkingSlot.isBicycle()));
+				this.parkingSlotStatus.add(new ArrayList<Boolean>(
+						Arrays.asList(parkingSlot.isOffline(), parkingSlot.isBicycle())));
 			}
 		}
 		
 		public Date getTimeStamp() {
 			return timeStamp;
 		}
-		public ArrayList<Map.Entry<Boolean, Boolean>> getParkingSlotStatus() {
+		public ArrayList<ArrayList<Boolean>> getParkingSlotStatus() {
 			return parkingSlotStatus;
 		}
 		
