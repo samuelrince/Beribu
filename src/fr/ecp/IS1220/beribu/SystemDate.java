@@ -183,7 +183,7 @@ public class SystemDate {
 
 	public static void main(String[] args) {
 		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019,03,02);
+		SD.setDay(2020,02,29);
 		SD.setTime(12,24,36);
 		System.out.println(SD);
 	}
