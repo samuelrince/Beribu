@@ -8,7 +8,7 @@ class SystemDateTest {
 
 	/*
 	 * Test initialization
-	 */
+	 *
 	@Test
 	void initTest001() {
 		SystemDate SD = SystemDate.getInstance();
@@ -28,11 +28,11 @@ class SystemDateTest {
 			SD.setSecond(30);
 			SD.setYear(2019);
 		});
-	}
+	}*/
 	
 	/*
 	 * Test some wrong and correct Date
-	 */
+	 *
 	@Test
 	void correctDateTest001() {
 		SystemDate SD = SystemDate.getInstance();
@@ -48,6 +48,6 @@ class SystemDateTest {
 			SD.setDay(2024, 3, 31);
 			SD.setTime(17, 25, 15);
 		});
-	}
+	}*/
 
 }
