@@ -134,7 +134,6 @@ class RideTest {
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
-		System.out.println(u.getListOfRides().get(0).getEndTime());
 		assertEquals(new Date(2019, 3, 8, 13, 24, 56), u.getListOfRides().get(0).getEndTime());
 	}
 	@Test
@@ -222,7 +221,438 @@ class RideTest {
 	}
 	
 	/*
-	 * Test price and time credit balance update
+	 * Test price calculation
 	 */
+	@Test
+	void endRideTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 13, 13);
+		User u = new User("Jean");
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(16, 13, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 3h 
+		// Its a mechanical bicycle
+		// The user did not subscribe 
+		// The user time credit balance is null
+		// => price should be 3.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);
+	}
+	@Test
+	void endRideTest002() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 13, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vlibre(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(16, 13, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 3h 
+		// Its a mechanical bicycle
+		// The user did subscribe to Vlibre 
+		// The user time credit balance is null
+		// => price should be 2.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 2.0);
+	}
+	@Test
+	void endRideTest003() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 13, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(16, 13, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 3h 
+		// Its a mechanical bicycle
+		// The user did subscribe to Vmax 
+		// The user time credit balance is null
+		// => price should be 2.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 2.0);
+	}
+	@Test
+	void endRideTest004() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 13, 13);
+		User u = new User("Jean");
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 13, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a electrical bicycle
+		// The user did not subscribe 
+		// The user time credit balance is null
+		// => price should be 8.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 8.0);
+	}
+	@Test
+	void endRideTest005() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 13, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vlibre(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 13, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a electrical bicycle
+		// The user did subscribe to a Vlibre card
+		// The user time credit balance is null
+		// => price should be 7.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 7.0);
+	}
+	@Test
+	void endRideTest006() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 13, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 13, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a electrical bicycle
+		// The user did subscribe to a Vmax card
+		// The user time credit balance is null
+		// => price should be 3.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);
+	}
+	@Test
+	void endRideTest007() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vlibre(u));
+		u.addTimeCreditBalance(45);
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a mechanical bicycle
+		// The user did subscribe to a Vlibre card
+		// The user time credit balance is 45minutes
+		// => price should be 3.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);
+	}
+	@Test
+	void endRideTest008() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		u.addTimeCreditBalance(75);
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a mechanical bicycle
+		// The user did subscribe to a Vmax card
+		// The user time credit balance is 75minutes
+		// => price should be 2.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 2.0);
+	}
+	@Test
+	void endRideTest009() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vlibre(u));
+		u.addTimeCreditBalance(45);
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a electrical bicycle
+		// The user did subscribe to a Vlibre card
+		// The user time credit balance is 45minutes
+		// => price should be 7.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 7.0);
+	}
+	@Test
+	void endRideTest0010() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		u.addTimeCreditBalance(45);
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		// The duration is 4h 
+		// Its a electrical bicycle
+		// The user did subscribe to a Vmax card
+		// The user time credit balance is 45minutes
+		// => price should be 3.0
+		assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);
+	}
+	/*
+	 * Test duration of ride
+	 */
+	@Test
+	void endRideTest0011() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		u.addTimeCreditBalance(45);
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 2, 8);
+		SD.setTime(17, 15, 13);
+		assertThrows(RuntimeException.class, () -> {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		});
+	}
+	@Test
+	void endRideTest0012() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		u.addTimeCreditBalance(45);
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 20, 33);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		Duration d = new Duration();
+		d.add(4, 5, 20);
+		assertEquals(d, u.getListOfRides().get(0).getDuration());
+	}
 	
+	/*
+	 * Test time credit affectation
+	 */
+	@Test
+	void endRideTest0011b() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), false);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		assertEquals(new Duration(), u.getTimeCreditBalance());
+	}
+	@Test
+	void endRideTest0012b() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		assertEquals(new Duration(), u.getTimeCreditBalance());
+	}
+	@Test
+	void endRideTest0013b() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vlibre(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), false);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		assertEquals(new Duration(), u.getTimeCreditBalance());
+	}
+	@Test
+	void endRideTest0014b() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vlibre(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		Duration d = new Duration();
+		d.setDuration(5*60);
+		assertEquals(d, u.getTimeCreditBalance());
+	}
+	@Test
+	void endRideTest0015b() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), false);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		assertEquals(new Duration(), u.getTimeCreditBalance());
+	}
+	@Test
+	void endRideTest0016b() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		Duration d = new Duration();
+		d.setDuration(5*60);
+		assertEquals(d, u.getTimeCreditBalance());
+	}
+	
+	/*
+	 * Test no parking slot available
+	 */
+	@Test
+	void endRideTest17() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		assertThrows(RuntimeException.class, () -> {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		});
+	}
+	@Test
+	void endRideTest18() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		u.subscribe(new Vmax(u));
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		Station s2 = new Station(new Localization(2.1, 3.1), true);
+		new ParkingSlot(s1);
+		new ParkingSlot(s2);
+		s2.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		assertThrows(RuntimeException.class, () -> {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		});
+	}
 }

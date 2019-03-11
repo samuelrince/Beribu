@@ -8,7 +8,7 @@ public class Vlibre implements Card{
 	public Vlibre(User user) {
 		super();
 		this.user = user;
-		user.subscribe(this);
+		//user.subscribe(this);
 	}
 	
 	@Override
