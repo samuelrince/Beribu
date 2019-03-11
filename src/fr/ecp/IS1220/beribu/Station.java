@@ -61,13 +61,12 @@ public class Station {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
-				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType)
+				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType()))
 					number++;
 			}
 		}
 		return number;
 	}
-	
 	
 	/**
 	 * This method returns the number of parking slots available in the station,
@@ -116,7 +115,6 @@ public class Station {
 		return false;
 	}
 	
-	
 	/**
 	 * This method returns an available bicycle of the station (the first available in the order
 	 * of parking slots) if it exists AND empties the corresponding parking slot. 
@@ -136,14 +134,14 @@ public class Station {
 		throw new RuntimeException("Sorry, no bicycle is available.");
 	}
 		
-	/**
-	 * This method returns an available bicycle of given type of the station (the first available in the order
+  /**
+   * This method returns an available bicycle of given type of the station (the first available in the order
 	 * of parking slots) if it exists AND empties the corresponding parking slot. 
 	 * If no such bicycle exists, throws a RuntimeException.
 	 * @return a Bicycle
 	 * @throws RuntimeException
 	 */
-	public Bicycle getBicycle(String bicycleType) {
+	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
@@ -182,7 +180,7 @@ public class Station {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
-				if (this.parkingSlots.get(i).getBicycle().getType() == bicycleType) {
+				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					return true;
 				}
 			}
@@ -210,7 +208,6 @@ public class Station {
 		return isOffline;
 	}
 
-	
 	/**
 	 * A call to this method sets all the parking slots of the station in the state
 	 * specified by input isOffline.
@@ -218,6 +215,7 @@ public class Station {
 	 */
 	public void setOffline(Boolean isOffline) {
 		this.isOffline = isOffline;
+		// Set all parking slots offline
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			this.parkingSlots.get(i).setOffline(isOffline);
 		}
@@ -260,7 +258,6 @@ public class Station {
 		this.targetOf.remove(travel); 
 	}
  
-	
 	/**
 	 * This is automatically called when any operation (rental, return, offline, online, parking slot creation)
 	 * is performed in the station, including any of its parking slots. <br>
@@ -302,11 +299,10 @@ public class Station {
 		this.history.add(new State());
 	}
 	
-	/**
+  /**
 	 * A nested class of the class Station that depicts the state of the station 
 	 * at a given moment in time.
 	 * @author Valentin
-	 *
 	 */
 	public class State{
 		private Date timeStamp;
