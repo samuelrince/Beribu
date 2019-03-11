@@ -3,19 +3,19 @@ package fr.ecp.IS1220.beribu;
 import java.util.ArrayList;
 
 public class FastestPath implements PathStrategy {
-
+	ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
+	
 	@Override
 	public ArrayList<Station> findPath(Localization source, Localization destination) {
 		// TODO Auto-generated method stub
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
 		startEnd.set(1, destination.getClosestStationWithBicycle());
-		
-		ArrayList<Station> listOfStations = Station.allStations();
+
 		ArrayList<String> typeDict = Bicycle.getTypeDict();
 		double shortestTime = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
-		for (int i = 0; i < Station.allStations().size(); i++) {
-			Station currentStation = Station.allStations().get(i);
+		for (int i = 0; i < listOfStations.size(); i++) {
+			Station currentStation = listOfStations.get(i);
 			if (currentStation.isBicycle()) {
 				String fastestBicycleType = null;
 				double fastestSpeed = 0;
@@ -50,13 +50,12 @@ public class FastestPath implements PathStrategy {
 		// TODO Auto-generated method stub
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
 		startEnd.set(1, destination.getClosestStationWithBicycle());
-		
-		ArrayList<Station> listOfStations = Station.allStations();
+
 		double bicycleSpeed = Bicycle.getSpeed(bicycleType);
 		double shortestTime = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
-		for (int i = 0; i < Station.allStations().size(); i++) {
-			Station currentStation = Station.allStations().get(i);
+		for (int i = 0; i < listOfStations.size(); i++) {
+			Station currentStation = listOfStations.get(i);
 			if (currentStation.isBicycle(bicycleType)) {
 				double travelTime = 4/3.6*source.distanceTo(currentStation.
 						getLocalization()) + bicycleSpeed/3.6

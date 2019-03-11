@@ -81,7 +81,7 @@ public class Localization {
 	 * @return 		the closest available Station
 	 */
 	public Station getClosestAvailableStation() throws RuntimeException {
-		ArrayList<Station> listOfStations = Station.allStations();
+		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
 		for (int i = 0; i < listOfStations.size(); i++) {
@@ -106,7 +106,7 @@ public class Localization {
 	 * @return 		the closest available Station
 	 */
 	public Station getClosestAvailableStation(boolean isPlus) throws RuntimeException {
-		ArrayList<Station> listOfStations = Station.allStations();
+		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
 		for (int i = 0; i < listOfStations.size(); i++) {
@@ -126,7 +126,7 @@ public class Localization {
 	
 	public ArrayList<Station> getStationsInRadius(double radius) 
 			throws RuntimeException {
-		ArrayList<Station> listOfStations = Station.allStations();
+		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		ArrayList<Station> stationsInRadius = new ArrayList<Station>();
 		for (int i = 0; i < listOfStations.size(); i++) {
 			if (this.distanceTo(listOfStations.get(i).getLocalization())
@@ -145,7 +145,7 @@ public class Localization {
 	 */
 	public Station getClosestStationWithBicycle() 
 			throws RuntimeException {
-		ArrayList<Station> listOfStations = Station.allStations();
+		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
 		for (int i = 0; i < listOfStations.size(); i++) {
@@ -174,7 +174,7 @@ public class Localization {
 	 */
 	public Station getClosestStationWithBicycle(String bicycleType) 
 			throws RuntimeException {
-		ArrayList<Station> listOfStations = Station.allStations();
+		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
 		for (int i = 0; i < listOfStations.size(); i++) {
