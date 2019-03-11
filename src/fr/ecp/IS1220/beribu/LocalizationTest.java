@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class LocalizationTest {
-	private static final double DELTA = 1e-5;
+	private static final double DELTA = 1e-14;
 
 	/*
 	 * Test getters 
