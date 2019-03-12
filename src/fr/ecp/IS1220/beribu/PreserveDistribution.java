@@ -3,7 +3,8 @@ package fr.ecp.IS1220.beribu;
 import java.util.ArrayList;
 
 public class PreserveDistribution implements PathStrategy {
-
+	String bicycleType;
+	
 	@Override
 	public ArrayList<Station> findPath(Localization source, Localization destination) {
 		// TODO Auto-generated method stub
@@ -16,7 +17,8 @@ public class PreserveDistribution implements PathStrategy {
 			startStation.numberOfBicycles())
 				startStation = closeStations.get(i);
 		}
-		startEnd.set(0, startStation);
+		startEnd.add(startStation);
+		this.bicycleType = startStation.getOneBicycleType();
 		
 		Station endStation = destination.getClosestAvailableStation();
 		ArrayList<Station> closeStations1 = destination.getStationsInRadius(
@@ -26,7 +28,7 @@ public class PreserveDistribution implements PathStrategy {
 			endStation.numberOfFreeSlots())
 				endStation = closeStations1.get(i);
 		}
-		startEnd.set(1, endStation);
+		startEnd.add(endStation);
 		return startEnd;
 	}
 	
@@ -34,6 +36,7 @@ public class PreserveDistribution implements PathStrategy {
 	public ArrayList<Station> findPath(Localization source, Localization destination,
 			String bicycleType) {
 		// TODO Auto-generated method stub
+		this.bicycleType = bicycleType;
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
 		Station startStation = source.getClosestStationWithBicycle(bicycleType);
 		ArrayList<Station> closeStations = source.getStationsInRadius(
@@ -43,7 +46,7 @@ public class PreserveDistribution implements PathStrategy {
 			startStation.numberOfBicycles(bicycleType))
 				startStation = closeStations.get(i);
 		}
-		startEnd.set(0, startStation);
+		startEnd.add(startStation);
 		
 		Station endStation = destination.getClosestAvailableStation();
 		ArrayList<Station> closeStations1 = destination.getStationsInRadius(
@@ -53,8 +56,11 @@ public class PreserveDistribution implements PathStrategy {
 			endStation.numberOfFreeSlots())
 				endStation = closeStations1.get(i);
 		}
-		startEnd.set(1, endStation);
+		startEnd.add(endStation);
 		return startEnd;
 	}
 	
+	public String getBicycleType() {
+		return this.bicycleType;
+	}
 }

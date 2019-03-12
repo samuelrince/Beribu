@@ -8,4 +8,5 @@ public interface PathStrategy {
 			Localization destination);
 	public ArrayList<Station> findPath(Localization source, 
 			Localization destination, String bicycleType);
+	public String getBicycleType();
 }

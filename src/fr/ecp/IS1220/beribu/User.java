@@ -145,6 +145,7 @@ public class User {
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
 						this.plannedRide.setSuggestedStartStation(station);
+						this.plannedRide.setBicycleType(bicycle.getType());
 					}
 				}
 			}
@@ -178,6 +179,7 @@ public class User {
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
 						this.plannedRide.setSuggestedStartStation(station);
+						this.plannedRide.setBicycleType(bicycle.getType());
 					}
 				}
 			}
