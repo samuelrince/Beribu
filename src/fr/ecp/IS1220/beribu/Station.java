@@ -111,11 +111,11 @@ public class Station {
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (!parkingSlots.get(i).isBicycle()
-			&& parkingSlots.get(i).isOffline() == false) {
-				return true;
+			&& !parkingSlots.get(i).isOffline()) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	/**
