@@ -86,8 +86,8 @@ public class StationBalance implements Statistics {
 				getHistory().size()-1).getTimeStamp(),end).getDuration();
 		occupationTime += numberOfOccupied*elapsedTime;
 		totalTime += parkingSlotStatus.size()*elapsedTime;
-		
-		return occupationTime/totalTime;
+
+		return (double)occupationTime/(double)totalTime;
 	}
 	
 }
