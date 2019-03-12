@@ -103,9 +103,9 @@ public class Travel {
 		this.suggestedStartStation.addTargetOf(this);
 		this.suggestedEndStation.addTargetOf(this);
 		this.previsionDuration = new Duration(this.suggestedStartStation,
-				this.suggestedEndStation, this.bicycleType);
-		this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);		
-				
+				this.suggestedEndStation, this.pathStrategy.getBicycleType());
+		this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.pathStrategy.getBicycleType());		
+		System.out.println(this);
 	}
 	
 	public void start() {
@@ -171,17 +171,8 @@ public class Travel {
 		if (!this.user.isOnRide()) {
 			this.suggestedStartStation.removeTargetOf(this);
 			this.suggestedEndStation.removeTargetOf(this);
-			ArrayList<Station> startEnd = this.pathStrategy.findPath(
-					this.source, this.destination, this.bicycleType);
-			this.suggestedStartStation = startEnd.get(0);
-			this.suggestedEndStation = startEnd.get(1);
-			this.suggestedStartStation.addTargetOf(this);
-			this.suggestedEndStation.addTargetOf(this);
-			this.previsionDuration = new Duration(this.suggestedStartStation,
-					this.suggestedEndStation, this.bicycleType);
-			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
-
 			this.user.notifyUser("Your planned ride has been recalculated.");
+			this.findRide();
 		}
 		else {
 			this.suggestedEndStation.removeTargetOf(this);
@@ -193,7 +184,16 @@ public class Travel {
 
 			this.user.notifyUser("The return station is not available anymore."
 					+ "Your return station has been recalculated.");
+			System.out.println(this);
 		}
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "User : "+this.user+"\n"+"Suggested rental station : "+
+				this.suggestedStartStation.getName()+"\n"+"Suggested return station : "
+				+ this.suggestedEndStation.getName() +"\n"+"Estimated duration : " +
+				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
+	}
 }

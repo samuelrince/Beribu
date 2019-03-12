@@ -31,6 +31,10 @@ public class MyVelibNetwork {
 		this.stationDatabase.add(new Station(localization, isPlus));
 	}
 	
+	public void addStation(Station station) {
+		this.stationDatabase.add(station);
+	}
+	
 	public void addUser(String name) {
 		this.userDatabase.add(new User(name));
 	}

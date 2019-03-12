@@ -13,6 +13,7 @@ public class Station {
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
+	private String name;
 	private Boolean isOffline;
 	private Boolean isPlus;
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
@@ -22,6 +23,14 @@ public class Station {
 		super();
 		this.localization = localization;
 		this.isPlus = isPlus;
+		this.id = uniqId++;
+	}
+	
+	public Station(Localization localization, Boolean isPlus, String name) {
+		super();
+		this.localization = localization;
+		this.isPlus = isPlus;
+		this.name = name;
 		this.id = uniqId++;
 	}
 	
@@ -182,6 +191,23 @@ public class Station {
 		return false;
 	}
 	
+	/**
+	 * This method returns one available type of bicycle in the station.
+	 * For example, if the station contains electrical and mechanical bicycles,
+	 * this method can return either "electrical" or "mechanical" (depending
+	 * on the order of the bicycles appearance in the parking slots).
+	 * If no bicycle is available, throws a RuntimeException.
+	 * @return a type of bicycle as a String
+	 */
+	public String getOneBicycleType() throws RuntimeException {
+			for (int i = 0; i < Bicycle.getTypeDict().size(); i++) {
+			if (this.isBicycle(Bicycle.getTypeDict().get(i))) {
+				return Bicycle.getTypeDict().get(i);
+			}
+		}
+		throw new RuntimeException("No bicycle available in this station.");
+	}
+	
 	public long getId() {
 		return this.id;
 	}
@@ -195,11 +221,15 @@ public class Station {
 	}
 	
 	public Localization getLocalization() {
-		return localization;
+		return this.localization;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+	
 	public Boolean isOffline() {
-		return isOffline;
+		return this.isOffline;
 	}
 
 	/**
@@ -216,7 +246,7 @@ public class Station {
 	}
 
 	public ArrayList<ParkingSlot> getParkingSlots() {
-		return parkingSlots;
+		return this.parkingSlots;
 	}
 
 	/**
@@ -230,7 +260,7 @@ public class Station {
 	}
 	
 	public ArrayList<Travel> getTargetOf() {
-		return targetOf;
+		return this.targetOf;
 	}
 
 	

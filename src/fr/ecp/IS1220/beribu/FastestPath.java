@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 public class FastestPath implements PathStrategy {
 	ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
+	String bicycleType;
 	
 	@Override
 	public ArrayList<Station> findPath(Localization source, Localization destination) {
 		// TODO Auto-generated method stub
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
-		startEnd.set(1, destination.getClosestStationWithBicycle());
+		startEnd.add(destination.getClosestStationWithBicycle());
 
 		ArrayList<String> typeDict = Bicycle.getTypeDict();
 		double shortestTime = Double.POSITIVE_INFINITY;
@@ -23,13 +24,14 @@ public class FastestPath implements PathStrategy {
 					if (currentStation.isBicycle(typeDict.get(j)) &&
 							Bicycle.getSpeed(typeDict.get(j)) > fastestSpeed) {
 						fastestBicycleType = typeDict.get(j);
+						this.bicycleType = fastestBicycleType;
 					}
 				}
 						
 				double travelTime = 4/3.6*source.distanceTo(currentStation.
 						getLocalization()) + Bicycle.getSpeed(fastestBicycleType)/3.6
 						*currentStation.getLocalization().distanceTo(
-						startEnd.get(1).getLocalization());
+						startEnd.get(0).getLocalization());
 
 				if (travelTime < shortestTime) {
 					shortestTime = travelTime;
@@ -40,7 +42,7 @@ public class FastestPath implements PathStrategy {
 				continue;
 			}
 		}
-		startEnd.set(0, listOfStations.get(stationIndex));
+		startEnd.add(0, listOfStations.get(stationIndex));
 		return startEnd;
 	}
 	
@@ -48,8 +50,9 @@ public class FastestPath implements PathStrategy {
 	public ArrayList<Station> findPath(Localization source, Localization destination,
 			String bicycleType) {
 		// TODO Auto-generated method stub
+		this.bicycleType = bicycleType;
 		ArrayList<Station> startEnd = new ArrayList<Station>(2);
-		startEnd.set(1, destination.getClosestStationWithBicycle());
+		startEnd.add(destination.getClosestStationWithBicycle());
 
 		double bicycleSpeed = Bicycle.getSpeed(bicycleType);
 		double shortestTime = Double.POSITIVE_INFINITY;
@@ -60,7 +63,7 @@ public class FastestPath implements PathStrategy {
 				double travelTime = 4/3.6*source.distanceTo(currentStation.
 						getLocalization()) + bicycleSpeed/3.6
 						*currentStation.getLocalization().distanceTo(
-						startEnd.get(1).getLocalization());
+						startEnd.get(0).getLocalization());
 
 				if (travelTime < shortestTime) {
 					shortestTime = travelTime;
@@ -71,8 +74,11 @@ public class FastestPath implements PathStrategy {
 				continue;
 			}
 		}
-		startEnd.set(0, listOfStations.get(stationIndex));
+		startEnd.add(0, listOfStations.get(stationIndex));
 		return startEnd;
 	}
 
+	public String getBicycleType() {
+		return this.bicycleType;
+	}
 }
