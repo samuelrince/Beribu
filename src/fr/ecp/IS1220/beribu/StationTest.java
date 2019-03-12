@@ -259,7 +259,7 @@ class StationTest {
 		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
 		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
 		s.getParkingSlots().get(3).setBicycle(new MechanicalBike());
-		assertTrue(s.isFull() == false);
+		assertTrue(s.isFull() == true);
 	}
 	@Test
 	void isFullTest002() {
@@ -274,7 +274,7 @@ class StationTest {
 		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
 		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
 		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
-		assertTrue(s.isFull() == true);
+		assertTrue(s.isFull() == false);
 	}
 	
 	/*
