@@ -655,4 +655,24 @@ class RideTest {
 			u.getCurrentRide().end(s2.getFreeParkingSlot());
 		});
 	}
+	
+	/*
+	 * Test start and end at the same station
+	 */
+	@Test
+	void endRideTest19() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 8);
+		SD.setTime(13, 15, 13);
+		User u = new User("Jean");
+		Station s1 = new Station(new Localization(2.0, 3.0), true);
+		new ParkingSlot(s1);
+		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		u.newRide(s1);
+		SD.setDay(2019, 3, 8);
+		SD.setTime(17, 15, 13);
+		assertDoesNotThrow(() -> {
+			u.getCurrentRide().end(s1.getFreeParkingSlot());
+		});
+	}
 }
