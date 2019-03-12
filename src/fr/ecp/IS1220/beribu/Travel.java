@@ -39,6 +39,7 @@ public class Travel {
 	 * @param user
 	 * @param source
 	 * @param destination
+	 * @param pathStrategy
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			PathStrategy pathStrategy) {
@@ -54,6 +55,8 @@ public class Travel {
 	 * @param user
 	 * @param source
 	 * @param destination
+	 * @param pathStrategy
+	 * @param bicycleType
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			PathStrategy pathStrategy,String bicycleType) {
@@ -71,6 +74,7 @@ public class Travel {
 	 * @param user
 	 * @param source
 	 * @param destination
+	 * @param bicycleType
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			String bicycleType) {
@@ -152,7 +156,6 @@ public class Travel {
 		return previsionDuration;
 	}
 	public boolean isOngoing() {
-		// TODO Auto-generated method stub
 		return this.ongoing;
 	}
 	public void setSuggestedStartStation(Station station) {
@@ -190,10 +193,24 @@ public class Travel {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "User : "+this.user+"\n"+"Suggested rental station : "+
+		return "User : "+this.user.getName() +"\n"+"Suggested rental station : "+
 				this.suggestedStartStation.getName()+"\n"+"Suggested return station : "
 				+ this.suggestedEndStation.getName() +"\n"+"Estimated duration : " +
 				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
+	}
+	
+	public static void main(String[] args) {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
+		new MyVelibNetwork("Paris");
+		Station s1 = new Station(new Localization(0.0, 0.0), false);
+		Station s2 = new Station(new Localization(5.0, 5.0), false);
+		new ParkingSlot(s1).setBicycle(new MechanicalBike());
+		new ParkingSlot(s1).setBicycle(new ElectricalBike());
+		new ParkingSlot(s2);
+		MyVelibNetwork.getInstance().addStation(s1);
+		MyVelibNetwork.getInstance().addStation(s2);
+		
+		new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0));
 	}
 }
