@@ -106,7 +106,6 @@ public class Scenario1 {
 		System.out.println(stations);
 		System.out.println();
 		
-	
 		System.out.println(StationBalance.occupationRate(s0, s0.getCreatedAt(), new Date()));
 		System.out.println(StationBalance.occupationRate(s1, s1.getCreatedAt(), new Date()));
 		System.out.println(StationBalance.occupationRate(s2, s2.getCreatedAt(), new Date()));
