@@ -2,13 +2,15 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * This class represents a station.
  * @author Valentin
  *
  */
-public class Station {
+public class Station implements Comparable<Station>{
 	private static long uniqId;
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
@@ -17,14 +19,21 @@ public class Station {
 	private Boolean isPlus;
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
 	private ArrayList<Travel> targetOf = new ArrayList<Travel>();
+	private Date createdAt;
 	
 	public Station(Localization localization, Boolean isPlus) {
 		super();
+		SystemDate SD = SystemDate.getInstance();
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
+		this.createdAt = new Date();
 	}
 	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
 	public  ArrayList<State> getHistory() {
 		return this.history;
 	}
@@ -293,6 +302,17 @@ public class Station {
 		this.history.add(new State());
 	}
 	
+	@Override
+	public String toString() {
+		return "Station N°" + this.getId();
+	}
+	
+	@Override
+	public int compareTo(Station o) {
+		return this.id > o.getId() ? 1 : this.id < o.getId() ? -1 : 0;
+		
+	}
+	
   /**
 	 * A nested class of the class Station that depicts the state of the station 
 	 * at a given moment in time.
@@ -329,18 +349,22 @@ public class Station {
 	}
 
 	public static void main(String[] args) {
-		Station station1 = new Station(new Localization(0,0),false);
-		new ParkingSlot(station1);
-		new ParkingSlot(station1);
-		new ParkingSlot(station1);
-		ElectricalBike eBike1 = new ElectricalBike();
-		MechanicalBike mBike1 = new MechanicalBike();
-		ElectricalBike eBike2 = new ElectricalBike();
-		station1.getParkingSlots().get(0).setBicycle(eBike1);
-		station1.getParkingSlots().get(1).setBicycle(mBike1);
-		station1.getParkingSlots().get(2).setBicycle(eBike2);
-		station1.getParkingSlots().get(2).setOffline(true);
-		System.out.println(station1.getBicycle("ELECTrICAL").getType());
+		Station s1 = new Station(new Localization(2.1, 3.1), false);
+		Station s2 = new Station(new Localization(2.1, 3.1), false);
+		Station s3 = new Station(new Localization(2.1, 3.1), true);
+		ArrayList<Station> stations = new ArrayList<Station>();
+		stations.add(s3); stations.add(s1); stations.add(s2);
+		
+		System.out.println(" == Stations initial order == ");
+		System.out.println(stations.toString());
+		
+		
+		
+		Collections.sort(stations);
+		System.out.println(" == Stations sorted by ID == ");
+		System.out.println(stations.toString());
+		
+		Comparator<Station> c = new SortStationByMostUsed();
 	}
 	
 }	
