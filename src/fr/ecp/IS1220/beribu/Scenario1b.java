@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Scenario1 {
+public class Scenario1b {
 
 	public static void main(String[] args) {
 		SystemDate SD = SystemDate.getInstance();
@@ -106,17 +106,10 @@ public class Scenario1 {
 		System.out.println(stations);
 		System.out.println();
 		
-		System.out.println(StationBalance.occupationRate(s0, s0.getCreatedAt(), new Date()));
-		System.out.println(StationBalance.occupationRate(s1, s1.getCreatedAt(), new Date()));
-		System.out.println(StationBalance.occupationRate(s2, s2.getCreatedAt(), new Date()));
-		//System.out.println(StationBalance.occupationRate(s3, s3.getCreatedAt(), new Date()));
-		
-		/*
 		c = new SortStationByLeastOccupied();
 		Collections.sort(stations, c);
 		System.out.println(" == Stations sorted by least occupied == ");
 		System.out.println(stations);
 		System.out.println();
-		*/
 	}
 }
