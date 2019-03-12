@@ -334,7 +334,7 @@ public class Station implements Comparable<Station>{
 	
 	@Override
 	public String toString() {
-		return "Station N�" + this.getId();
+		return "Station No." + this.getId();
 	}
 	
 	@Override
