@@ -13,8 +13,8 @@ public class Station {
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
-	private String name;
-	private Boolean isOffline;
+	private String name = "_unnamed_";
+	private Boolean isOffline = false;
 	private Boolean isPlus;
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
 	private ArrayList<Travel> targetOf = new ArrayList<Travel>();
@@ -233,13 +233,14 @@ public class Station {
 	}
 
 	/**
-	 * A call to this method sets all the parking slots of the station in the state
-	 * specified by input isOffline.
-	 * @param isOffline should be true to set the station offline, false to set it online
+	 * A call to this method sets the station and all its parking slots 
+	 * in the state specified by input isOffline.
+	 * @param isOffline should be true to set the station offline,
+	 *  false to set it online
 	 */
 	public void setOffline(Boolean isOffline) {
 		this.isOffline = isOffline;
-		// Set all parking slots offline
+		// Set all parking slots off/online
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			this.parkingSlots.get(i).setOffline(isOffline);
 		}
@@ -358,6 +359,17 @@ public class Station {
 		
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String status;
+		if (this.isOffline)
+			status = "offline";
+		else
+			status = "online";
+		return "Station "+this.name+" ,id."+this.id+" ("+status+")";
+	}
+	
 	public static void main(String[] args) {
 		Station station1 = new Station(new Localization(0,0),false);
 		new ParkingSlot(station1);

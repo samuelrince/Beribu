@@ -191,9 +191,9 @@ public class Travel {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "User : "+this.user+"\n"+"Suggested rental station : "+
-				this.suggestedStartStation.getName()+"\n"+"Suggested return station : "
-				+ this.suggestedEndStation.getName() +"\n"+"Estimated duration : " +
+		return  "User : "+this.user+"\n"+"Suggested rental station : "+
+				this.suggestedStartStation+"\n"+"Suggested return station : "
+				+ this.suggestedEndStation+"\n"+"Estimated duration : " +
 				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
 	}
 }

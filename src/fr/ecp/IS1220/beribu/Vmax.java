@@ -4,6 +4,7 @@ package fr.ecp.IS1220.beribu;
 public class Vmax implements Card{
 	private User user;
 	private Date creationDate;
+	private String type = "Vmax";
 	
 	public Vmax(User user) {
 		super();
@@ -21,6 +22,10 @@ public class Vmax implements Card{
 		// TODO Auto-generated method stub
 		return this.creationDate;
 	}
+	public String getType() {
+		return this.type;
+	}
+	
 	@Override
 	public double cost(Duration duration, String bicycleType) {
 		// TODO Auto-generated method stub

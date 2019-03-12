@@ -4,6 +4,7 @@ package fr.ecp.IS1220.beribu;
 public class Standard implements Card{
 	private User user;
 	private Date creationDate;
+	private String type = "Standard";
 	
 	public Standard(User user) {
 		super();
@@ -15,6 +16,10 @@ public class Standard implements Card{
 	public User getUser() {
 		// TODO Auto-generated method stub
 		return this.user;
+	}
+	
+	public String getType() {
+		return this.type;
 	}
 
 	@Override
