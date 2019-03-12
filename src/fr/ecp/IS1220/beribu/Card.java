@@ -4,6 +4,7 @@ package fr.ecp.IS1220.beribu;
 public interface Card {
 	public User getUser();
 	public Date getCreationDate();
+	public String getType();
 	public double cost(Duration duration, String bicycleType);
 	public int timeCreditOperation(Duration duration, String bicycleType,
 			boolean plusStation);

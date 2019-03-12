@@ -34,6 +34,10 @@ public class ParkingSlot {
 	}
 
 	public void setOffline(boolean isOffline) {
+		if (!isOffline && this.station.isOffline()) {
+			throw new RuntimeException("This parking slot can't be"
+					+ " set online because the station is offline.");
+		}
 		this.isOffline = isOffline;
 		this.station.updateStatus();
 	}

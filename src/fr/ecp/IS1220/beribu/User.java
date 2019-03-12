@@ -284,6 +284,13 @@ public class User {
 		System.out.println(message);
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.name+" (id."+this.id+"), "+ 
+				this.card.getType()+" subscriber";
+	}
+	
 	public static void main(String[] args) {
 		User user1 = new User("Robert Downey Jr.");
 		System.out.println(user1);
