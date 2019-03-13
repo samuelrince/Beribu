@@ -103,7 +103,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		MechanicalBike mBike = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(mBike);
+		s.getParkingSlots().get(0).attachBicycle(mBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s);
@@ -117,7 +117,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).setBicycle(eBike);
+		s.getParkingSlots().get(0).attachBicycle(eBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s);
@@ -131,7 +131,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).setBicycle(eBike);
+		s.getParkingSlots().get(0).attachBicycle(eBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "Electrical");
@@ -146,7 +146,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		MechanicalBike mBike = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(mBike);
+		s.getParkingSlots().get(0).attachBicycle(mBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "Mechanical");
@@ -161,7 +161,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		MechanicalBike mBike = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(mBike);
+		s.getParkingSlots().get(0).attachBicycle(mBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "eleCtrical");
@@ -176,7 +176,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).setBicycle(eBike);
+		s.getParkingSlots().get(0).attachBicycle(eBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "mechanicaL");
@@ -184,7 +184,7 @@ class UserTest {
 		});
 	}
 	@Test
-	void newRideTest007() {
+	void newRideTest007() throws Exception, RuntimeException {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 02, 17);
 		SD.setTime(19, 22, 37);
@@ -193,8 +193,8 @@ class UserTest {
 		new ParkingSlot(s);
 		MechanicalBike mBike1 = new MechanicalBike();
 		MechanicalBike mBike2 = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(mBike1);
-		s.getParkingSlots().get(0).setBicycle(mBike2);
+		s.getParkingSlots().get(0).attachBicycle(mBike1);
+		s.getParkingSlots().get(0).attachBicycle(mBike2);
 		User u = new User("Jean");
 		u.newRide(s);
 		assertThrows(RuntimeException.class, () -> {
@@ -220,7 +220,7 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).setBicycle(eBike);
+		s.getParkingSlots().get(0).attachBicycle(eBike);
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "Nothing");

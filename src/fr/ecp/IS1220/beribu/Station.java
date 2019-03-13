@@ -128,9 +128,9 @@ public class Station {
 	public Bicycle getBicycle() throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
-				this.parkingSlots.get(i).setBicycle(null);
+				this.parkingSlots.get(i).detachBicycle();
 				return bicycle;
 			}
 		}
@@ -147,10 +147,10 @@ public class Station {
 	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
-					this.parkingSlots.get(i).setBicycle(null);
+					this.parkingSlots.get(i).detachBicycle();
 					this.updateStatus();
 					return bicycle;
 				}
@@ -167,7 +167,7 @@ public class Station {
 	public boolean isBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				return true;
 			}
 		}
@@ -182,7 +182,7 @@ public class Station {
 	public boolean isBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle()
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					return true;
 				}
@@ -389,7 +389,7 @@ public class Station {
 		return "Station "+this.name+" ,id."+this.id+" ("+status+")";
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Station station1 = new Station(new Localization(0,0),false);
 		new ParkingSlot(station1);
 		new ParkingSlot(station1);
@@ -397,9 +397,9 @@ public class Station {
 		ElectricalBike eBike1 = new ElectricalBike();
 		MechanicalBike mBike1 = new MechanicalBike();
 		ElectricalBike eBike2 = new ElectricalBike();
-		station1.getParkingSlots().get(0).setBicycle(eBike1);
-		station1.getParkingSlots().get(1).setBicycle(mBike1);
-		station1.getParkingSlots().get(2).setBicycle(eBike2);
+		station1.getParkingSlots().get(0).attachBicycle(eBike1);
+		station1.getParkingSlots().get(1).attachBicycle(mBike1);
+		station1.getParkingSlots().get(2).attachBicycle(eBike2);
 		station1.getParkingSlots().get(2).setOffline(true);
 		System.out.println(station1.getBicycle("ELECTrICAL").getType());
 	}

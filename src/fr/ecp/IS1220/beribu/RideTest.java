@@ -75,7 +75,7 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		assertDoesNotThrow(() -> {
@@ -83,7 +83,7 @@ class RideTest {
 		});
 	}
 	@Test
-	void endTest002() {
+	void endTest002() throws Exception, RuntimeException {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -94,8 +94,8 @@ class RideTest {
 		Bicycle b2 = new ElectricalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b1);
-		s2.getParkingSlots().get(0).setBicycle(b2);
+		s1.getParkingSlots().get(0).attachBicycle(b1);
+		s2.getParkingSlots().get(0).attachBicycle(b2);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		assertThrows(RuntimeException.class, () -> {
@@ -103,7 +103,7 @@ class RideTest {
 		});
 	}
 	@Test
-	void endTest003() {
+	void endTest003() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -113,14 +113,14 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
 		assertEquals(new Duration(new Date(2019, 3, 8, 13, 13, 13), new Date(2019, 3, 8, 13, 24, 56)), u.getListOfRides().get(0).getDuration());
 	}
 	@Test
-	void endTest004() {
+	void endTest004() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -130,7 +130,7 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
@@ -138,7 +138,7 @@ class RideTest {
 		assertEquals(new Date(2019, 3, 8, 13, 24, 56), u.getListOfRides().get(0).getEndTime());
 	}
 	@Test
-	void endTest005() {
+	void endTest005() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -148,14 +148,14 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
 		assertEquals(new Date(2019, 3, 8, 13, 13, 13), u.getListOfRides().get(0).getStartTime());
 	}
 	@Test
-	void endTest006() {
+	void endTest006() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -165,14 +165,14 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
 		assertEquals(s2, u.getListOfRides().get(0).getEndStation());
 	}
 	@Test
-	void endTest007() {
+	void endTest007() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -182,14 +182,14 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
 		assertEquals(s1, u.getListOfRides().get(0).getStartStation());
 	}
 	@Test
-	void endTest008() {
+	void endTest008() throws RuntimeException, Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -199,14 +199,14 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		u.getCurrentRide().end(s2.getFreeParkingSlot());
 		assertEquals(false, u.getListOfRides().get(0).isCurrent());
 	}
 	@Test
-	void endTest009() {
+	void endTest009() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
@@ -216,7 +216,7 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(b);
+		s1.getParkingSlots().get(0).attachBicycle(b);
 		u.newRide(s1);
 		assertEquals(true, u.getCurrentRide().isCurrent());
 	}

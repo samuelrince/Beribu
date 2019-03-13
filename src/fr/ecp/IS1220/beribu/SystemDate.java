@@ -27,7 +27,7 @@ public class SystemDate {
 		this.setMonth(month);
 		this.setDay(day);
 		System.out.println("Current day has been set to "+day+"/"
-				+month+"/"+year);
+				+month+"/"+year+".");
 	}
 
 	public void setTime(int hour, int minute, int second) {
@@ -35,7 +35,7 @@ public class SystemDate {
 		this.setMinute(minute);
 		this.setSecond(second);
 		System.out.println("Current time has been set to "+hour+":"
-				+minute+":"+second);
+				+minute+":"+second+".");
 	}
 	
 	public int getYear() {
