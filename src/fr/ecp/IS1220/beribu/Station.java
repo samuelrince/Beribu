@@ -269,6 +269,16 @@ public class Station {
 		this.updateStatus();
 	}
 	
+	public void createParkingSlots(int quantity) throws IllegalArgumentException {
+		if (quantity < 0) {
+			throw new IllegalArgumentException("Must enter a positive"
+					+ " quantity.");
+		}
+		for (int i = 0; i < quantity; i++) {
+			new ParkingSlot(this);
+		}
+	}
+	
 	public ArrayList<Travel> getTargetOf() {
 		return this.targetOf;
 	}
