@@ -46,6 +46,12 @@ public class Scenario1 {
 		
 		user1.planRide(new Localization(48.847962637540554,2.3183927431184657), 
 				new Localization(48.85979680709707,2.315828448811203));
+		user1.getPlannedRide().start();
+		user1.newRide(station3);
+		SD.setTime(19, 26, 37);
+		station1.getParkingSlots().get(3).setOffline(true);
+		
+		
 		//user1.newRide(station2);
 		
 		

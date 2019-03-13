@@ -254,8 +254,17 @@ public class Station {
 	 * Adds a given parking slot to the station. This method is automatically called
 	 * when creating a parking slot associated to the station.
 	 * @param parkingSlot
+	 * @throws 
 	 */
-	public void addParkingSlot(ParkingSlot parkingSlot) {
+	public void addParkingSlot(ParkingSlot parkingSlot) throws IllegalArgumentException {
+		if (parkingSlot.getStation().getId() != this.id) {
+			throw new IllegalArgumentException("Can't link with a "
+					+ "parking slot associated to another station.");
+		}
+		if (this.getParkingSlots().contains(parkingSlot)) {
+			throw new IllegalArgumentException("This parking slot"
+					+ "is already linked with the station.");
+		}
 		this.parkingSlots.add(parkingSlot);
 		this.updateStatus();
 	}
