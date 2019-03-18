@@ -27,8 +27,37 @@ public class MyVelibNetwork {
 		}
 	}
 	
-	public void addStation(Localization localization, Boolean isPlus) {
+	public void createEmptyStation(Localization localization, Boolean isPlus) {
 		this.stationDatabase.add(new Station(localization, isPlus));
+	}
+	
+	public void createStation(Localization center, double radius, int number,
+			int plusNumber, double populationPercentage) throws IllegalArgumentException {
+		if (radius < 0) {
+			throw new IllegalArgumentException("The radius should be > 0.");
+		}
+		if (number < 0 || plusNumber < 0) {
+			throw new IllegalArgumentException("The number of stations and Plus stations"
+					+ " should be positive.");
+		}
+		if (populationPercentage < 0) {
+			throw new IllegalArgumentException("The population percentage should be "
+					+ "positive.");
+		}
+		if (plusNumber > number) {
+			throw new IllegalArgumentException("The number of Plus stations should"
+					+ " not exceed the total number of stations created.");
+		}
+		
+		for (int i = 0; i < plusNumber; i++) {
+			Localization randomLoc = center.generateLocInRadius(radius);
+			this.createEmptyStation(randomLoc, true);
+		}
+		for (int i = 0; i < number - plusNumber; i++) {
+			Localization randomLoc = center.generateLocInRadius(radius);
+			this.createEmptyStation(randomLoc, false);
+		}
+		
 	}
 	
 	public void addStation(Station station) {
@@ -52,8 +81,7 @@ public class MyVelibNetwork {
 	}
 
 	public static void main(String[] args) {
-		new MyVelibNetwork("Lyon");
-		System.out.println(MyVelibNetwork.getInstance().getName());
 		new MyVelibNetwork("Paris");
+		System.out.println(MyVelibNetwork.getInstance().getName());
 	}
 }

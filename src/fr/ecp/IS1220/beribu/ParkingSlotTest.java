@@ -54,14 +54,31 @@ class ParkingSlotTest {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
-		Station s = new Station(new Localization(0.8, 0.7), false);
-		ParkingSlot p = new ParkingSlot(s);
+		Station s1 = new Station(new Localization(0.8, 0.7), false);
+		ParkingSlot p1 = new ParkingSlot(s1);
+		ParkingSlot p2 = new ParkingSlot(s1);
 		Bicycle b = new ElectricalBike();
-		User u = new User("Jean");
-		p.attachBicycle(b);
-		u.newRide(s);
+		p1.attachBicycle(b);
 		assertThrows(IllegalArgumentException.class, () -> {
-			p.attachBicycle(b);
+			p2.attachBicycle(b);
+		});
+	}
+	
+	/*
+	 * Test set bicycle method
+	 */
+	@Test
+	void attachBicycleTest003() throws Exception {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 12, 12);
+		SD.setTime(5, 34, 45);
+		Station s1 = new Station(new Localization(0.8, 0.7), false);
+		ParkingSlot p1 = new ParkingSlot(s1);
+		Bicycle b1 = new ElectricalBike();
+		Bicycle b2 = new ElectricalBike();
+		p1.attachBicycle(b1);
+		assertThrows(RuntimeException.class, () -> {
+			p1.attachBicycle(b2);
 		});
 	}
 	
