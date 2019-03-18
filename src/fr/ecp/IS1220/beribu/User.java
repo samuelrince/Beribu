@@ -144,8 +144,8 @@ public class User {
 				this.listOfRides.add(ride);
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
-						this.plannedRide.setSuggestedStartStation(station);
 						this.plannedRide.setBicycleType(bicycle.getType());
+						this.plannedRide.setSuggestedStartStation(station);
 					}
 				}
 			}
@@ -178,8 +178,8 @@ public class User {
 				this.listOfRides.add(ride);
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
-						this.plannedRide.setSuggestedStartStation(station);
 						this.plannedRide.setBicycleType(bicycle.getType());
+						this.plannedRide.setSuggestedStartStation(station);
 					}
 				}
 			}
@@ -282,6 +282,13 @@ public class User {
 
 	public void notifyUser(String message) {
 		System.out.println(message);
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.name+" (id."+this.id+"), "+ 
+				this.card.getType()+" subscriber";
 	}
 	
 	public static void main(String[] args) {

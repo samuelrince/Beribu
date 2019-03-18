@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class Bicycle {
 	private long id;
 	private static long uniqId;
+	private boolean attached;
 	
 	public Bicycle() {
 		this.id = uniqId++;
@@ -14,6 +15,14 @@ public abstract class Bicycle {
 		return id;
 	}
 		
+	public boolean getAttached() {
+		return this.attached;
+	}
+	
+	public void setAttached(boolean attached) {
+		this.attached = attached;
+	}
+	
 	public abstract String getType();
 	
 	public abstract double getSpeed();

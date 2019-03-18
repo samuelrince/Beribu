@@ -4,6 +4,7 @@ package fr.ecp.IS1220.beribu;
 public class Vlibre implements Card{
 	private User user;
 	private Date creationDate;
+	private String type = "Vlibre";
 	
 	public Vlibre(User user) {
 		super();
@@ -20,6 +21,9 @@ public class Vlibre implements Card{
 	public Date getCreationDate() {
 		// TODO Auto-generated method stub
 		return this.creationDate;
+	}
+	public String getType() {
+		return this.type;
 	}
 	
 	@Override

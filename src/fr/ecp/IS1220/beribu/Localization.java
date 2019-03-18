@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Localization {
 	private double latitude;
 	private double longitude;
+	final static double rayonTerre = 6371000;
 
 	public Localization(double latitude, double longitude) {
 		super();
@@ -67,7 +68,6 @@ public class Localization {
 	 * @return 		the distance between the two Localization
 	 */
 	public double distanceTo(Localization loc) {
-		double rayonTerre = 6371000;
 		double deltaLat = (loc.getLatitude() - this.latitude)*Math.PI/180;
 		double deltaLong = (loc.getLongitude() - this.longitude)*Math.PI/180;
 		return Math.sqrt(deltaLat*deltaLat + Math.pow(Math.cos(this.latitude),2)
@@ -191,6 +191,16 @@ public class Localization {
 					+ " bicycle of type "+ bicycleType +" was found.");
 		}
 		return listOfStations.get(stationIndex);
+	}
+	
+	public Localization generateLocInRadius(double radius) throws IllegalArgumentException {
+		if (radius < 0) {
+			throw new IllegalArgumentException("The radius should be > 0.");
+		}
+		double r = Math.random()*radius;
+		double angle = Math.random()*2*Math.PI;
+		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
+				this.longitude + Math.sin(angle)*r/rayonTerre);
 	}
 	
 	public static void main(String[] args) {

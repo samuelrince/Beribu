@@ -26,7 +26,7 @@ class StationTest {
 	 * Test number of bicycle method
 	 */
 	@Test
-	void numberOfBicycleTest001() {
+	void numberOfBicycleTest001() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -35,13 +35,13 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfBicycles() == 3);
 	}
 	@Test
-	void numberOfBicycleTest002() {
+	void numberOfBicycleTest002() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -50,13 +50,13 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfBicycles("Electrical") == 2);
 	}
 	@Test
-	void numberOfBicycleTest003() {
+	void numberOfBicycleTest003() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -65,9 +65,9 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfBicycles("Mechanical") == 1);
 	}
 	@Test
@@ -107,7 +107,7 @@ class StationTest {
 		assertTrue(s.numberOfBicycles("Electrical") == 0);
 	}
 	@Test
-	void numberOfBicycleTest007() {
+	void numberOfBicycleTest007() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -116,11 +116,11 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
 		assertTrue(s.numberOfBicycles("Mechanical") == 0);
 	}
 	@Test
-	void numberOfBicycleTest008() {
+	void numberOfBicycleTest008() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -129,7 +129,7 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(3).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfBicycles("Electrical") == 0);
 	}
 	
@@ -137,7 +137,7 @@ class StationTest {
 	 * Test number of free slots methods
 	 */
 	@Test
-	void numberOfFreeSlotsTest001() {
+	void numberOfFreeSlotsTest001() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -146,13 +146,13 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfFreeSlots() == 1);
 	}
 	@Test
-	void numberOfFreeSlotsTest002() {
+	void numberOfFreeSlotsTest002() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -161,8 +161,8 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfFreeSlots() == 2);
 	}
 	@Test
@@ -178,7 +178,7 @@ class StationTest {
 		assertTrue(s.numberOfFreeSlots() == 4);
 	}
 	@Test
-	void numberOfFreeSlotsTest004() {
+	void numberOfFreeSlotsTest004() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -187,10 +187,10 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(3).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());
 		assertTrue(s.numberOfFreeSlots() == 0);
 	}
 	
@@ -198,7 +198,7 @@ class StationTest {
 	 * Test get free parking slot method
 	 */
 	@Test
-	void getFreeParkingSlotTest001() {
+	void getFreeParkingSlotTest001() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -207,8 +207,8 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(2).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
 		assertEquals(p1, s.getFreeParkingSlot());
 	}
 	@Test
@@ -224,7 +224,7 @@ class StationTest {
 		assertEquals(p1, s.getFreeParkingSlot());
 	}
 	@Test
-	void getFreeParkingSlotTest003() {
+	void getFreeParkingSlotTest003() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -233,10 +233,10 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(3).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());
 		assertThrows(RuntimeException.class, () -> {
 			s.getFreeParkingSlot();
 		});
@@ -246,7 +246,7 @@ class StationTest {
 	 * Test is full method
 	 */
 	@Test
-	void isFullTest001() {
+	void isFullTest001() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -255,14 +255,15 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(3).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());
 		assertTrue(s.isFull() == true);
+
 	}
 	@Test
-	void isFullTest002() {
+	void isFullTest002() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -271,9 +272,9 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());
 		assertTrue(s.isFull() == false);
 	}
 	
@@ -281,7 +282,7 @@ class StationTest {
 	 * Test get bicycle method
 	 */
 	@Test
-	void getBicycleTest001() {
+	void getBicycleTest001() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -291,13 +292,13 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		Bicycle b = new ElectricalBike();
-		s.getParkingSlots().get(0).setBicycle(b);
-		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(b);
+		s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());
 		assertEquals(s.getBicycle(), b);
 	}
 	@Test
-	void getBicycleTest002() {
+	void getBicycleTest002() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -307,13 +308,13 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		Bicycle b = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(b);
-		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(b);
+		s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());
 		assertEquals(s.getBicycle(), b);
 	}
 	@Test
-	void getBicycleTest003() {
+	void getBicycleTest003() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -323,9 +324,9 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		Bicycle b = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(1).setBicycle(b);
-		s.getParkingSlots().get(2).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(1).attachBicycle(b);
+		s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());
 		s.getParkingSlots().get(0).setOffline(true);
 		assertEquals(s.getBicycle(), b);
 	}
@@ -344,7 +345,7 @@ class StationTest {
 		});
 	}
 	@Test
-	void getBicycleTest005() {
+	void getBicycleTest005() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -353,14 +354,14 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
 		s.getParkingSlots().get(0).setOffline(true);
 		assertThrows(RuntimeException.class, () -> {
 			s.getBicycle();
 		});
 	}
 	@Test
-	void getBicycleTest006() {
+	void getBicycleTest006() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -370,12 +371,12 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		Bicycle b = new ElectricalBike();
-		s.getParkingSlots().get(0).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(1).setBicycle(b);
+		s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(1).attachBicycle(b);
 		assertEquals(b, s.getBicycle("Electrical"));
 	}
 	@Test
-	void getBicycleTest007() {
+	void getBicycleTest007() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -385,11 +386,11 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		Bicycle b = new MechanicalBike();
-		s.getParkingSlots().get(1).setBicycle(b);
+		s.getParkingSlots().get(1).attachBicycle(b);
 		assertEquals(b, s.getBicycle("Mechanical"));
 	}
 	@Test
-	void getBicycleTest008() {
+	void getBicycleTest008() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
@@ -399,23 +400,23 @@ class StationTest {
 		new ParkingSlot(s);
 		new ParkingSlot(s);
 		Bicycle b = new MechanicalBike();
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(b);
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(b);
 		s.getParkingSlots().get(1).setOffline(true);
 		assertThrows(RuntimeException.class, () -> {
 			s.getBicycle("Mechanical");
 		});
 	}
 	@Test
-	void getBicycleTest010() {
+	void getBicycleTest010() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
-		s.getParkingSlots().get(1).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
 		s.getParkingSlots().get(0).setOffline(true);
 		s.getParkingSlots().get(1).setOffline(true);
 		assertThrows(RuntimeException.class, () -> {
@@ -437,71 +438,71 @@ class StationTest {
 		assertFalse(s.isBicycle());
 	}
 	@Test
-	void isBicycleTest002() {
+	void isBicycleTest002() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
 		assertTrue(s.isBicycle());
 	}
 	@Test
-	void isBicycleTest003() {
+	void isBicycleTest003() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
 		assertTrue(s.isBicycle());
 	}
 	@Test
-	void isBicycleTest004() {
+	void isBicycleTest004() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
 		s.getParkingSlots().get(0).setOffline(true);
 		assertFalse(s.isBicycle());
 	}
 	@Test
-	void isBicycleTest005() {
+	void isBicycleTest005() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new MechanicalBike());
-		s.getParkingSlots().get(1).setBicycle(new MechanicalBike());
+		s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
 		assertTrue(s.isBicycle("Mechanical"));
 	}
 	@Test
-	void isBicycleTest006() {
+	void isBicycleTest006() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
 		assertFalse(s.isBicycle("Mechanical"));
 	}
 	@Test
-	void isBicycleTest007() {
+	void isBicycleTest007() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
 		s.getParkingSlots().get(0).setOffline(true);
 		assertFalse(s.isBicycle("Electrical"));
 	}
@@ -510,14 +511,14 @@ class StationTest {
 	 * Test set offline
 	 */
 	@Test
-	void setOfflineTest001() {
+	void setOfflineTest001() throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 12, 12);
 		SD.setTime(5, 34, 45);
 		Station s = new Station(new Localization(0.8, 0.7), false);
 		new ParkingSlot(s);
 		new ParkingSlot(s);
-		s.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
 		s.getParkingSlots().get(0).setOffline(true);
 		s.setOffline(true);
 		assertTrue(s.getParkingSlots().get(0).isOffline() && s.getParkingSlots().get(1).isOffline());

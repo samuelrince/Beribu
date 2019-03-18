@@ -159,9 +159,11 @@ public class Travel {
 		return this.ongoing;
 	}
 	public void setSuggestedStartStation(Station station) {
-		this.suggestedStartStation.removeTargetOf(this);
-		this.suggestedStartStation = station;
-		this.update();
+		if (station.getId() != this.suggestedStartStation.getId()) {
+			this.suggestedStartStation.removeTargetOf(this);
+			this.suggestedStartStation = station;
+			this.update();
+		}
 	}
 	
 	/**
@@ -174,28 +176,33 @@ public class Travel {
 		if (!this.user.isOnRide()) {
 			this.suggestedStartStation.removeTargetOf(this);
 			this.suggestedEndStation.removeTargetOf(this);
-			this.user.notifyUser("Your planned ride has been recalculated.");
+			this.user.notifyUser("Your planned ride has been updated.");
 			this.findRide();
 		}
 		else {
+			Station previousEndStation = this.suggestedEndStation;
 			this.suggestedEndStation.removeTargetOf(this);
 			this.suggestedEndStation = this.destination.getClosestAvailableStation();
 			this.suggestedEndStation.addTargetOf(this);
 			this.previsionDuration = new Duration(this.suggestedStartStation,
 					this.suggestedEndStation, this.bicycleType);
 			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
-
-			this.user.notifyUser("The return station is not available anymore."
-					+ "Your return station has been recalculated.");
-			System.out.println(this);
+			if (previousEndStation.getId() != this.suggestedEndStation.getId()) {
+				this.user.notifyUser("The return station is not available anymore."
+						+ "Your return station has been updated.");
+				System.out.println(this);
+			}
+			else {
+				this.user.notifyUser("Your planned ride has been updated.");
+			}
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return "User : "+this.user.getName() +"\n"+"Suggested rental station : "+
-				this.suggestedStartStation.getName()+"\n"+"Suggested return station : "
-				+ this.suggestedEndStation.getName() +"\n"+"Estimated duration : " +
+		return  "User : "+this.user+"\n"+"Suggested rental station : "+
+				this.suggestedStartStation+"\n"+"Suggested return station : "
+				+ this.suggestedEndStation+"\n"+"Estimated duration : " +
 				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
 	}
 	

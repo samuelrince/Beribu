@@ -24,9 +24,34 @@ public class ParkingSlot {
 		
 	}
 	
-	public void setBicycle(Bicycle bicycle) {
+	public void attachBicycle(Bicycle bicycle) throws Exception {
+		if (this.isBicycle()) {
+			throw new RuntimeException("This parking slot already holds a bicycle.");
+		}
+		if (this.isOffline) {
+			throw new RuntimeException("This parking slot is offline.");
+		}
+		if (bicycle == null) {
+			throw new IllegalArgumentException("The argument can't be null.");
+		}
+		if (bicycle.getAttached() == true) {
+			throw new IllegalArgumentException("This bicycle is already linked to"
+					+ " a parking slot.");
+		}
 		this.bicycle = bicycle;
+		bicycle.setAttached(true);
 		this.station.updateStatus();
+	}
+	
+	public void detachBicycle() throws RuntimeException{
+		if (!this.isBicycle()) {
+			throw new RuntimeException("This parking slot holds on bicycle.");
+		}
+		if (this.isOffline) {
+			throw new RuntimeException("This parking slot is offline.");
+		}
+		this.bicycle.setAttached(false);
+		this.bicycle = null;
 	}
 	
 	public Station getStation() {
@@ -34,6 +59,10 @@ public class ParkingSlot {
 	}
 
 	public void setOffline(boolean isOffline) {
+		if (!isOffline && this.station.isOffline()) {
+			throw new RuntimeException("This parking slot can't be"
+					+ " set online because the station is offline.");
+		}
 		this.isOffline = isOffline;
 		this.station.updateStatus();
 	}

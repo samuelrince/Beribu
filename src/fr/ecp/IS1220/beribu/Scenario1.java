@@ -3,7 +3,7 @@ package fr.ecp.IS1220.beribu;
 
 public class Scenario1 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 02, 17);
 		SD.setTime(19, 22, 37);
@@ -34,23 +34,23 @@ public class Scenario1 {
 		MechanicalBike mBike2 = new MechanicalBike();
 		MechanicalBike mBike3 = new MechanicalBike();
 		
-		station1.getParkingSlots().get(0).setBicycle(eBike1);
-		station1.getParkingSlots().get(1).setBicycle(mBike1);
-		station1.getParkingSlots().get(2).setBicycle(eBike2);
+		station1.getParkingSlots().get(0).attachBicycle(eBike1);
+		station1.getParkingSlots().get(1).attachBicycle(mBike1);
+		station1.getParkingSlots().get(2).attachBicycle(eBike2);
 		station1.getParkingSlots().get(2).setOffline(true);
-		station2.getParkingSlots().get(0).setBicycle(eBike3);
-		station2.getParkingSlots().get(2).setBicycle(eBike4);
-		station3.getParkingSlots().get(1).setBicycle(mBike2);
-		station3.getParkingSlots().get(2).setBicycle(mBike3);
+		station2.getParkingSlots().get(0).attachBicycle(eBike3);
+		station2.getParkingSlots().get(2).attachBicycle(eBike4);
+		station3.getParkingSlots().get(1).attachBicycle(mBike2);
+		station3.getParkingSlots().get(2).attachBicycle(mBike3);
 		station3.getParkingSlots().get(0).setOffline(true);
 		
 		user1.planRide(new Localization(48.847962637540554,2.3183927431184657), 
 				new Localization(48.85979680709707,2.315828448811203));
-		//user1.newRide(station2);
+		user1.getPlannedRide().start();
+		user1.newRide(station3);
+		SD.setTime(19, 26, 37);
+		station1.getParkingSlots().get(3).setOffline(true);
 		
-		
-		//user1.getCurrentRide().end(station2.getParkingSlots().get(0));
-		//System.out.println(ride.toString());
 		
 	}
 }
