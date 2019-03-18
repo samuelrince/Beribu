@@ -1,6 +1,5 @@
 package fr.ecp.IS1220.beribu;
 
-
 public class Vlibre implements Card{
 	private User user;
 	private Date creationDate;

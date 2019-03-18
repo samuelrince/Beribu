@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.beribu.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import fr.ecp.IS1220.beribu.Date;
+import fr.ecp.IS1220.beribu.Duration;
+import fr.ecp.IS1220.beribu.SystemDate;
 
 class DurationTest {
 	

@@ -1,6 +1,5 @@
 package fr.ecp.IS1220.beribu;
 
-
 public class Ride {
 	private static long uniqId;
 	private long id;

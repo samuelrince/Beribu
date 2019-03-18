@@ -1,8 +1,19 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.beribu.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import fr.ecp.IS1220.beribu.Card;
+import fr.ecp.IS1220.beribu.Duration;
+import fr.ecp.IS1220.beribu.ElectricalBike;
+import fr.ecp.IS1220.beribu.Localization;
+import fr.ecp.IS1220.beribu.MechanicalBike;
+import fr.ecp.IS1220.beribu.ParkingSlot;
+import fr.ecp.IS1220.beribu.Station;
+import fr.ecp.IS1220.beribu.SystemDate;
+import fr.ecp.IS1220.beribu.User;
+import fr.ecp.IS1220.beribu.Vlibre;
 
 class UserTest {
 	
