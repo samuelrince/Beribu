@@ -34,6 +34,15 @@ public class Station {
 		this.id = uniqId++;
 	}
 	
+	public Station(Localization localization, Boolean isPlus, String name, int numberOfSlots) {
+		super();
+		this.localization = localization;
+		this.isPlus = isPlus;
+		this.name = name;
+		this.id = uniqId++;
+		this.createParkingSlots(numberOfSlots);
+	}
+	
 	public  ArrayList<State> getHistory() {
 		return this.history;
 	}
@@ -208,6 +217,27 @@ public class Station {
 		throw new RuntimeException("No bicycle available in this station.");
 	}
 	
+	public void populate(ArrayList<Bicycle> bicycleList) {
+		ArrayList<Bicycle> bList = (ArrayList<Bicycle>) bicycleList.clone();
+		for (int i = 0; i < this.parkingSlots.size(); i++) {
+			if (bList.size() == 0)
+				break;
+			try {
+				this.parkingSlots.get(i).attachBicycle(bList.get(0));
+			} 
+			catch (Exception e) {}
+			bList.remove(0);
+		}
+		if (bList.size() == 0)
+			System.out.println(bicycleList.size()+" bicycles have been attached to "
+					+ this+".");
+		else {
+			System.out.println(bicycleList.size()-bList.size()+" have been attached. "
+					+ bList.size()+ " input bicycles have been ignored.");
+		}
+	}
+
+	
 	public long getId() {
 		return this.id;
 	}
@@ -376,8 +406,34 @@ public class Station {
 			return parkingSlotStatus;
 		}
 		
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			String res = timeStamp + " -> / ";
+			for (int i = 0; i < parkingSlotStatus.size(); i++) {
+				res += "slot "+i+" : ";
+				if (parkingSlotStatus.get(i).get(0))
+					res += "offline, ";
+				else
+					res += "online, ";
+				if (parkingSlotStatus.get(i).get(1))
+					res += "occupied";
+				else
+					res += "free";
+				res += " / ";
+			}
+			return res;
+		}
+		
 	}
-
+	
+	public String historyTrace() {
+		String res = "----------------------"+"\n"+"History of "+this.toString()+ "\n";
+		for (int i = 0; i < this.history.size(); i++)
+			res += "\n"+this.history.get(i);
+		return res+"\n"+"----------------------";
+	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -390,6 +446,9 @@ public class Station {
 	}
 	
 	public static void main(String[] args) throws Exception {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 02, 17);
+		SD.setTime(19, 22, 37);
 		Station station1 = new Station(new Localization(0,0),false);
 		new ParkingSlot(station1);
 		new ParkingSlot(station1);
@@ -397,11 +456,12 @@ public class Station {
 		ElectricalBike eBike1 = new ElectricalBike();
 		MechanicalBike mBike1 = new MechanicalBike();
 		ElectricalBike eBike2 = new ElectricalBike();
-		station1.getParkingSlots().get(0).attachBicycle(eBike1);
-		station1.getParkingSlots().get(1).attachBicycle(mBike1);
-		station1.getParkingSlots().get(2).attachBicycle(eBike2);
+//		station1.getParkingSlots().get(0).attachBicycle(eBike1);
+//		station1.getParkingSlots().get(1).attachBicycle(mBike1);
+//		station1.getParkingSlots().get(2).attachBicycle(eBike2);
+		station1.populate(new ArrayList<Bicycle>(Arrays.asList(eBike1, mBike1, eBike2)));
 		station1.getParkingSlots().get(2).setOffline(true);
-		System.out.println(station1.getBicycle("ELECTrICAL").getType());
+		System.out.println(station1.historyTrace());
 	}
 	
 }	
