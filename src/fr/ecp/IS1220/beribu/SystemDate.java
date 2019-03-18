@@ -26,12 +26,16 @@ public class SystemDate {
 		this.setYear(year);
 		this.setMonth(month);
 		this.setDay(day);
+		System.out.println("Current day has been set to "+day+"/"
+				+month+"/"+year+".");
 	}
 
 	public void setTime(int hour, int minute, int second) {
 		this.setHour(hour);
 		this.setMinute(minute);
 		this.setSecond(second);
+		System.out.println("Current time has been set to "+hour+":"
+				+minute+":"+second+".");
 	}
 	
 	public int getYear() {

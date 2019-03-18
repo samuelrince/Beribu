@@ -15,7 +15,7 @@ public class Station implements Comparable<Station>{
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
-	private String name = "_unnamed_";
+	private String name;
 	private Boolean isOffline = false;
 	private Boolean isPlus;
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
@@ -28,6 +28,7 @@ public class Station implements Comparable<Station>{
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
+		this.name = "Station"+id;
 		this.createdAt = new Date();
 	}
 	
@@ -39,6 +40,25 @@ public class Station implements Comparable<Station>{
 		this.id = uniqId++;
 	}
 	
+	public Station(Localization localization, Boolean isPlus, String name, int numberOfSlots) {
+		super();
+		this.localization = localization;
+		this.isPlus = isPlus;
+		this.name = name;
+		this.id = uniqId++;
+		this.createParkingSlots(numberOfSlots);
+	}
+	
+	public Station(Localization localization, Boolean isPlus, int numberOfSlots) {
+		super();
+		this.localization = localization;
+		this.isPlus = isPlus;
+		this.id = uniqId++;
+		this.name = "Station"+id;
+		this.createParkingSlots(numberOfSlots);
+	}
+	
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -137,9 +157,9 @@ public class Station implements Comparable<Station>{
 	public Bicycle getBicycle() throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
-				this.parkingSlots.get(i).setBicycle(null);
+				this.parkingSlots.get(i).detachBicycle();
 				return bicycle;
 			}
 		}
@@ -156,10 +176,10 @@ public class Station implements Comparable<Station>{
 	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
-					this.parkingSlots.get(i).setBicycle(null);
+					this.parkingSlots.get(i).detachBicycle();
 					this.updateStatus();
 					return bicycle;
 				}
@@ -176,7 +196,7 @@ public class Station implements Comparable<Station>{
 	public boolean isBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				return true;
 			}
 		}
@@ -191,7 +211,7 @@ public class Station implements Comparable<Station>{
 	public boolean isBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle()
-			&& this.parkingSlots.get(i).isOffline() == false) {
+			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					return true;
 				}
@@ -216,6 +236,35 @@ public class Station implements Comparable<Station>{
 		}
 		throw new RuntimeException("No bicycle available in this station.");
 	}
+	
+	/**
+	 * This method populates a station with the list of bicycles passed in argument.
+	 * Only the available parking slots are populated. The bicycles are attributed to
+	 * each available parking slot by order of appearance, starting from the beginning 
+	 * of the list, until all bicycles have been attributed or until there are no
+	 * more available parking slots.
+	 * @param bicycleList a population of bicycles
+	 */
+	public void populate(ArrayList<Bicycle> bicycleList) {
+		ArrayList<Bicycle> bList = (ArrayList<Bicycle>) bicycleList.clone();
+		for (int i = 0; i < this.parkingSlots.size(); i++) {
+			if (bList.size() == 0)
+				break;
+			try {
+				this.parkingSlots.get(i).attachBicycle(bList.get(0));
+			} 
+			catch (Exception e) {}
+			bList.remove(0);
+		}
+		if (bList.size() == 0)
+			System.out.println(bicycleList.size()+" bicycles have been attached to "
+					+ this+".");
+		else {
+			System.out.println(bicycleList.size()-bList.size()+" have been attached. "
+					+ bList.size()+ " input bicycles have been ignored.");
+		}
+	}
+
 	
 	public long getId() {
 		return this.id;
@@ -263,10 +312,29 @@ public class Station implements Comparable<Station>{
 	 * Adds a given parking slot to the station. This method is automatically called
 	 * when creating a parking slot associated to the station.
 	 * @param parkingSlot
+	 * @throws 
 	 */
-	public void addParkingSlot(ParkingSlot parkingSlot) {
+	public void addParkingSlot(ParkingSlot parkingSlot) throws IllegalArgumentException {
+		if (parkingSlot.getStation().getId() != this.id) {
+			throw new IllegalArgumentException("Can't link with a "
+					+ "parking slot associated to another station.");
+		}
+		if (this.getParkingSlots().contains(parkingSlot)) {
+			throw new IllegalArgumentException("This parking slot"
+					+ "is already linked with the station.");
+		}
 		this.parkingSlots.add(parkingSlot);
 		this.updateStatus();
+	}
+	
+	public void createParkingSlots(int quantity) throws IllegalArgumentException {
+		if (quantity < 0) {
+			throw new IllegalArgumentException("Must enter a positive"
+					+ " quantity.");
+		}
+		for (int i = 0; i < quantity; i++) {
+			new ParkingSlot(this);
+		}
 	}
 	
 	public ArrayList<Travel> getTargetOf() {
@@ -377,8 +445,34 @@ public class Station implements Comparable<Station>{
 			return parkingSlotStatus;
 		}
 		
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			String res = timeStamp + " -> / ";
+			for (int i = 0; i < parkingSlotStatus.size(); i++) {
+				res += "slot "+i+" : ";
+				if (parkingSlotStatus.get(i).get(0))
+					res += "offline, ";
+				else
+					res += "online, ";
+				if (parkingSlotStatus.get(i).get(1))
+					res += "occupied";
+				else
+					res += "free";
+				res += " / ";
+			}
+			return res;
+		}
+		
 	}
-
+	
+	public String historyTrace() {
+		String res = "----------------------"+"\n"+"History of "+this.toString()+ "\n";
+		for (int i = 0; i < this.history.size(); i++)
+			res += "\n"+this.history.get(i);
+		return res+"\n"+"----------------------";
+	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -390,23 +484,37 @@ public class Station implements Comparable<Station>{
 		return "Station "+this.name+" ,id."+this.id+" ("+status+")";
 	}
 	
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws Exception {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 02, 17);
+		SD.setTime(19, 22, 37);
+		Station station1 = new Station(new Localization(0,0),false);
+		new ParkingSlot(station1);
+		new ParkingSlot(station1);
+		new ParkingSlot(station1);
+		ElectricalBike eBike1 = new ElectricalBike();
+		MechanicalBike mBike1 = new MechanicalBike();
+		ElectricalBike eBike2 = new ElectricalBike();
+//		station1.getParkingSlots().get(0).attachBicycle(eBike1);
+//		station1.getParkingSlots().get(1).attachBicycle(mBike1);
+//		station1.getParkingSlots().get(2).attachBicycle(eBike2);
+		station1.populate(new ArrayList<Bicycle>(Arrays.asList(eBike1, mBike1, eBike2)));
+		station1.getParkingSlots().get(2).setOffline(true);
+		System.out.println(station1.historyTrace());
+
 		Station s1 = new Station(new Localization(2.1, 3.1), false);
 		Station s2 = new Station(new Localization(2.1, 3.1), false);
 		Station s3 = new Station(new Localization(2.1, 3.1), true);
 		ArrayList<Station> stations = new ArrayList<Station>();
 		stations.add(s3); stations.add(s1); stations.add(s2);
-		
 		System.out.println(" == Stations initial order == ");
 		System.out.println(stations.toString());
-		
-		
-		
 		Collections.sort(stations);
 		System.out.println(" == Stations sorted by ID == ");
 		System.out.println(stations.toString());
-		
 		Comparator<Station> c = new SortStationByMostUsed();
+
 	}
 	
 }	

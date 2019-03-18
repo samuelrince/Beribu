@@ -25,13 +25,13 @@ public class Ride {
 		this.id = uniqId++;
 	}
 
-	public void end(ParkingSlot parkingSlot) throws RuntimeException {
-		if (!parkingSlot.isBicycle()) {
-			parkingSlot.setBicycle(this.bicycle);
+	public void end(ParkingSlot parkingSlot) throws Exception {
+		try {
+			parkingSlot.attachBicycle(this.bicycle);
+			this.current = false;
 			Date endTime = new Date();
 			this.endTime = endTime;
 			this.endStation = parkingSlot.getStation();
-			this.current = false;
 			this.duration = new Duration(this.startTime,this.endTime);
 			this.pay();
 			if (this.user.getPlannedRide() != null) {
@@ -40,8 +40,8 @@ public class Ride {
 				}
 			}
 		}
-		else {
-			throw new RuntimeException("This parking slot is not available");
+		catch (Exception exception) {
+			System.err.println("This parking slot is not available.");
 		}
 	}
 	
