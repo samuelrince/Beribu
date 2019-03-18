@@ -12,7 +12,7 @@ class TravelTest {
 
 	@Before
 	public void initialize() {
-		
+		System.out.println("I am here");
 	}
 	@Test
 	void initTest001() {
@@ -22,8 +22,12 @@ class TravelTest {
 		Station s1 = new Station(new Localization(0.0, 0.0), false);
 		Station s2 = new Station(new Localization(5.0, 5.0), false);
 		Station s3 = new Station(new Localization(5.0000000000000001, 5.0000000000000001), true);
-		new ParkingSlot(s1).setBicycle(new MechanicalBike());
-		new ParkingSlot(s1).setBicycle(new ElectricalBike());
+		try {
+			new ParkingSlot(s1).attachBicycle(new MechanicalBike());
+			new ParkingSlot(s1).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		new ParkingSlot(s2);
 		new ParkingSlot(s3);
 		MyVelibNetwork.getInstance().addStation(s1);

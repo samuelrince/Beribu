@@ -205,19 +205,4 @@ public class Travel {
 				+ this.suggestedEndStation+"\n"+"Estimated duration : " +
 				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
 	}
-	
-	public static void main(String[] args) {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
-		new MyVelibNetwork("Paris");
-		Station s1 = new Station(new Localization(0.0, 0.0), false);
-		Station s2 = new Station(new Localization(5.0, 5.0), false);
-		new ParkingSlot(s1).setBicycle(new MechanicalBike());
-		new ParkingSlot(s1).setBicycle(new ElectricalBike());
-		new ParkingSlot(s2);
-		MyVelibNetwork.getInstance().addStation(s1);
-		MyVelibNetwork.getInstance().addStation(s2);
-		
-		new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0));
-	}
 }

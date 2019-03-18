@@ -103,7 +103,11 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		MechanicalBike mBike = new MechanicalBike();
-		s.getParkingSlots().get(0).attachBicycle(mBike);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(mBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s);
@@ -117,7 +121,11 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).attachBicycle(eBike);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(eBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s);
@@ -131,7 +139,11 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).attachBicycle(eBike);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(eBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "Electrical");
@@ -146,7 +158,11 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		MechanicalBike mBike = new MechanicalBike();
-		s.getParkingSlots().get(0).attachBicycle(mBike);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(mBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "Mechanical");
@@ -161,7 +177,11 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		MechanicalBike mBike = new MechanicalBike();
-		s.getParkingSlots().get(0).attachBicycle(mBike);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(mBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "eleCtrical");
@@ -176,7 +196,11 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).attachBicycle(eBike);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(eBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "mechanicaL");
@@ -219,8 +243,12 @@ class UserTest {
 		SD.setTime(19, 22, 37);
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
-		ElectricalBike eBike = new ElectricalBike();
-		s.getParkingSlots().get(0).attachBicycle(eBike);
+		ElectricalBike eBike = new ElectricalBike();	
+		try {
+			s.getParkingSlots().get(0).attachBicycle(eBike);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		assertDoesNotThrow(() -> {
 			u.newRide(s, "Nothing");
