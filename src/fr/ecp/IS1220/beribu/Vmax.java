@@ -9,7 +9,7 @@ public class Vmax implements Card{
 	public Vmax(User user) {
 		super();
 		this.user = user;
-		user.subscribe(this);
+		//user.subscribe(this);
 	}
 	
 	@Override
