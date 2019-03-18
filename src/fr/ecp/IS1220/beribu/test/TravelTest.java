@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.beribu.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,21 @@ import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import fr.ecp.IS1220.beribu.AvoidPlus;
+import fr.ecp.IS1220.beribu.ElectricalBike;
+import fr.ecp.IS1220.beribu.FastestPath;
+import fr.ecp.IS1220.beribu.Localization;
+import fr.ecp.IS1220.beribu.MechanicalBike;
+import fr.ecp.IS1220.beribu.MinimalWalking;
+import fr.ecp.IS1220.beribu.MyVelibNetwork;
+import fr.ecp.IS1220.beribu.ParkingSlot;
+import fr.ecp.IS1220.beribu.PreferPlus;
+import fr.ecp.IS1220.beribu.PreserveDistribution;
+import fr.ecp.IS1220.beribu.Station;
+import fr.ecp.IS1220.beribu.SystemDate;
+import fr.ecp.IS1220.beribu.Travel;
+import fr.ecp.IS1220.beribu.User;
 
 class TravelTest {
 

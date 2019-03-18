@@ -1,6 +1,5 @@
 package fr.ecp.IS1220.beribu;
 
-
 public interface Card {
 	public User getUser();
 	public Date getCreationDate();
