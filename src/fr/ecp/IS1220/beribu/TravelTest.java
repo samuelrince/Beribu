@@ -52,120 +52,90 @@ class TravelTest {
 	}
 	@Test
 	void initTest004() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new AvoidPlus());
 		});
 	}
 	@Test
 	void initTest005() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreferPlus());
 		});
 	}
 	@Test
 	void initTest006() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution());
 		});
 	}
 	@Test
 	void initTest007() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), "Electrical");
 		});
 	}
 	@Test
 	void initTest008() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), "Mechanical");
 		});
 	}
 	@Test
 	void initTest009() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new MinimalWalking(), "Mechanical");
 		});
 	}
 	@Test
 	void initTest010() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new FastestPath(), "Mechanical");
 		});	
 	}
 	@Test
 	void initTest011() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new AvoidPlus(), "Mechanical");
 		});
 	}
 	@Test
 	void initTest012() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreferPlus(), "Mechanical");
 		});
 	}
 	@Test
 	void initTest013() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution(), "Mechanical");
 		});
 	}
 	@Test
 	void initTest014() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new MinimalWalking(), "Electrical");
 		});
 	}
 	@Test
 	void initTest015() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new FastestPath(), "Electrical");
 		});	
 	}
 	@Test
 	void initTest016() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new AvoidPlus(), "Electrical");
 		});
 	}
 	@Test
 	void initTest017() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreferPlus(), "Electrical");
 		});
 	}
 	@Test
 	void initTest018() {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
 		assertDoesNotThrow(() -> {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution(), "Electrical");
 		});
