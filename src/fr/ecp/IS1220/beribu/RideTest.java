@@ -75,7 +75,11 @@ class RideTest {
 		Bicycle b = new MechanicalBike();
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).attachBicycle(b);
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(b);
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
 		assertDoesNotThrow(() -> {
@@ -233,11 +237,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(16, 13, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 3h 
 		// Its a mechanical bicycle
 		// The user did not subscribe 
@@ -256,11 +268,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(16, 13, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 3h 
 		// Its a mechanical bicycle
 		// The user did subscribe to Vlibre 
@@ -279,11 +299,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(16, 13, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 3h 
 		// Its a mechanical bicycle
 		// The user did subscribe to Vmax 
@@ -301,11 +329,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 13, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a electrical bicycle
 		// The user did not subscribe 
@@ -324,11 +360,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 13, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a electrical bicycle
 		// The user did subscribe to a Vlibre card
@@ -347,11 +391,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 13, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a electrical bicycle
 		// The user did subscribe to a Vmax card
@@ -371,11 +423,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a mechanical bicycle
 		// The user did subscribe to a Vlibre card
@@ -395,11 +455,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new MechanicalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a mechanical bicycle
 		// The user did subscribe to a Vmax card
@@ -419,11 +487,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a electrical bicycle
 		// The user did subscribe to a Vlibre card
@@ -443,11 +519,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		// The duration is 4h 
 		// Its a electrical bicycle
 		// The user did subscribe to a Vmax card
@@ -470,7 +554,11 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 2, 8);
 		SD.setTime(17, 15, 13);
@@ -490,11 +578,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 20, 33);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		Duration d = new Duration();
 		d.add(4, 5, 20);
 		assertEquals(d, u.getListOfRides().get(0).getDuration());
@@ -513,11 +609,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), false);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		assertEquals(new Duration(), u.getTimeCreditBalance());
 	}
 	@Test
@@ -530,11 +634,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		assertEquals(new Duration(), u.getTimeCreditBalance());
 	}
 	@Test
@@ -548,11 +660,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), false);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		assertEquals(new Duration(), u.getTimeCreditBalance());
 	}
 	@Test
@@ -566,11 +686,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		Duration d = new Duration();
 		d.setDuration(5*60);
 		assertEquals(d, u.getTimeCreditBalance());
@@ -586,11 +714,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), false);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		assertEquals(new Duration(), u.getTimeCreditBalance());
 	}
 	@Test
@@ -604,11 +740,19 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
-		u.getCurrentRide().end(s2.getFreeParkingSlot());
+		try {
+			u.getCurrentRide().end(s2.getFreeParkingSlot());
+		} catch (Exception e) {
+			fail("Failed to find a free parking slot");
+		}
 		Duration d = new Duration();
 		d.setDuration(5*60);
 		assertEquals(d, u.getTimeCreditBalance());
@@ -627,7 +771,11 @@ class RideTest {
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
@@ -646,8 +794,12 @@ class RideTest {
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
-		s2.getParkingSlots().get(0).setBicycle(new MechanicalBike());
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s2.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
@@ -667,7 +819,11 @@ class RideTest {
 		User u = new User("Jean");
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		new ParkingSlot(s1);
-		s1.getParkingSlots().get(0).setBicycle(new ElectricalBike());
+		try {
+			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+		} catch (Exception e) {
+			fail("Failed to attach the bike");
+		}
 		u.newRide(s1);
 		SD.setDay(2019, 3, 8);
 		SD.setTime(17, 15, 13);
