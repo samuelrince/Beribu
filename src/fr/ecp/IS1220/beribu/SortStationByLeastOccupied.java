@@ -3,7 +3,7 @@ package fr.ecp.IS1220.beribu;
 import java.util.Comparator;
 
 public class SortStationByLeastOccupied implements Comparator<Station>{
-
+	
 	@Override
 	public int compare(Station s1, Station s2) {
 		SystemDate SD = SystemDate.getInstance();
