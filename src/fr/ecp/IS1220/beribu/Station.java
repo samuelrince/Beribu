@@ -13,7 +13,7 @@ public class Station {
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
 	private Localization localization;
-	private String name = "_unnamed_";
+	private String name;
 	private Boolean isOffline = false;
 	private Boolean isPlus;
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
@@ -24,6 +24,7 @@ public class Station {
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.id = uniqId++;
+		this.name = "Station"+id;
 	}
 	
 	public Station(Localization localization, Boolean isPlus, String name) {
@@ -40,6 +41,15 @@ public class Station {
 		this.isPlus = isPlus;
 		this.name = name;
 		this.id = uniqId++;
+		this.createParkingSlots(numberOfSlots);
+	}
+	
+	public Station(Localization localization, Boolean isPlus, int numberOfSlots) {
+		super();
+		this.localization = localization;
+		this.isPlus = isPlus;
+		this.id = uniqId++;
+		this.name = "Station"+id;
 		this.createParkingSlots(numberOfSlots);
 	}
 	
@@ -217,6 +227,14 @@ public class Station {
 		throw new RuntimeException("No bicycle available in this station.");
 	}
 	
+	/**
+	 * This method populates a station with the list of bicycles passed in argument.
+	 * Only the available parking slots are populated. The bicycles are attributed to
+	 * each available parking slot by order of appearance, starting from the beginning 
+	 * of the list, until all bicycles have been attributed or until there are no
+	 * more available parking slots.
+	 * @param bicycleList a population of bicycles
+	 */
 	public void populate(ArrayList<Bicycle> bicycleList) {
 		ArrayList<Bicycle> bList = (ArrayList<Bicycle>) bicycleList.clone();
 		for (int i = 0; i < this.parkingSlots.size(); i++) {
