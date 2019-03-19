@@ -402,11 +402,6 @@ public class Station implements Comparable<Station>{
 	}
 	
 	@Override
-	public String toString() {
-		return "Station No." + this.getId();
-	}
-	
-	@Override
 	public int compareTo(Station o) {
 		return this.id > o.getId() ? 1 : this.id < o.getId() ? -1 : 0;
 		

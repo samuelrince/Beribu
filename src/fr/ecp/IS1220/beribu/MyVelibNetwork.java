@@ -8,6 +8,7 @@ public class MyVelibNetwork {
 	private ArrayList<Station> stationDatabase = new ArrayList<Station>();
 	private ArrayList<User> userDatabase = new ArrayList<User>();
 	private BicycleFactory bicycleFactory = new BicycleFactory();
+	private CardFactory cardFactory = new CardFactory();
 	
 	public MyVelibNetwork(String name) throws RuntimeException {
 		if (instance == null) {
@@ -155,8 +156,21 @@ public class MyVelibNetwork {
 		this.stationDatabase.add(station);
 	}
 	
-	public void addUser(String name) {
-		this.userDatabase.add(new User(name));
+	public void createUsers(int number) {
+		for (int i = 0; i < number; i++)
+			this.userDatabase.add(new User());
+	}
+	
+	public void createSubscribers(int number,String subType) {
+		for (int i = 0; i < number; i++) {
+			User user = new User();
+			user.subscribe(subType);
+			this.userDatabase.add(user);
+		}
+	}
+	
+	public void addUser(User user) {
+		this.userDatabase.add(user);
 	}
 	
 	public String getName() {
