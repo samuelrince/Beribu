@@ -299,7 +299,7 @@ public class User {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return this.name+" (id."+this.id+"), "+ 
-				this.card.getType()+" subscriber";
+				this.card.getType();
 	}
 	
 	public static void main(String[] args) {

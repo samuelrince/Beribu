@@ -30,8 +30,8 @@ public class MyVelibNetwork {
 	}
 	
 	public void createEmptyStation(Localization localization, Boolean isPlus,
-			double numberOfSlots) {
-		this.stationDatabase.add(new Station(localization, isPlus));
+			int numberOfSlots) {
+		this.stationDatabase.add(new Station(localization, isPlus, numberOfSlots));
 	}
 	
 	/**
@@ -103,7 +103,7 @@ public class MyVelibNetwork {
 					+ " types should be equal to 100.");
 		
 		int n = number*numberOfSlots;
-		int numberOfBicycles = (int) Math.round(n*populationPercentage);
+		int numberOfBicycles = (int) Math.round(n*populationPercentage/100);
 		int[] numberOfBicyclesPerStation = new int[number];
 		int n_div = numberOfBicycles/number;
 		int n_mod = numberOfBicycles%number;
@@ -114,7 +114,7 @@ public class MyVelibNetwork {
 		int[] numberOfTypes = new int[typePercentage.length];
 		int numberCheck = 0;
 		for (int i = 0; i < numberOfTypes.length-1; i++) {
-			numberOfTypes[i] = (int) Math.round(typePercentage[i]*numberOfBicycles);
+			numberOfTypes[i] = (int) Math.round(typePercentage[i]/100*numberOfBicycles);
 			numberCheck += numberOfTypes[i];
 		}
 		numberOfTypes[numberOfTypes.length-1] = numberOfBicycles - numberCheck;
@@ -184,6 +184,29 @@ public class MyVelibNetwork {
 	public ArrayList<User> getUserDatabase() {
 		return userDatabase;
 	}
+	
+	public String stationDatabaseState() {
+		String res = "\n"+this.toString() +"\n"+"State of stations :"+"\n";
+		for (int i = 0; i < this.stationDatabase.size(); i++) {	
+			res += "\n"+this.stationDatabase.get(i).toString()+" : "+
+					this.stationDatabase.get(i).getCurrentState().toString();
+		}
+		return res;
+	}
+	
+	public String userDatabaseRepresentation() {
+		String res = "\n"+this.toString() +"\n"+"List of users :"+"\n";
+		for (int i = 0; i < this.userDatabase.size(); i++) {
+			res += "\n"+this.userDatabase.get(i).toString();
+		}
+		return res;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "MyVelib "+this.name;
+	}
 
 	public static void main(String[] args) {
 		SystemDate SD = SystemDate.getInstance();
@@ -194,5 +217,11 @@ public class MyVelibNetwork {
 		network.createPopStation(new Localization(0,0), false,
 				10, new int[] {5,2});
 		System.out.println(network.stationDatabase);
+		network.createStations(new Localization(0,0), 5., 3, 1, 10, 70., new double[] {70,30});
+		network.createSubscribers(3, "standard");
+		network.createSubscribers(2, "Vlibre");
+		network.createSubscribers(1, "Vmax");
+		System.out.println(network.stationDatabaseState());
+		System.out.println(network.userDatabaseRepresentation());
 	}
 }
