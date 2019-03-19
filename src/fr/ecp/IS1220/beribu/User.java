@@ -25,6 +25,13 @@ public class User {
 		this.id = uniqId++;
 		this.creationDate = new Date();
 	}
+	
+	public User() {
+		super();
+		this.id = uniqId++;
+		this.name = "Bob"+this.id;
+		this.creationDate = new Date();
+	}
 
 	public long getId() {
 		return this.id;
@@ -92,14 +99,18 @@ public class User {
 	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card
 	 * that belongs to another user)
 	 */
-	public void subscribe(Card card) throws RuntimeException {
+	public void subscribe(Card card) throws IllegalArgumentException {
 		if (card.getUser() == this) {
 			this.card = card;
 		} else {
-			throw new RuntimeException("A user cannot subscribe to a card that belongs to another user");
+			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user");
 		}
 	}
-
+	public void subscribe(String cardType) {
+		CardFactory cardFactory = new CardFactory();
+		this.subscribe(cardFactory.newCard(cardType, this));
+	}
+	
 	public ArrayList<Ride> getListOfRides() {
 		return this.listOfRides;
 	}
