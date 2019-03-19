@@ -186,7 +186,7 @@ public class MyVelibNetwork {
 	}
 	
 	public String stationDatabaseState() {
-		String res = this.toString() +"\n"+"State of stations :"+"\n";
+		String res = "\n"+this.toString() +"\n"+"State of stations :"+"\n";
 		for (int i = 0; i < this.stationDatabase.size(); i++) {	
 			res += "\n"+this.stationDatabase.get(i).toString()+" : "+
 					this.stationDatabase.get(i).getCurrentState().toString();
@@ -195,7 +195,7 @@ public class MyVelibNetwork {
 	}
 	
 	public String userDatabaseRepresentation() {
-		String res = this.toString() +"\n"+"List of users :"+"\n";
+		String res = "\n"+this.toString() +"\n"+"List of users :"+"\n";
 		for (int i = 0; i < this.userDatabase.size(); i++) {
 			res += "\n"+this.userDatabase.get(i).toString();
 		}
@@ -218,6 +218,10 @@ public class MyVelibNetwork {
 				10, new int[] {5,2});
 		System.out.println(network.stationDatabase);
 		network.createStations(new Localization(0,0), 5., 3, 1, 10, 70., new double[] {70,30});
+		network.createSubscribers(3, "standard");
+		network.createSubscribers(2, "Vlibre");
+		network.createSubscribers(1, "Vmax");
 		System.out.println(network.stationDatabaseState());
+		System.out.println(network.userDatabaseRepresentation());
 	}
 }

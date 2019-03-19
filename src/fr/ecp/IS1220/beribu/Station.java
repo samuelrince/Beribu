@@ -480,7 +480,7 @@ public class Station implements Comparable<Station>{
 			status = "offline";
 		else
 			status = "online";
-		return "Station "+this.name+" ,id."+this.id+" ("+status+")";
+		return this.name+" (id."+this.id+"), "+status+"";
 	}
 	
 
