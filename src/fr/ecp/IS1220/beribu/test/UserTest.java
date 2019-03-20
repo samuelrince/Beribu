@@ -228,8 +228,12 @@ class UserTest {
 		new ParkingSlot(s);
 		MechanicalBike mBike1 = new MechanicalBike();
 		MechanicalBike mBike2 = new MechanicalBike();
-		s.getParkingSlots().get(0).attachBicycle(mBike1);
-		s.getParkingSlots().get(0).attachBicycle(mBike2);
+		try {
+			s.getParkingSlots().get(0).attachBicycle(mBike1);
+			s.getParkingSlots().get(1).attachBicycle(mBike2);
+		} catch(Exception e) {
+			fail("Failed to attach the bike");
+		}
 		User u = new User("Jean");
 		u.newRide(s);
 		assertThrows(RuntimeException.class, () -> {
