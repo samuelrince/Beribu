@@ -1,6 +1,5 @@
 package fr.ecp.IS1220.beribu;
 
-
 public class Scenario1 {
 
 	public static void main(String[] args) throws Exception {

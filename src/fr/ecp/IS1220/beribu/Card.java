@@ -1,5 +1,6 @@
 package fr.ecp.IS1220.beribu;
 
+
 /**
  * This interface represents a card/subscription.
  * @author Valentin
