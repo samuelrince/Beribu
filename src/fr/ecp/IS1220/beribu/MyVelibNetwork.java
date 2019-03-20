@@ -2,14 +2,23 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a MyVelib network. It is a singleton.
+ * @author Valentin
+ *
+ */
 public class MyVelibNetwork {
 	private static MyVelibNetwork instance = null;
 	private String name;
 	private ArrayList<Station> stationDatabase = new ArrayList<Station>();
 	private ArrayList<User> userDatabase = new ArrayList<User>();
 	private BicycleFactory bicycleFactory = new BicycleFactory();
-	private CardFactory cardFactory = new CardFactory();
 	
+	/**
+	 * Constructor of class MyVelibNetwork.
+	 * @param name name of the network
+	 * @throws RuntimeException
+	 */
 	public MyVelibNetwork(String name) throws RuntimeException {
 		if (instance == null) {
 			this.name = name;
@@ -20,7 +29,13 @@ public class MyVelibNetwork {
 		}
 	}
 
-	public static synchronized MyVelibNetwork getInstance() {
+	/**
+	 * This method should be used when trying to access the MyVelib network.
+	 * If the network has not been instantiated, throws a RuntimeException.
+	 * @return the unique instance of MyVelibNetwork
+	 * @throws RuntimeException
+	 */
+	public static synchronized MyVelibNetwork getInstance() throws RuntimeException {
 		if (instance==null) {
 			throw new RuntimeException("No MyVelib network has been created.");
 		}
@@ -28,20 +43,27 @@ public class MyVelibNetwork {
 			return instance;
 		}
 	}
-	
+	/**
+	 * Add a new empty station with a number of slots to the network.
+	 * @param localization localization of the station
+	 * @param isPlus type of station (true for Plus, false for Standard)
+	 * @param numberOfSlots number of parking slots
+	 */
 	public void createEmptyStation(Localization localization, Boolean isPlus,
 			int numberOfSlots) {
 		this.stationDatabase.add(new Station(localization, isPlus, numberOfSlots));
 	}
 	
 	/**
+	 * Adds a new station with a number of slots to the network. This station is 
+	 * populated with the number of bicycles specified, one number for each type.
 	 * The numbers of bicycles of each type should be listed in an array giving the
-	 * number of bicycle for each type in order of appearance in the bicycle type
+	 * number of bicycles for each type in order of appearance in the bicycle type
 	 * dictionary (see Bicycle.getTypeDict()).
-	 * @param localization
-	 * @param isPlus
-	 * @param numberOfSlots
-	 * @param numberOfBicycles
+	 * @param localization localization of the station
+	 * @param isPlus type of station (true for Plus, false for Standard)
+	 * @param numberOfSlots number of parking slots
+	 * @param numberOfBicycles number of bicycles of each type
 	 */
 	public void createPopStation(Localization localization, Boolean isPlus, 
 			int numberOfSlots, int[] numberOfBicycles) {
@@ -69,6 +91,21 @@ public class MyVelibNetwork {
 		this.stationDatabase.add(station);
 	}
 	
+	/**
+	 * This method creates a number of stations within a circular perimeter 
+	 * defined by a center and a radius. The stations contain a number of parking
+	 * slots, which can be populated with bicycles.
+	 * @param center center of the covered area 
+	 * @param radius radius of the covered area (in km)
+	 * @param number number of stations
+	 * @param plusNumber number of Plus stations
+	 * @param numberOfSlots number of parking slots in each station
+	 * @param populationPercentage percentage of parking slots which should
+	 * be populated with bicycles
+	 * @param typePercentage portion of each type of bicycle relatively to the
+	 * total amount of bicycles
+	 * @throws IllegalArgumentException
+	 */
 	public void createStations(Localization center, double radius, int number,
 			int plusNumber, int numberOfSlots, double populationPercentage, 
 			double[] typePercentage) throws IllegalArgumentException {
@@ -152,15 +189,29 @@ public class MyVelibNetwork {
 		}
 	}
 	
+	/**
+	 * Adds a given station to the network.
+	 * @param station station to add
+	 */
 	public void addStation(Station station) {
 		this.stationDatabase.add(station);
 	}
 	
+	/**
+	 * Adds a number of new Standard users to the network.
+	 * @param number number of users
+	 */
 	public void createUsers(int number) {
 		for (int i = 0; i < number; i++)
 			this.userDatabase.add(new User());
 	}
 	
+	/**
+	 * Adds a number of new users with the specified type of subscription to
+	 * the network.
+	 * @param number number of users
+	 * @param subType type of subscription
+	 */
 	public void createSubscribers(int number,String subType) {
 		for (int i = 0; i < number; i++) {
 			User user = new User();
@@ -169,22 +220,45 @@ public class MyVelibNetwork {
 		}
 	}
 	
+	/**
+	 * Adds a given user to the network.
+	 * @param user user to add
+	 */
 	public void addUser(User user) {
 		this.userDatabase.add(user);
 	}
 	
+	/**
+	 * 
+	 * @return name of the network
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * 
+	 * @return list of stations of the network
+	 */
 	public ArrayList<Station> getStationDatabase() {
 		return stationDatabase;
 	}
 
+	/**
+	 * 
+	 * @return list of users of the network
+	 */
 	public ArrayList<User> getUserDatabase() {
 		return userDatabase;
 	}
 	
+	/**
+	 * Returns a representation of the list of stations of the network and their
+	 * current state, ie. the most recent status of all their parking slots 
+	 * (online/offline and free/occupied).
+	 * @return a representation of the list of stations of the network and their
+	 * current state
+	 */
 	public String stationDatabaseState() {
 		String res = "\n"+this.toString() +"\n"+"State of stations :"+"\n";
 		for (int i = 0; i < this.stationDatabase.size(); i++) {	
@@ -194,6 +268,10 @@ public class MyVelibNetwork {
 		return res;
 	}
 	
+	/**
+	 * 
+	 * @return a representation of the list of users of the network
+	 */
 	public String userDatabaseRepresentation() {
 		String res = "\n"+this.toString() +"\n"+"List of users :"+"\n";
 		for (int i = 0; i < this.userDatabase.size(); i++) {
