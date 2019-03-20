@@ -25,22 +25,17 @@ public class Ride {
 	}
 
 	public void end(ParkingSlot parkingSlot) throws Exception {
-		try {
-			parkingSlot.attachBicycle(this.bicycle);
-			this.current = false;
-			Date endTime = new Date();
-			this.endTime = endTime;
-			this.endStation = parkingSlot.getStation();
-			this.duration = new Duration(this.startTime,this.endTime);
-			this.pay();
-			if (this.user.getPlannedRide() != null) {
-				if (this.user.getPlannedRide().isOngoing()){
-					this.user.discardPlannedRide();
-				}
+		parkingSlot.attachBicycle(this.bicycle);
+		this.current = false;
+		Date endTime = new Date();
+		this.endTime = endTime;
+		this.endStation = parkingSlot.getStation();
+		this.duration = new Duration(this.startTime,this.endTime);
+		this.pay();
+		if (this.user.getPlannedRide() != null) {
+			if (this.user.getPlannedRide().isOngoing()){
+				this.user.discardPlannedRide();
 			}
-		}
-		catch (Exception exception) {
-			System.err.println("This parking slot is not available.");
 		}
 	}
 	
