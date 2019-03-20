@@ -35,27 +35,22 @@ public class Ride {
 		this.id = uniqId++;
 	}
 
-	/**
+  /**
 	 * Puts an end to the ride by returning the bicycle to a given parking slot.
 	 * @param parkingSlot the parking slot to attach the bicycle to
 	 */
-	public void end(ParkingSlot parkingSlot) {
-		try {
-			parkingSlot.attachBicycle(this.bicycle);
-			this.current = false;
-			Date endTime = new Date();
-			this.endTime = endTime;
-			this.endStation = parkingSlot.getStation();
-			this.duration = new Duration(this.startTime,this.endTime);
-			this.pay();
-			if (this.user.getPlannedRide() != null) {
-				if (this.user.getPlannedRide().isOngoing()){
-					this.user.discardPlannedRide();
-				}
+	public void end(ParkingSlot parkingSlot) throws Exception {
+		parkingSlot.attachBicycle(this.bicycle);
+		this.current = false;
+		Date endTime = new Date();
+		this.endTime = endTime;
+		this.endStation = parkingSlot.getStation();
+		this.duration = new Duration(this.startTime,this.endTime);
+		this.pay();
+		if (this.user.getPlannedRide() != null) {
+			if (this.user.getPlannedRide().isOngoing()){
+				this.user.discardPlannedRide();
 			}
-		}
-		catch (Exception exception) {
-			System.err.println("This parking slot is not available.");
 		}
 	}
 	
