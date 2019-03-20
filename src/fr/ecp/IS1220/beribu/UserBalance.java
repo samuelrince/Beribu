@@ -1,7 +1,17 @@
 package fr.ecp.IS1220.beribu;
 
+/**
+ * This class provides a number of methods for computing user-related statistics.
+ * @author Valentin
+ *
+ */
 public class UserBalance implements Statistics {
 	
+	/**
+	 * Returns the total number of rides ever performed by a given user.
+	 * @param user the user to analyze
+	 * @return their total number of rides
+	 */
 	public static int numberOfRides(User user) {
 		if (user.isOnRide()) {
 			return user.getListOfRides().size()-1;
@@ -11,6 +21,14 @@ public class UserBalance implements Statistics {
 		}
 	}
 	
+	/**
+	 * Returns the total number of rides performed by a given user during
+	 * a given time window.
+	 * @param user the user to analyze
+	 * @param begin the start of the time window
+	 * @end the end of the time window
+	 * @return their total number of rides
+	 */
 	public static int numberOfRides(User user, Date begin, Date end) {
 		int numberOfRides = 0;
 		int maxIndex;
@@ -29,6 +47,12 @@ public class UserBalance implements Statistics {
 		return numberOfRides;
 	}
 	
+	/**
+	 * Returns the sum of the durations of all the rides ever performed by
+	 * a given user.
+	 * @param user the user to analyze
+	 * @return their total time spent on a bicycle
+	 */
 	public static Duration timeSpentOnBicycle(User user) {
 		Duration timeSpentOnBicycle = new Duration();
 		for ( int i = 0; i < UserBalance.numberOfRides(user); i++) {
@@ -37,6 +61,12 @@ public class UserBalance implements Statistics {
 		return timeSpentOnBicycle;
 	}
 	
+	/**
+	 * Returns the sum of the costs of all the rides ever performed by
+	 * a given user.
+	 * @param user the user to analyze
+	 * @return the total cost of their rides
+	 */
 	public static double totalCharges(User user) {
 		double totalCharges = 0;
 		for ( int i = 0; i < UserBalance.numberOfRides(user); i++) {

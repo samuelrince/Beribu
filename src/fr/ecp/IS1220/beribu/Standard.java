@@ -1,5 +1,11 @@
 package fr.ecp.IS1220.beribu;
 
+/**
+ * This class represents a subscription of type "Standard". Factually, it means
+ * the registered card is a credit card.
+ * @author Valentin
+ *
+ */
 public class Standard implements Card{
 	private User user;
 	private Date creationDate;

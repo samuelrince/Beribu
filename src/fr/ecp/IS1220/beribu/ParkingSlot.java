@@ -1,6 +1,10 @@
 package fr.ecp.IS1220.beribu;
 
-
+/**
+ * This class represents a parking slot.
+ * @author Valentin
+ *
+ */
 public class ParkingSlot {
 	private static long uniqId;
 	private long id;
@@ -8,6 +12,9 @@ public class ParkingSlot {
 	private boolean isOffline = false;
 	private Station station;
 	
+	/**
+	 * Constructor of class ParkingSlot.
+	 */
 	public ParkingSlot(Station station) {
 		super();
 		this.station = station;
@@ -15,16 +22,31 @@ public class ParkingSlot {
 		station.addParkingSlot(this);
 	}
 	
+	/**
+	 * 
+	 * @return id of the parking slot
+	 */
 	public long getId() {
 		return this.id;
 	}
 	
+	/**
+	 * 
+	 * @return bicycle attached to the parking slot, null if no bicycle
+	 */
 	public Bicycle getBicycle() {
 		return this.bicycle;
 		
 	}
 	
-	public void attachBicycle(Bicycle bicycle) throws Exception {
+	/**
+	 * Attaches a given bicycle to the parking slot if it is online and free.
+	 * @param bicycle bicycle to attach
+	 * @throws RuntimeException
+	 * @throws IllegalArgumentException
+	 */
+	public void attachBicycle(Bicycle bicycle) throws RuntimeException,
+	IllegalArgumentException {
 		if (this.isBicycle()) {
 			throw new RuntimeException("This parking slot already holds a bicycle.");
 		}
@@ -43,6 +65,10 @@ public class ParkingSlot {
 		this.station.updateStatus();
 	}
 	
+	/**
+	 * Detaches the bicycle currently attached to the parking slot if it is online.
+	 * @throws RuntimeException
+	 */
 	public void detachBicycle() throws RuntimeException{
 		if (!this.isBicycle()) {
 			throw new RuntimeException("This parking slot holds on bicycle.");
@@ -54,10 +80,18 @@ public class ParkingSlot {
 		this.bicycle = null;
 	}
 	
+	/**
+	 * 	
+	 * @return station containing the parking slot
+	 */
 	public Station getStation() {
 		return station;
 	}
 
+	/**
+	 * Sets the parking slot in the state specified in argument.
+	 * @param isOffline true to set the parking slot offline, false to set it online
+	 */
 	public void setOffline(boolean isOffline) {
 		if (!isOffline && this.station.isOffline()) {
 			throw new RuntimeException("This parking slot can't be"
@@ -67,15 +101,18 @@ public class ParkingSlot {
 		this.station.updateStatus();
 	}
 
+	/**
+	 * 
+	 * @return true if the parking slot is offline, false otherwise
+	 */
 	public boolean isOffline() {
 		return this.isOffline;
 		
 	}
 	
 	/**
-	 * This method returns true if a bicycle is attached to the parking
-	 * slot, and false otherwise.
-	 * @return		boolean 
+	 * 
+	 * @return true if a bicycle is attached to the parking slot, false otherwise
 	 */
 	public boolean isBicycle() {
 		if (this.getBicycle() != null) {

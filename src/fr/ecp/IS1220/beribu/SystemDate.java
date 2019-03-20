@@ -3,6 +3,11 @@ package fr.ecp.IS1220.beribu;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * This class represents a simulation of time. It is a singleton.
+ * @author Valentin
+ *
+ */
 public class SystemDate {
 	private static SystemDate instance = null;
 	private int year;
@@ -14,6 +19,12 @@ public class SystemDate {
 	
 	private SystemDate(){}
 	
+	/**
+	 * This method should be called when trying to access the SystemDate.
+	 * It returns the unique instance of this class if it has been instantiated,
+	 * or instantiates it before returning it.
+	 * @return the unique instance of SystemDate
+	 */
 	public static synchronized SystemDate getInstance() {
 		if (instance==null) {
 			instance = new SystemDate();

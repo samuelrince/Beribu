@@ -1,14 +1,30 @@
 package fr.ecp.IS1220.beribu;
 
-
+/**
+ * This class represents a duration. It is used mainly for purposes of validity
+ * check and string representation.
+ * @author Valentin
+ *
+ */
 public class Duration {
 	//duration in seconds
 	private int duration;
 
+	/**
+	 * Constructor of class Duration.
+	 */
 	public Duration() {
 		this.duration = 0;
 	}
-	public Duration(Date startDate, Date endDate) throws RuntimeException {
+	
+	/**
+	 * Constructor of class Duration. The value assigned corresponds to the
+	 * duration between two given dates.
+	 * @param startDate date when the duration begins
+	 * @param endDate date when the duration ends
+	 * @throws RuntimeException
+	 */
+	public Duration(Date startDate, Date endDate) throws IllegalArgumentException {
 		int yearInSeconds = (endDate.getYear()-startDate.getYear())*32140800;
 		int monthInSeconds = (endDate.getMonth()-startDate.getMonth())*2678400;
 		int dayInSeconds = (endDate.getDay()-startDate.getDay())*86400;
@@ -19,32 +35,74 @@ public class Duration {
 		if (t>=0) {
 			this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
 		} else {
-			throw new RuntimeException("The duration cannot be negative");
+			throw new IllegalArgumentException("The end date should be posterior to the start date.");
 		}
 	}
+	
+	/**
+	 * Constructor of class Duration. The value assigned corresponds to the 
+	 * time that would be taken to go from one given station to another with a 
+	 * given bicycle type.
+	 * @param startStation start station
+	 * @param endStation end station
+	 * @param bicycleType type of bicycle used
+	 */
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
 				endStation.getLocalization());
 		this.duration = (int) (distance/Bicycle.getSpeed(bicycleType));
 	}
 	
+	/**
+	 * 
+	 * @return value of duration (in s)
+	 */
 	public int getDuration() {
 		return duration;
 	}
 	
+	/**
+	 * Sets the value of duration.
+	 * @param duration value of duration (in s)
+	 */
 	public void setDuration(int duration) {
-		this.duration = duration;
+		if (duration >= 0)
+			this.duration = duration;
+		else
+			throw new IllegalArgumentException("The duration can't be negative.")
 	}
 
+	/**
+	 * Adds another duration to this duration. Their two values are summed.
+	 * @param duration duration to add
+	 */
 	public void add(Duration duration) {
 		this.duration += duration.getDuration();
 	}
+	
+	/**
+	 * Adds a given amount of minutes to the duration.
+	 * @param minutes the number of minutes to add
+	 */
 	public void add(int minutes) {
 		this.duration += 60*minutes;
 	}
+	
+	/**
+	 * Adds a given amount of minutes and seconds to the duration.
+	 * @param minutes the number of minutes to add
+	 * @param seconds the number of seconds to add
+	 */
 	public void add(int minutes, int seconds) {
 		this.duration += 60*minutes + seconds;
 	}
+	
+	/**
+	 * Adds a given amount of hours, minutes and seconds to the duration.
+	 * @param hours the number of hours to add
+	 * @param minutes the number of minutes to add
+	 * @param seconds the number of seconds to add
+	 */
 	public void add(int hours, int minutes, int seconds) {
 		this.duration += 3600*hours + 60*minutes + seconds;
 	}
