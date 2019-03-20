@@ -1,5 +1,9 @@
 package fr.ecp.IS1220.beribu;
-
+/**
+ * A bicycle factory used for the creation of bicycles from the network.
+ * @author Valentin
+ *
+ */
 public class BicycleFactory {
 
 	public Bicycle newBicycle(String bicycleType) {

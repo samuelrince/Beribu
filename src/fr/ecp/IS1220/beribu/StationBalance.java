@@ -3,8 +3,19 @@ package fr.ecp.IS1220.beribu;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
+/**
+ * This class provides a number of methods for computing station-related statistics.
+ * @author Valentin
+ *
+ */
 public class StationBalance implements Statistics {
 
+	/**
+	 * This method returns the total number of bike rentals performed in a
+	 * given station since its creation.
+	 * @param station station to analyze
+	 * @return the total number of bike rentals
+	 */
 	public static int totalRentCount(Station station) {
 		int totalRentCount = 0;
 		for (int i = 1; i < station.getHistory().size(); i++) {
@@ -22,6 +33,12 @@ public class StationBalance implements Statistics {
 		return totalRentCount;
 	}
 	
+	/**
+	 * This method returns the total number of bike returns performed in a
+	 * given station since its creation.
+	 * @param station station to analyze
+	 * @return the total number of bike returns
+	 */
 	public static int totalReturnCount(Station station) {
 		int totalReturnCount = 0;
 		for (int i = 1; i < station.getHistory().size(); i++) {
@@ -39,6 +56,20 @@ public class StationBalance implements Statistics {
 		return totalReturnCount;
 	}
 	
+	/**
+	 * This method returns the rate of occupation of a given station during a
+	 * given time window, ie. the sum on each parking slot of the time during which
+	 * this parking slot has been occupied or offline divided by the total available 
+	 * time. <br> This available time is defined as the length
+	 * of the time window, except for the parking slots which have been created
+	 * during the time window ; it is then defined as the total time of existence of
+	 * the parking slot until the end of the time window.
+	 * @param station the station to analyze
+	 * @param start start of the time window
+	 * @param end end of the time window
+	 * @return the occupation rate of the station during this time window
+	 * @throws RuntimeException
+	 */
 	public static double occupationRate(Station station, Date start, Date end) 
 			throws RuntimeException {
 		int minIndex = 0;

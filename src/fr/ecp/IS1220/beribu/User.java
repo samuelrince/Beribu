@@ -4,6 +4,11 @@ package fr.ecp.IS1220.beribu;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * This class represents a user.
+ * @author Valentin
+ *
+ */
 public class User {
 	private static long uniqId;
 	private Date creationDate;

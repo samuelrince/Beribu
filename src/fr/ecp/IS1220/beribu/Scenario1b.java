@@ -6,7 +6,8 @@ import java.util.Comparator;
 
 public class Scenario1b {
 
-	public static void main(String[] args) throws RuntimeException, Exception {
+
+	public static void main(String[] args) throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 1, 1); SD.setTime(1, 0, 0);
 		// Stations
