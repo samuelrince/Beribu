@@ -25,10 +25,6 @@ import fr.ecp.IS1220.beribu.User;
 
 class TravelTest {
 
-	@BeforeEach
-	public void initialize() {
-		System.err.println("Before all");
-	}
 	@Test
 	void initTest001() {
 		SystemDate SD = SystemDate.getInstance();
