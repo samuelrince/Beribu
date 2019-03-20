@@ -253,6 +253,23 @@ public class MyVelibNetwork {
 	}
 	
 	/**
+	 * 
+	 * @param index index of user
+	 * @return the user at specified index in the network user data base
+	 */
+	public User user(int index) {
+		return this.userDatabase.get(index);
+	}
+	
+	/**
+	 * 
+	 * @param index index of the station
+	 * @return the station at specified index in the network station data base
+	 */
+	public Station station(int index) {
+		return this.stationDatabase.get(index);
+	}
+	/**
 	 * Returns a representation of the list of stations of the network and their
 	 * current state, ie. the most recent status of all their parking slots 
 	 * (online/offline and free/occupied).

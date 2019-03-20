@@ -2,6 +2,13 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 
+/**
+ * A path strategy for finding the path between two localizations which 
+ * requires to walk the minimal distance and doesn't make the ride end in a
+ * Plus station.
+ * @author Valentin
+ *
+ */
 public class AvoidPlus implements PathStrategy {
 	String bicycleType;
 	

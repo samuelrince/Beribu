@@ -3,6 +3,12 @@ package fr.ecp.IS1220.beribu;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * A path strategy for finding the path between two localizations which 
+ * requires to walk the minimal distance.
+ * @author Valentin
+ *
+ */
 public class MinimalWalking implements PathStrategy {
 	String bicycleType;
 	

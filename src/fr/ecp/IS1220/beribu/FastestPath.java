@@ -2,6 +2,12 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 
+/**
+ * A path strategy for finding the path between two localizations which 
+ * takes the minimal time.
+ * @author Valentin
+ *
+ */
 public class FastestPath implements PathStrategy {
 	ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 	String bicycleType;

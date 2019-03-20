@@ -78,6 +78,7 @@ public class ParkingSlot {
 		}
 		this.bicycle.setAttached(false);
 		this.bicycle = null;
+		this.station.updateStatus();
 	}
 	
 	/**

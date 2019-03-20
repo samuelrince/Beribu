@@ -221,6 +221,16 @@ public class User {
 		}
 	}
 	
+	public void endCurrentRide(Station station) {
+		if (station.isFull())
+			throw new IllegalArgumentException("This station is full.");
+		else {
+			if (this.getCurrentRide() != null) {
+				this.getCurrentRide().end(station.getFreeParkingSlot());
+			}
+		}
+	}
+	
 	/**
 	 * This method should be used when a user want to plan a future ride.
 	 * A new object Travel associated to the user is created.
