@@ -39,6 +39,7 @@ public class Travel {
 	 * @param user
 	 * @param source
 	 * @param destination
+	 * @param pathStrategy
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			PathStrategy pathStrategy) {
@@ -54,6 +55,8 @@ public class Travel {
 	 * @param user
 	 * @param source
 	 * @param destination
+	 * @param pathStrategy
+	 * @param bicycleType
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			PathStrategy pathStrategy,String bicycleType) {
@@ -71,6 +74,7 @@ public class Travel {
 	 * @param user
 	 * @param source
 	 * @param destination
+	 * @param bicycleType
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			String bicycleType) {
@@ -152,7 +156,6 @@ public class Travel {
 		return previsionDuration;
 	}
 	public boolean isOngoing() {
-		// TODO Auto-generated method stub
 		return this.ongoing;
 	}
 	public void setSuggestedStartStation(Station station) {
@@ -197,7 +200,6 @@ public class Travel {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return  "User : "+this.user+"\n"+"Suggested rental station : "+
 				this.suggestedStartStation+"\n"+"Suggested return station : "
 				+ this.suggestedEndStation+"\n"+"Estimated duration : " +

@@ -562,39 +562,5 @@ public class Station implements Comparable<Station>{
 			status = "online";
 		return this.name+" (id."+this.id+"), "+status+"";
 	}
-	
-
-	public static void main(String[] args) throws Exception {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 02, 17);
-		SD.setTime(19, 22, 37);
-		Station station1 = new Station(new Localization(0,0),false);
-		new ParkingSlot(station1);
-		new ParkingSlot(station1);
-		new ParkingSlot(station1);
-		ElectricalBike eBike1 = new ElectricalBike();
-		MechanicalBike mBike1 = new MechanicalBike();
-		ElectricalBike eBike2 = new ElectricalBike();
-//		station1.getParkingSlots().get(0).attachBicycle(eBike1);
-//		station1.getParkingSlots().get(1).attachBicycle(mBike1);
-//		station1.getParkingSlots().get(2).attachBicycle(eBike2);
-		station1.populate(new ArrayList<Bicycle>(Arrays.asList(eBike1, mBike1, eBike2)));
-		station1.getParkingSlots().get(2).setOffline(true);
-		System.out.println(station1.historyTrace());
-
-		Station s1 = new Station(new Localization(2.1, 3.1), false);
-		Station s2 = new Station(new Localization(2.1, 3.1), false);
-		Station s3 = new Station(new Localization(2.1, 3.1), true);
-		ArrayList<Station> stations = new ArrayList<Station>();
-		stations.add(s3); stations.add(s1); stations.add(s2);
-		System.out.println(" == Stations initial order == ");
-		System.out.println(stations.toString());
-		Collections.sort(stations);
-		System.out.println(" == Stations sorted by ID == ");
-		System.out.println(stations.toString());
-		Comparator<Station> c = new SortStationByMostUsed();
-
-	}
-	
 }	
 

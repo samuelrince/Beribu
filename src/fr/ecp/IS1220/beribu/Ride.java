@@ -160,6 +160,6 @@ public class Ride {
 
 	@Override
 	public String toString() {
-		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
+		return "Ride [" + id + "], of " + user.getName() + " on bike NÂ°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
 	}
 }
