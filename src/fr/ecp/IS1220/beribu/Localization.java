@@ -2,11 +2,21 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a localization.
+ * @author Valentin
+ *
+ */
 public class Localization {
 	private double latitude;
 	private double longitude;
 	final static double rayonTerre = 6371000;
 
+	/**
+	 * Constructor of class Localization.
+	 * @param latitude in ° (positive for N, negative for S)
+	 * @param longitude in ° (positive for E, negative for O)
+	 */
 	public Localization(double latitude, double longitude) {
 		super();
 		this.latitude = latitude;
@@ -18,6 +28,10 @@ public class Localization {
 		return "GPS (" + latitude + "°, " + longitude + "°)";
 	}
 
+	/**
+	 * 
+	 * @return latitude of the localization (in °)
+	 */
 	public double getLatitude() {
 		return latitude;
 	}
@@ -26,6 +40,10 @@ public class Localization {
 		this.latitude = latitude;
 	}
 
+	/**
+	 * 
+	 * @return longitude of the localization (in °)
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
@@ -63,9 +81,9 @@ public class Localization {
 	}
 
 	/**
-	 * This method returns the distance between two Localization.
-	 * @param loc	the Localization target to compare with
-	 * @return 		the distance between the two Localization
+	 * Returns the distance between two localizations.
+	 * @param loc	the Localization to compare with
+	 * @return 		the distance between the two localizations
 	 */
 	public double distanceTo(Localization loc) {
 		double deltaLat = (loc.getLatitude() - this.latitude)*Math.PI/180;
@@ -75,10 +93,10 @@ public class Localization {
 	}
 	
 	/**
-	 * This method browses the public list of stations and picks the 
-	 * one which is the closest to the Localization instance 
-	 * and contains at least one free parking slot.
-	 * @return 		the closest available Station
+	 * This method browses the list of stations on the network and picks the 
+	 * one which is the closest to this Localization
+	 * and contains at least one available parking slot.
+	 * @return 		the closest Station with an available parking slot
 	 */
 	public Station getClosestAvailableStation() throws RuntimeException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
@@ -99,11 +117,11 @@ public class Localization {
 	}
 	
 	/**
-	 * This method browses the public list of stations and picks the 
-	 * one of specified type which is the closest to the Localization instance 
-	 * and contains at least one free parking slot.
+	 * This method browses the public list of stations on the network and picks the 
+	 * one of specified type which is the closest to this Localization
+	 * and contains at least one available parking slot.
 	 * @param isPlus	true if the Station should be Plus, false otherwise
-	 * @return 		the closest available Station
+	 * @return 		the closest Station of given type with an available parking slot
 	 */
 	public Station getClosestAvailableStation(boolean isPlus) throws RuntimeException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
@@ -138,9 +156,9 @@ public class Localization {
 	}
 	
 	/**
-	 * This method browses the public list of stations and picks the one 
-	 * which is the closest to the Localization instance and contains at 
-	 * least one bicycle.
+	 * This method browses the public list of stations on the network and picks the one 
+	 * which is the closest to this Localization and contains at 
+	 * least one available bicycle.
 	 * @return 		the closest Station with an available Bicycle
 	 */
 	public Station getClosestStationWithBicycle() 
@@ -165,12 +183,12 @@ public class Localization {
 	}
 	
 	/**
-	 * This method browses the public list of stations and picks the one 
-	 * which is the closest to the Localization instance and contains at 
-	 * least one bicycle of specified type.
+	 * This method browses the public list of stations on the network and picks the one 
+	 * which is the closest to this Localization and contains at 
+	 * least one available bicycle of specified type.
 	 * @param bicycleType 	the type of bicycle desired, 
 	 * null if indifferent to the type
-	 * @return 		the closest Station with an available Bicycle
+	 * @return 		the closest Station with an available Bicycle of given type
 	 */
 	public Station getClosestStationWithBicycle(String bicycleType) 
 			throws RuntimeException {

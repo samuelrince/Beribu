@@ -3,6 +3,11 @@ package fr.ecp.IS1220.beribu;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * This class represents a date and time.
+ * @author Valentin
+ *
+ */
 public class Date {
 	private int year = -1;
 	private int month = -1;
@@ -11,11 +16,24 @@ public class Date {
 	private int minute = -1;
 	private int second = -1;
 
+	/**
+	 * Constructor of class Date. Creates a new instance of Date taking the
+	 * current time and date of SystemDate.
+	 */
 	public Date() {
 		this.currentDate();
 		this.isValid();
 	}
 	
+	/**
+	 * Constructor of class Date.
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param hour
+	 * @param minute
+	 * @param second
+	 */
 	public Date(int year, int month, int day, int hour, int minute, int second) {
 		this.currentDate();
 		this.year = year;
@@ -33,7 +51,7 @@ public class Date {
 	
 	public void setYear(int year) {
 		if (year<1970) {
-			throw new IllegalArgumentException("Please enter year after 1970");
+			throw new IllegalArgumentException("Please enter a year after 1970.");
 		}
 		this.year = year;
 		if (this.isComplete()) {
@@ -122,8 +140,7 @@ public class Date {
 	}
 	
 	/**
-	 * This method is used to instantiate the Date object by using 
-	 * SystemDate unique instance.
+	 * Sets the time and day of the Date on the time and day of SystemDate.
 	 */
 	public void currentDate() {
 		SystemDate currentDate = SystemDate.getInstance();
@@ -135,7 +152,13 @@ public class Date {
 		this.setSecond(currentDate.getSecond());
 	}
 	
-
+	/**
+	 * Compares the instance of Date with another given Date and returns 
+	 * true if the former is after the latter, false otherwise.
+	 * Returns true if the two dates are simultaneous.
+	 * @param otherDate date to compare with
+	 * @return true if the date passed in argument is before this date, false otherwise
+	 */
 	public boolean isAfter(Date otherDate) {
 		if (this.year != otherDate.year) {
 			if (this.year < otherDate.year)
@@ -215,9 +238,9 @@ public class Date {
 	}
 	
 	/**
-	 * This method checks if the current instance of Date object is fully
-	 * filled with coherent values (different than -1).
-	 * @return	True if the date is complete and false otherwise.
+	 * Checks if the current instance of Date object is fully
+	 * filled with coherent values (different from -1).
+	 * @return	true if the date is complete, false otherwise
 	 */
 	private boolean isComplete() {
 		if (this.year == -1)
@@ -236,12 +259,12 @@ public class Date {
 	}
 	
 	/**
-	 * This method checks the sanity of date object. It is called at each 
-	 * instantiation of a new object Date. It is also called when you set 
-	 * a new date (using setters). To perform date validation on object 
-	 * <b>this</b> the date should be complete (see isComplete method).
-	 * @return								True if the date is valid
-	 * @throws IllegalArgumentException		When the date is not valid
+	 * This method checks the sanity of a Date object. It is called at each 
+	 * instantiation of a new Date. It is also called when using setters
+	 * of Date. To perform date validation on object 
+	 * <b>this</b> the date should be complete (see method isComplete()).
+	 * @return								true if the date is valid
+	 * @throws IllegalArgumentException		if the date is not valid
 	 */
 	private boolean isValid() throws IllegalArgumentException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
@@ -256,7 +279,7 @@ public class Date {
 		try {
 			java.util.Date date = sdf.parse(dateStr);
 		} catch(ParseException e) {
-			throw new IllegalArgumentException("Please enter a valid date");
+			throw new IllegalArgumentException("Please enter a valid date.");
 		}
 		return true;
 	}

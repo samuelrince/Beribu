@@ -1,6 +1,10 @@
 package fr.ecp.IS1220.beribu;
 
-
+/**
+ * This class represents a bicycle of type "mechanical".
+ * @author Valentin
+ *
+ */
 public class MechanicalBike extends Bicycle {
 	private long id;
 	private String type = "MECHANICAL";

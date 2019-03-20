@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class Scenario1b {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 1, 1); SD.setTime(1, 0, 0);
 		// Stations
@@ -34,14 +34,14 @@ public class Scenario1b {
 		//new ParkingSlot(s3);
 		s0.getParkingSlots().get(3).setOffline(true);
 		// Bicycles
-		s0.getParkingSlots().get(0).setBicycle(new MechanicalBike());
-		s0.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s0.getParkingSlots().get(3).setBicycle(new MechanicalBike());	
-		s1.getParkingSlots().get(1).setBicycle(new ElectricalBike());
-		s2.getParkingSlots().get(1).setBicycle(new MechanicalBike());
-		s2.getParkingSlots().get(2).setBicycle(new MechanicalBike());
-		s2.getParkingSlots().get(0).setBicycle(new MechanicalBike());
-		s2.getParkingSlots().get(3).setBicycle(new MechanicalBike());
+		s0.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		s0.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s0.getParkingSlots().get(3).attachBicycle(new MechanicalBike());	
+		s1.getParkingSlots().get(1).attachBicycle(new ElectricalBike());
+		s2.getParkingSlots().get(1).attachBicycle(new MechanicalBike());
+		s2.getParkingSlots().get(2).attachBicycle(new MechanicalBike());
+		s2.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
+		s2.getParkingSlots().get(3).attachBicycle(new MechanicalBike());
 		// Users
 		User u1 = new User("Jean");
 		User u2 = new User("Paul");

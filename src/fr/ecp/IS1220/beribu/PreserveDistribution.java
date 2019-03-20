@@ -2,6 +2,13 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 
+/**
+ * A path strategy for finding the path between two localizations which 
+ * is a compromise between the walk distance and the conservation of a uniform
+ * distribution of bicycles among the stations of the network.
+ * @author Valentin
+ *
+ */
 public class PreserveDistribution implements PathStrategy {
 	String bicycleType;
 	
