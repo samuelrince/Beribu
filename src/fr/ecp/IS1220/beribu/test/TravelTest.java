@@ -25,14 +25,15 @@ import fr.ecp.IS1220.beribu.User;
 
 class TravelTest {
 
-	@Before
+	@BeforeEach
 	public void initialize() {
-		System.out.println("I am here");
+		System.err.println("Before all");
 	}
 	@Test
 	void initTest001() {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
+		//MyVelibNetwork mvb = MyVelibNetwork.getInstance();
 		new MyVelibNetwork("Paris");
 		Station s1 = new Station(new Localization(0.0, 0.0), false);
 		Station s2 = new Station(new Localization(5.0, 5.0), false);

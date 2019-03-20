@@ -2012,7 +2012,6 @@
   <PapyrusJava:External xmi:id="_NMj54Em3EemRH7dBVgFhXQ" name="Ride" base_Classifier="_NMhdoEm3EemRH7dBVgFhXQ"/>
   <PapyrusJava:External xmi:id="_NMqAgEm3EemRH7dBVgFhXQ" name="Travel" base_Classifier="_NMnkQEm3EemRH7dBVgFhXQ"/>
   <standard:Create xmi:id="_NMtq4Em3EemRH7dBVgFhXQ" base_BehavioralFeature="_NMr1sEm3EemRH7dBVgFhXQ"/>
-  <PapyrusJava:External xmi:id="_NNhjMEm3EemRH7dBVgFhXQ" name="PathStrategy"/>
   <PapyrusJava:External xmi:id="_pxlZkEm3EemRH7dBVgFhXQ" name="Card" base_Classifier="_NLQSUEm3EemRH7dBVgFhXQ"/>
   <standard:Create xmi:id="_pxqSEEm3EemRH7dBVgFhXQ" base_BehavioralFeature="_pxpD8Em3EemRH7dBVgFhXQ"/>
   <standard:Create xmi:id="_pyeKYEm3EemRH7dBVgFhXQ" base_BehavioralFeature="_pyc8Qkm3EemRH7dBVgFhXQ"/>
