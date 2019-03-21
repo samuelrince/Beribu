@@ -37,7 +37,7 @@ public class SystemDate {
 		this.setYear(year);
 		this.setMonth(month);
 		this.setDay(day);
-		System.out.println("Current day has been set to "+day+"/"
+		System.out.println("Current System day has been set to "+day+"/"
 				+month+"/"+year+".");
 	}
 
@@ -45,7 +45,7 @@ public class SystemDate {
 		this.setHour(hour);
 		this.setMinute(minute);
 		this.setSecond(second);
-		System.out.println("Current time has been set to "+hour+":"
+		System.out.println("Current System time has been set to "+hour+":"
 				+minute+":"+second+".");
 	}
 	

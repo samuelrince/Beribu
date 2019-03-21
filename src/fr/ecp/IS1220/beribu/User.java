@@ -29,6 +29,7 @@ public class User {
 		this.name = name;
 		this.id = uniqId++;
 		this.creationDate = new Date();
+		System.out.println("New user "+this+".");
 	}
 	
 	public User() {
@@ -36,6 +37,7 @@ public class User {
 		this.id = uniqId++;
 		this.name = "Bob"+this.id;
 		this.creationDate = new Date();
+		System.out.println("New user "+this+".");
 	}
 
 	public long getId() {
@@ -107,6 +109,7 @@ public class User {
 	public void subscribe(Card card) throws IllegalArgumentException {
 		if (card.getUser() == this) {
 			this.card = card;
+			System.out.println(this+" has a new subscription of type "+card.getType()+ ".");			
 		} else {
 			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user");
 		}
@@ -164,6 +167,9 @@ public class User {
 						this.plannedRide.setSuggestedStartStation(station);
 					}
 				}
+				station.incRentCount();
+				System.out.println(this+" has started"
+						+ " a new ride from "+station+".");
 			}
 			catch(RuntimeException exception) {
 				System.err.println("No bicycle available. Please change to another station.");
@@ -198,6 +204,9 @@ public class User {
 						this.plannedRide.setSuggestedStartStation(station);
 					}
 				}
+				station.incRentCount();
+				System.out.println(this+" has started"
+						+ " a new ride from "+station+".");
 			}
 			catch(RuntimeException exception) {
 				System.err.println("Please try another bicycle type "
@@ -227,6 +236,9 @@ public class User {
 		else {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
+				station.incReturnCount();
+				System.out.println(this+" has ended"
+						+ " their ride in "+station+".");
 			}
 		}
 	}
@@ -300,21 +312,21 @@ public class User {
 			this.plannedRide.suggestedStartStation.removeTargetOf(this.plannedRide);
 			this.plannedRide.suggestedEndStation.removeTargetOf(this.plannedRide);
 			this.plannedRide = null;
+			System.out.println(this+"has discarded their planned ride.");
 		}
 		else {
-			System.out.println("No planned ride to discard.");
+			System.out.println(this+"has no planned ride to discard.");
 		}
 	}
 
 	public void notifyUser(String message) {
-		System.out.println(message);
+		System.out.println("For "+this+" : "+message);
 	}
 	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return this.name+" (id."+this.id+"), "+ 
-				this.card.getType();
+		return this.name+" (id."+this.id+")";
 	}
 	
 	public static void main(String[] args) {

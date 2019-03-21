@@ -69,7 +69,7 @@ public class Duration {
 		if (duration >= 0)
 			this.duration = duration;
 		else
-			throw new IllegalArgumentException("The duration can't be negative.")
+			throw new IllegalArgumentException("The duration can't be negative.");
 	}
 
 	/**
