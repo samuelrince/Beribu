@@ -45,6 +45,7 @@ public class Ride {
 		Date endTime = new Date();
 		this.endTime = endTime;
 		this.endStation = parkingSlot.getStation();
+		parkingSlot.getStation().incReturnCount();
 		this.duration = new Duration(this.startTime,this.endTime);
 		this.pay();
 		if (this.user.getPlannedRide() != null) {

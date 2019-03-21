@@ -50,7 +50,7 @@ class DateTest {
 		SD.setTime(19, 45, 21);
 		Date d1 = new Date();
 		Date d2 = new Date(2019, 3, 10, 19, 45, 21);
-		assertEquals(d1, d2);
+		assertTrue(d1.equals(d2));
 	}
 	@Test
 	void equalsTest002() {

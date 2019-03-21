@@ -19,8 +19,16 @@ public class Scenario1c {
 		SD.setTime(20, 22, 37);
 		network.user(1).newRide(network.station(1));
 		network.user(2).newRide(network.station(1));
-		network.user(1).endCurrentRide(network.station(1));
-		network.user(2).endCurrentRide(network.station(1));
+		try {
+			network.user(1).endCurrentRide(network.station(1));
+			network.user(2).endCurrentRide(network.station(1));
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(network.station(1).historyTrace());
 		StationBalance.display(network.station(1));
 		UserBalance.display(network.user(1));
