@@ -116,6 +116,7 @@ class RideTest {
 		s2.getParkingSlots().get(0).attachBicycle(b2);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
+		System.out.println(s2.getParkingSlots().get(0).isBicycle());
 		assertThrows(RuntimeException.class, () -> {
 			u.getCurrentRide().end(s2.getParkingSlots().get(0));
 		});
@@ -438,7 +439,7 @@ class RideTest {
 		new ParkingSlot(s1);
 		new ParkingSlot(s2);
 		try {
-			s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());
+			s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());
 		} catch (Exception e) {
 			fail("Failed to attach the bike");
 		}
