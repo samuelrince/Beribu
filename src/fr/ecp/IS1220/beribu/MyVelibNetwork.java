@@ -23,6 +23,7 @@ public class MyVelibNetwork {
 		if (instance == null) {
 			this.name = name;
 			instance = this;
+			System.out.println("New MyVelib network :"+this+".");
 		}
 		else {
 			throw new RuntimeException("A MyVelib network already exists.");
@@ -215,7 +216,8 @@ public class MyVelibNetwork {
 	public void createSubscribers(int number,String subType) {
 		for (int i = 0; i < number; i++) {
 			User user = new User();
-			user.subscribe(subType);
+			if (subType != "Standard")
+				user.subscribe(subType);
 			this.userDatabase.add(user);
 		}
 	}
@@ -253,6 +255,23 @@ public class MyVelibNetwork {
 	}
 	
 	/**
+	 * 
+	 * @param index index of user
+	 * @return the user at specified index in the network user data base
+	 */
+	public User user(int index) {
+		return this.userDatabase.get(index);
+	}
+	
+	/**
+	 * 
+	 * @param index index of the station
+	 * @return the station at specified index in the network station data base
+	 */
+	public Station station(int index) {
+		return this.stationDatabase.get(index);
+	}
+	/**
 	 * Returns a representation of the list of stations of the network and their
 	 * current state, ie. the most recent status of all their parking slots 
 	 * (online/offline and free/occupied).
@@ -260,12 +279,12 @@ public class MyVelibNetwork {
 	 * current state
 	 */
 	public String stationDatabaseState() {
-		String res = "\n"+this.toString() +"\n"+"State of stations :"+"\n";
+		String res = "----------------------"+"\n"+this.toString() +"\n"+"State of stations :"+"\n";
 		for (int i = 0; i < this.stationDatabase.size(); i++) {	
 			res += "\n"+this.stationDatabase.get(i).toString()+" : "+
 					this.stationDatabase.get(i).getCurrentState().toString();
 		}
-		return res;
+		return res+"\n"+"----------------------";
 	}
 	
 	/**
@@ -273,17 +292,18 @@ public class MyVelibNetwork {
 	 * @return a representation of the list of users of the network
 	 */
 	public String userDatabaseRepresentation() {
-		String res = "\n"+this.toString() +"\n"+"List of users :"+"\n";
+		String res = "----------------------"+"\n"+this.toString() +"\n"+"List of users :"+"\n";
 		for (int i = 0; i < this.userDatabase.size(); i++) {
-			res += "\n"+this.userDatabase.get(i).toString();
+			res += "\n"+this.userDatabase.get(i).toString()+", "
+		+this.userDatabase.get(i).getCard().getType();
 		}
-		return res;
+		return res+"\n"+"----------------------";
 	}
 	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "MyVelib "+this.name;
+		return "\\MyVelib "+this.name+"/";
 	}
 
 	public static void main(String[] args) {

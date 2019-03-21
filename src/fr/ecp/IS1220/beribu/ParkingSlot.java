@@ -20,6 +20,7 @@ public class ParkingSlot {
 		this.station = station;
 		this.id = uniqId++;
 		station.addParkingSlot(this);
+		System.out.println("A parking slot has been added to "+station+".");
 	}
 	
 	/**
@@ -78,6 +79,7 @@ public class ParkingSlot {
 		}
 		this.bicycle.setAttached(false);
 		this.bicycle = null;
+		this.station.updateStatus();
 	}
 	
 	/**

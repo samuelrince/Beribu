@@ -1,5 +1,10 @@
 package fr.ecp.IS1220.beribu;
 
+/**
+ * A card factory used when creating a new subscription (or changing of credit "Standard" card).
+ * @author Valentin
+ *
+ */
 public class CardFactory {
 
 	public Card newCard(String type, User user) {

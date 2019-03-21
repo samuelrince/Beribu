@@ -32,6 +32,7 @@ public class Travel {
 		this.destination = destination;
 		this.pathStrategy = new MinimalWalking();
 		this.findRide();
+		System.out.println(user+" has initiated a planned ride."+"\n"+this);
 	}	
 	
 	/**

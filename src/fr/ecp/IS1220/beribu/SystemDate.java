@@ -38,8 +38,8 @@ public class SystemDate {
 		this.month = month;
 		this.day = day;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
-		System.out.println("Current day has been set to "+day+"/"
+			throw new IllegalArgumentException("The SystemDate is not valid.");
+		System.out.println("Current System day has been set to "+day+"/"
 				+month+"/"+year+".");
 	}
 
@@ -49,7 +49,7 @@ public class SystemDate {
 		this.second = second;
 		if (!this.isValid())
 			throw new IllegalArgumentException("The SystemDate is not valid");
-		System.out.println("Current time has been set to "+hour+":"
+		System.out.println("Current System time has been set to "+hour+":"
 				+minute+":"+second+".");
 	}
 	

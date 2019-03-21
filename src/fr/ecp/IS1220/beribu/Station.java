@@ -21,6 +21,8 @@ public class Station implements Comparable<Station>{
 	private ArrayList<ParkingSlot> parkingSlots = new ArrayList<ParkingSlot>();
 	private ArrayList<Travel> targetOf = new ArrayList<Travel>();
 	private Date createdAt;
+	private int rentCount = 0;
+	private int returnCount = 0;
 	
 	public Station(Localization localization, Boolean isPlus) {
 		super();
@@ -30,6 +32,7 @@ public class Station implements Comparable<Station>{
 		this.id = uniqId++;
 		this.name = "Station"+id;
 		this.createdAt = new Date();
+		System.out.println("New station "+this+".");
 	}
 	
 	/**
@@ -43,7 +46,9 @@ public class Station implements Comparable<Station>{
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.name = name;
+		this.createdAt = new Date();
 		this.id = uniqId++;
+		System.out.println("New station "+this+".");
 	}
 	
 	/**
@@ -59,7 +64,9 @@ public class Station implements Comparable<Station>{
 		this.localization = localization;
 		this.isPlus = isPlus;
 		this.name = name;
+		this.createdAt = new Date();
 		this.id = uniqId++;
+		System.out.println("New station "+this+".");
 		this.createParkingSlots(numberOfSlots);
 	}
 	
@@ -76,6 +83,8 @@ public class Station implements Comparable<Station>{
 		this.isPlus = isPlus;
 		this.id = uniqId++;
 		this.name = "Station"+id;
+		this.createdAt = new Date();
+		System.out.println("New station "+this+".");
 		this.createParkingSlots(numberOfSlots);
 	}
 	
@@ -157,7 +166,7 @@ public class Station implements Comparable<Station>{
 				return this.parkingSlots.get(i);
 			}
 		}
-		throw new RuntimeException("No parking slot available in this station");
+		throw new RuntimeException("No parking slot available in "+this+".");
 	}
 	
 	/**
@@ -192,7 +201,7 @@ public class Station implements Comparable<Station>{
 				return bicycle;
 			}
 		}
-		throw new RuntimeException("Sorry, no bicycle is available.");
+		throw new RuntimeException("No bicycle is available in "+this+".");
 	}
 		
 	/**
@@ -214,7 +223,7 @@ public class Station implements Comparable<Station>{
 				}
 			}
 		}
-		throw new RuntimeException("Sorry, no bicycle of the desired type is available.");
+		throw new RuntimeException("No bicycle of type "+bicycleType+" is available in "+this+".");
 	}
 	
 	/**
@@ -258,13 +267,15 @@ public class Station implements Comparable<Station>{
 	 * @return a type of bicycle as a String
 	 * @throws RuntimeException
 	 */
-	public String getOneBicycleType() throws RuntimeException {
-			for (int i = 0; i < Bicycle.getTypeDict().size(); i++) {
+	public String getOneBicycleType() {
+		if (!this.isBicycle())
+			throw new RuntimeException("No bicycle is available in "+this+".");
+		for (int i = 0; i < Bicycle.getTypeDict().size(); i++) {
 			if (this.isBicycle(Bicycle.getTypeDict().get(i))) {
 				return Bicycle.getTypeDict().get(i);
 			}
 		}
-		throw new RuntimeException("No bicycle available in this station.");
+		return null;
 	}
 	
 	/**
@@ -314,6 +325,22 @@ public class Station implements Comparable<Station>{
 		this.isPlus = isPlus;
 	}
 	
+	public int getRentCount() {
+		return rentCount;
+	}
+
+	public void incRentCount() {
+		this.rentCount++;
+	}
+
+	public int getReturnCount() {
+		return returnCount;
+	}
+
+	public void incReturnCount() {
+		this.returnCount++;
+	}
+
 	/**
 	 * 
 	 * @return localization of the station
@@ -349,6 +376,10 @@ public class Station implements Comparable<Station>{
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			this.parkingSlots.get(i).setOffline(isOffline);
 		}
+		if (isOffline)
+			System.out.println(this+" is now offline.");
+		else
+			System.out.println(this+" is now online.");
 	}
 
 	/**
