@@ -123,13 +123,14 @@ public class StationBalance implements Statistics {
 	
 	public static void display(Station station) {
 		System.out.println("----------------------"+"\n"+"Statistics of station "+station+"\n"+"\n"
-	+"Date of creation :"+station.getCreatedAt()+"\n"+"Number of slots : "+station.getParkingSlots().size()
-	+"\n"+"Total number of rentals : "+station.getRentCount()+"\n"+"Total number of returns : "
+	+"Date of creation :"+station.getCreatedAt()+"\n"+"GPS coordinates : "+station.getLocalization()
+	+"\n"+"Number of slots : "+station.getParkingSlots().size()+"\n"+
+	"Total number of rentals : "+station.getRentCount()+"\n"+"Total number of returns : "
 	+station.getReturnCount()+"\n"+"Occupation rate : "+StationBalance.occupationRate(
 			station, new Date(1970,1,1,0,0,0), new Date())*100+"%"+"\n"+"----------------------");
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RuntimeException, Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 02, 17);
 		SD.setTime(19, 22, 37);

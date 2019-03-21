@@ -232,7 +232,7 @@ public class User {
 		}
 	}
 	
-	public void endCurrentRide(Station station) {
+	public void endCurrentRide(Station station) throws RuntimeException, Exception {
 		if (station.isFull())
 			throw new IllegalArgumentException("This station is full.");
 		else {

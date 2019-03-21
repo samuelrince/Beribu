@@ -49,6 +49,7 @@ public class Travel {
 		this.destination = destination;
 		this.pathStrategy = pathStrategy;
 		this.findRide();
+		System.out.println(user+" has initiated a planned ride."+"\n"+this);
 	}
 	/**
 	 * Constructor of the class Travel, called automatically when using method User.planRide().
@@ -67,6 +68,7 @@ public class Travel {
 		this.pathStrategy = pathStrategy;
 		this.bicycleType = bicycleType;	
 		this.findRide();
+		System.out.println(user+" has initiated a planned ride."+"\n"+this);
 	}	
 	/**
 	 * Constructor of the class Travel, called automatically when using method User.planRide().
@@ -85,6 +87,7 @@ public class Travel {
 		this.pathStrategy = new MinimalWalking();
 		this.bicycleType = bicycleType;		
 		this.findRide();
+		System.out.println(user+" has initiated a planned ride."+"\n"+this);
 	}
 	
 	/**
@@ -204,6 +207,6 @@ public class Travel {
 		return  "User : "+this.user+"\n"+"Suggested rental station : "+
 				this.suggestedStartStation+"\n"+"Suggested return station : "
 				+ this.suggestedEndStation+"\n"+"Estimated duration : " +
-				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
+				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost()+"€";
 	}
 }

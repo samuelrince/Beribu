@@ -2,6 +2,8 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStringConversion;
+
 /**
  * This class represents a localization.
  * @author Valentin
@@ -25,7 +27,17 @@ public class Localization {
 
 	@Override
 	public String toString() {
-		return "GPS (" + latitude + "°, " + longitude + "°)";
+		String horiz;
+		String vert;
+		if (latitude>0)
+			vert = "N";
+		else
+			vert = "S";
+		if (longitude>0)
+			horiz = "E";
+		else
+			horiz = "O";
+		return "(" + latitude + "°"+vert+", " + longitude + "°"+horiz+")";
 	}
 
 	/**
@@ -220,6 +232,7 @@ public class Localization {
 		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
 				this.longitude + Math.sin(angle)*r/rayonTerre);
 	}
+	
 	
 	public static void main(String[] args) {
 		Localization loc1 = new Localization(0,-160);
