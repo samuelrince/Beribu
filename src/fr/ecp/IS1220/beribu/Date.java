@@ -27,12 +27,12 @@ public class Date {
 	
 	/**
 	 * Constructor of class Date.
-	 * @param year
-	 * @param month
-	 * @param day
-	 * @param hour
-	 * @param minute
-	 * @param second
+	 * @param year	represent the year
+	 * @param month 	represent the month
+	 * @param day	represent the day
+	 * @param hour	represent the hour
+	 * @param minute	represent the minute
+	 * @param second	represent the second
 	 */
 	public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second) {
 		this.currentDate();

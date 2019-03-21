@@ -44,7 +44,7 @@ public interface Card {
 	 * @param duration duration of the ride
 	 * @param bicycleType type of bicycle used for the ride
 	 * @param plusStation type of the return station, true if Plus and false otherwise
-	 * @return
+	 * @return a int that correspond to the time gain with the ride
 	 */
 	public int timeCreditOperation(Duration duration, String bicycleType,
 			boolean plusStation);

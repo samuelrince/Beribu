@@ -14,6 +14,7 @@ public class ParkingSlot {
 	
 	/**
 	 * Constructor of class ParkingSlot.
+	 * @param station a Station object that is linked to
 	 */
 	public ParkingSlot(Station station) {
 		super();
@@ -43,8 +44,9 @@ public class ParkingSlot {
 	/**
 	 * Attaches a given bicycle to the parking slot if it is online and free.
 	 * @param bicycle bicycle to attach
-	 * @throws RuntimeException
-	 * @throws IllegalArgumentException
+	 * @throws RuntimeException	Occurs when the parking slot is offline or already holds
+	 * a bicycle
+	 * @throws IllegalArgumentException Occurs when the bicycle state is not valid
 	 */
 	public void attachBicycle(Bicycle bicycle) throws RuntimeException,
 	IllegalArgumentException {
@@ -68,7 +70,7 @@ public class ParkingSlot {
 	
 	/**
 	 * Detaches the bicycle currently attached to the parking slot if it is online.
-	 * @throws RuntimeException
+	 * @throws RuntimeException when the parking slot state is not valid
 	 */
 	public void detachBicycle() throws RuntimeException{
 		if (!this.isBicycle()) {

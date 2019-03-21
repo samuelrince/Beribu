@@ -17,7 +17,7 @@ public class MyVelibNetwork {
 	/**
 	 * Constructor of class MyVelibNetwork.
 	 * @param name name of the network
-	 * @throws RuntimeException
+	 * @throws RuntimeException	occurs when the network already exists
 	 */
 	public MyVelibNetwork(String name) throws RuntimeException {
 		if (instance == null) {
@@ -34,7 +34,7 @@ public class MyVelibNetwork {
 	 * This method should be used when trying to access the MyVelib network.
 	 * If the network has not been instantiated, throws a RuntimeException.
 	 * @return the unique instance of MyVelibNetwork
-	 * @throws RuntimeException
+	 * @throws RuntimeException	occurs when there is no instance of the network
 	 */
 	public static synchronized MyVelibNetwork getInstance() throws RuntimeException {
 		if (instance==null) {
@@ -105,7 +105,8 @@ public class MyVelibNetwork {
 	 * be populated with bicycles
 	 * @param typePercentage portion of each type of bicycle relatively to the
 	 * total amount of bicycles
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException	occurs when a wrong type of parameter
+	 * is passed to the method
 	 */
 	public void createStations(Localization center, double radius, int number,
 			int plusNumber, int numberOfSlots, double populationPercentage, 

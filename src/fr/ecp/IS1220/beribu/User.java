@@ -67,7 +67,7 @@ public class User {
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in minutes.
-	 * @param minutes
+	 * @param minutes correspond to minutes
 	 */
 	public void addTimeCreditBalance(int minutes) {
 		this.timeCreditBalance.add(minutes);
@@ -76,8 +76,8 @@ public class User {
 	/**
 	 * This method adds time to the user time credit balance.
 	 * The duration to add is expressed in minutes and in seconds.
-	 * @param minutes
-	 * @param seconds
+	 * @param minutes correspond to minutes
+	 * @param seconds correspond to seconds
 	 */
 	public void addTimeCreditBalance(int minutes, int seconds) {
 		this.timeCreditBalance.add(minutes, seconds);
@@ -86,9 +86,9 @@ public class User {
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in hours, in minutes and in seconds.
-	 * @param hours
-	 * @param minutes
-	 * @param seconds
+	 * @param hours	correspond to hours
+	 * @param minutes correspond to minutes
+	 * @param seconds correspond to seconds
 	 */
 	public void addTimeCreditBalance(int hours, int minutes, int seconds) {
 		this.timeCreditBalance.add(hours, minutes, seconds);
@@ -189,6 +189,7 @@ public class User {
 	 * and return an error otherwise. 
 	 * 
 	 * @param station	Should be a Station object
+	 * @param bicycleType	A String corresponding to the type of bicycle wanted
 	 * @throws RuntimeException		Throws RuntimeException when a user tries to start
 	 * a new ride without finishing his current ride.
 	 */
@@ -233,8 +234,9 @@ public class User {
 	/**
 	 * This method should be used when a user want to end his current Ride at a
 	 * specified station.
-	 * @param station
-	 * @throws Exception
+	 * @param station	The station where to end the ride
+	 * @throws Exception	Occurs when the station is full or when there is no
+	 * parking slot available
 	 */
 	public void endCurrentRide(Station station) throws Exception {
 		if (station.isFull())

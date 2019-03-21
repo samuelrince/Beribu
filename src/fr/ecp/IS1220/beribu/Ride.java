@@ -38,6 +38,8 @@ public class Ride {
   /**
 	 * Puts an end to the ride by returning the bicycle to a given parking slot.
 	 * @param parkingSlot the parking slot to attach the bicycle to
+	 * @throws Exception When an error occurred could be a wrong argument, lack
+	 * of space in the station or a wrong parking slot
 	 */
 	public void end(ParkingSlot parkingSlot) throws Exception {
 		parkingSlot.attachBicycle(this.bicycle);

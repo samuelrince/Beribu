@@ -68,7 +68,7 @@ public class StationBalance implements Statistics {
 	 * @param start start of the time window
 	 * @param end end of the time window
 	 * @return the occupation rate of the station during this time window
-	 * @throws RuntimeException
+	 * @throws RuntimeException	when there is no data
 	 */
 	public static double occupationRate(Station station, Date start, Date end) 
 			throws RuntimeException {
