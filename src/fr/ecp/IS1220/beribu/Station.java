@@ -23,6 +23,7 @@ public class Station implements Comparable<Station>{
 	private Date createdAt;
 	private int rentCount = 0;
 	private int returnCount = 0;
+	private boolean initializing = true;
 	
 	public Station(Localization localization, Boolean isPlus) {
 		super();
@@ -304,6 +305,7 @@ public class Station implements Comparable<Station>{
 			System.out.println(bicycleList.size()-bList.size()+" have been attached. "
 					+ bList.size()+ " input bicycles have been ignored.");
 		}
+		this.updateStatus();
 	}
 
 	/**
@@ -406,7 +408,8 @@ public class Station implements Comparable<Station>{
 					+ "is already linked with the station.");
 		}
 		this.parkingSlots.add(parkingSlot);
-		this.updateStatus();
+		if (!this.initializing)
+			this.updateStatus();
 	}
 	
 	/**
@@ -422,6 +425,7 @@ public class Station implements Comparable<Station>{
 		for (int i = 0; i < quantity; i++) {
 			new ParkingSlot(this);
 		}
+		this.initializing = false;
 	}
 	
 	/**

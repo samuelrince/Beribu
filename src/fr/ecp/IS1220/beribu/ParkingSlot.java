@@ -63,7 +63,6 @@ public class ParkingSlot {
 		}
 		this.bicycle = bicycle;
 		bicycle.setAttached(true);
-		this.station.updateStatus();
 	}
 	
 	/**
@@ -79,7 +78,6 @@ public class ParkingSlot {
 		}
 		this.bicycle.setAttached(false);
 		this.bicycle = null;
-		this.station.updateStatus();
 	}
 	
 	/**

@@ -16,22 +16,22 @@ public class StationBalance implements Statistics {
 	 * @param station station to analyze
 	 * @return the total number of bike rentals
 	 */
-//	public static int totalRentCount(Station station) {
-//		int totalRentCount = 0;
-//		for (int i = 1; i < station.getHistory().size(); i++) {
-//			ArrayList<ArrayList<Boolean>> previousStatus = 
-//					station.getHistory().get(i-1).getParkingSlotStatus();
-//			ArrayList<ArrayList<Boolean>> parkingSlotStatus = 
-//					station.getHistory().get(i).getParkingSlotStatus();
-//			for (int j = 0; j < previousStatus.size(); j++) {
-//				if (previousStatus.get(j).get(1) == true
-//						&& parkingSlotStatus.get(j).get(1) == false) {
-//					totalRentCount++;
-//				}						
-//			}
-//		}
-//		return totalRentCount;
-//	}
+	public static int totalRentCount(Station station) {
+		int totalRentCount = 0;
+		for (int i = 1; i < station.getHistory().size(); i++) {
+			ArrayList<ArrayList<Boolean>> previousStatus = 
+					station.getHistory().get(i-1).getParkingSlotStatus();
+			ArrayList<ArrayList<Boolean>> parkingSlotStatus = 
+					station.getHistory().get(i).getParkingSlotStatus();
+			for (int j = 0; j < previousStatus.size(); j++) {
+				if (previousStatus.get(j).get(1) == true
+						&& parkingSlotStatus.get(j).get(1) == false) {
+					totalRentCount++;
+				}						
+			}
+		}
+		return totalRentCount;
+	}
 	
 	/**
 	 * This method returns the total number of bike returns performed in a
@@ -39,22 +39,22 @@ public class StationBalance implements Statistics {
 	 * @param station station to analyze
 	 * @return the total number of bike returns
 	 */
-//	public static int totalReturnCount(Station station) {
-//		int totalReturnCount = 0;
-//		for (int i = 1; i < station.getHistory().size(); i++) {
-//			ArrayList<ArrayList<Boolean>> previousStatus = 
-//					station.getHistory().get(i-1).getParkingSlotStatus();
-//			ArrayList<ArrayList<Boolean>> parkingSlotStatus = 
-//					station.getHistory().get(i).getParkingSlotStatus();
-//			for (int j = 0; j < previousStatus.size(); j++) {
-//				if (previousStatus.get(j).get(1) == false
-//						&& parkingSlotStatus.get(j).get(1) == true) {
-//					totalReturnCount++;
-//				}						
-//			}
-//		}
-//		return totalReturnCount;
-//	}
+	public static int totalReturnCount(Station station) {
+		int totalReturnCount = 0;
+		for (int i = 1; i < station.getHistory().size(); i++) {
+			ArrayList<ArrayList<Boolean>> previousStatus = 
+					station.getHistory().get(i-1).getParkingSlotStatus();
+			ArrayList<ArrayList<Boolean>> parkingSlotStatus = 
+					station.getHistory().get(i).getParkingSlotStatus();
+			for (int j = 0; j < previousStatus.size(); j++) {
+				if (previousStatus.get(j).get(1) == false
+						&& parkingSlotStatus.get(j).get(1) == true) {
+					totalReturnCount++;
+				}						
+			}
+		}
+		return totalReturnCount;
+	}
 	
 	/**
 	 * This method returns the rate of occupation of a given station during a
@@ -151,6 +151,8 @@ public class StationBalance implements Statistics {
 		network.user(2).endCurrentRide(network.station(1));
 		System.out.println(network.station(1).historyTrace());
 		StationBalance.display(network.station(1));
+		System.out.println("rent:"+StationBalance.totalRentCount(network.station(1)));
+		System.out.println("return:"+StationBalance.totalReturnCount(network.station(1)));
 	}
 
 }

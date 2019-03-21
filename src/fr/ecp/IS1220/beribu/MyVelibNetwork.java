@@ -83,12 +83,12 @@ public class MyVelibNetwork {
 			throw new IllegalArgumentException(typeDict.size()+" numbers of bicycles should be given, "
 					+ "one for each type in the order of appearance in Bicycle.getTypeDict().");
 		Station station = new Station(localization, isPlus,numberOfSlots);
+		ArrayList<Bicycle> bList = new ArrayList<Bicycle>();
 		for (int i = 0; i < typeDict.size(); i++) {
-			ArrayList<Bicycle> bList = new ArrayList<Bicycle>(numberOfBicycles[i]);
 			for (int j = 0; j < numberOfBicycles[i]; j++)
 				bList.add(this.bicycleFactory.newBicycle(typeDict.get(i)));
-			station.populate(bList);
 		}
+		station.populate(bList);
 		this.stationDatabase.add(station);
 	}
 	

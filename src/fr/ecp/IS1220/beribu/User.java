@@ -168,6 +168,7 @@ public class User {
 					}
 				}
 				station.incRentCount();
+				station.updateStatus();
 				System.out.println(this+" has started"
 						+ " a new ride from "+station+".");
 			}
@@ -205,6 +206,7 @@ public class User {
 					}
 				}
 				station.incRentCount();
+				station.updateStatus();
 				System.out.println(this+" has started"
 						+ " a new ride from "+station+".");
 			}
@@ -237,6 +239,7 @@ public class User {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
 				station.incReturnCount();
+				station.updateStatus();
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
 			}
