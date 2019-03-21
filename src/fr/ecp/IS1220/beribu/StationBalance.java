@@ -27,7 +27,7 @@ public class StationBalance implements Statistics {
 				if (previousStatus.get(j).get(1) == true
 						&& parkingSlotStatus.get(j).get(1) == false) {
 					totalRentCount++;
-				}						
+				}
 			}
 		}
 		return totalRentCount;
