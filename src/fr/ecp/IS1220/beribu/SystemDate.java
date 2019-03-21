@@ -10,12 +10,12 @@ import java.text.SimpleDateFormat;
  */
 public class SystemDate {
 	private static SystemDate instance = null;
-	private int year;
-	private int month;
-	private int day;
-	private int hour;
-	private int minute;
-	private int second;
+	private Integer year;
+	private Integer month;
+	private Integer day;
+	private Integer hour;
+	private Integer minute;
+	private Integer second;
 	
 	private SystemDate(){}
 	
@@ -32,8 +32,14 @@ public class SystemDate {
 		}
 		return instance;
 	}
+	
+	public static synchronized void delInstance() {
+		if (instance != null) {
+			instance = null;
+		}
+	}
 
-	public void setDay(int year, int month, int day) {
+	public void setDay(Integer year, Integer month, Integer day) {
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -43,7 +49,7 @@ public class SystemDate {
 				+month+"/"+year+".");
 	}
 
-	public void setTime(int hour, int minute, int second) {
+	public void setTime(Integer hour, Integer minute, Integer second) {
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
@@ -53,11 +59,11 @@ public class SystemDate {
 				+minute+":"+second+".");
 	}
 	
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		if (year<1970) {
 			throw new IllegalArgumentException("Please enter a year after 1970");
 		}
@@ -66,11 +72,11 @@ public class SystemDate {
 			throw new IllegalArgumentException("The SystemDate is not valid");
 	}
 
-	public int getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
-	public void setMonth(int month) {
+	public void setMonth(Integer month) {
 		if (month<1 || month>12) {
 			throw new IllegalArgumentException("Please enter a valid month"
 					+ " number between 1 and 12.");
@@ -80,11 +86,11 @@ public class SystemDate {
 			throw new IllegalArgumentException("The SystemDate is not valid");
 	}
 
-	public int getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
-	public void setDay(int day) {
+	public void setDay(Integer day) {
 		if (day<1 || day>31) {
 			throw new IllegalArgumentException("Please enter a valid day"
 					+ " number between 1 and 31.");
@@ -94,11 +100,11 @@ public class SystemDate {
 			throw new IllegalArgumentException("The SystemDate is not valid");
 	}
 
-	public int getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
-	public void setHour(int hour) {
+	public void setHour(Integer hour) {
 		if (hour<0 || hour>23) {
 			throw new IllegalArgumentException("Please enter a valid hour"
 					+ " between 0 and 23.");
@@ -108,11 +114,11 @@ public class SystemDate {
 			throw new IllegalArgumentException("The SystemDate is not valid");
 	}
 
-	public int getMinute() {
+	public Integer getMinute() {
 		return minute;
 	}
 
-	public void setMinute(int minute) {
+	public void setMinute(Integer minute) {
 		if (minute<0 || minute>59) {
 			throw new IllegalArgumentException("Please enter a valid minute"
 					+ " between 0 and 59.");
@@ -122,11 +128,11 @@ public class SystemDate {
 			throw new IllegalArgumentException("The SystemDate is not valid");
 	}
 
-	public int getSecond() {
+	public Integer getSecond() {
 		return second;
 	}
 
-	public void setSecond(int second) {
+	public void setSecond(Integer second) {
 		if (second<0 || second>59) {
 			throw new IllegalArgumentException("Please enter a valid second"
 					+ " between 0 and 59.");
@@ -143,12 +149,12 @@ public class SystemDate {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
 		sdf.setLenient(false);
 		String dateStr = new String();
-		dateStr = String.valueOf(this.getYear()) + '/' + 
-				String.valueOf(this.getMonth()) + '/' + 
-				String.valueOf(this.getDay()) + '-' +
-				String.valueOf(this.getHour()) + ':' +
-				String.valueOf(this.getMinute()) + ':' +
-				String.valueOf(this.getSecond());
+		dateStr = String.valueOf(this.year == null ? 2000 : this.year) + '/' + 
+				String.valueOf(this.month == null ? 1 : this.month) + '/' + 
+				String.valueOf(this.day == null ? 1 : this.day) + '-' +
+				String.valueOf(this.hour == null ? 1 : this.hour) + ':' +
+				String.valueOf(this.minute == null ? 1 : this.minute) + ':' +
+				String.valueOf(this.second == null ? 1 : this.second);
 		try {
 			java.util.Date date = sdf.parse(dateStr);
 		} catch(ParseException e) {

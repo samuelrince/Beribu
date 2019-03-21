@@ -32,12 +32,12 @@ class DateTest {
 		SD.setDay(2019, 3, 10);
 		SD.setTime(19, 45, 21);
 		Date d = new Date(2019, 3, 10, 19, 45, 21);
-		assertTrue((SD.getYear() == d.getYear()) &&
-				(SD.getMonth() == d.getMonth()) &&
-				(SD.getDay() == d.getDay()) &&
-				(SD.getHour() == d.getHour()) &&
-				(SD.getMinute() == d.getMinute()) &&
-				(SD.getSecond() == d.getSecond()));
+		assertTrue(((int) SD.getYear() == (int) d.getYear()) &&
+				((int) SD.getMonth() == (int) d.getMonth()) &&
+				((int) SD.getDay() == (int) d.getDay()) &&
+				((int) SD.getHour() == (int) d.getHour()) &&
+				((int) SD.getMinute() == (int) d.getMinute()) &&
+				((int) SD.getSecond() == (int) d.getSecond()));
 	}
 	
 	/*

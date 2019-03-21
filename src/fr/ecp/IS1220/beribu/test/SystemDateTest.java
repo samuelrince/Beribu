@@ -2,12 +2,17 @@ package fr.ecp.IS1220.beribu.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import fr.ecp.IS1220.beribu.SystemDate;
 
 class SystemDateTest {
 
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Test some wrong and correct Date
 	 */
