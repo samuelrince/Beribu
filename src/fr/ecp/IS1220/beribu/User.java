@@ -230,13 +230,19 @@ public class User {
 		}
 	}
 	
-	public void endCurrentRide(Station station) {
+	/**
+	 * This method should be used when a user want to end his current Ride at a
+	 * specified station.
+	 * @param station
+	 * @throws Exception
+	 */
+	public void endCurrentRide(Station station) throws Exception {
 		if (station.isFull())
 			throw new IllegalArgumentException("This station is full.");
 		else {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
-				station.incReturnCount();
+				//station.incReturnCount(); TEMPORARY
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
 			}
