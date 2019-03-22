@@ -125,6 +125,7 @@ public class Station implements Comparable<Station>{
 	/**
 	 * Returns the number of available bicycles of a given type in the station.
 	 * Bicycles parked on an offline parking slot are not taken into account.
+	 * @param bicycleType A string corresponding to the type of bicycle
 	 * @return the number of available bicycles of given type
 	 */
 	public int numberOfBicycles(String bicycleType) {
@@ -159,7 +160,7 @@ public class Station implements Comparable<Station>{
 	 * Returns a free parking slot (online and holding no bicycle) 
 	 * of the station if such a parking slot exists, otherwise throws a RuntimeException.
 	 * @return a free parking slot
-	 * @throws RuntimeException
+	 * @throws RuntimeException	when there is no available parking slot
 	 */
 	public ParkingSlot getFreeParkingSlot() throws RuntimeException {
 		for(int i = 0; i <= this.parkingSlots.size() - 1; i++) {
@@ -191,7 +192,7 @@ public class Station implements Comparable<Station>{
 	 * of parking slots) if it exists AND empties the corresponding parking slot. 
 	 * If no such bicycle exists, throws a RuntimeException.
 	 * @return an available bicycle
-	 * @throws RuntimeException
+	 * @throws RuntimeException	When no bicycle is available
 	 */
 	public Bicycle getBicycle() throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -209,8 +210,9 @@ public class Station implements Comparable<Station>{
 	 * Returns an available bicycle of given type of the station (the first available in the order
 	 * of parking slots) if it exists AND empties the corresponding parking slot. 
 	 * If no such bicycle exists, throws a RuntimeException.
+	 * @param bicycleType A string corresponding on the bicycle type
 	 * @return an available bicycle of given type
-	 * @throws RuntimeException
+	 * @throws RuntimeException	When no bicycle is available
 	 */
 	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
@@ -245,6 +247,7 @@ public class Station implements Comparable<Station>{
 	/**
 	 * Returns true if there is at least one available bicycle of 
 	 * given type in the station. Returns false otherwise.
+	 * @param bicycleType a String that correspond to the type of bicycle wanted
 	 * @return true if there is a bicycle of given type, false otherwise
 	 */
 	public boolean isBicycle(String bicycleType) {
@@ -266,7 +269,7 @@ public class Station implements Comparable<Station>{
 	 * on the order of the bicycles appearance in the parking slots).
 	 * If no bicycle is available, throws a RuntimeException.
 	 * @return a type of bicycle as a String
-	 * @throws RuntimeException
+	 * @throws RuntimeException	occurs when no bicycle is available
 	 */
 	public String getOneBicycleType() {
 		if (!this.isBicycle())
@@ -395,8 +398,9 @@ public class Station implements Comparable<Station>{
 	/**
 	 * Adds a given parking slot to the station. This method is automatically called
 	 * when creating a parking slot associated to the station.
-	 * @param parkingSlot
-	 * @throws IllegalArgumentException
+	 * @param parkingSlot	the parking slot you to add
+	 * @throws IllegalArgumentException		when the parkingSlot is already in the station
+	 * or linked to another station
 	 */
 	public void addParkingSlot(ParkingSlot parkingSlot) throws IllegalArgumentException {
 		if (parkingSlot.getStation().getId() != this.id) {
@@ -415,7 +419,7 @@ public class Station implements Comparable<Station>{
 	/**
 	 * Adds a number of new parking slots to the station.
 	 * @param quantity number of new parking slots
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException	when the quantity is not positive
 	 */
 	public void createParkingSlots(int quantity) throws IllegalArgumentException {
 		if (quantity < 0) {
@@ -441,7 +445,7 @@ public class Station implements Comparable<Station>{
 	 * This method is called when a planned ride Travel suggests this station either
 	 * as a start station or end station to a user. The Travel then becomes an 
 	 * observer of this station and is notified if needed.
-	 * @param travel
+	 * @param travel	The Travel object
 	 */
 	public void addTargetOf(Travel travel) {
 		this.targetOf.add(travel); 

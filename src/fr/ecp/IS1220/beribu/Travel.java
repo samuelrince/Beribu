@@ -22,9 +22,9 @@ public class Travel {
 	/**
 	 * Constructor of the class Travel, called automatically when using method User.planRide(). 
 	 * The default PathStrategy is MinimalWalking.
-	 * @param user
-	 * @param source
-	 * @param destination
+	 * @param user	a User object
+	 * @param source	a Localization corresponding to the start point
+	 * @param destination	a Localization corresponding to the end point
 	 */
 	public Travel(User user,Localization source, Localization destination) {
 		this.user = user;
@@ -37,10 +37,10 @@ public class Travel {
 	
 	/**
 	 * Constructor of the class Travel, called automatically when using method User.planRide(). 
-	 * @param user
-	 * @param source
-	 * @param destination
-	 * @param pathStrategy
+	 * @param user	a User object
+	 * @param source	a Localization corresponding to the start point
+	 * @param destination	a Localization corresponding to the end point
+	 * @param pathStrategy	the PathStrategy to apply
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			PathStrategy pathStrategy) {
@@ -54,11 +54,11 @@ public class Travel {
 	/**
 	 * Constructor of the class Travel, called automatically when using method User.planRide().
 	 *  The user can specify a type of bicycle.
-	 * @param user
-	 * @param source
-	 * @param destination
-	 * @param pathStrategy
-	 * @param bicycleType
+	 * @param user	a User object
+	 * @param source	a Localization corresponding to the start point
+	 * @param destination	a Localization corresponding to the end point
+	 * @param pathStrategy	the PathStrategy to apply
+	 * @param bicycleType	a String corresponding to the type of bicycle wanted
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			PathStrategy pathStrategy,String bicycleType) {
@@ -74,10 +74,10 @@ public class Travel {
 	 * Constructor of the class Travel, called automatically when using method User.planRide().
 	 *  The user can specify a type of bicycle.
 	 * The default PathStrategy is MinimalWalking.
-	 * @param user
-	 * @param source
-	 * @param destination
-	 * @param bicycleType
+	 * @param user	a User object
+	 * @param source	a Localization corresponding to the start point
+	 * @param destination	a Localization corresponding to the end point
+	 * @param bicycleType	a String corresponding to the type of bicycle wanted
 	 */
 	public Travel(User user,Localization source, Localization destination,
 			String bicycleType) {

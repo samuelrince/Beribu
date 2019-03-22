@@ -2,37 +2,20 @@ package fr.ecp.IS1220.beribu.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+
+import fr.ecp.IS1220.beribu.SystemDate;
 
 class SystemDateTest {
 
-	/*
-	 * Test initialization
-	 *
-	@Test
-	void initTest001() {
-		SystemDate SD = SystemDate.getInstance();
-		assertDoesNotThrow(() -> {
-			SD.setDay(2100, 6, 12);
-			SD.setTime(13, 45, 33);
-		});
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
 	}
-	@Test
-	void initTest002() {
-		SystemDate SD = SystemDate.getInstance();
-		assertDoesNotThrow(() -> {
-			SD.setMinute(33);
-			SD.setMonth(5);
-			SD.setDay(30);
-			SD.setHour(12);
-			SD.setSecond(30);
-			SD.setYear(2019);
-		});
-	}*/
-	
 	/*
 	 * Test some wrong and correct Date
-	 *
+	 */
 	@Test
 	void correctDateTest001() {
 		SystemDate SD = SystemDate.getInstance();
@@ -48,6 +31,100 @@ class SystemDateTest {
 			SD.setDay(2024, 3, 31);
 			SD.setTime(17, 25, 15);
 		});
-	}*/
-
+	}
+	@Test
+	void correctDateTest003() {
+		SystemDate SD = SystemDate.getInstance();
+		assertDoesNotThrow(() -> {
+			SD.setDay(2032, 2, 29);
+			SD.setTime(17, 25, 15);
+		});
+	}
+	@Test
+	void correctDateTest004() {
+		SystemDate SD = SystemDate.getInstance();
+		assertDoesNotThrow(() -> {
+			SD.setDay(2029, 12, 31);
+			SD.setTime(17, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2019, 2, 29);
+			SD.setTime(17, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest002() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2019, 4, 31);
+			SD.setTime(17, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest003() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 2, 30);
+			SD.setTime(17, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest004() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 13, 30);
+			SD.setTime(17, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest005() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 1, 40);
+			SD.setTime(17, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest006() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(-1, 1, 1);
+			SD.setTime(17, 31, 59);
+		});
+	}@Test
+	void wrongDateTest007() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 1, 1);
+			SD.setTime(25, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest008() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 1, 40);
+			SD.setTime(-6, 31, 59);
+		});
+	}
+	@Test
+	void wrongDateTest009() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 1, 40);
+			SD.setTime(23, 60, 59);
+		});
+	}
+	@Test
+	void wrongDateTest010() {
+		SystemDate SD = SystemDate.getInstance();
+		assertThrows(IllegalArgumentException.class, () -> {
+			SD.setDay(2020, 1, 40);
+			SD.setTime(23, 6, 72);
+		});
+	}
 }

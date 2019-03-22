@@ -105,8 +105,8 @@ public class Scenario1b {
 		System.out.println();
 		
 		Comparator<Station> c = new SortStationByMostUsed();
-		
 		Collections.sort(stations, c);
+		System.out.println(s0.getRentCount() + " " + s0.getReturnCount());
 		System.out.println(" == Stations sorted by most used == ");
 		System.out.println(stations);
 		System.out.println();

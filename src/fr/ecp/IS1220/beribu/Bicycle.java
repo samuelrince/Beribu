@@ -54,7 +54,7 @@ public abstract class Bicycle {
 	 * Returns the speed of a given type of bicycle.
 	 * @param bicycleType type of bicycle
 	 * @return the speed of this type of bicycle
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException occurs when a wrong bicycleType is entered
 	 */
 	public static double getSpeed(String bicycleType) throws IllegalArgumentException {
 		if (bicycleType.equalsIgnoreCase("MECHANICAL")) {

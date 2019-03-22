@@ -22,7 +22,8 @@ public class Duration {
 	 * duration between two given dates.
 	 * @param startDate date when the duration begins
 	 * @param endDate date when the duration ends
-	 * @throws RuntimeException
+	 * @throws RuntimeException	occurs when the duration is negative (wrong
+	 * dates)
 	 */
 	public Duration(Date startDate, Date endDate) throws IllegalArgumentException {
 		int yearInSeconds = (endDate.getYear()-startDate.getYear())*32140800;
