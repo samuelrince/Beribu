@@ -1,18 +1,28 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Date;
-import fr.ecp.IS1220.beribu.Duration;
-import fr.ecp.IS1220.beribu.SystemDate;
+import fr.ecp.IS1220.myVelib.app.Date;
+import fr.ecp.IS1220.myVelib.app.Duration;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
 
+/**
+ * This class contains Junit tests for Duration class
+ * @author Samuel
+ *
+ */
 class DurationTest {
 	
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Duration calculation Test
 	 */

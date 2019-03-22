@@ -1,15 +1,26 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Localization;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
 
+/**
+ * This class contains Junit tests for Localization class
+ * @author Samuel
+ *
+ */
 class LocalizationTest {
 	private static final double DELTA = 1e-14;
 
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Test getters 
 	 */

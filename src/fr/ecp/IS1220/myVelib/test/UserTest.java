@@ -1,27 +1,39 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Card;
-import fr.ecp.IS1220.beribu.Duration;
-import fr.ecp.IS1220.beribu.ElectricalBike;
-import fr.ecp.IS1220.beribu.Localization;
-import fr.ecp.IS1220.beribu.MechanicalBike;
-import fr.ecp.IS1220.beribu.ParkingSlot;
-import fr.ecp.IS1220.beribu.Station;
-import fr.ecp.IS1220.beribu.SystemDate;
-import fr.ecp.IS1220.beribu.User;
-import fr.ecp.IS1220.beribu.Vlibre;
+import fr.ecp.IS1220.myVelib.app.Card;
+import fr.ecp.IS1220.myVelib.app.Duration;
+import fr.ecp.IS1220.myVelib.app.ElectricalBike;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.MechanicalBike;
+import fr.ecp.IS1220.myVelib.app.ParkingSlot;
+import fr.ecp.IS1220.myVelib.app.Station;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
+import fr.ecp.IS1220.myVelib.app.User;
+import fr.ecp.IS1220.myVelib.app.Vlibre;
 
+/**
+ * This class contains Junit tests for User class
+ * @author Samuel
+ *
+ */
 class UserTest {
 	
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Test different IDs
 	 */
 	@Test
 	void idTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u1 = new User("Jean");
 		User u2 = new User("Paul");
 		assertFalse(u1.getId() == u2.getId());
@@ -38,6 +50,8 @@ class UserTest {
 	 */
 	@Test
 	void creditBalanceTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u1 = new User("Jean");
 		u1.addTimeCreditBalance(10);
 		Duration d = new Duration();
@@ -46,6 +60,8 @@ class UserTest {
 	}
 	@Test
 	void creditBalanceTest002() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u1 = new User("Jean");
 		u1.addTimeCreditBalance(10, 30);
 		Duration d = new Duration();
@@ -54,6 +70,8 @@ class UserTest {
 	}
 	@Test
 	void creditBalanceTest003() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u1 = new User("Jean");
 		u1.addTimeCreditBalance(1, 10, 30);
 		Duration d = new Duration();
@@ -66,6 +84,8 @@ class UserTest {
 	 */
 	@Test
 	void subscriptionTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u = new User("Jean");
 		Card c = new Vlibre(u);
 		u.subscribe(c);
@@ -73,6 +93,8 @@ class UserTest {
 	}
 	@Test 
 	void subscriptionTest002() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u1 = new User("Jean");
 		User u2 = new User("Paul");
 		Card c1 = new Vlibre(u1);
@@ -82,6 +104,8 @@ class UserTest {
 	}
 	@Test 
 	void subscriptionTest003() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u1 = new User("Jean");
 		User u2 = new User("Paul");
 		Card c2 = new Vlibre(u2);
@@ -95,6 +119,8 @@ class UserTest {
 	 */
 	@Test
 	void getCurrentRideTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u = new User("Jean");
 		assertEquals(null, u.getCurrentRide());
 	}
@@ -194,9 +220,8 @@ class UserTest {
 			fail("Failed to attach the bike");
 		}
 		User u = new User("Jean");
-		assertDoesNotThrow(() -> {
+		assertThrows(RuntimeException.class, () -> {
 			u.newRide(s, "eleCtrical");
-			assertEquals(null, u.getCurrentRide());
 		});
 	}
 	@Test
@@ -213,7 +238,7 @@ class UserTest {
 			fail("Failed to attach the bike");
 		}
 		User u = new User("Jean");
-		assertDoesNotThrow(() -> {
+		assertThrows(RuntimeException.class, () -> {
 			u.newRide(s, "mechanicaL");
 			assertEquals(null, u.getCurrentRide());
 		});
@@ -248,8 +273,9 @@ class UserTest {
 		Station s = new Station(new Localization(0.0, 0.0), false);
 		new ParkingSlot(s);
 		User u = new User("Jean");
-		u.newRide(s);
-		assertEquals(null, u.getCurrentRide());
+		assertThrows(RuntimeException.class, () -> {
+			u.newRide(s);
+		});
 	}
 	@Test
 	void newRideTest009() {
@@ -265,7 +291,7 @@ class UserTest {
 			fail("Failed to attach the bike");
 		}
 		User u = new User("Jean");
-		assertDoesNotThrow(() -> {
+		assertThrows(RuntimeException.class, () -> {
 			u.newRide(s, "Nothing");
 			assertEquals(null, u.getCurrentRide());
 		});

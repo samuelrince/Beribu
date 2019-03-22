@@ -1,8 +1,19 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.client;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import fr.ecp.IS1220.myVelib.app.ElectricalBike;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.MechanicalBike;
+import fr.ecp.IS1220.myVelib.app.ParkingSlot;
+import fr.ecp.IS1220.myVelib.app.SortStationByLeastOccupied;
+import fr.ecp.IS1220.myVelib.app.SortStationByMostUsed;
+import fr.ecp.IS1220.myVelib.app.Station;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
+import fr.ecp.IS1220.myVelib.app.User;
+import fr.ecp.IS1220.myVelib.app.Vlibre;
 
 public class Scenario1b {
 
@@ -68,18 +79,18 @@ public class Scenario1b {
 		SD.setDay(2019, 1, 1); SD.setTime(10, 13, 27);
 		u3.getCurrentRide().end(s1.getFreeParkingSlot());
 			// Day 2
-		SD.setDay(2019, 1, 2); SD.setTime(8, 10, 34);
+		SD.setDay(2019, 1, 2); SD.setTime(10, 15, 27);
 		u1.newRide(s1);
 		SD.setDay(2019, 1, 2); SD.setTime(10, 30, 27);
 		u2.newRide(s2);
 		SD.setDay(2019, 1, 2); SD.setTime(10, 35, 27);
 		u1.getCurrentRide().end(s2.getFreeParkingSlot());
-		SD.setDay(2019, 1, 2); SD.setTime(11, 13, 27);
+		SD.setDay(2019, 1, 2); SD.setTime(10, 35, 28);
 		u2.getCurrentRide().end(s0.getFreeParkingSlot());
 			// Day 3
-		SD.setDay(2019, 1, 3); SD.setTime(10, 15, 56);
-		u3.newRide(s1);
 		SD.setDay(2019, 1, 3); SD.setTime(10, 35, 56);
+		u3.newRide(s1);
+		SD.setDay(2019, 1, 3); SD.setTime(10, 37, 56);
 		u3.getCurrentRide().end(s0.getFreeParkingSlot());
 		SD.setDay(2019, 1, 3); SD.setTime(10, 43, 56);
 		u2.newRide(s1);

@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 import java.util.ArrayList;
 import java.util.Arrays;

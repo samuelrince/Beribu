@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 import java.util.ArrayList;
 
@@ -231,12 +231,5 @@ public class Localization {
 		double angle = Math.random()*2*Math.PI;
 		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
 				this.longitude + Math.sin(angle)*r/rayonTerre);
-	}
-	
-	
-	public static void main(String[] args) {
-		Localization loc1 = new Localization(0,-160);
-		Localization loc2 = new Localization(0,160);
-		System.out.println(loc1.distanceTo(loc2)/1000+" km");
 	}
 }

@@ -1,11 +1,11 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 /**
  * This class provides a number of methods for computing user-related statistics.
  * @author Valentin
  *
  */
-public class UserBalance implements Statistics {
+public class UserBalance {
 	
 	/**
 	 * Returns the total number of rides ever performed by a given user.

@@ -1,7 +1,12 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 import java.util.Comparator;
 
+/**
+ * This class is used to sort Station by most used criterion
+ * @author Samuel
+ *
+ */
 public class SortStationByMostUsed implements Comparator<Station> {
 
 	@Override

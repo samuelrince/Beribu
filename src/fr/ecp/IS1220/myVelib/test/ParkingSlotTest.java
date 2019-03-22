@@ -1,18 +1,28 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Bicycle;
-import fr.ecp.IS1220.beribu.ElectricalBike;
-import fr.ecp.IS1220.beribu.Localization;
-import fr.ecp.IS1220.beribu.ParkingSlot;
-import fr.ecp.IS1220.beribu.Station;
-import fr.ecp.IS1220.beribu.SystemDate;
+import fr.ecp.IS1220.myVelib.app.Bicycle;
+import fr.ecp.IS1220.myVelib.app.ElectricalBike;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.ParkingSlot;
+import fr.ecp.IS1220.myVelib.app.Station;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
 
+/**
+ * This class contains Junit tests for ParkingSlot class
+ * @author Samuel
+ *
+ */
 class ParkingSlotTest {
 
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Test is bicycle method
 	 */

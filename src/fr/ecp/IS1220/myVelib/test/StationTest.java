@@ -1,30 +1,44 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Bicycle;
-import fr.ecp.IS1220.beribu.ElectricalBike;
-import fr.ecp.IS1220.beribu.Localization;
-import fr.ecp.IS1220.beribu.MechanicalBike;
-import fr.ecp.IS1220.beribu.ParkingSlot;
-import fr.ecp.IS1220.beribu.Station;
-import fr.ecp.IS1220.beribu.SystemDate;
+import fr.ecp.IS1220.myVelib.app.Bicycle;
+import fr.ecp.IS1220.myVelib.app.ElectricalBike;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.MechanicalBike;
+import fr.ecp.IS1220.myVelib.app.ParkingSlot;
+import fr.ecp.IS1220.myVelib.app.Station;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
 
+/**
+ * This class contains Junit tests for Station class
+ * @author Samuel
+ *
+ */
 class StationTest {
 
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Test initialization
 	 */
 	@Test
 	void initTest001() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		assertDoesNotThrow(() -> {
 			new Station(new Localization(0.1, 0.4), true);
 		});
 	}
 	@Test
 	void initTest002() {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		assertDoesNotThrow(() -> {
 			new Station(new Localization(1.8, 6.0), false);
 		});

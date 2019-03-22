@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +40,13 @@ public class SystemDate {
 	}
 
 	public void setDay(Integer year, Integer month, Integer day) {
+		if (!(this.year == null) && !(this.month == null) && !(this.day == null) && !(this.hour == null) && !(this.minute == null) && !(this.second == null)) {
+			Date d1 = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
+			Date d2 = new Date(year, month, day, this.hour, this.minute, this.second);
+			if (d1.isAfter(d2) && !(d1.equals(d2))) {
+				throw new IllegalArgumentException("You cannot travel back time");
+			}
+		}
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -50,6 +57,13 @@ public class SystemDate {
 	}
 
 	public void setTime(Integer hour, Integer minute, Integer second) {
+		if (!(this.year == null) && !(this.month == null) && !(this.day == null) && !(this.hour == null) && !(this.minute == null) && !(this.second == null)) {
+			Date d1 = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
+			Date d2 = new Date(this.year, this.month, this.day, hour, minute, second);
+			if (d1.isAfter(d2) && !(d1.equals(d2))) {
+				throw new IllegalArgumentException("You cannot travel back time");
+			}
+		}
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;

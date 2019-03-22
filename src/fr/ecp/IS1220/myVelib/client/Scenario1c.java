@@ -1,4 +1,8 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.client;
+
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.MyVelibNetwork;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
 
 public class Scenario1c {
 

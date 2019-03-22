@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 /**
  * This class represents a duration. It is used mainly for purposes of validity
@@ -135,17 +135,5 @@ public class Duration {
 		if (this.duration != other.duration)
 			return false;
 		return true;
-	}
-	
-	public static void main(String[] args) {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019,03,02);
-		SD.setTime(12,24,36);
-		Date date1 = new Date();
-		SD.setDay(2019,03,02);
-		SD.setTime(13,36,50);
-		Date date2 = new Date();
-		Duration duration = new Duration(date1,date2);
-		System.out.println(duration);
 	}
 }

@@ -1,23 +1,33 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Date;
-import fr.ecp.IS1220.beribu.Localization;
-import fr.ecp.IS1220.beribu.MechanicalBike;
-import fr.ecp.IS1220.beribu.ParkingSlot;
-import fr.ecp.IS1220.beribu.Station;
-import fr.ecp.IS1220.beribu.StationBalance;
-import fr.ecp.IS1220.beribu.SystemDate;
-import fr.ecp.IS1220.beribu.User;
+import fr.ecp.IS1220.myVelib.app.Date;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.MechanicalBike;
+import fr.ecp.IS1220.myVelib.app.ParkingSlot;
+import fr.ecp.IS1220.myVelib.app.Station;
+import fr.ecp.IS1220.myVelib.app.StationBalance;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
+import fr.ecp.IS1220.myVelib.app.User;
 
+/**
+ * This class contains Junit tests for StationBalance class
+ * @author Samuel
+ *
+ */
 class StationBalanceTest {
 	//Work In Progress
 	/*
 	 * Test total rent count 
 	 *
+	 *@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	@Test
 	void totalRentCountTest001() {
 		SystemDate SD = SystemDate.getInstance();

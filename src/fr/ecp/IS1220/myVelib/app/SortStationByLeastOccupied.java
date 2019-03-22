@@ -1,7 +1,12 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 import java.util.Comparator;
 
+/**
+ * This calss is used to sort Station by least occupied criterion
+ * @author samuel
+ *
+ */
 public class SortStationByLeastOccupied implements Comparator<Station>{
 	
 	@Override

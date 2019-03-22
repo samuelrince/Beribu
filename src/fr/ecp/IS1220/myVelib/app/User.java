@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 
 import java.util.ArrayList;
@@ -328,10 +328,4 @@ public class User {
 		// TODO Auto-generated method stub
 		return this.name+" (id."+this.id+")";
 	}
-	
-	public static void main(String[] args) {
-		User user1 = new User("Robert Downey Jr.");
-		System.out.println(user1);
-	}
-	
 }

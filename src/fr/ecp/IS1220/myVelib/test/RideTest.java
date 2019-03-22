@@ -1,25 +1,35 @@
-package fr.ecp.IS1220.beribu.test;
+package fr.ecp.IS1220.myVelib.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.beribu.Bicycle;
-import fr.ecp.IS1220.beribu.Date;
-import fr.ecp.IS1220.beribu.Duration;
-import fr.ecp.IS1220.beribu.ElectricalBike;
-import fr.ecp.IS1220.beribu.Localization;
-import fr.ecp.IS1220.beribu.MechanicalBike;
-import fr.ecp.IS1220.beribu.ParkingSlot;
-import fr.ecp.IS1220.beribu.Ride;
-import fr.ecp.IS1220.beribu.Station;
-import fr.ecp.IS1220.beribu.SystemDate;
-import fr.ecp.IS1220.beribu.User;
-import fr.ecp.IS1220.beribu.Vlibre;
-import fr.ecp.IS1220.beribu.Vmax;
+import fr.ecp.IS1220.myVelib.app.Bicycle;
+import fr.ecp.IS1220.myVelib.app.Date;
+import fr.ecp.IS1220.myVelib.app.Duration;
+import fr.ecp.IS1220.myVelib.app.ElectricalBike;
+import fr.ecp.IS1220.myVelib.app.Localization;
+import fr.ecp.IS1220.myVelib.app.MechanicalBike;
+import fr.ecp.IS1220.myVelib.app.ParkingSlot;
+import fr.ecp.IS1220.myVelib.app.Ride;
+import fr.ecp.IS1220.myVelib.app.Station;
+import fr.ecp.IS1220.myVelib.app.SystemDate;
+import fr.ecp.IS1220.myVelib.app.User;
+import fr.ecp.IS1220.myVelib.app.Vlibre;
+import fr.ecp.IS1220.myVelib.app.Vmax;
 
+/**
+ * This class contains Junit tests for Ride class
+ * @author Samuel
+ *
+ */
 class RideTest {
 
+	@AfterEach
+	void afterEach() {
+		SystemDate.delInstance();
+	}
 	/*
 	 * Test initialization
 	 */
@@ -575,9 +585,9 @@ class RideTest {
 			fail("Failed to attach the bike");
 		}
 		u.newRide(s1);
-		SD.setDay(2019, 2, 8);
-		SD.setTime(17, 15, 13);
-		assertThrows(RuntimeException.class, () -> {
+		assertThrows(Exception.class, () -> {
+			SD.setDay(2019, 2, 8);
+			SD.setTime(17, 15, 13);
 			u.getCurrentRide().end(s2.getFreeParkingSlot());
 		});
 	}

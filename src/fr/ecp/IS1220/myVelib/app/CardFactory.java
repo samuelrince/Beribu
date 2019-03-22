@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.beribu;
+package fr.ecp.IS1220.myVelib.app;
 
 /**
  * A card factory used when creating a new subscription (or changing of credit "Standard" card).
