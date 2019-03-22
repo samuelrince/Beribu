@@ -7,10 +7,10 @@ public class Scenario1c {
 		SD.setDay(2019, 02, 17);
 		SD.setTime(19, 22, 37);
 		MyVelibNetwork network = new MyVelibNetwork("Paris");
-		network.createPopStation(new Localization(0,0), false,
-				10, new int[] {5,2});
-		System.out.println(network.getStationDatabase());
-		network.createStations(new Localization(0,0), 5., 2, 1, 10, 70., new double[] {70,30});
+//		network.createStations(new Localization(0,0), 5., 2, 1, 10, 70., new double[] {70,30});
+		network.createPopStation(new Localization(0,0), false, 10,new int[]{0,1});
+		network.createPopStation(new Localization(0,0.1), true, 10,new int[]{2,0});
+		network.createPopStation(new Localization(1,1), true, 10,new int[]{0,0});
 		network.createSubscribers(3, "standard");
 		network.createSubscribers(2, "Vlibre");
 		network.createSubscribers(1, "Vmax");
@@ -19,12 +19,12 @@ public class Scenario1c {
 		SD.setTime(20, 22, 37);
 		network.user(1).newRide(network.station(1));
 		network.user(2).newRide(network.station(1));
-		network.user(1).endCurrentRide(network.station(1));
-		network.user(2).endCurrentRide(network.station(1));
-		network.user(3).planRide(new Localization(1,1), 
-				new Localization(0,0),"electrical");
-		System.out.println(network.station(1).historyTrace());
-		StationBalance.display(network.station(1));
-		UserBalance.display(network.user(1));
+		network.user(3).planRide(new Localization(0,0),
+				new Localization(1,1),"electrical");
+		network.user(4).newRide(network.station(0),"electrical");
+		System.out.println(network.stationDatabaseState());
+		network.user(2).endCurrentRide(network.station(2));
+		network.user(4).endCurrentRide(network.station(2));
+		
 	}
 }

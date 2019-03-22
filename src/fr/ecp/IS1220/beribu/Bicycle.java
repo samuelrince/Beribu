@@ -1,6 +1,7 @@
 package fr.ecp.IS1220.beribu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This abstract class represents a bicycle.
@@ -11,6 +12,8 @@ public abstract class Bicycle {
 	private long id;
 	private static long uniqId;
 	private boolean attached;
+	private static final ArrayList<String> typeDict = new ArrayList<String>(
+			Arrays.asList("MECHANICAL","ELECTRICAL"));
 	
 	public Bicycle() {
 		this.id = uniqId++;
@@ -70,9 +73,6 @@ public abstract class Bicycle {
 	 * @return the dictionary of bicycle types
 	 */
 	public static ArrayList<String> getTypeDict(){
-		ArrayList<String> typeDict = new ArrayList<String>();
-		typeDict.add("MECHANICAL");
-		typeDict.add("ELECTRICAL");	
 		return typeDict;
 	}
 }

@@ -161,6 +161,8 @@ public class User {
 				Bicycle bicycle = station.getBicycle();
 				Ride ride = new Ride(this,bicycle,station);
 				this.listOfRides.add(ride);
+				System.out.println(this+" has started"
+						+ " a new ride from "+station+".");
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
 						this.plannedRide.setBicycleType(bicycle.getType());
@@ -169,8 +171,6 @@ public class User {
 				}
 				station.incRentCount();
 				station.updateStatus();
-				System.out.println(this+" has started"
-						+ " a new ride from "+station+".");
 			}
 			catch(RuntimeException exception) {
 				System.err.println("No bicycle available. Please change to another station.");
@@ -199,6 +199,8 @@ public class User {
 				Bicycle bicycle = station.getBicycle(bicycleType);
 				Ride ride = new Ride(this,bicycle,station);
 				this.listOfRides.add(ride);
+				System.out.println(this+" has started"
+						+ " a new ride from "+station+".");
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
 						this.plannedRide.setBicycleType(bicycle.getType());
@@ -207,8 +209,6 @@ public class User {
 				}
 				station.incRentCount();
 				station.updateStatus();
-				System.out.println(this+" has started"
-						+ " a new ride from "+station+".");
 			}
 			catch(RuntimeException exception) {
 				System.err.println("Please try another bicycle type "
@@ -238,10 +238,10 @@ public class User {
 		else {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
-				station.incReturnCount();
-				station.updateStatus();
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
+				station.incReturnCount();
+				station.updateStatus();
 			}
 		}
 	}

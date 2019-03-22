@@ -1,6 +1,9 @@
 package fr.ecp.IS1220.beribu;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
 
 /**
  * This class represents a MyVelib network. It is a singleton.
@@ -300,6 +303,18 @@ public class MyVelibNetwork {
 		return res+"\n"+"----------------------";
 	}
 	
+	  public void visual2D() {
+		  JFrame frame = new JFrame();
+		  frame.setSize(new Dimension(620,650));
+		  ArrayList<Localization> points=new ArrayList<Localization>();
+		  for (Station s:this.stationDatabase) {
+			  points.add(s.getLocalization());
+		  }
+		  Panneau p=new Panneau(points);
+		  frame.setContentPane(p);
+		  frame.setVisible(true);
+}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -321,5 +336,6 @@ public class MyVelibNetwork {
 		network.createSubscribers(1, "Vmax");
 		System.out.println(network.stationDatabaseState());
 		System.out.println(network.userDatabaseRepresentation());
+		network.visual2D();
 	}
 }

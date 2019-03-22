@@ -478,8 +478,8 @@ public class Station implements Comparable<Station>{
 				if (!this.isBicycle(Bicycle.getTypeDict().get(j))) {
 					for (int i = 0; i < this.targetOf.size(); i++) {
 						if (this.targetOf.get(i).getSuggestedStartStation() == this
-								&& this.targetOf.get(i).getBicycleType() == 
-								Bicycle.getTypeDict().get(j)){
+								&& this.targetOf.get(i).getBicycleType().
+								equalsIgnoreCase(Bicycle.getTypeDict().get(j))) {
 							this.targetOf.get(i).update();
 						}
 					}
