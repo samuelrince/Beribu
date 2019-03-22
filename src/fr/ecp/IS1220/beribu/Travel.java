@@ -98,22 +98,29 @@ public class Travel {
 	 */
 	public void findRide() {
 		ArrayList<Station> startEnd;
-		if (this.bicycleType != null) {
-			startEnd = this.pathStrategy.findPath(
-					this.source, this.destination, this.bicycleType);
+		try{
+			if (this.bicycleType != null) {
+				startEnd = this.pathStrategy.findPath(
+						this.source, this.destination, this.bicycleType);
+			}
+			else {
+				startEnd = this.pathStrategy.findPath(
+						this.source, this.destination);
+			}
+			this.suggestedStartStation = startEnd.get(0);
+			this.suggestedEndStation = startEnd.get(1);
+			this.suggestedStartStation.addTargetOf(this);
+			this.suggestedEndStation.addTargetOf(this);
+			this.previsionDuration = new Duration(this.suggestedStartStation,
+					this.suggestedEndStation, this.pathStrategy.getBicycleType());
+			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.pathStrategy.getBicycleType());		
+			System.out.println(this);
 		}
-		else {
-			startEnd = this.pathStrategy.findPath(
-					this.source, this.destination);
-		}
-		this.suggestedStartStation = startEnd.get(0);
-		this.suggestedEndStation = startEnd.get(1);
-		this.suggestedStartStation.addTargetOf(this);
-		this.suggestedEndStation.addTargetOf(this);
-		this.previsionDuration = new Duration(this.suggestedStartStation,
-				this.suggestedEndStation, this.pathStrategy.getBicycleType());
-		this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.pathStrategy.getBicycleType());		
-		System.out.println(this);
+		catch(RuntimeException e) {this.user.notifyUser("No path can be found on the"
+				+ " network because either no bicycle is available or all stations "
+				+ "are full. Please try initializing a new planned ride with a "
+				+ "different bicycle type or a different path strategy, or try updating"
+				+ " this planned ride later.");}
 	}
 	
 	public void start() {
@@ -184,25 +191,29 @@ public class Travel {
 			this.findRide();
 		}
 		else {
-			Station previousEndStation = this.suggestedEndStation;
-			this.suggestedEndStation.removeTargetOf(this);
-			this.suggestedEndStation = this.destination.getClosestAvailableStation();
-			this.suggestedEndStation.addTargetOf(this);
-			this.previsionDuration = new Duration(this.suggestedStartStation,
-					this.suggestedEndStation, this.bicycleType);
-			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
-			if (previousEndStation.getId() != this.suggestedEndStation.getId()) {
-				this.user.notifyUser("The return station is not available anymore."
-						+ "Your return station has been updated.");
-				System.out.println(this);
+			try {
+				Station previousEndStation = this.suggestedEndStation;
+				this.suggestedEndStation.removeTargetOf(this);
+				this.suggestedEndStation = this.destination.getClosestAvailableStation();
+				this.suggestedEndStation.addTargetOf(this);
+				this.previsionDuration = new Duration(this.suggestedStartStation,
+						this.suggestedEndStation, this.bicycleType);
+				this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
+				if (previousEndStation.getId() != this.suggestedEndStation.getId()) {
+					this.user.notifyUser("The return station is not available anymore."
+							+ "Your return station has been updated.");
+					System.out.println(this);
+				}
+				else {
+					this.user.notifyUser("Your planned ride has been updated.");
+					System.out.println(this);
+				}
 			}
-			else {
-				this.user.notifyUser("Your planned ride has been updated.");
-				System.out.println(this);
-			}
+			catch(RuntimeException e) {this.user.notifyUser("All stations of the network"
+					+ " are full. Please try updating this planned ride later.");}
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return  "----------------------"+"\n"+"Planned ride of "+this.user+" : "+"\n"+
