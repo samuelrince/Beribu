@@ -161,6 +161,8 @@ public class User {
 				Bicycle bicycle = station.getBicycle();
 				Ride ride = new Ride(this,bicycle,station);
 				this.listOfRides.add(ride);
+				System.out.println(this+" has started"
+						+ " a new ride from "+station+".");
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
 						this.plannedRide.setBicycleType(bicycle.getType());
@@ -168,8 +170,7 @@ public class User {
 					}
 				}
 				station.incRentCount();
-				System.out.println(this+" has started"
-						+ " a new ride from "+station+".");
+				station.updateStatus();
 			}
 			catch(RuntimeException exception) {
 				System.err.println("No bicycle available. Please change to another station.");
@@ -199,6 +200,8 @@ public class User {
 				Bicycle bicycle = station.getBicycle(bicycleType);
 				Ride ride = new Ride(this,bicycle,station);
 				this.listOfRides.add(ride);
+				System.out.println(this+" has started"
+						+ " a new ride from "+station+".");
 				if (this.plannedRide != null) {
 					if (this.plannedRide.isOngoing()){
 						this.plannedRide.setBicycleType(bicycle.getType());
@@ -206,8 +209,7 @@ public class User {
 					}
 				}
 				station.incRentCount();
-				System.out.println(this+" has started"
-						+ " a new ride from "+station+".");
+				station.updateStatus();
 			}
 			catch(RuntimeException exception) {
 				System.err.println("Please try another bicycle type "
@@ -232,13 +234,12 @@ public class User {
 	}
 	
 	/**
-	 * This method should be used when a user want to end his current Ride at a
-	 * specified station.
-	 * @param station	The station where to end the ride
-	 * @throws Exception	Occurs when the station is full or when there is no
-	 * parking slot available
+	 * This method should be used when a user wants to end their current Ride in a
+	 * given station.
+	 * @param station	the return station
+	 * @throws Exception	occurs when there is no parking slot available
 	 */
-	public void endCurrentRide(Station station) throws Exception {
+	public void endCurrentRide(Station station) throws RuntimeException,Exception {
 		if (station.isFull())
 			throw new IllegalArgumentException("This station is full.");
 		else {
@@ -247,6 +248,8 @@ public class User {
 				//station.incReturnCount(); TEMPORARY
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
+				station.incReturnCount();
+				station.updateStatus();
 			}
 		}
 	}

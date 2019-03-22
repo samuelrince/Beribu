@@ -31,8 +31,8 @@ public class Travel {
 		this.source = source;
 		this.destination = destination;
 		this.pathStrategy = new MinimalWalking();
-		this.findRide();
 		System.out.println(user+" has initiated a planned ride."+"\n"+this);
+		this.findRide();
 	}	
 	
 	/**
@@ -48,6 +48,7 @@ public class Travel {
 		this.source = source;
 		this.destination = destination;
 		this.pathStrategy = pathStrategy;
+		System.out.println(user+" has initiated a planned ride."+"\n"+this);
 		this.findRide();
 	}
 	/**
@@ -66,6 +67,7 @@ public class Travel {
 		this.destination = destination;
 		this.pathStrategy = pathStrategy;
 		this.bicycleType = bicycleType;	
+		System.out.println(user+" has initiated a planned ride."+"\n"+this);
 		this.findRide();
 	}	
 	/**
@@ -84,6 +86,7 @@ public class Travel {
 		this.destination = destination;
 		this.pathStrategy = new MinimalWalking();
 		this.bicycleType = bicycleType;		
+		System.out.println(user+" has initiated a planned ride.");
 		this.findRide();
 	}
 	
@@ -195,15 +198,17 @@ public class Travel {
 			}
 			else {
 				this.user.notifyUser("Your planned ride has been updated.");
+				System.out.println(this);
 			}
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return  "User : "+this.user+"\n"+"Suggested rental station : "+
-				this.suggestedStartStation+"\n"+"Suggested return station : "
-				+ this.suggestedEndStation+"\n"+"Estimated duration : " +
-				this.previsionDuration+"\n"+"Estimated cost : " + this.getPrevisionCost();
+		return  "----------------------"+"\n"+"Planned ride of "+this.user+" : "+"\n"+
+				"\n"+"Suggested rental station : "+this.suggestedStartStation+"\n"+
+				"Suggested return station : "+ this.suggestedEndStation+"\n"+
+				"Estimated duration : " +this.previsionDuration+"\n"+
+				"Estimated cost : " + this.getPrevisionCost()+"€"+"\n"+"----------------------";
 	}
 }
