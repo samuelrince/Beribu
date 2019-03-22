@@ -9,12 +9,12 @@ import java.text.SimpleDateFormat;
  *
  */
 public class Date {
-	private int year = -1;
-	private int month = -1;
-	private int day = -1;
-	private int hour = -1;
-	private int minute = -1;
-	private int second = -1;
+	private Integer year = null;
+	private Integer month = null;
+	private Integer day = null;
+	private Integer hour = null;
+	private Integer minute = null;
+	private Integer second = null;
 
 	/**
 	 * Constructor of class Date. Creates a new instance of Date taking the
@@ -27,14 +27,14 @@ public class Date {
 	
 	/**
 	 * Constructor of class Date.
-	 * @param year
-	 * @param month
-	 * @param day
-	 * @param hour
-	 * @param minute
-	 * @param second
+	 * @param year	represent the year
+	 * @param month 	represent the month
+	 * @param day	represent the day
+	 * @param hour	represent the hour
+	 * @param minute	represent the minute
+	 * @param second	represent the second
 	 */
-	public Date(int year, int month, int day, int hour, int minute, int second) {
+	public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second) {
 		this.currentDate();
 		this.year = year;
 		this.month = month;
@@ -45,93 +45,81 @@ public class Date {
 		this.isValid();
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		if (year<1970) {
 			throw new IllegalArgumentException("Please enter a year after 1970.");
 		}
 		this.year = year;
-		if (this.isComplete()) {
-			this.isValid();
-		}
+		this.isValid();
 	}
 	
-	public int getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 	
-	public void setMonth(int month) {
+	public void setMonth(Integer month) {
 		if (month<1 || month>12) {
 			throw new IllegalArgumentException("Please enter a valid month"
 					+ " number between 1 and 12.");
 		}
 		this.month = month;
-		if (this.isComplete()) {
-			this.isValid();
-		}
+		this.isValid();
 	}
 
-	public int getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
-	public void setDay(int day) {
+	public void setDay(Integer day) {
 		if (day<1 || day>31) {
 			throw new IllegalArgumentException("Please enter a valid day"
 					+ " number between 1 and 31.");
 		}
 		this.day = day;
-		if (this.isComplete()) {
-			this.isValid();
-		}
+		this.isValid();
 	}
 
-	public int getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
-	public void setHour(int hour) {
+	public void setHour(Integer hour) {
 		if (hour<0 || hour>23) {
 			throw new IllegalArgumentException("Please enter a valid hour"
 					+ " between 0 and 23.");
 		}
 		this.hour = hour;
-		if (this.isComplete()) {
-			this.isValid();
-		}
+		this.isValid();
 	}
 
-	public int getMinute() {
+	public Integer getMinute() {
 		return minute;
 	}
 
-	public void setMinute(int minute) {
+	public void setMinute(Integer minute) {
 		if (minute<0 || minute>59) {
 			throw new IllegalArgumentException("Please enter a valid minute"
 					+ " between 0 and 59.");
 		}
 		this.minute = minute;
-		if (this.isComplete()) {
-			this.isValid();
-		}
+		this.isValid();
 	}
 
-	public int getSecond() {
+	public Integer getSecond() {
 		return second;
 	}
 
-	public void setSecond(int second) {
+	public void setSecond(Integer second) {
 		if (second<0 || second>59) {
 			throw new IllegalArgumentException("Please enter a valid second"
 					+ " between 0 and 59.");
 		}
 		this.second = second;
-		if (this.isComplete()) {
-			this.isValid();
-		}
+		this.isValid();
 	}
 
 	@Override
@@ -222,38 +210,17 @@ public class Date {
 		if (getClass() != obj.getClass())
 			return false;
 		Date other = (Date) obj;
-		if (day != other.day)
+		if (!this.day.equals(other.getDay()))
 			return false;
-		if (hour != other.hour)
+		if (!this.hour.equals(other.getHour()))
 			return false;
-		if (minute != other.minute)
+		if (!this.minute.equals(other.getMinute())) 
 			return false;
-		if (month != other.month)
+		if (!this.month.equals(other.getMonth()))
 			return false;
-		if (second != other.second)
+		if (!this.second.equals(other.getSecond()))
 			return false;
-		if (year != other.year)
-			return false;
-		return true;
-	}
-	
-	/**
-	 * Checks if the current instance of Date object is fully
-	 * filled with coherent values (different from -1).
-	 * @return	true if the date is complete, false otherwise
-	 */
-	private boolean isComplete() {
-		if (this.year == -1)
-			return false;
-		if (this.month == -1)
-			return false;
-		if (this.day == -1)
-			return false;
-		if (this.hour == -1)
-			return false;
-		if (this.minute == -1)
-			return false;
-		if (this.second == -1)
+		if (!this.year.equals(other.getYear()))
 			return false;
 		return true;
 	}
@@ -261,8 +228,7 @@ public class Date {
 	/**
 	 * This method checks the sanity of a Date object. It is called at each 
 	 * instantiation of a new Date. It is also called when using setters
-	 * of Date. To perform date validation on object 
-	 * <b>this</b> the date should be complete (see method isComplete()).
+	 * of Date.
 	 * @return								true if the date is valid
 	 * @throws IllegalArgumentException		if the date is not valid
 	 */
@@ -270,12 +236,12 @@ public class Date {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
 		sdf.setLenient(false);
 		String dateStr = new String();
-		dateStr = String.valueOf(this.getYear()) + '/' + 
-				String.valueOf(this.getMonth()) + '/' + 
-				String.valueOf(this.getDay()) + '-' +
-				String.valueOf(this.getHour()) + ':' +
-				String.valueOf(this.getMinute()) + ':' +
-				String.valueOf(this.getSecond());
+		dateStr = String.valueOf(this.year == null ? 2000 : this.year) + '/' + 
+				String.valueOf(this.month == null ? 1 : this.month) + '/' + 
+				String.valueOf(this.day == null ? 1 : this.day) + '-' +
+				String.valueOf(this.hour == null ? 1 : this.hour) + ':' +
+				String.valueOf(this.minute == null ? 1 : this.minute) + ':' +
+				String.valueOf(this.second == null ? 1 : this.second);
 		try {
 			java.util.Date date = sdf.parse(dateStr);
 		} catch(ParseException e) {

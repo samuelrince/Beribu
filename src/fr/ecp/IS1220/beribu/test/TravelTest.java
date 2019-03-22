@@ -28,8 +28,7 @@ class TravelTest {
 	@Test
 	void initTest001() {
 		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 12); SD.setTime(17, 22, 47);
-		//MyVelibNetwork mvb = MyVelibNetwork.getInstance();
+		SD.setDay(2019, 3, 12); SD.setTime(17, 22, 47);
 		new MyVelibNetwork("Paris");
 		Station s1 = new Station(new Localization(0.0, 0.0), false);
 		Station s2 = new Station(new Localization(5.0, 5.0), false);
@@ -152,7 +151,6 @@ class TravelTest {
 			new Travel(new User("Jean"), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution(), "Electrical");
 		});
 	}
-	
 	
 	
 	/*

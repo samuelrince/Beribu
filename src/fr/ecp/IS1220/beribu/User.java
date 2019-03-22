@@ -67,7 +67,7 @@ public class User {
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in minutes.
-	 * @param minutes
+	 * @param minutes correspond to minutes
 	 */
 	public void addTimeCreditBalance(int minutes) {
 		this.timeCreditBalance.add(minutes);
@@ -76,8 +76,8 @@ public class User {
 	/**
 	 * This method adds time to the user time credit balance.
 	 * The duration to add is expressed in minutes and in seconds.
-	 * @param minutes
-	 * @param seconds
+	 * @param minutes correspond to minutes
+	 * @param seconds correspond to seconds
 	 */
 	public void addTimeCreditBalance(int minutes, int seconds) {
 		this.timeCreditBalance.add(minutes, seconds);
@@ -86,9 +86,9 @@ public class User {
 	/**
 	 * This method adds time to the user credit balance.
 	 * The duration to add is expressed in hours, in minutes and in seconds.
-	 * @param hours
-	 * @param minutes
-	 * @param seconds
+	 * @param hours	correspond to hours
+	 * @param minutes correspond to minutes
+	 * @param seconds correspond to seconds
 	 */
 	public void addTimeCreditBalance(int hours, int minutes, int seconds) {
 		this.timeCreditBalance.add(hours, minutes, seconds);
@@ -190,6 +190,7 @@ public class User {
 	 * and return an error otherwise. 
 	 * 
 	 * @param station	Should be a Station object
+	 * @param bicycleType	A String corresponding to the type of bicycle wanted
 	 * @throws RuntimeException		Throws RuntimeException when a user tries to start
 	 * a new ride without finishing his current ride.
 	 */
@@ -232,12 +233,19 @@ public class User {
 		}
 	}
 	
-	public void endCurrentRide(Station station) throws RuntimeException, Exception {
+	/**
+	 * This method should be used when a user wants to end their current Ride in a
+	 * given station.
+	 * @param station	the return station
+	 * @throws Exception	occurs when there is no parking slot available
+	 */
+	public void endCurrentRide(Station station) throws RuntimeException,Exception {
 		if (station.isFull())
 			throw new IllegalArgumentException("This station is full.");
 		else {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
+				//station.incReturnCount(); TEMPORARY
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
 				station.incReturnCount();

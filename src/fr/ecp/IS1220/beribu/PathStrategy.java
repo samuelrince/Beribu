@@ -28,6 +28,7 @@ public interface PathStrategy {
 	 * a type of bike for the ride.
 	 * @param source the start point of the user
 	 * @param destination the destination of the user
+	 * @param bicycleType a String that to correspond to the type of the bicycle
 	 * @return two stations, one for bike rental and one for bike return
 	 */
 	public ArrayList<Station> findPath(Localization source, 
@@ -37,6 +38,7 @@ public interface PathStrategy {
 	 * Returns the type of bicycle associated to the computed path. <br>
 	 * For example, if the user is indifferent to the type of bicycle, a type of
 	 * bicycle is still going to be associated to the computed path.
+	 * @return a String that to correspond to the type of the bicycle
 	 */
 	public String getBicycleType();
 }

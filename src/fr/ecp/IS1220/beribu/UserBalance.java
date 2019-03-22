@@ -26,7 +26,7 @@ public class UserBalance implements Statistics {
 	 * a given time window.
 	 * @param user the user to analyze
 	 * @param begin the start of the time window
-	 * @end the end of the time window
+	 * @param end the end of the time window
 	 * @return their total number of rides
 	 */
 	public static int numberOfRides(User user, Date begin, Date end) {
