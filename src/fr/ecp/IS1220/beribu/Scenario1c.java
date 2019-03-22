@@ -25,6 +25,5 @@ public class Scenario1c {
 		System.out.println(network.stationDatabaseState());
 		network.user(2).endCurrentRide(network.station(2));
 		network.user(4).endCurrentRide(network.station(2));
-		
 	}
 }
