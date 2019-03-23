@@ -31,7 +31,7 @@ public class Travel {
 		this.source = source;
 		this.destination = destination;
 		this.pathStrategy = new MinimalWalking();
-		System.out.println(user+" has initiated a planned ride."+"\n"+this);
+		System.out.println(user+" has initiated a planned ride."+"\n");
 		this.findRide();
 	}	
 	
@@ -48,7 +48,7 @@ public class Travel {
 		this.source = source;
 		this.destination = destination;
 		this.pathStrategy = pathStrategy;
-		System.out.println(user+" has initiated a planned ride."+"\n"+this);
+		System.out.println(user+" has initiated a planned ride."+"\n");
 		this.findRide();
 	}
 	/**
@@ -67,7 +67,7 @@ public class Travel {
 		this.destination = destination;
 		this.pathStrategy = pathStrategy;
 		this.bicycleType = bicycleType;	
-		System.out.println(user+" has initiated a planned ride."+"\n"+this);
+		System.out.println(user+" has initiated a planned ride."+"\n");
 		this.findRide();
 	}	
 	/**
@@ -216,9 +216,18 @@ public class Travel {
 
 	@Override
 	public String toString() {
+		String rentalString = "Suggested rental station : ";
+		String btype;
+		if (this.ongoing) {
+			btype = "Bicycle type : "+this.bicycleType;
+			rentalString = "Rental station : ";
+		}
+		else
+			btype = "Possible bicycle type : "+this.pathStrategy.getBicycleType();
 		return  "----------------------"+"\n"+"Planned ride of "+this.user+" : "+"\n"+
-				"\n"+"Suggested rental station : "+this.suggestedStartStation+"\n"+
+				"\n"+rentalString+this.suggestedStartStation+"\n"+
 				"Suggested return station : "+ this.suggestedEndStation+"\n"+
+				btype+"\n"+
 				"Estimated duration : " +this.previsionDuration+"\n"+
 				"Estimated cost : " + this.getPrevisionCost()+"€"+"\n"+"----------------------";
 	}

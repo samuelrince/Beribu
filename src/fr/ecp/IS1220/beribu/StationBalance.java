@@ -1,5 +1,7 @@
 package fr.ecp.IS1220.beribu;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
@@ -117,7 +119,7 @@ public class StationBalance implements Statistics {
 				getHistory().size()-1).getTimeStamp(),end).getDuration();
 		occupationTime += numberOfOccupied*elapsedTime;
 		totalTime += parkingSlotStatus.size()*elapsedTime;
-
+				
 		return (double)occupationTime/(double)totalTime;
 	}
 	

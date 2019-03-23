@@ -13,7 +13,7 @@ public abstract class Bicycle {
 	private static long uniqId;
 	private boolean attached;
 	private static final ArrayList<String> typeDict = new ArrayList<String>(
-			Arrays.asList("MECHANICAL","ELECTRICAL"));
+			Arrays.asList("mechanical","electrical"));
 	
 	public Bicycle() {
 		this.id = uniqId++;
@@ -57,10 +57,10 @@ public abstract class Bicycle {
 	 * @throws IllegalArgumentException occurs when a wrong bicycleType is entered
 	 */
 	public static double getSpeed(String bicycleType) throws IllegalArgumentException {
-		if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
+		if (bicycleType.equalsIgnoreCase("mechanical")) {
 			return 15/3.6;
 		}
-		if (bicycleType.equalsIgnoreCase("ELECTRICAL")) {
+		if (bicycleType.equalsIgnoreCase("electrical")) {
 			return 20/3.6;
 		}
 		else {
