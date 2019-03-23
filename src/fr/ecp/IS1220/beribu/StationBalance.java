@@ -81,7 +81,7 @@ public class StationBalance implements Statistics {
 			if (minIndex == station.getHistory().size())
 				throw new RuntimeException("No data for this time window yet.");
 		}
-		maxIndex = minIndex + 1;
+		maxIndex = Math.min(minIndex + 1,station.getHistory().size()-1);
 		while (end.isAfter(station.getHistory().get(maxIndex).getTimeStamp())){
 			maxIndex++;
 			if (maxIndex == station.getHistory().size())
