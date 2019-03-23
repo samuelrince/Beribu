@@ -4,3 +4,12 @@ ie
 perimeter
 km
 regroups
+odeon
+metro
+du
+louvre
+paris
+pyramide
+vaneau
+vlibre
+vmax

@@ -237,7 +237,6 @@ public class User {
 				//station.incReturnCount(); TEMPORARY
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
-				station.incReturnCount();
 				station.updateStatus();
 			}
 		}

@@ -95,6 +95,32 @@ public class MyVelibNetwork {
 		this.stationDatabase.add(station);
 	}
 	
+	public void createPopStation(Localization localization, Boolean isPlus, 
+			int numberOfSlots, int[] numberOfBicycles, String name) {
+		int sum = 0;
+		for (int i = 0; i < numberOfBicycles.length; i++) {
+			if (numberOfBicycles[i] < 0)
+				throw new IllegalArgumentException("The numbers of bicycles should be"
+						+ " positive.");
+			sum += numberOfBicycles[i];
+		}
+		if (sum > numberOfSlots)
+			throw new IllegalArgumentException("The total number of bicycles should"
+					+ " not exceed the number of parking slots created.");
+		ArrayList<String> typeDict = Bicycle.getTypeDict();
+		if (typeDict.size() != numberOfBicycles.length)
+			throw new IllegalArgumentException(typeDict.size()+" numbers of bicycles should be given, "
+					+ "one for each type in the order of appearance in Bicycle.getTypeDict().");
+		Station station = new Station(localization, isPlus,name,numberOfSlots);
+		ArrayList<Bicycle> bList = new ArrayList<Bicycle>();
+		for (int i = 0; i < typeDict.size(); i++) {
+			for (int j = 0; j < numberOfBicycles[i]; j++)
+				bList.add(this.bicycleFactory.newBicycle(typeDict.get(i)));
+		}
+		station.populate(bList);
+		this.stationDatabase.add(station);
+	}
+	
 	/**
 	 * This method creates a number of stations within a circular perimeter 
 	 * defined by a center and a radius. The stations contain a number of parking
