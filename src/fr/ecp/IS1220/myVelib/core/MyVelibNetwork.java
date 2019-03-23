@@ -95,6 +95,32 @@ public class MyVelibNetwork {
 		this.stationDatabase.add(station);
 	}
 	
+	public void createPopStation(Localization localization, Boolean isPlus, 
+			int numberOfSlots, int[] numberOfBicycles, String name) {
+		int sum = 0;
+		for (int i = 0; i < numberOfBicycles.length; i++) {
+			if (numberOfBicycles[i] < 0)
+				throw new IllegalArgumentException("The numbers of bicycles should be"
+						+ " positive.");
+			sum += numberOfBicycles[i];
+		}
+		if (sum > numberOfSlots)
+			throw new IllegalArgumentException("The total number of bicycles should"
+					+ " not exceed the number of parking slots created.");
+		ArrayList<String> typeDict = Bicycle.getTypeDict();
+		if (typeDict.size() != numberOfBicycles.length)
+			throw new IllegalArgumentException(typeDict.size()+" numbers of bicycles should be given, "
+					+ "one for each type in the order of appearance in Bicycle.getTypeDict().");
+		Station station = new Station(localization, isPlus,name,numberOfSlots);
+		ArrayList<Bicycle> bList = new ArrayList<Bicycle>();
+		for (int i = 0; i < typeDict.size(); i++) {
+			for (int j = 0; j < numberOfBicycles[i]; j++)
+				bList.add(this.bicycleFactory.newBicycle(typeDict.get(i)));
+		}
+		station.populate(bList);
+		this.stationDatabase.add(station);
+	}
+	
 	/**
 	 * This method creates a number of stations within a circular perimeter 
 	 * defined by a center and a radius. The stations contain a number of parking
@@ -320,23 +346,5 @@ public class MyVelibNetwork {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "\\MyVelib "+this.name+"/";
-	}
-
-	public static void main(String[] args) {
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 02, 17);
-		SD.setTime(19, 22, 37);
-		MyVelibNetwork network = new MyVelibNetwork("Paris");
-		System.out.println(MyVelibNetwork.getInstance().getName());
-		network.createPopStation(new Localization(0,0), false,
-				10, new int[] {5,2});
-		System.out.println(network.stationDatabase);
-		network.createStations(new Localization(0,0), 5., 3, 1, 10, 70., new double[] {70,30});
-		network.createSubscribers(3, "standard");
-		network.createSubscribers(2, "Vlibre");
-		network.createSubscribers(1, "Vmax");
-		System.out.println(network.stationDatabaseState());
-		System.out.println(network.userDatabaseRepresentation());
-		network.visual2D();
 	}
 }

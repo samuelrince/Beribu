@@ -76,14 +76,21 @@ public class StationBalance {
 		int maxIndex;
 		while (start.isAfter(station.getHistory().get(minIndex).getTimeStamp())){
 			minIndex++;
-			if (minIndex == station.getHistory().size())
-				throw new RuntimeException("No data for this time window yet.");
+			if (minIndex == station.getHistory().size()) {
+				break;
+			}
 		}
-		maxIndex = minIndex + 1;
+		if (minIndex > 0)
+			minIndex--;
+		maxIndex = minIndex;
+		if (!end.isAfter(station.getHistory().get(maxIndex).getTimeStamp()))
+			throw new RuntimeException(station+" did not exist yet during that time window.");
 		while (end.isAfter(station.getHistory().get(maxIndex).getTimeStamp())){
 			maxIndex++;
 			if (maxIndex == station.getHistory().size())
+				maxIndex--;
 				break;
+				
 		}
 		int occupationTime = 0;
 		int totalTime = 0;
@@ -117,7 +124,7 @@ public class StationBalance {
 				getHistory().size()-1).getTimeStamp(),end).getDuration();
 		occupationTime += numberOfOccupied*elapsedTime;
 		totalTime += parkingSlotStatus.size()*elapsedTime;
-
+				
 		return (double)occupationTime/(double)totalTime;
 	}
 	
