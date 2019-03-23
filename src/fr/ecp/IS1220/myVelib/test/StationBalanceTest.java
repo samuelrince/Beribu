@@ -1,18 +1,20 @@
 package fr.ecp.IS1220.myVelib.test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.app.Date;
-import fr.ecp.IS1220.myVelib.app.Localization;
-import fr.ecp.IS1220.myVelib.app.MechanicalBike;
-import fr.ecp.IS1220.myVelib.app.ParkingSlot;
-import fr.ecp.IS1220.myVelib.app.Station;
-import fr.ecp.IS1220.myVelib.app.StationBalance;
-import fr.ecp.IS1220.myVelib.app.SystemDate;
-import fr.ecp.IS1220.myVelib.app.User;
+import fr.ecp.IS1220.myVelib.core.Date;
+import fr.ecp.IS1220.myVelib.core.Localization;
+import fr.ecp.IS1220.myVelib.core.MechanicalBike;
+import fr.ecp.IS1220.myVelib.core.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.Station;
+import fr.ecp.IS1220.myVelib.core.StationBalance;
+import fr.ecp.IS1220.myVelib.core.SystemDate;
+import fr.ecp.IS1220.myVelib.core.User;
 
 /**
  * This class contains Junit tests for StationBalance class
@@ -21,13 +23,14 @@ import fr.ecp.IS1220.myVelib.app.User;
  */
 class StationBalanceTest {
 	//Work In Progress
-	/*
-	 * Test total rent count 
-	 *
-	 *@AfterEach
+	@AfterEach
 	void afterEach() {
 		SystemDate.delInstance();
 	}
+	
+	/*
+	 * Test total rent count 
+	 */	
 	@Test
 	void totalRentCountTest001() {
 		SystemDate SD = SystemDate.getInstance();
@@ -40,6 +43,7 @@ class StationBalanceTest {
 		for (User u : users) {
 			u.newRide(s);
 		}
+		assertTrue(StationBalance.totalRentCount(s) == 9);
 	}
 	
 	@Test
@@ -56,10 +60,10 @@ class StationBalanceTest {
 		
 		for (int i = 0; i < 6; i++) {
 			users.get(i).newRide(s);
-			users.get(i).getCurrentRide().end(s1.getFreeParkingSlot());
+			users.get(i).endCurrentRide(s1);
 		}
 		users.get(9).newRide(s1);
 		users.get(9).getCurrentRide().end(s.getFreeParkingSlot());
+		assertTrue(StationBalance.totalReturnCount(s1) == 5);
 	}
-	*/
 }

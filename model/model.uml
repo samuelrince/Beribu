@@ -4456,6 +4456,3249 @@
                   </ownedOperation>
                 </packagedElement>
               </packagedElement>
+              <packagedElement xmi:type="uml:Package" xmi:id="_0DiGQEzzEemApJ4NBozkFQ" name="test">
+                <packagedElement xmi:type="uml:Class" xmi:id="_0DkigEzzEemApJ4NBozkFQ" name="DateTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0DmXsEzzEemApJ4NBozkFQ" name="afterEach" specification="_0DlwoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Doz8EzzEemApJ4NBozkFQ" name="initTest001" specification="_0DoM4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 10);&#xD;
+    SD.setTime(19, 45, 21);&#xD;
+    Date d = new Date();&#xD;
+    assertTrue((SD.getYear() == d.getYear()) &amp;&amp; (SD.getMonth() == d.getMonth()) &amp;&amp; (SD.getDay() == d.getDay()) &amp;&amp; (SD.getHour() == d.getHour()) &amp;&amp; (SD.getMinute() == d.getMinute()) &amp;&amp; (SD.getSecond() == d.getSecond()));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0DqpIEzzEemApJ4NBozkFQ" name="initTest002" specification="_0DqCEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 10);&#xD;
+    SD.setTime(19, 45, 21);&#xD;
+    Date d = new Date(2019, 3, 10, 19, 45, 21);&#xD;
+    assertTrue(((int) SD.getYear() == (int) d.getYear()) &amp;&amp; ((int) SD.getMonth() == (int) d.getMonth()) &amp;&amp; ((int) SD.getDay() == (int) d.getDay()) &amp;&amp; ((int) SD.getHour() == (int) d.getHour()) &amp;&amp; ((int) SD.getMinute() == (int) d.getMinute()) &amp;&amp; ((int) SD.getSecond() == (int) d.getSecond()));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Du6kEzzEemApJ4NBozkFQ" name="equalsTest001" specification="_0DuTgEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 10);&#xD;
+    SD.setTime(19, 45, 21);&#xD;
+    Date d1 = new Date();&#xD;
+    Date d2 = new Date(2019, 3, 10, 19, 45, 21);&#xD;
+    assertTrue(d1.equals(d2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0DwvwEzzEemApJ4NBozkFQ" name="equalsTest002" specification="_0DwIsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 10);&#xD;
+    SD.setTime(19, 45, 21);&#xD;
+    Date d1 = new Date();&#xD;
+    Date d2 = new Date(2019, 3, 10, 19, 45, 21);&#xD;
+    d2.setDay(4);&#xD;
+    assertNotEquals(d1, d2);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Dyk8EzzEemApJ4NBozkFQ" name="hashCodeTest001" specification="_0Dx94EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 10);&#xD;
+    SD.setTime(19, 45, 21);&#xD;
+    Date d1 = new Date();&#xD;
+    Date d2 = new Date(2019, 3, 10, 19, 45, 21);&#xD;
+    assertEquals(d1.hashCode(), d2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0DzzEEzzEemApJ4NBozkFQ" name="hashCodeTest002" specification="_0DzMAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 10);&#xD;
+    SD.setTime(19, 45, 21);&#xD;
+    Date d1 = new Date();&#xD;
+    Date d2 = new Date(2019, 3, 10, 19, 45, 21);&#xD;
+    d2.setHour(3);&#xD;
+    assertNotEquals(d1.hashCode(), d2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D1BMEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest001" specification="_0D0aIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date(2018, 12, 31, 23, 59, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D2PUUzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest002" specification="_0D2PUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date(2020, 2, 29, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D3dcEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest003" specification="_0D22YEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date(2024, 02, 29, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D4EgUzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest004" specification="_0D4EgEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date(2028, 04, 30, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D5SoEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest005" specification="_0D4rkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date(2028, 03, 31, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D55sUzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest006" specification="_0D55sEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D7u4EzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest007" specification="_0D7H0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2028, 2, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D8V8UzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest008" specification="_0D8V8EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2020, 2, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D9kEUzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest009" specification="_0D9kEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2020, 04, 30);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0D-yMEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest010" specification="_0D-LIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2020, 03, 31);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EAAUEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest001" specification="_0D_ZQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2028, 4, 31, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EBOcEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest002" specification="_0EAnYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 29, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EB1gUzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest003" specification="_0EB1gEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 28, 24, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EDDoUzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest004" specification="_0EDDoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 28, 10, -1, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EERwEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest005" specification="_0EDqsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 28, 10, 10, 61);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EGG8EzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest006" specification="_0EFf4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 28, 10, 10, -1);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EHVEEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest007" specification="_0EGuAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 28, 10, 61, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EIjMEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest008" specification="_0EH8IEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 2, 28, -1, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EJKQUzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest009" specification="_0EJKQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(-1, 2, 28, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EKYYUzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest010" specification="_0EKYYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, 13, 28, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ELmgEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest011" specification="_0EK_cEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 1, 1);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        new Date(2019, -1, 28, 10, 10, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EM0oEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest012" specification="_0EMNkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2019, 2, 29);&#xD;
+        SD.setTime(10, 10, 10);&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EOCwEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest013" specification="_0ENbsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2019, 4, 31);&#xD;
+        SD.setTime(10, 10, 10);&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EOp0UzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest014" specification="_0EOp0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2019, 11, 31);&#xD;
+        SD.setTime(10, 10, 10);&#xD;
+        new Date();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EP38EzzEemApJ4NBozkFQ" name="correctDateSetTest001" specification="_0EPQ4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2020, 2, 28, 19, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        d.setDay(29);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ERGEEzzEemApJ4NBozkFQ" name="correctDateSetTest002" specification="_0EQfAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        d.setYear(2021);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ERtIUzzEemApJ4NBozkFQ" name="correctDateSetTest003" specification="_0ERtIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        d.setMonth(10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ES7QEzzEemApJ4NBozkFQ" name="correctDateSetTest004" specification="_0ESUMEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        d.setHour(20);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ETiUUzzEemApJ4NBozkFQ" name="correctDateSetTest005" specification="_0ETiUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        d.setMinute(20);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EUwcUzzEemApJ4NBozkFQ" name="correctDateSetTest006" specification="_0EUwcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        d.setSecond(20);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EV-kEzzEemApJ4NBozkFQ" name="wrongDateSetTest001" specification="_0EVXgEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setDay(-1);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EXMsEzzEemApJ4NBozkFQ" name="wrongDateSetTest002" specification="_0EWloEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setDay(29);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EXzwUzzEemApJ4NBozkFQ" name="wrongDateSetTest003" specification="_0EXzwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setMonth(13);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EZB4UzzEemApJ4NBozkFQ" name="wrongDateSetTest004" specification="_0EZB4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setMonth(0);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EaQAEzzEemApJ4NBozkFQ" name="wrongDateSetTest005" specification="_0EZo8EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setYear(1969);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Ea3EUzzEemApJ4NBozkFQ" name="wrongDateSetTest006" specification="_0Ea3EEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setMonth(-1);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EcFMEzzEemApJ4NBozkFQ" name="wrongDateSetTest007" specification="_0EbeIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setHour(24);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EcsQUzzEemApJ4NBozkFQ" name="wrongDateSetTest008" specification="_0EcsQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setHour(-1);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Ed6YEzzEemApJ4NBozkFQ" name="wrongDateSetTest009" specification="_0EdTUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setMinute(-1);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EehcUzzEemApJ4NBozkFQ" name="wrongDateSetTest010" specification="_0EehcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setMinute(60);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EfvkUzzEemApJ4NBozkFQ" name="wrongDateSetTest011" specification="_0EfvkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setSecond(60);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Eg9sEzzEemApJ4NBozkFQ" name="wrongDateSetTest012" specification="_0EgWoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 11, 29);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date d = new Date(2019, 2, 28, 19, 10, 10);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        d.setSecond(-1);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0DlwoEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0DmXsEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0DoM4EzzEemApJ4NBozkFQ" name="initTest001" visibility="private" method="_0Doz8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0DqCEEzzEemApJ4NBozkFQ" name="initTest002" visibility="private" method="_0DqpIEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0DuTgEzzEemApJ4NBozkFQ" name="equalsTest001" visibility="private" method="_0Du6kEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0DwIsEzzEemApJ4NBozkFQ" name="equalsTest002" visibility="private" method="_0DwvwEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Dx94EzzEemApJ4NBozkFQ" name="hashCodeTest001" visibility="private" method="_0Dyk8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0DzMAEzzEemApJ4NBozkFQ" name="hashCodeTest002" visibility="private" method="_0DzzEEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D0aIEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest001" visibility="private" method="_0D1BMEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D2PUEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest002" visibility="private" method="_0D2PUUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D22YEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest003" visibility="private" method="_0D3dcEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D4EgEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest004" visibility="private" method="_0D4EgUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D4rkEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest005" visibility="private" method="_0D5SoEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D55sEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest006" visibility="private" method="_0D55sUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D7H0EzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest007" visibility="private" method="_0D7u4EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D8V8EzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest008" visibility="private" method="_0D8V8UzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D9kEEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest009" visibility="private" method="_0D9kEUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D-LIEzzEemApJ4NBozkFQ" name="correctDateAtInstantiationTest010" visibility="private" method="_0D-yMEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0D_ZQEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest001" visibility="private" method="_0EAAUEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EAnYEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest002" visibility="private" method="_0EBOcEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EB1gEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest003" visibility="private" method="_0EB1gUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EDDoEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest004" visibility="private" method="_0EDDoUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EDqsEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest005" visibility="private" method="_0EERwEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EFf4EzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest006" visibility="private" method="_0EGG8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EGuAEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest007" visibility="private" method="_0EHVEEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EH8IEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest008" visibility="private" method="_0EIjMEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EJKQEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest009" visibility="private" method="_0EJKQUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EKYYEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest010" visibility="private" method="_0EKYYUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EK_cEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest011" visibility="private" method="_0ELmgEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EMNkEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest012" visibility="private" method="_0EM0oEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ENbsEzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest013" visibility="private" method="_0EOCwEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EOp0EzzEemApJ4NBozkFQ" name="wrongDateAtInstantiationTest014" visibility="private" method="_0EOp0UzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EPQ4EzzEemApJ4NBozkFQ" name="correctDateSetTest001" visibility="private" method="_0EP38EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EQfAEzzEemApJ4NBozkFQ" name="correctDateSetTest002" visibility="private" method="_0ERGEEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ERtIEzzEemApJ4NBozkFQ" name="correctDateSetTest003" visibility="private" method="_0ERtIUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ESUMEzzEemApJ4NBozkFQ" name="correctDateSetTest004" visibility="private" method="_0ES7QEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ETiUEzzEemApJ4NBozkFQ" name="correctDateSetTest005" visibility="private" method="_0ETiUUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EUwcEzzEemApJ4NBozkFQ" name="correctDateSetTest006" visibility="private" method="_0EUwcUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EVXgEzzEemApJ4NBozkFQ" name="wrongDateSetTest001" visibility="private" method="_0EV-kEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EWloEzzEemApJ4NBozkFQ" name="wrongDateSetTest002" visibility="private" method="_0EXMsEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EXzwEzzEemApJ4NBozkFQ" name="wrongDateSetTest003" visibility="private" method="_0EXzwUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EZB4EzzEemApJ4NBozkFQ" name="wrongDateSetTest004" visibility="private" method="_0EZB4UzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EZo8EzzEemApJ4NBozkFQ" name="wrongDateSetTest005" visibility="private" method="_0EaQAEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Ea3EEzzEemApJ4NBozkFQ" name="wrongDateSetTest006" visibility="private" method="_0Ea3EUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EbeIEzzEemApJ4NBozkFQ" name="wrongDateSetTest007" visibility="private" method="_0EcFMEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EcsQEzzEemApJ4NBozkFQ" name="wrongDateSetTest008" visibility="private" method="_0EcsQUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EdTUEzzEemApJ4NBozkFQ" name="wrongDateSetTest009" visibility="private" method="_0Ed6YEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EehcEzzEemApJ4NBozkFQ" name="wrongDateSetTest010" visibility="private" method="_0EehcUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EfvkEzzEemApJ4NBozkFQ" name="wrongDateSetTest011" visibility="private" method="_0EfvkUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EgWoEzzEemApJ4NBozkFQ" name="wrongDateSetTest012" visibility="private" method="_0Eg9sEzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0El2MEzzEemApJ4NBozkFQ" name="DurationTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EnEUEzzEemApJ4NBozkFQ" name="afterEach" specification="_0EmdQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EnrYUzzEemApJ4NBozkFQ" name="addDuration001" specification="_0EnrYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration = new Duration(date1, date2);&#xD;
+    assertTrue(duration.getDuration() == 6615);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EnrY0zzEemApJ4NBozkFQ" name="addDuration002" specification="_0EnrYkzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 02, 01, 21, 33, 12);&#xD;
+    Duration duration = new Duration(date1, date2);&#xD;
+    assertTrue(duration.getDuration() == 93015);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EoScUzzEemApJ4NBozkFQ" name="addDuration003" specification="_0EoScEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date2 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date1 = new Date(2019, 02, 01, 21, 33, 12);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        Duration duration = new Duration(date1, date2);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EoSc0zzEemApJ4NBozkFQ" name="addTest001" specification="_0EoSckzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration = new Duration(date1, date2);&#xD;
+    duration.add(2);&#xD;
+    assertTrue(duration.getDuration() == 6735);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EoSdUzzEemApJ4NBozkFQ" name="addTest002" specification="_0EoSdEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration = new Duration(date1, date2);&#xD;
+    duration.add(2, 30);&#xD;
+    assertTrue(duration.getDuration() == 6765);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Eo5gUzzEemApJ4NBozkFQ" name="addTest003" specification="_0Eo5gEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration = new Duration(date1, date2);&#xD;
+    duration.add(2, 30, 15);&#xD;
+    assertTrue(duration.getDuration() == 15630);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Eo5g0zzEemApJ4NBozkFQ" name="equalityTest001" specification="_0Eo5gkzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration1 = new Duration(date1, date2);&#xD;
+    Duration duration2 = new Duration(date1, date2);&#xD;
+    assertTrue(duration1.equals(duration2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Eo5hUzzEemApJ4NBozkFQ" name="equalityTest002" specification="_0Eo5hEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Date date3 = new Date(2019, 01, 31, 17, 42, 57);&#xD;
+    Date date4 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration1 = new Duration(date1, date2);&#xD;
+    Duration duration2 = new Duration(date3, date4);&#xD;
+    assertFalse(duration1.equals(duration2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EpgkEzzEemApJ4NBozkFQ" name="hashCodeTest001" specification="_0Eo5hkzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration1 = new Duration(date1, date2);&#xD;
+    Duration duration2 = new Duration(date1, date2);&#xD;
+    assertTrue(duration1.hashCode() == duration2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EpgkkzzEemApJ4NBozkFQ" name="hashCodeTest002" specification="_0EpgkUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 20);&#xD;
+    SD.setTime(10, 10, 10);&#xD;
+    Date date1 = new Date(2019, 01, 31, 19, 42, 57);&#xD;
+    Date date2 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Date date3 = new Date(2019, 01, 31, 17, 42, 57);&#xD;
+    Date date4 = new Date(2019, 01, 31, 21, 33, 12);&#xD;
+    Duration duration1 = new Duration(date1, date2);&#xD;
+    Duration duration2 = new Duration(date3, date4);&#xD;
+    assertFalse(duration1.hashCode() == duration2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EmdQEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0EnEUEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EnrYEzzEemApJ4NBozkFQ" name="addDuration001" visibility="private" method="_0EnrYUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EnrYkzzEemApJ4NBozkFQ" name="addDuration002" visibility="private" method="_0EnrY0zzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EoScEzzEemApJ4NBozkFQ" name="addDuration003" visibility="private" method="_0EoScUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EoSckzzEemApJ4NBozkFQ" name="addTest001" visibility="private" method="_0EoSc0zzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EoSdEzzEemApJ4NBozkFQ" name="addTest002" visibility="private" method="_0EoSdUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Eo5gEzzEemApJ4NBozkFQ" name="addTest003" visibility="private" method="_0Eo5gUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Eo5gkzzEemApJ4NBozkFQ" name="equalityTest001" visibility="private" method="_0Eo5g0zzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Eo5hEzzEemApJ4NBozkFQ" name="equalityTest002" visibility="private" method="_0Eo5hUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Eo5hkzzEemApJ4NBozkFQ" name="hashCodeTest001" visibility="private" method="_0EpgkEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EpgkUzzEemApJ4NBozkFQ" name="hashCodeTest002" visibility="private" method="_0EpgkkzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0Esj4EzzEemApJ4NBozkFQ" name="LocalizationTest">
+                  <ownedAttribute xmi:type="uml:Property" xmi:id="_0EtK8EzzEemApJ4NBozkFQ" name="DELTA" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                    <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_6j0jABydEduyofBvg4RL2w"/>
+                    <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_0EuZEEzzEemApJ4NBozkFQ" name="defaultValue">
+                      <language>JAVA</language>
+                      <body>1e-14</body>
+                    </defaultValue>
+                  </ownedAttribute>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EvnMUzzEemApJ4NBozkFQ" name="afterEach" specification="_0EvnMEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Ew1UUzzEemApJ4NBozkFQ" name="test001" specification="_0Ew1UEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc = new Localization(1.0, 1.0);&#xD;
+    assertTrue(loc.getLatitude() == 1.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EyDcEzzEemApJ4NBozkFQ" name="test002" specification="_0ExcYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc = new Localization(1.0, 1.0);&#xD;
+    assertTrue(loc.getLongitude() == 1.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0EzRkEzzEemApJ4NBozkFQ" name="test003" specification="_0EyqgEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc = new Localization(1.0, 1.0);&#xD;
+    loc.setLatitude(1.2);&#xD;
+    assertTrue(loc.getLatitude() == 1.2);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E0fsEzzEemApJ4NBozkFQ" name="test004" specification="_0Ez4oEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc = new Localization(1.0, 1.0);&#xD;
+    loc.setLongitude(1.2);&#xD;
+    assertTrue(loc.getLongitude() == 1.2);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E1GwUzzEemApJ4NBozkFQ" name="test005" specification="_0E1GwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(1.0, 2.0);&#xD;
+    Localization loc2 = new Localization(1.0, 2.0);&#xD;
+    assertTrue(loc1.equals(loc2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E2U4EzzEemApJ4NBozkFQ" name="test006" specification="_0E1t0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(1.0, 2.0);&#xD;
+    Localization loc2 = new Localization(1.0, 1.0);&#xD;
+    assertFalse(loc1.equals(loc2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E3jAEzzEemApJ4NBozkFQ" name="test007" specification="_0E278EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(2.0, 1.0);&#xD;
+    Localization loc2 = new Localization(1.0, 1.0);&#xD;
+    assertFalse(loc1.equals(loc2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E5_QEzzEemApJ4NBozkFQ" name="test008" specification="_0E4xIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(2.0, 2.0);&#xD;
+    Localization loc2 = new Localization(1.0, 1.0);&#xD;
+    assertFalse(loc1.equals(loc2));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E70cEzzEemApJ4NBozkFQ" name="test009" specification="_0E7NYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(1.0, 2.0);&#xD;
+    Localization loc2 = new Localization(1.0, 2.0);&#xD;
+    assertTrue(loc1.hashCode() == loc2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E9poEzzEemApJ4NBozkFQ" name="test010" specification="_0E9CkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(1.0, 2.0);&#xD;
+    Localization loc2 = new Localization(1.0, 1.0);&#xD;
+    assertFalse(loc1.hashCode() == loc2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0E-QsUzzEemApJ4NBozkFQ" name="test011" specification="_0E-QsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(2.0, 1.0);&#xD;
+    Localization loc2 = new Localization(1.0, 1.0);&#xD;
+    assertFalse(loc1.hashCode() == loc2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FAF4EzzEemApJ4NBozkFQ" name="test012" specification="_0E_e0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    Localization loc1 = new Localization(2.0, 2.0);&#xD;
+    Localization loc2 = new Localization(1.0, 1.0);&#xD;
+    assertFalse(loc1.hashCode() == loc2.hashCode());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EvnMEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0EvnMUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Ew1UEzzEemApJ4NBozkFQ" name="test001" visibility="private" method="_0Ew1UUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ExcYEzzEemApJ4NBozkFQ" name="test002" visibility="private" method="_0EyDcEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0EyqgEzzEemApJ4NBozkFQ" name="test003" visibility="private" method="_0EzRkEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Ez4oEzzEemApJ4NBozkFQ" name="test004" visibility="private" method="_0E0fsEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E1GwEzzEemApJ4NBozkFQ" name="test005" visibility="private" method="_0E1GwUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E1t0EzzEemApJ4NBozkFQ" name="test006" visibility="private" method="_0E2U4EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E278EzzEemApJ4NBozkFQ" name="test007" visibility="private" method="_0E3jAEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E4xIEzzEemApJ4NBozkFQ" name="test008" visibility="private" method="_0E5_QEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E7NYEzzEemApJ4NBozkFQ" name="test009" visibility="private" method="_0E70cEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E9CkEzzEemApJ4NBozkFQ" name="test010" visibility="private" method="_0E9poEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E-QsEzzEemApJ4NBozkFQ" name="test011" visibility="private" method="_0E-QsUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0E_e0EzzEemApJ4NBozkFQ" name="test012" visibility="private" method="_0FAF4EzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0FFlcEzzEemApJ4NBozkFQ" name="ParkingSlotTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FHaoEzzEemApJ4NBozkFQ" name="afterEach" specification="_0FGzkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FIowUzzEemApJ4NBozkFQ" name="isBicycleTest001" specification="_0FIowEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p = new ParkingSlot(s);&#xD;
+    p.setOffline(true);&#xD;
+    assertTrue(p.isOffline());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FJP0EzzEemApJ4NBozkFQ" name="isBicycleTest002" specification="_0FIowkzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p = new ParkingSlot(s);&#xD;
+    p.setOffline(true);&#xD;
+    p.setOffline(false);&#xD;
+    assertFalse(p.isOffline());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FKd8EzzEemApJ4NBozkFQ" name="attachBicycleTest001" specification="_0FJ24EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p = new ParkingSlot(s);&#xD;
+    Bicycle b = new ElectricalBike();&#xD;
+    p.attachBicycle(b);&#xD;
+    assertEquals(p.getBicycle(), s.getParkingSlots().get(0).getBicycle());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FMTIEzzEemApJ4NBozkFQ" name="attachBicycleTest002" specification="_0FLsEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s1 = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p1 = new ParkingSlot(s1);&#xD;
+    ParkingSlot p2 = new ParkingSlot(s1);&#xD;
+    Bicycle b = new ElectricalBike();&#xD;
+    p1.attachBicycle(b);&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        p2.attachBicycle(b);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FM6MUzzEemApJ4NBozkFQ" name="attachBicycleTest003" specification="_0FM6MEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s1 = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p1 = new ParkingSlot(s1);&#xD;
+    Bicycle b1 = new ElectricalBike();&#xD;
+    Bicycle b2 = new ElectricalBike();&#xD;
+    p1.attachBicycle(b1);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        p1.attachBicycle(b2);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FOvYEzzEemApJ4NBozkFQ" name="setOfflineTest001" specification="_0FOIUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p = new ParkingSlot(s);&#xD;
+    p.setOffline(true);&#xD;
+    assertEquals(p.isOffline(), s.getParkingSlots().get(0).isOffline());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FGzkEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0FHaoEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FIowEzzEemApJ4NBozkFQ" name="isBicycleTest001" visibility="private" method="_0FIowUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FIowkzzEemApJ4NBozkFQ" name="isBicycleTest002" visibility="private" method="_0FJP0EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FJ24EzzEemApJ4NBozkFQ" name="attachBicycleTest001" visibility="private" method="_0FKd8EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FLsEEzzEemApJ4NBozkFQ" name="attachBicycleTest002" visibility="private" method="_0FMTIEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FM6MEzzEemApJ4NBozkFQ" name="attachBicycleTest003" visibility="private" method="_0FM6MUzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FOIUEzzEemApJ4NBozkFQ" name="setOfflineTest001" visibility="private" method="_0FOvYEzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0Fd_8EzzEemApJ4NBozkFQ" name="RideTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FfOEEzzEemApJ4NBozkFQ" name="afterEach" specification="_0FenAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FhDQEzzEemApJ4NBozkFQ" name="initTest001" specification="_0FgcMEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Bicycle b = new ElectricalBike();&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Ride(u, b, s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FhDQkzzEemApJ4NBozkFQ" name="initTest002" specification="_0FhDQUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    Station s = new Station(new Localization(2.0, 3.0), false);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Ride(u, b, s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FjfgEzzEemApJ4NBozkFQ" name="initTest003" specification="_0Fi4cEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    Station s = new Station(new Localization(2.0, 3.0), true);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Ride(u, b, s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FlUsEzzEemApJ4NBozkFQ" name="initTest004" specification="_0FktoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    User u2 = new User(&quot;Paul&quot;);&#xD;
+    Bicycle b1 = new MechanicalBike();&#xD;
+    Bicycle b2 = new ElectricalBike();&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(0.1, 0.0), false);&#xD;
+    Ride r1 = new Ride(u1, b1, s1);&#xD;
+    Ride r2 = new Ride(u2, b2, s2);&#xD;
+    assertFalse(r1.getId() == r2.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Fnw8EzzEemApJ4NBozkFQ" name="endTest001" specification="_0FnJ4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FtQgEzzEemApJ4NBozkFQ" name="endTest002" specification="_0Fo_EEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b1 = new MechanicalBike();&#xD;
+    Bicycle b2 = new ElectricalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b1);&#xD;
+    s2.getParkingSlots().get(0).attachBicycle(b2);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    System.out.println(s2.getParkingSlots().get(0).isBicycle());&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.getCurrentRide().end(s2.getParkingSlots().get(0));&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FvswEzzEemApJ4NBozkFQ" name="endTest003" specification="_0FueoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    assertEquals(new Duration(new Date(2019, 3, 8, 13, 13, 13), new Date(2019, 3, 8, 13, 24, 56)), u.getListOfRides().get(0).getDuration());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FyJAEzzEemApJ4NBozkFQ" name="endTest004" specification="_0Fw64EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    assertEquals(new Date(2019, 3, 8, 13, 24, 56), u.getListOfRides().get(0).getEndTime());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FywEEzzEemApJ4NBozkFQ" name="endTest005" specification="_0FyJAUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    assertEquals(new Date(2019, 3, 8, 13, 13, 13), u.getListOfRides().get(0).getStartTime());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0FzXIUzzEemApJ4NBozkFQ" name="endTest006" specification="_0FzXIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    assertEquals(s2, u.getListOfRides().get(0).getEndStation());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0F2acEzzEemApJ4NBozkFQ" name="endTest007" specification="_0F1MUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    assertEquals(s1, u.getListOfRides().get(0).getStartStation());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0F4PoEzzEemApJ4NBozkFQ" name="endTest008" specification="_0F3BgEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    SD.setTime(13, 24, 56);&#xD;
+    u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    assertEquals(false, u.getListOfRides().get(0).isCurrent());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0F6E0EzzEemApJ4NBozkFQ" name="endTest009" specification="_0F42sEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(5.0, 3.0), true);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    s1.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    u.newRide(s1);&#xD;
+    assertEquals(true, u.getCurrentRide().isCurrent());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0F76AEzzEemApJ4NBozkFQ" name="endRideTest001" specification="_0F7S8EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(16, 13, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 3h &#xD;
+    // Its a mechanical bicycle&#xD;
+    // The user did not subscribe &#xD;
+    // The user time credit balance is null&#xD;
+    // => price should be 3.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0F-WQEzzEemApJ4NBozkFQ" name="endRideTest002" specification="_0F9vMEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vlibre(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(16, 13, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 3h &#xD;
+    // Its a mechanical bicycle&#xD;
+    // The user did subscribe to Vlibre &#xD;
+    // The user time credit balance is null&#xD;
+    // => price should be 2.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 2.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GAygEzzEemApJ4NBozkFQ" name="endRideTest003" specification="_0GALcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(16, 13, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 3h &#xD;
+    // Its a mechanical bicycle&#xD;
+    // The user did subscribe to Vmax &#xD;
+    // The user time credit balance is null&#xD;
+    // => price should be 2.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 2.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GCAoEzzEemApJ4NBozkFQ" name="endRideTest004" specification="_0GBZkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 13, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a electrical bicycle&#xD;
+    // The user did not subscribe &#xD;
+    // The user time credit balance is null&#xD;
+    // => price should be 8.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 8.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GDOwUzzEemApJ4NBozkFQ" name="endRideTest005" specification="_0GDOwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vlibre(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 13, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a electrical bicycle&#xD;
+    // The user did subscribe to a Vlibre card&#xD;
+    // The user time credit balance is null&#xD;
+    // => price should be 7.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 7.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GFD8EzzEemApJ4NBozkFQ" name="endRideTest006" specification="_0GEc4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 13, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 13, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a electrical bicycle&#xD;
+    // The user did subscribe to a Vmax card&#xD;
+    // The user time credit balance is null&#xD;
+    // => price should be 3.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GFrAUzzEemApJ4NBozkFQ" name="endRideTest007" specification="_0GFrAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vlibre(u));&#xD;
+    u.addTimeCreditBalance(45);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a mechanical bicycle&#xD;
+    // The user did subscribe to a Vlibre card&#xD;
+    // The user time credit balance is 45minutes&#xD;
+    // => price should be 3.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GG5IUzzEemApJ4NBozkFQ" name="endRideTest008" specification="_0GG5IEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    u.addTimeCreditBalance(75);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a mechanical bicycle&#xD;
+    // The user did subscribe to a Vmax card&#xD;
+    // The user time credit balance is 75minutes&#xD;
+    // => price should be 2.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 2.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GJVYEzzEemApJ4NBozkFQ" name="endRideTest009" specification="_0GIuUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vlibre(u));&#xD;
+    u.addTimeCreditBalance(45);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a electrical bicycle&#xD;
+    // The user did subscribe to a Vlibre card&#xD;
+    // The user time credit balance is 45minutes&#xD;
+    // => price should be 7.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 7.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GJ8cUzzEemApJ4NBozkFQ" name="endRideTest0010" specification="_0GJ8cEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    u.addTimeCreditBalance(45);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    // The duration is 4h &#xD;
+    // Its a electrical bicycle&#xD;
+    // The user did subscribe to a Vmax card&#xD;
+    // The user time credit balance is 45minutes&#xD;
+    // => price should be 3.0&#xD;
+    assertTrue(u.getListOfRides().get(0).getPrice() == 3.0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GMYsEzzEemApJ4NBozkFQ" name="endRideTest0011" specification="_0GLxoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    u.addTimeCreditBalance(45);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    assertThrows(Exception.class, () -> {&#xD;
+        SD.setDay(2019, 2, 8);&#xD;
+        SD.setTime(17, 15, 13);&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GM_wUzzEemApJ4NBozkFQ" name="endRideTest0012" specification="_0GM_wEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    u.addTimeCreditBalance(45);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 20, 33);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    Duration d = new Duration();&#xD;
+    d.add(4, 5, 20);&#xD;
+    assertEquals(d, u.getListOfRides().get(0).getDuration());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GON4EzzEemApJ4NBozkFQ" name="endRideTest0011b" specification="_0GNm0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), false);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    assertEquals(new Duration(), u.getTimeCreditBalance());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GQDEEzzEemApJ4NBozkFQ" name="endRideTest0012b" specification="_0GO08EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    assertEquals(new Duration(), u.getTimeCreditBalance());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GQqIUzzEemApJ4NBozkFQ" name="endRideTest0013b" specification="_0GQqIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vlibre(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), false);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    assertEquals(new Duration(), u.getTimeCreditBalance());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GSfUUzzEemApJ4NBozkFQ" name="endRideTest0014b" specification="_0GSfUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vlibre(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    Duration d = new Duration();&#xD;
+    d.setDuration(5 * 60);&#xD;
+    assertEquals(d, u.getTimeCreditBalance());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GTtcEzzEemApJ4NBozkFQ" name="endRideTest0015b" specification="_0GTGYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), false);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    assertEquals(new Duration(), u.getTimeCreditBalance());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GVioEzzEemApJ4NBozkFQ" name="endRideTest0016b" specification="_0GU7kEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    try {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to find a free parking slot&quot;);&#xD;
+    }&#xD;
+    Duration d = new Duration();&#xD;
+    d.setDuration(5 * 60);&#xD;
+    assertEquals(d, u.getTimeCreditBalance());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GWwwUzzEemApJ4NBozkFQ" name="endRideTest17" specification="_0GWwwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GX-4EzzEemApJ4NBozkFQ" name="endRideTest18" specification="_0GXX0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.subscribe(new Vmax(u));&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    Station s2 = new Station(new Localization(2.1, 3.1), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    new ParkingSlot(s2);&#xD;
+    try {&#xD;
+        s2.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.getCurrentRide().end(s2.getFreeParkingSlot());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GZ0EEzzEemApJ4NBozkFQ" name="endRideTest19" specification="_0GZNAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(13, 15, 13);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Station s1 = new Station(new Localization(2.0, 3.0), true);&#xD;
+    new ParkingSlot(s1);&#xD;
+    try {&#xD;
+        s1.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    u.newRide(s1);&#xD;
+    SD.setDay(2019, 3, 8);&#xD;
+    SD.setTime(17, 15, 13);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        u.getCurrentRide().end(s1.getFreeParkingSlot());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FenAEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0FfOEEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FgcMEzzEemApJ4NBozkFQ" name="initTest001" visibility="private" method="_0FhDQEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FhDQUzzEemApJ4NBozkFQ" name="initTest002" visibility="private" method="_0FhDQkzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Fi4cEzzEemApJ4NBozkFQ" name="initTest003" visibility="private" method="_0FjfgEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FktoEzzEemApJ4NBozkFQ" name="initTest004" visibility="private" method="_0FlUsEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FnJ4EzzEemApJ4NBozkFQ" name="endTest001" visibility="private" method="_0Fnw8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Fo_EEzzEemApJ4NBozkFQ" name="endTest002" visibility="private" method="_0FtQgEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ _0FpmIEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FueoEzzEemApJ4NBozkFQ" name="endTest003" visibility="private" method="_0FvswEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Fw64EzzEemApJ4NBozkFQ" name="endTest004" visibility="private" method="_0FyJAEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FyJAUzzEemApJ4NBozkFQ" name="endTest005" visibility="private" method="_0FywEEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0FzXIEzzEemApJ4NBozkFQ" name="endTest006" visibility="private" method="_0FzXIUzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0F1MUEzzEemApJ4NBozkFQ" name="endTest007" visibility="private" method="_0F2acEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0F3BgEzzEemApJ4NBozkFQ" name="endTest008" visibility="private" method="_0F4PoEzzEemApJ4NBozkFQ" raisedException="_0FpmIEzzEemApJ4NBozkFQ _n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0F42sEzzEemApJ4NBozkFQ" name="endTest009" visibility="private" method="_0F6E0EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0F7S8EzzEemApJ4NBozkFQ" name="endRideTest001" visibility="private" method="_0F76AEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0F9vMEzzEemApJ4NBozkFQ" name="endRideTest002" visibility="private" method="_0F-WQEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GALcEzzEemApJ4NBozkFQ" name="endRideTest003" visibility="private" method="_0GAygEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GBZkEzzEemApJ4NBozkFQ" name="endRideTest004" visibility="private" method="_0GCAoEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GDOwEzzEemApJ4NBozkFQ" name="endRideTest005" visibility="private" method="_0GDOwUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GEc4EzzEemApJ4NBozkFQ" name="endRideTest006" visibility="private" method="_0GFD8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GFrAEzzEemApJ4NBozkFQ" name="endRideTest007" visibility="private" method="_0GFrAUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GG5IEzzEemApJ4NBozkFQ" name="endRideTest008" visibility="private" method="_0GG5IUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GIuUEzzEemApJ4NBozkFQ" name="endRideTest009" visibility="private" method="_0GJVYEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GJ8cEzzEemApJ4NBozkFQ" name="endRideTest0010" visibility="private" method="_0GJ8cUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GLxoEzzEemApJ4NBozkFQ" name="endRideTest0011" visibility="private" method="_0GMYsEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GM_wEzzEemApJ4NBozkFQ" name="endRideTest0012" visibility="private" method="_0GM_wUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GNm0EzzEemApJ4NBozkFQ" name="endRideTest0011b" visibility="private" method="_0GON4EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GO08EzzEemApJ4NBozkFQ" name="endRideTest0012b" visibility="private" method="_0GQDEEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GQqIEzzEemApJ4NBozkFQ" name="endRideTest0013b" visibility="private" method="_0GQqIUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GSfUEzzEemApJ4NBozkFQ" name="endRideTest0014b" visibility="private" method="_0GSfUUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GTGYEzzEemApJ4NBozkFQ" name="endRideTest0015b" visibility="private" method="_0GTtcEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GU7kEzzEemApJ4NBozkFQ" name="endRideTest0016b" visibility="private" method="_0GVioEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GWwwEzzEemApJ4NBozkFQ" name="endRideTest17" visibility="private" method="_0GWwwUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GXX0EzzEemApJ4NBozkFQ" name="endRideTest18" visibility="private" method="_0GX-4EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GZNAEzzEemApJ4NBozkFQ" name="endRideTest19" visibility="private" method="_0GZ0EEzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0FpmIEzzEemApJ4NBozkFQ" name="RuntimeException"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0Gc3YEzzEemApJ4NBozkFQ" name="StationBalanceTest"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0GlaQEzzEemApJ4NBozkFQ" name="StationTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GnPcEzzEemApJ4NBozkFQ" name="afterEach" specification="_0GmBUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Gn2gUzzEemApJ4NBozkFQ" name="initTest001" specification="_0Gn2gEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Station(new Localization(0.1, 0.4), true);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GodkUzzEemApJ4NBozkFQ" name="initTest002" specification="_0GodkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Station(new Localization(1.8, 6.0), false);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GprsEzzEemApJ4NBozkFQ" name="numberOfBicycleTest001" specification="_0GpEoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfBicycles() == 3);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GqSwEzzEemApJ4NBozkFQ" name="numberOfBicycleTest002" specification="_0GprsUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfBicycles(&quot;Electrical&quot;) == 2);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GsH8EzzEemApJ4NBozkFQ" name="numberOfBicycleTest003" specification="_0Gq50EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfBicycles(&quot;Mechanical&quot;) == 1);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GsvAUzzEemApJ4NBozkFQ" name="numberOfBicycleTest004" specification="_0GsvAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertTrue(s.numberOfBicycles() == 0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Gt9IEzzEemApJ4NBozkFQ" name="numberOfBicycleTest005" specification="_0GtWEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertTrue(s.numberOfBicycles(&quot;Mechanical&quot;) == 0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GukMEzzEemApJ4NBozkFQ" name="numberOfBicycleTest006" specification="_0Gt9IUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertTrue(s.numberOfBicycles(&quot;Electrical&quot;) == 0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GvyUEzzEemApJ4NBozkFQ" name="numberOfBicycleTest007" specification="_0GvLQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    assertTrue(s.numberOfBicycles(&quot;Mechanical&quot;) == 0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GxAcEzzEemApJ4NBozkFQ" name="numberOfBicycleTest008" specification="_0GwZYEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfBicycles(&quot;Electrical&quot;) == 0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GyOkEzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest001" specification="_0GxngEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfFreeSlots() == 1);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0GzcsEzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest002" specification="_0GyOkUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfFreeSlots() == 2);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G0q0EzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest003" specification="_0G0DwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertTrue(s.numberOfFreeSlots() == 4);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G1R4EzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest004" specification="_0G0q0UzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.numberOfFreeSlots() == 0);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G2gAEzzEemApJ4NBozkFQ" name="getFreeParkingSlotTest001" specification="_0G148EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p1 = new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new MechanicalBike());&#xD;
+    assertEquals(p1, s.getFreeParkingSlot());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G3uIEzzEemApJ4NBozkFQ" name="getFreeParkingSlotTest002" specification="_0G3HEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    ParkingSlot p1 = new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertEquals(p1, s.getFreeParkingSlot());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G48QEzzEemApJ4NBozkFQ" name="getFreeParkingSlotTest003" specification="_0G3uIUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        s.getFreeParkingSlot();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G6KYEzzEemApJ4NBozkFQ" name="isFullTest001" specification="_0G48QUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(3).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.isFull() == true);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G7YgEzzEemApJ4NBozkFQ" name="isFullTest002" specification="_0G6KYUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());&#xD;
+    assertTrue(s.isFull() == false);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G8moEzzEemApJ4NBozkFQ" name="getBicycleTest001" specification="_0G7YgUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    Bicycle b = new ElectricalBike();&#xD;
+    s.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());&#xD;
+    assertEquals(s.getBicycle(), b);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G-b0EzzEemApJ4NBozkFQ" name="getBicycleTest002" specification="_0G9NsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    s.getParkingSlots().get(0).attachBicycle(b);&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());&#xD;
+    assertEquals(s.getBicycle(), b);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0G_p8EzzEemApJ4NBozkFQ" name="getBicycleTest003" specification="_0G-b0UzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(b);&#xD;
+    s.getParkingSlots().get(2).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(0).setOffline(true);&#xD;
+    assertEquals(s.getBicycle(), b);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HARAUzzEemApJ4NBozkFQ" name="getBicycleTest004" specification="_0HARAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        s.getBicycle();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HCGMEzzEemApJ4NBozkFQ" name="getBicycleTest005" specification="_0HBfIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(0).setOffline(true);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        s.getBicycle();&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HD7YEzzEemApJ4NBozkFQ" name="getBicycleTest006" specification="_0HCtQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    Bicycle b = new ElectricalBike();&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(b);&#xD;
+    assertEquals(b, s.getBicycle(&quot;Electrical&quot;));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HFJgEzzEemApJ4NBozkFQ" name="getBicycleTest007" specification="_0HEicEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    s.getParkingSlots().get(1).attachBicycle(b);&#xD;
+    assertEquals(b, s.getBicycle(&quot;Mechanical&quot;));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HG-sEzzEemApJ4NBozkFQ" name="getBicycleTest008" specification="_0HGXoEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    Bicycle b = new MechanicalBike();&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(b);&#xD;
+    s.getParkingSlots().get(1).setOffline(true);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        s.getBicycle(&quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HIM0EzzEemApJ4NBozkFQ" name="getBicycleTest010" specification="_0HG-sUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(0).setOffline(true);&#xD;
+    s.getParkingSlots().get(1).setOffline(true);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        s.getBicycle(&quot;Eletrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HJa8UzzEemApJ4NBozkFQ" name="isBicycleTest001" specification="_0HJa8EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    assertFalse(s.isBicycle());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HKCAUzzEemApJ4NBozkFQ" name="isBicycleTest002" specification="_0HKCAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    assertTrue(s.isBicycle());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HL3MEzzEemApJ4NBozkFQ" name="isBicycleTest003" specification="_0HKpEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.isBicycle());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HNsYEzzEemApJ4NBozkFQ" name="isBicycleTest004" specification="_0HMeQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(0).setOffline(true);&#xD;
+    assertFalse(s.isBicycle());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HPhkEzzEemApJ4NBozkFQ" name="isBicycleTest005" specification="_0HOTcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new MechanicalBike());&#xD;
+    s.getParkingSlots().get(1).attachBicycle(new MechanicalBike());&#xD;
+    assertTrue(s.isBicycle(&quot;Mechanical&quot;));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HQIoEzzEemApJ4NBozkFQ" name="isBicycleTest006" specification="_0HPhkUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    assertFalse(s.isBicycle(&quot;Mechanical&quot;));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HRWwEzzEemApJ4NBozkFQ" name="isBicycleTest007" specification="_0HQvsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(0).setOffline(true);&#xD;
+    assertFalse(s.isBicycle(&quot;Electrical&quot;));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HR90EzzEemApJ4NBozkFQ" name="setOfflineTest001" specification="_0HRWwUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.getParkingSlots().get(0).attachBicycle(new ElectricalBike());&#xD;
+    s.getParkingSlots().get(0).setOffline(true);&#xD;
+    s.setOffline(true);&#xD;
+    assertTrue(s.getParkingSlots().get(0).isOffline() &amp;&amp; s.getParkingSlots().get(1).isOffline());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HR90kzzEemApJ4NBozkFQ" name="setOfflineTest002" specification="_0HR90UzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    s.setOffline(true);&#xD;
+    assertTrue(s.getParkingSlots().get(0).isOffline() &amp;&amp; s.getParkingSlots().get(1).isOffline());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HTL8EzzEemApJ4NBozkFQ" name="setOfflineTest003" specification="_0HSk4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 12, 12);&#xD;
+    SD.setTime(5, 34, 45);&#xD;
+    Station s = new Station(new Localization(0.8, 0.7), false);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        s.setOffline(true);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GmBUEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0GnPcEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Gn2gEzzEemApJ4NBozkFQ" name="initTest001" visibility="private" method="_0Gn2gUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GodkEzzEemApJ4NBozkFQ" name="initTest002" visibility="private" method="_0GodkUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GpEoEzzEemApJ4NBozkFQ" name="numberOfBicycleTest001" visibility="private" method="_0GprsEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GprsUzzEemApJ4NBozkFQ" name="numberOfBicycleTest002" visibility="private" method="_0GqSwEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Gq50EzzEemApJ4NBozkFQ" name="numberOfBicycleTest003" visibility="private" method="_0GsH8EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GsvAEzzEemApJ4NBozkFQ" name="numberOfBicycleTest004" visibility="private" method="_0GsvAUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GtWEEzzEemApJ4NBozkFQ" name="numberOfBicycleTest005" visibility="private" method="_0Gt9IEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Gt9IUzzEemApJ4NBozkFQ" name="numberOfBicycleTest006" visibility="private" method="_0GukMEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GvLQEzzEemApJ4NBozkFQ" name="numberOfBicycleTest007" visibility="private" method="_0GvyUEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GwZYEzzEemApJ4NBozkFQ" name="numberOfBicycleTest008" visibility="private" method="_0GxAcEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GxngEzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest001" visibility="private" method="_0GyOkEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0GyOkUzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest002" visibility="private" method="_0GzcsEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G0DwEzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest003" visibility="private" method="_0G0q0EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G0q0UzzEemApJ4NBozkFQ" name="numberOfFreeSlotsTest004" visibility="private" method="_0G1R4EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G148EzzEemApJ4NBozkFQ" name="getFreeParkingSlotTest001" visibility="private" method="_0G2gAEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G3HEEzzEemApJ4NBozkFQ" name="getFreeParkingSlotTest002" visibility="private" method="_0G3uIEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G3uIUzzEemApJ4NBozkFQ" name="getFreeParkingSlotTest003" visibility="private" method="_0G48QEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G48QUzzEemApJ4NBozkFQ" name="isFullTest001" visibility="private" method="_0G6KYEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G6KYUzzEemApJ4NBozkFQ" name="isFullTest002" visibility="private" method="_0G7YgEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G7YgUzzEemApJ4NBozkFQ" name="getBicycleTest001" visibility="private" method="_0G8moEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G9NsEzzEemApJ4NBozkFQ" name="getBicycleTest002" visibility="private" method="_0G-b0EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0G-b0UzzEemApJ4NBozkFQ" name="getBicycleTest003" visibility="private" method="_0G_p8EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HARAEzzEemApJ4NBozkFQ" name="getBicycleTest004" visibility="private" method="_0HARAUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HBfIEzzEemApJ4NBozkFQ" name="getBicycleTest005" visibility="private" method="_0HCGMEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HCtQEzzEemApJ4NBozkFQ" name="getBicycleTest006" visibility="private" method="_0HD7YEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HEicEzzEemApJ4NBozkFQ" name="getBicycleTest007" visibility="private" method="_0HFJgEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HGXoEzzEemApJ4NBozkFQ" name="getBicycleTest008" visibility="private" method="_0HG-sEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HG-sUzzEemApJ4NBozkFQ" name="getBicycleTest010" visibility="private" method="_0HIM0EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HJa8EzzEemApJ4NBozkFQ" name="isBicycleTest001" visibility="private" method="_0HJa8UzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HKCAEzzEemApJ4NBozkFQ" name="isBicycleTest002" visibility="private" method="_0HKCAUzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HKpEEzzEemApJ4NBozkFQ" name="isBicycleTest003" visibility="private" method="_0HL3MEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HMeQEzzEemApJ4NBozkFQ" name="isBicycleTest004" visibility="private" method="_0HNsYEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HOTcEzzEemApJ4NBozkFQ" name="isBicycleTest005" visibility="private" method="_0HPhkEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HPhkUzzEemApJ4NBozkFQ" name="isBicycleTest006" visibility="private" method="_0HQIoEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HQvsEzzEemApJ4NBozkFQ" name="isBicycleTest007" visibility="private" method="_0HRWwEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HRWwUzzEemApJ4NBozkFQ" name="setOfflineTest001" visibility="private" method="_0HR90EzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HR90UzzEemApJ4NBozkFQ" name="setOfflineTest002" visibility="private" method="_0HR90kzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HSk4EzzEemApJ4NBozkFQ" name="setOfflineTest003" visibility="private" method="_0HTL8EzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0HWPQEzzEemApJ4NBozkFQ" name="SystemDateTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HXdYEzzEemApJ4NBozkFQ" name="afterEach" specification="_0HW2UEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HYrgEzzEemApJ4NBozkFQ" name="correctDateTest001" specification="_0HYEcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        SD.setDay(2024, 2, 29);&#xD;
+        SD.setTime(13, 20, 10);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HZ5oEzzEemApJ4NBozkFQ" name="correctDateTest002" specification="_0HZSkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        SD.setDay(2024, 3, 31);&#xD;
+        SD.setTime(17, 25, 15);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HZ5okzzEemApJ4NBozkFQ" name="correctDateTest003" specification="_0HZ5oUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        SD.setDay(2032, 2, 29);&#xD;
+        SD.setTime(17, 25, 15);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HbHwUzzEemApJ4NBozkFQ" name="correctDateTest004" specification="_0HbHwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        SD.setDay(2029, 12, 31);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HcV4EzzEemApJ4NBozkFQ" name="wrongDateTest001" specification="_0Hbu0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2019, 2, 29);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HdkAEzzEemApJ4NBozkFQ" name="wrongDateTest002" specification="_0Hc88EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2019, 4, 31);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HeLEEzzEemApJ4NBozkFQ" name="wrongDateTest003" specification="_0HdkAUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 2, 30);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HfZMEzzEemApJ4NBozkFQ" name="wrongDateTest004" specification="_0HeyIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 13, 30);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HgAQUzzEemApJ4NBozkFQ" name="wrongDateTest005" specification="_0HgAQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 1, 40);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HgnUUzzEemApJ4NBozkFQ" name="wrongDateTest006" specification="_0HgnUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(-1, 1, 1);&#xD;
+        SD.setTime(17, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HhOYEzzEemApJ4NBozkFQ" name="wrongDateTest007" specification="_0HgnUkzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 1, 1);&#xD;
+        SD.setTime(25, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Hh1cUzzEemApJ4NBozkFQ" name="wrongDateTest008" specification="_0Hh1cEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 1, 40);&#xD;
+        SD.setTime(-6, 31, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HicgUzzEemApJ4NBozkFQ" name="wrongDateTest009" specification="_0HicgEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 1, 40);&#xD;
+        SD.setTime(23, 60, 59);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HjDkUzzEemApJ4NBozkFQ" name="wrongDateTest010" specification="_0HjDkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    assertThrows(IllegalArgumentException.class, () -> {&#xD;
+        SD.setDay(2020, 1, 40);&#xD;
+        SD.setTime(23, 6, 72);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HW2UEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0HXdYEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HYEcEzzEemApJ4NBozkFQ" name="correctDateTest001" visibility="private" method="_0HYrgEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HZSkEzzEemApJ4NBozkFQ" name="correctDateTest002" visibility="private" method="_0HZ5oEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HZ5oUzzEemApJ4NBozkFQ" name="correctDateTest003" visibility="private" method="_0HZ5okzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HbHwEzzEemApJ4NBozkFQ" name="correctDateTest004" visibility="private" method="_0HbHwUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hbu0EzzEemApJ4NBozkFQ" name="wrongDateTest001" visibility="private" method="_0HcV4EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hc88EzzEemApJ4NBozkFQ" name="wrongDateTest002" visibility="private" method="_0HdkAEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HdkAUzzEemApJ4NBozkFQ" name="wrongDateTest003" visibility="private" method="_0HeLEEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HeyIEzzEemApJ4NBozkFQ" name="wrongDateTest004" visibility="private" method="_0HfZMEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HgAQEzzEemApJ4NBozkFQ" name="wrongDateTest005" visibility="private" method="_0HgAQUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HgnUEzzEemApJ4NBozkFQ" name="wrongDateTest006" visibility="private" method="_0HgnUUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HgnUkzzEemApJ4NBozkFQ" name="wrongDateTest007" visibility="private" method="_0HhOYEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hh1cEzzEemApJ4NBozkFQ" name="wrongDateTest008" visibility="private" method="_0Hh1cUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HicgEzzEemApJ4NBozkFQ" name="wrongDateTest009" visibility="private" method="_0HicgUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HjDkEzzEemApJ4NBozkFQ" name="wrongDateTest010" visibility="private" method="_0HjDkUzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0HnVAEzzEemApJ4NBozkFQ" name="TravelTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HojIEzzEemApJ4NBozkFQ" name="afterEach" specification="_0Hn8EEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HqYUEzzEemApJ4NBozkFQ" name="initTest001" specification="_0HpxQEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 12);&#xD;
+    SD.setTime(17, 22, 47);&#xD;
+    new MyVelibNetwork(&quot;Paris&quot;);&#xD;
+    Station s1 = new Station(new Localization(0.0, 0.0), false);&#xD;
+    Station s2 = new Station(new Localization(5.0, 5.0), false);&#xD;
+    Station s3 = new Station(new Localization(5.0000000000000001, 5.0000000000000001), true);&#xD;
+    try {&#xD;
+        new ParkingSlot(s1).attachBicycle(new MechanicalBike());&#xD;
+        new ParkingSlot(s1).attachBicycle(new ElectricalBike());&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    new ParkingSlot(s2);&#xD;
+    new ParkingSlot(s3);&#xD;
+    MyVelibNetwork.getInstance().addStation(s1);&#xD;
+    MyVelibNetwork.getInstance().addStation(s2);&#xD;
+    MyVelibNetwork.getInstance().addStation(s3);&#xD;
+    SD.setDay(2019, 03, 13);&#xD;
+    SD.setTime(17, 22, 47);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0));&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Hq_YEzzEemApJ4NBozkFQ" name="initTest002" specification="_0HqYUUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new MinimalWalking());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HsNgEzzEemApJ4NBozkFQ" name="initTest003" specification="_0HrmcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new FastestPath());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HtboEzzEemApJ4NBozkFQ" name="initTest004" specification="_0Hs0kEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new AvoidPlus());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HupwEzzEemApJ4NBozkFQ" name="initTest005" specification="_0HuCsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreferPlus());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HvQ0EzzEemApJ4NBozkFQ" name="initTest006" specification="_0HupwUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Hwe8EzzEemApJ4NBozkFQ" name="initTest007" specification="_0Hv34EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), &quot;Electrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HxGAEzzEemApJ4NBozkFQ" name="initTest008" specification="_0Hwe8UzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), &quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HxtEUzzEemApJ4NBozkFQ" name="initTest009" specification="_0HxtEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new MinimalWalking(), &quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0Hy7MEzzEemApJ4NBozkFQ" name="initTest010" specification="_0HyUIEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new FastestPath(), &quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0HziQEzzEemApJ4NBozkFQ" name="initTest011" specification="_0Hy7MUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new AvoidPlus(), &quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H0wYEzzEemApJ4NBozkFQ" name="initTest012" specification="_0H0JUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreferPlus(), &quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H1-gEzzEemApJ4NBozkFQ" name="initTest013" specification="_0H1XcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution(), &quot;Mechanical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H2lkUzzEemApJ4NBozkFQ" name="initTest014" specification="_0H2lkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new MinimalWalking(), &quot;Electrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H3zsUzzEemApJ4NBozkFQ" name="initTest015" specification="_0H3zsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new FastestPath(), &quot;Electrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H4awUzzEemApJ4NBozkFQ" name="initTest016" specification="_0H4awEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new AvoidPlus(), &quot;Electrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H5o4EzzEemApJ4NBozkFQ" name="initTest017" specification="_0H5B0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreferPlus(), &quot;Electrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0H63AEzzEemApJ4NBozkFQ" name="initTest018" specification="_0H6P8EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        new Travel(new User(&quot;Jean&quot;), new Localization(2.0, 3.0), new Localization(10.0, 7.0), new PreserveDistribution(), &quot;Electrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hn8EEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0HojIEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HpxQEzzEemApJ4NBozkFQ" name="initTest001" visibility="private" method="_0HqYUEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HqYUUzzEemApJ4NBozkFQ" name="initTest002" visibility="private" method="_0Hq_YEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HrmcEzzEemApJ4NBozkFQ" name="initTest003" visibility="private" method="_0HsNgEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hs0kEzzEemApJ4NBozkFQ" name="initTest004" visibility="private" method="_0HtboEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HuCsEzzEemApJ4NBozkFQ" name="initTest005" visibility="private" method="_0HupwEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HupwUzzEemApJ4NBozkFQ" name="initTest006" visibility="private" method="_0HvQ0EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hv34EzzEemApJ4NBozkFQ" name="initTest007" visibility="private" method="_0Hwe8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hwe8UzzEemApJ4NBozkFQ" name="initTest008" visibility="private" method="_0HxGAEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HxtEEzzEemApJ4NBozkFQ" name="initTest009" visibility="private" method="_0HxtEUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0HyUIEzzEemApJ4NBozkFQ" name="initTest010" visibility="private" method="_0Hy7MEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0Hy7MUzzEemApJ4NBozkFQ" name="initTest011" visibility="private" method="_0HziQEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H0JUEzzEemApJ4NBozkFQ" name="initTest012" visibility="private" method="_0H0wYEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H1XcEzzEemApJ4NBozkFQ" name="initTest013" visibility="private" method="_0H1-gEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H2lkEzzEemApJ4NBozkFQ" name="initTest014" visibility="private" method="_0H2lkUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H3zsEzzEemApJ4NBozkFQ" name="initTest015" visibility="private" method="_0H3zsUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H4awEzzEemApJ4NBozkFQ" name="initTest016" visibility="private" method="_0H4awUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H5B0EzzEemApJ4NBozkFQ" name="initTest017" visibility="private" method="_0H5o4EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0H6P8EzzEemApJ4NBozkFQ" name="initTest018" visibility="private" method="_0H63AEzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_0H_vgEzzEemApJ4NBozkFQ" name="UserTest">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IA9oEzzEemApJ4NBozkFQ" name="afterEach" specification="_0IAWkEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate.delInstance();&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IBksUzzEemApJ4NBozkFQ" name="idTest001" specification="_0IBksEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    User u2 = new User(&quot;Paul&quot;);&#xD;
+    assertFalse(u1.getId() == u2.getId());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ICy0EzzEemApJ4NBozkFQ" name="creditBalanceTest001" specification="_0ICLwEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    u1.addTimeCreditBalance(10);&#xD;
+    Duration d = new Duration();&#xD;
+    d.add(10);&#xD;
+    assertTrue(d.equals(u1.getTimeCreditBalance()));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IEA8EzzEemApJ4NBozkFQ" name="creditBalanceTest002" specification="_0IDZ4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    u1.addTimeCreditBalance(10, 30);&#xD;
+    Duration d = new Duration();&#xD;
+    d.add(10, 30);&#xD;
+    assertTrue(d.equals(u1.getTimeCreditBalance()));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IEoAUzzEemApJ4NBozkFQ" name="creditBalanceTest003" specification="_0IEoAEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    u1.addTimeCreditBalance(1, 10, 30);&#xD;
+    Duration d = new Duration();&#xD;
+    d.add(1, 10, 30);&#xD;
+    assertTrue(d.equals(u1.getTimeCreditBalance()));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IF2IEzzEemApJ4NBozkFQ" name="subscriptionTest001" specification="_0IFPEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    Card c = new Vlibre(u);&#xD;
+    u.subscribe(c);&#xD;
+    assertTrue(u.getCard() == c);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IHEQEzzEemApJ4NBozkFQ" name="subscriptionTest002" specification="_0IGdMEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    User u2 = new User(&quot;Paul&quot;);&#xD;
+    Card c1 = new Vlibre(u1);&#xD;
+    Card c2 = new Vlibre(u2);&#xD;
+    u1.subscribe(c1);&#xD;
+    assertFalse(u1.getCard() == c2);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IISYEzzEemApJ4NBozkFQ" name="subscriptionTest003" specification="_0IHrUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u1 = new User(&quot;Jean&quot;);&#xD;
+    User u2 = new User(&quot;Paul&quot;);&#xD;
+    Card c2 = new Vlibre(u2);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u1.subscribe(c2);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0II5cUzzEemApJ4NBozkFQ" name="getCurrentRideTest001" specification="_0II5cEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 3, 11);&#xD;
+    SD.setTime(10, 11, 11);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertEquals(null, u.getCurrentRide());&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IKHkEzzEemApJ4NBozkFQ" name="getCurrentRideTest002" specification="_0IJggEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+// TODO Test the method when the user already terminates his last ride.&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IKuoEzzEemApJ4NBozkFQ" name="newRideTest001" specification="_0IKHkUzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    MechanicalBike mBike = new MechanicalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(mBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        u.newRide(s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ILVsUzzEemApJ4NBozkFQ" name="newRideTest002" specification="_0ILVsEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    ElectricalBike eBike = new ElectricalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(eBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        u.newRide(s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IMj0UzzEemApJ4NBozkFQ" name="newRideTest003" specification="_0IMj0EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    ElectricalBike eBike = new ElectricalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(eBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        u.newRide(s, &quot;Electrical&quot;);&#xD;
+        assertEquals(u.getCurrentRide().getBicycle().getType(), &quot;ELECTRICAL&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0INK4UzzEemApJ4NBozkFQ" name="newRideTest004" specification="_0INK4EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    MechanicalBike mBike = new MechanicalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(mBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertDoesNotThrow(() -> {&#xD;
+        u.newRide(s, &quot;Mechanical&quot;);&#xD;
+        assertEquals(u.getCurrentRide().getBicycle().getType(), &quot;MECHANICAL&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IOZAEzzEemApJ4NBozkFQ" name="newRideTest005" specification="_0INx8EzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    MechanicalBike mBike = new MechanicalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(mBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.newRide(s, &quot;eleCtrical&quot;);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IPnIEzzEemApJ4NBozkFQ" name="newRideTest006" specification="_0IPAEEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    ElectricalBike eBike = new ElectricalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(eBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.newRide(s, &quot;mechanicaL&quot;);&#xD;
+        assertEquals(null, u.getCurrentRide());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0IQ1QEzzEemApJ4NBozkFQ" name="newRideTest007" specification="_0IQOMEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    new ParkingSlot(s);&#xD;
+    MechanicalBike mBike1 = new MechanicalBike();&#xD;
+    MechanicalBike mBike2 = new MechanicalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(mBike1);&#xD;
+        s.getParkingSlots().get(1).attachBicycle(mBike2);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    u.newRide(s);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.newRide(s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ISDYEzzEemApJ4NBozkFQ" name="newRideTest008" specification="_0IRcUEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.newRide(s);&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0ISqcUzzEemApJ4NBozkFQ" name="newRideTest009" specification="_0ISqcEzzEemApJ4NBozkFQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    SystemDate SD = SystemDate.getInstance();&#xD;
+    SD.setDay(2019, 02, 17);&#xD;
+    SD.setTime(19, 22, 37);&#xD;
+    Station s = new Station(new Localization(0.0, 0.0), false);&#xD;
+    new ParkingSlot(s);&#xD;
+    ElectricalBike eBike = new ElectricalBike();&#xD;
+    try {&#xD;
+        s.getParkingSlots().get(0).attachBicycle(eBike);&#xD;
+    } catch (Exception e) {&#xD;
+        fail(&quot;Failed to attach the bike&quot;);&#xD;
+    }&#xD;
+    User u = new User(&quot;Jean&quot;);&#xD;
+    assertThrows(RuntimeException.class, () -> {&#xD;
+        u.newRide(s, &quot;Nothing&quot;);&#xD;
+        assertEquals(null, u.getCurrentRide());&#xD;
+    });&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IAWkEzzEemApJ4NBozkFQ" name="afterEach" visibility="private" method="_0IA9oEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IBksEzzEemApJ4NBozkFQ" name="idTest001" visibility="private" method="_0IBksUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ICLwEzzEemApJ4NBozkFQ" name="creditBalanceTest001" visibility="private" method="_0ICy0EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IDZ4EzzEemApJ4NBozkFQ" name="creditBalanceTest002" visibility="private" method="_0IEA8EzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IEoAEzzEemApJ4NBozkFQ" name="creditBalanceTest003" visibility="private" method="_0IEoAUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IFPEEzzEemApJ4NBozkFQ" name="subscriptionTest001" visibility="private" method="_0IF2IEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IGdMEzzEemApJ4NBozkFQ" name="subscriptionTest002" visibility="private" method="_0IHEQEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IHrUEzzEemApJ4NBozkFQ" name="subscriptionTest003" visibility="private" method="_0IISYEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0II5cEzzEemApJ4NBozkFQ" name="getCurrentRideTest001" visibility="private" method="_0II5cUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IJggEzzEemApJ4NBozkFQ" name="getCurrentRideTest002" visibility="private" method="_0IKHkEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IKHkUzzEemApJ4NBozkFQ" name="newRideTest001" visibility="private" method="_0IKuoEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ILVsEzzEemApJ4NBozkFQ" name="newRideTest002" visibility="private" method="_0ILVsUzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IMj0EzzEemApJ4NBozkFQ" name="newRideTest003" visibility="private" method="_0IMj0UzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0INK4EzzEemApJ4NBozkFQ" name="newRideTest004" visibility="private" method="_0INK4UzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0INx8EzzEemApJ4NBozkFQ" name="newRideTest005" visibility="private" method="_0IOZAEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IPAEEzzEemApJ4NBozkFQ" name="newRideTest006" visibility="private" method="_0IPnIEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IQOMEzzEemApJ4NBozkFQ" name="newRideTest007" visibility="private" method="_0IQ1QEzzEemApJ4NBozkFQ" raisedException="_n-NQAEzvEemApJ4NBozkFQ _0FpmIEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0IRcUEzzEemApJ4NBozkFQ" name="newRideTest008" visibility="private" method="_0ISDYEzzEemApJ4NBozkFQ"/>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_0ISqcEzzEemApJ4NBozkFQ" name="newRideTest009" visibility="private" method="_0ISqcUzzEemApJ4NBozkFQ"/>
+                </packagedElement>
+              </packagedElement>
             </packagedElement>
           </packagedElement>
         </packagedElement>
@@ -4637,4 +7880,5 @@
   <standard:Create xmi:id="_pFZFEEzwEemApJ4NBozkFQ" base_BehavioralFeature="_pFYeAEzwEemApJ4NBozkFQ"/>
   <PapyrusJava:Synchronized xmi:id="_pFbhUEzwEemApJ4NBozkFQ" base_Operation="_pFaTMEzwEemApJ4NBozkFQ"/>
   <PapyrusJava:Synchronized xmi:id="_pFdWgEzwEemApJ4NBozkFQ" base_Operation="_pFcvcEzwEemApJ4NBozkFQ"/>
+  <PapyrusJava:External xmi:id="_0FrbUEzzEemApJ4NBozkFQ" name="RuntimeException" base_Classifier="_0FpmIEzzEemApJ4NBozkFQ"/>
 </xmi:XMI>

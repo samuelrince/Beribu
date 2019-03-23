@@ -1,14 +1,14 @@
 package fr.ecp.IS1220.myVelib.client;
 
-import fr.ecp.IS1220.myVelib.app.ElectricalBike;
-import fr.ecp.IS1220.myVelib.app.Localization;
-import fr.ecp.IS1220.myVelib.app.MechanicalBike;
-import fr.ecp.IS1220.myVelib.app.MyVelibNetwork;
-import fr.ecp.IS1220.myVelib.app.ParkingSlot;
-import fr.ecp.IS1220.myVelib.app.Station;
-import fr.ecp.IS1220.myVelib.app.SystemDate;
-import fr.ecp.IS1220.myVelib.app.User;
-import fr.ecp.IS1220.myVelib.app.Vmax;
+import fr.ecp.IS1220.myVelib.core.ElectricalBike;
+import fr.ecp.IS1220.myVelib.core.Localization;
+import fr.ecp.IS1220.myVelib.core.MechanicalBike;
+import fr.ecp.IS1220.myVelib.core.MyVelibNetwork;
+import fr.ecp.IS1220.myVelib.core.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.Station;
+import fr.ecp.IS1220.myVelib.core.SystemDate;
+import fr.ecp.IS1220.myVelib.core.User;
+import fr.ecp.IS1220.myVelib.core.Vmax;
 
 public class Scenario1 {
 

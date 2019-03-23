@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.app.Card;
-import fr.ecp.IS1220.myVelib.app.Duration;
-import fr.ecp.IS1220.myVelib.app.ElectricalBike;
-import fr.ecp.IS1220.myVelib.app.Localization;
-import fr.ecp.IS1220.myVelib.app.MechanicalBike;
-import fr.ecp.IS1220.myVelib.app.ParkingSlot;
-import fr.ecp.IS1220.myVelib.app.Station;
-import fr.ecp.IS1220.myVelib.app.SystemDate;
-import fr.ecp.IS1220.myVelib.app.User;
-import fr.ecp.IS1220.myVelib.app.Vlibre;
+import fr.ecp.IS1220.myVelib.core.Card;
+import fr.ecp.IS1220.myVelib.core.Duration;
+import fr.ecp.IS1220.myVelib.core.ElectricalBike;
+import fr.ecp.IS1220.myVelib.core.Localization;
+import fr.ecp.IS1220.myVelib.core.MechanicalBike;
+import fr.ecp.IS1220.myVelib.core.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.Station;
+import fr.ecp.IS1220.myVelib.core.SystemDate;
+import fr.ecp.IS1220.myVelib.core.User;
+import fr.ecp.IS1220.myVelib.core.Vlibre;
 
 /**
  * This class contains Junit tests for User class

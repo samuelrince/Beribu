@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.app.Bicycle;
-import fr.ecp.IS1220.myVelib.app.ElectricalBike;
-import fr.ecp.IS1220.myVelib.app.Localization;
-import fr.ecp.IS1220.myVelib.app.ParkingSlot;
-import fr.ecp.IS1220.myVelib.app.Station;
-import fr.ecp.IS1220.myVelib.app.SystemDate;
+import fr.ecp.IS1220.myVelib.core.Bicycle;
+import fr.ecp.IS1220.myVelib.core.ElectricalBike;
+import fr.ecp.IS1220.myVelib.core.Localization;
+import fr.ecp.IS1220.myVelib.core.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.Station;
+import fr.ecp.IS1220.myVelib.core.SystemDate;
 
 /**
  * This class contains Junit tests for ParkingSlot class

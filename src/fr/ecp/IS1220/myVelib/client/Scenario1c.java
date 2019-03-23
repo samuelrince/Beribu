@@ -1,8 +1,8 @@
 package fr.ecp.IS1220.myVelib.client;
 
-import fr.ecp.IS1220.myVelib.app.Localization;
-import fr.ecp.IS1220.myVelib.app.MyVelibNetwork;
-import fr.ecp.IS1220.myVelib.app.SystemDate;
+import fr.ecp.IS1220.myVelib.core.Localization;
+import fr.ecp.IS1220.myVelib.core.MyVelibNetwork;
+import fr.ecp.IS1220.myVelib.core.SystemDate;
 
 public class Scenario1c {
 
