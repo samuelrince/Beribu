@@ -87,18 +87,22 @@ public class StationBalance {
 			throw new RuntimeException(station+" did not exist yet during that time window.");
 		while (end.isAfter(station.getHistory().get(maxIndex).getTimeStamp())){
 			maxIndex++;
-			if (maxIndex == station.getHistory().size())
-				maxIndex--;
+			if (maxIndex == station.getHistory().size())				
 				break;
 				
 		}
+		maxIndex--;
+		
 		int occupationTime = 0;
 		int totalTime = 0;
 		
-		for (int i = 0; i < station.getHistory().size()-1; i++) {
-			ArrayList<ArrayList<Boolean>> parkingSlotStatus = 
-					station.getHistory().get(i).getParkingSlotStatus();
-			Date nextTimeStamp = station.getHistory().get(i+1).getTimeStamp();
+		if (minIndex == maxIndex) {
+			ArrayList<ArrayList<Boolean>> parkingSlotStatus = station.getHistory().
+					get(minIndex).getParkingSlotStatus();
+			Date timeStamp = station.getHistory().get(minIndex).getTimeStamp();
+			if (start.isAfter(timeStamp))
+				timeStamp = start;
+			Date nextTimeStamp = end;
 			int numberOfOccupied = 0;
 			for (int j = 0; j < parkingSlotStatus.size(); j++) {
 				if (parkingSlotStatus.get(j).get(0) == true 
@@ -106,13 +110,19 @@ public class StationBalance {
 					numberOfOccupied++;
 				}	
 			}
-			int elapsedTime = new Duration(station.getHistory().get(i).
-					getTimeStamp(),nextTimeStamp).getDuration();
+			int elapsedTime = new Duration(timeStamp,nextTimeStamp).getDuration();
 			occupationTime += numberOfOccupied*elapsedTime;
 			totalTime += parkingSlotStatus.size()*elapsedTime;
+			
+			return (double)occupationTime/(double)totalTime;
 		}
+		
 		ArrayList<ArrayList<Boolean>> parkingSlotStatus = station.getHistory().
-				get(station. getHistory().size()-1).getParkingSlotStatus();
+				get(minIndex).getParkingSlotStatus();
+		Date timeStamp = station.getHistory().get(minIndex).getTimeStamp();
+		if (start.isAfter(timeStamp))
+			timeStamp = start;
+		Date nextTimeStamp = station.getHistory().get(minIndex+1).getTimeStamp();
 		int numberOfOccupied = 0;
 		for (int j = 0; j < parkingSlotStatus.size(); j++) {
 			if (parkingSlotStatus.get(j).get(0) == true 
@@ -120,8 +130,38 @@ public class StationBalance {
 				numberOfOccupied++;
 			}	
 		}
-		int elapsedTime = new Duration(station.getHistory().get(station.
-				getHistory().size()-1).getTimeStamp(),end).getDuration();
+		int elapsedTime = new Duration(timeStamp, nextTimeStamp).getDuration();
+		occupationTime += numberOfOccupied*elapsedTime;
+		totalTime += parkingSlotStatus.size()*elapsedTime;
+		
+		for (int i = minIndex+1; i < maxIndex; i++) {
+			parkingSlotStatus = station.getHistory().get(i).getParkingSlotStatus();
+			timeStamp = station.getHistory().get(i).getTimeStamp();
+			nextTimeStamp = station.getHistory().get(i+1).getTimeStamp();
+			numberOfOccupied = 0;
+			for (int j = 0; j < parkingSlotStatus.size(); j++) {
+				if (parkingSlotStatus.get(j).get(0) == true 
+						|| parkingSlotStatus.get(j).get(1) == true) {
+					numberOfOccupied++;
+				}	
+			}
+			elapsedTime = new Duration(timeStamp,nextTimeStamp).getDuration();
+			occupationTime += numberOfOccupied*elapsedTime;
+			totalTime += parkingSlotStatus.size()*elapsedTime;
+		}
+		
+		parkingSlotStatus = station.getHistory().
+				get(maxIndex).getParkingSlotStatus();
+		timeStamp = station.getHistory().get(maxIndex).getTimeStamp();
+		nextTimeStamp = end;
+		numberOfOccupied = 0;
+		for (int j = 0; j < parkingSlotStatus.size(); j++) {
+			if (parkingSlotStatus.get(j).get(0) == true 
+					|| parkingSlotStatus.get(j).get(1) == true) {
+				numberOfOccupied++;
+			}	
+		}
+		elapsedTime = new Duration(timeStamp,nextTimeStamp).getDuration();
 		occupationTime += numberOfOccupied*elapsedTime;
 		totalTime += parkingSlotStatus.size()*elapsedTime;
 				
