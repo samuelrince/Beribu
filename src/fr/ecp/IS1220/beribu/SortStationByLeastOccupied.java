@@ -2,6 +2,11 @@ package fr.ecp.IS1220.beribu;
 
 import java.util.Comparator;
 
+/**
+ * A comparator for sorting stations according to their occupation rate.
+ * @author Samuel
+ *
+ */
 public class SortStationByLeastOccupied implements Comparator<Station>{
 	
 	@Override

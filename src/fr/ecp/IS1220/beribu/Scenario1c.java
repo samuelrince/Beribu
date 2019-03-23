@@ -92,8 +92,9 @@ public class Scenario1c {
 		//Displaying the history of a station
 		System.out.println(network.station(10).historyTrace());
 		//Displaying the statistics of a few stations
-		StationBalance.display(network.station(10));
-		StationBalance.display(network.station(11));
+//		StationBalance.display(network.station(10));
+//		StationBalance.display(network.station(11));
+		StationBalance.display(network.station(0));
 		//Displaying the statistics of a few users
 		UserBalance.display(network.user(1));
 		UserBalance.display(network.user(15));
