@@ -22,7 +22,9 @@ import fr.ecp.IS1220.myVelib.core.User;
  *
  */
 class StationBalanceTest {
+	
 	//Work In Progress
+	
 	@AfterEach
 	void afterEach() {
 		SystemDate.delInstance();
@@ -43,7 +45,7 @@ class StationBalanceTest {
 		for (User u : users) {
 			u.newRide(s);
 		}
-		assertTrue(StationBalance.totalRentCount(s) == 9);
+		assertTrue(StationBalance.totalRentCount(s) == 10);
 	}
 	
 	@Test
