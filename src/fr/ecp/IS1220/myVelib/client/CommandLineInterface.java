@@ -10,6 +10,21 @@ public class CommandLineInterface {
 		CommandLineInterface.exit = exit;
 	}
 	
+	public static boolean check(String[] tokens) {
+		for (String word : tokens) {
+			char[] chars = word.toCharArray();
+			for(char c : chars){
+				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57)
+						&& !(c==39)) {
+					System.err.println("Invalid characters. Only letters of the "
+							+ "alphabet, numbers and apostrophes for strings are accepted.");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -20,7 +35,7 @@ public class CommandLineInterface {
 		Scanner scan = new Scanner(System.in);
 		String line;
 		// defining the words delimiters for splitting fileContent into words
-	    String delims = "[ <>.,?!]+";
+	    String delims = " ";
 	   
 	    do {
 
@@ -28,6 +43,8 @@ public class CommandLineInterface {
 	    	line = scan.nextLine();
 	    	System.out.println("Vous avez entré : "+line);
 	    	String[] tokens = line.split(delims);
+	    	if (!check(tokens))
+	    		continue;
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
 	}
