@@ -27,7 +27,7 @@ public class CommandLineInterface {
 	    	System.out.print("Entrez une commande : ");
 	    	line = scan.nextLine();
 	    	System.out.println("Vous avez entré : "+line);
-	    	String[] tokens = line.split(delims);	    	
+	    	String[] tokens = line.split(delims);
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
 	}
