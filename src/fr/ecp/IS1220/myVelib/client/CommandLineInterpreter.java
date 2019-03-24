@@ -11,14 +11,21 @@ public class CommandLineInterpreter {
 		String arguments[] = Arrays.copyOfRange(tokens, 1, tokens.length);
 		switch (command) {
 		case "exit": {
-			if (tokens.length == 1)
+			if (arguments.length == 0)
 				CommandLineInterface.setExit(true);
 			else
 				System.err.println("'exit' does not take any argument.");
 			break;
 		}
 		case "setup": {
-			
+			if (arguments.length == 1) {
+				
+			}
+			if (arguments.length == 5) {
+
+			}
+			else
+				System.err.println("'setup' takes 1 or 5 arguments.");
 			break;
 		}
 		
