@@ -11,6 +11,7 @@ import javax.swing.JFrame;
  *
  */
 public class MyVelibNetwork {
+	private static ArrayList<MyVelibNetwork> listOfNetworks = new ArrayList<MyVelibNetwork>();
 	private static MyVelibNetwork instance = null;
 	private String name;
 	private ArrayList<Station> stationDatabase = new ArrayList<Station>();
@@ -22,15 +23,10 @@ public class MyVelibNetwork {
 	 * @param name name of the network
 	 * @throws RuntimeException	occurs when the network already exists
 	 */
-	public MyVelibNetwork(String name) throws RuntimeException {
-		if (instance == null) {
-			this.name = name;
-			instance = this;
-			System.out.println("New MyVelib network :"+this+".");
-		}
-		else {
-			throw new RuntimeException("A MyVelib network already exists.");
-		}
+	public MyVelibNetwork(String name) {
+		this.name = name;
+		listOfNetworks.add(this);
+		switchNetwork(this);
 	}
 
 	/**
@@ -47,6 +43,14 @@ public class MyVelibNetwork {
 			return instance;
 		}
 	}
+	
+	public static void switchNetwork(MyVelibNetwork network) {
+		if (listOfNetworks.contains(network))
+			instance = network;
+		else
+			throw new IllegalArgumentException("This MyVelib network does not exist.");
+	}
+	
 	/**
 	 * Add a new empty station with a number of slots to the network.
 	 * @param localization localization of the station
