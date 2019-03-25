@@ -2,10 +2,22 @@ package fr.ecp.IS1220.myVelib.client;
 
 import java.util.Arrays;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
+
 import fr.ecp.IS1220.myVelib.core.*;
 
 public class CommandLineInterpreter {
 
+	public static String parseString(String word) throws ParseException {
+		
+		char[] chars = word.toCharArray();
+		if (chars[0]==39 && chars[chars.length-1]==39) {
+			char[] stringContent = Arrays.copyOfRange(chars,1,chars.length-1);
+			return new String(stringContent);
+		} 
+		throw new ParseException();
+	}
+	
 	public static void interprete(String[] tokens) {
 		String command = tokens[0];
 		String arguments[] = Arrays.copyOfRange(tokens, 1, tokens.length);
@@ -30,12 +42,29 @@ public class CommandLineInterpreter {
 		}
 		
 		case "addUser": {
-			User u1 = new User(tokens[1]);
-			System.out.println(u1);
+			if (arguments.length == 2) {
+
+			}
+			else
+				System.err.println("'addUser' takes 2 arguments.");
 			break;
 		}
 
 		case "switch": {
+			if (arguments.length == 1) {
+				String arg0 = null;
+				try {
+				arg0 = parseString(arguments[0]);
+				}
+				catch(ParseException e) {System.err.println("'switch' takes the following "
+						+ "types of argument :"+"\n"+"'<String>'");break;}
+				try {
+					MyVelibNetwork.switchNetwork(arg0);
+				}
+				catch(IllegalArgumentException e) {System.err.println(e);}
+			}
+			else
+				System.err.println("'switch' takes 1 argument.");
 
 			break;
 		}
