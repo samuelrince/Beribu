@@ -106,7 +106,7 @@ public class User {
 	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card
 	 * that belongs to another user)
 	 */
-	public void subscribe(Card card) throws IllegalArgumentException {
+	public void subscribe(Card card) throws Exception {
 		if (card.getUser() == this) {
 			this.card = card;
 			System.out.println(this+" has a new subscription of type "+card.getType()+ ".");			
@@ -114,7 +114,8 @@ public class User {
 			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user");
 		}
 	}
-	public void subscribe(String cardType) {
+	
+	public void subscribe(String cardType) throws Exception {
 		CardFactory cardFactory = new CardFactory();
 		this.subscribe(cardFactory.newCard(cardType, this));
 	}
@@ -155,7 +156,7 @@ public class User {
 	 * @throws RuntimeException		Throws RuntimeException when a user tries to start
 	 * a new ride without finishing his current ride.
 	 */
-	public void newRide(Station station) throws RuntimeException {
+	public void newRide(Station station) throws Exception {
 		if (!this.isOnRide()) {
 			Bicycle bicycle = station.getBicycle();
 			Ride ride = new Ride(this,bicycle,station);
@@ -189,7 +190,7 @@ public class User {
 	 * @throws RuntimeException		Throws RuntimeException when a user tries to start
 	 * a new ride without finishing his current ride.
 	 */
-	public void newRide(Station station, String bicycleType) throws RuntimeException {
+	public void newRide(Station station, String bicycleType) throws Exception {
 		if (!this.isOnRide()) {
 			Bicycle bicycle = station.getBicycle(bicycleType);
 			Ride ride = new Ride(this,bicycle,station);
@@ -228,7 +229,7 @@ public class User {
 	 * @param station	the return station
 	 * @throws Exception	occurs when there is no parking slot available
 	 */
-	public void endCurrentRide(Station station) throws RuntimeException,Exception {
+	public void endCurrentRide(Station station) throws Exception {
 		if (station.isFull())
 			throw new IllegalArgumentException("This station is full.");
 		else {
