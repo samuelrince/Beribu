@@ -19,11 +19,36 @@ public class Panneau extends JPanel{
 	}
 
 	public void paint(Graphics g) {
-		g.drawRect(50, 50, 500, 500);
+		g.drawRect(50, 50, 600, 600);
+		Localization barycenter = Localization.barycenter(locs);
+		double[] xSides = new double[] {0,0};
+		double[] ySides = new double[] {0,0};
+		for (Localization loc:locs) {
+			if (loc.getLatitude()-barycenter.getLatitude()>=ySides[1])
+				ySides[1] = loc.getLatitude()-barycenter.getLatitude();
+			if (barycenter.getLatitude()-loc.getLatitude()>=ySides[0])
+				ySides[0] = barycenter.getLatitude()-loc.getLatitude();
+			if (loc.getLongitude()-barycenter.getLongitude()>=xSides[1])
+				xSides[1] = loc.getLongitude()-barycenter.getLongitude();
+			if (barycenter.getLongitude()-loc.getLongitude()>=xSides[0])
+				xSides[0] = barycenter.getLongitude()-loc.getLongitude();
+		}
+		double xRatio;
+		if (xSides[1]+xSides[0] == 0)
+			xRatio = 1;
+		else
+			xRatio = 500/(xSides[1] + xSides[0]);
+		double yRatio;
+		if (ySides[1]+ySides[0] == 0)
+			yRatio = 1;
+		else
+			yRatio = 500/(ySides[1] + ySides[0]);
 		int i=0;
 		for (Localization loc:locs) {
-			g.fillOval(50+(int)(loc.getLongitude()), 550-(int)(loc.getLatitude()), 5, 5);
-			g.drawString(""+i,50+(int)(loc.getLongitude()), 550-(int)(loc.getLatitude()));
+			int xPixel = (int) (350 + (loc.getLongitude()-barycenter.getLongitude())*xRatio);
+			int yPixel = (int) (350 + (loc.getLatitude()-barycenter.getLatitude())*yRatio);
+			g.fillOval(xPixel, yPixel, 5, 5);
+			g.drawString("Station id."+i,xPixel,yPixel);
 			i++;
 		}
 	}

@@ -237,4 +237,24 @@ public class Localization {
 		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
 				this.longitude + Math.sin(angle)*r/(Math.cos(this.latitude)*rayonTerre));
 	}
+	
+	/**
+	 * Returns a localization which is the barycenter of the localizations given in argument.
+	 * @param locs the localizations to compute the barycenter of
+	 * @return the barycenter of these localizations
+	 */
+	public static Localization barycenter(ArrayList<Localization> locs) {
+		if (locs.size() < 2)
+			throw new IllegalArgumentException("Need at least 2 localizations to compute"
+					+ " their barycenter.");
+		double latMean = 0;
+		double longMean = 0;
+		for (int i = 0; i < locs.size(); i++) {
+			latMean += locs.get(i).getLatitude();
+			longMean += locs.get(i).getLongitude();
+		}
+		latMean /= locs.size();
+		longMean /= locs.size();
+		return new Localization(latMean,longMean);
+	}
 }
