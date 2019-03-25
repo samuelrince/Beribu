@@ -223,6 +223,11 @@ public class Localization {
 		return listOfStations.get(stationIndex);
 	}
 	
+	
+	/**
+	 * Acts exactly as randomLocInCircle.generate(this,radius).
+	 * @param radius the radius of the circular area
+	 */
 	public Localization generateLocInRadius(double radius) throws IllegalArgumentException {
 		if (radius < 0) {
 			throw new IllegalArgumentException("The radius should be > 0.");
@@ -230,6 +235,6 @@ public class Localization {
 		double r = Math.sqrt(Math.random())*radius;
 		double angle = Math.random()*2*Math.PI;
 		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
-				this.longitude + Math.sin(angle)*r/rayonTerre);
+				this.longitude + Math.sin(angle)*r/(Math.cos(this.latitude)*rayonTerre));
 	}
 }
