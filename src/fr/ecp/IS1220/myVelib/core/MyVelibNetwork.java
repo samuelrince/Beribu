@@ -193,6 +193,7 @@ public class MyVelibNetwork {
 			throw new IllegalArgumentException("The sum of percentages for all bicycle"
 					+ " types should be equal to 100.");
 		
+		RandomLocGenerator randomLocGenerator = new RandomLocInCircle();
 		int n = number*numberOfSlots;
 		int numberOfBicycles = (int) Math.round(n*populationPercentage/100);
 		int[] numberOfBicyclesPerStation = new int[number];
@@ -227,7 +228,7 @@ public class MyVelibNetwork {
 				isPlus = true;
 			else
 				isPlus = false;
-			Localization randomLoc = center.generateLocInRadius(radius);
+			Localization randomLoc = randomLocGenerator.generate(center,radius);
 			ArrayList<Bicycle> stationPopulation = new ArrayList<Bicycle>();
 			for (int k = 0; k < typeDict.size(); k++) {
 				for (int l = 0; l < numberOfTypes_div[k]; l++) {
@@ -242,7 +243,107 @@ public class MyVelibNetwork {
 			this.stationDatabase.get(stationDatabase.size()-1).populate(stationPopulation);
 		}
 	}
-	
+		
+	/**
+	 * This method creates a number of stations within an area defined by the random localization
+	 * generator and its parameters given in argument. The stations contain a number of parking
+	 * slots, which can be populated with bicycles.
+	 * @param randomLocGenerator random localization generator for the desired shape
+	 * @param center center of the covered area 
+	 * @param param parameter (can be radius, side length...) of the covered area (in km)
+	 * @param number number of stations
+	 * @param plusNumber number of Plus stations
+	 * @param numberOfSlots number of parking slots in each station
+	 * @param populationPercentage percentage of parking slots which should
+	 * be populated with bicycles
+	 * @param typePercentage portion of each type of bicycle relatively to the
+	 * total amount of bicycles
+	 * @throws IllegalArgumentException	occurs when a wrong type of parameter
+	 * is passed to the method
+	 */
+	public void createStations(RandomLocGenerator randomLocGenerator,
+			Localization center, double param, int number,
+			int plusNumber, int numberOfSlots, double populationPercentage, 
+			double[] typePercentage) throws IllegalArgumentException {
+		if (param < 0) {
+			throw new IllegalArgumentException("The parameter should be > 0.");
+		}
+		if (number < 0 || plusNumber < 0) {
+			throw new IllegalArgumentException("The number of stations and Plus stations"
+					+ " should be positive.");
+		}
+		if (populationPercentage < 0 || populationPercentage > 100) {
+			throw new IllegalArgumentException("The population percentage should range"
+					+ " between 0 and 100");
+		}
+		if (plusNumber > number) {
+			throw new IllegalArgumentException("The number of Plus stations should"
+					+ " not exceed the total number of stations created.");
+		}
+		ArrayList<String> typeDict = Bicycle.getTypeDict();
+		double sum = 0;
+		if (typePercentage.length != typeDict.size())
+			throw new IllegalArgumentException(typeDict.size()+" numbers of bicycles should be given, "
+					+ "one for each type in the order of appearance in Bicycle.getTypeDict().");
+		for (int i = 0; i < typePercentage.length; i++) {
+			if (typePercentage[i] < 0 || typePercentage[i] > 100)
+				throw new IllegalArgumentException("The percentage of each bicycle"
+						+ " type should range between 0 and 100");
+			sum += typePercentage[i];
+		}
+		if (sum != 100 )
+			throw new IllegalArgumentException("The sum of percentages for all bicycle"
+					+ " types should be equal to 100.");
+		
+		int n = number*numberOfSlots;
+		int numberOfBicycles = (int) Math.round(n*populationPercentage/100);
+		int[] numberOfBicyclesPerStation = new int[number];
+		int n_div = numberOfBicycles/number;
+		int n_mod = numberOfBicycles%number;
+		for (int i = 0; i < n_mod ; i++)
+			numberOfBicyclesPerStation[i] = n_div + 1;
+		for (int i = 0; i < number-n_mod ; i++)
+			numberOfBicyclesPerStation[i] = n_div;
+		int[] numberOfTypes = new int[typePercentage.length];
+		int numberCheck = 0;
+		for (int i = 0; i < numberOfTypes.length-1; i++) {
+			numberOfTypes[i] = (int) Math.round(typePercentage[i]/100*numberOfBicycles);
+			numberCheck += numberOfTypes[i];
+		}
+		numberOfTypes[numberOfTypes.length-1] = numberOfBicycles - numberCheck;
+		int[] numberOfTypes_div = new int[numberOfTypes.length];
+		int[] numberOfTypes_mod = new int[numberOfTypes.length];
+		for (int i = 0; i < numberOfTypes.length ; i++) {
+			numberOfTypes_div[i] = numberOfTypes[i]/number;
+			numberOfTypes_mod[i] = numberOfTypes[i]%number;
+		}
+		ArrayList<Bicycle> remainderOfBicycles = new ArrayList<Bicycle>();
+		for (int i = 0; i < numberOfTypes.length ; i++) {
+			for (int j = 0; j < numberOfTypes_mod[i]; j++)
+				remainderOfBicycles.add(this.bicycleFactory.newBicycle(typeDict.get(i)));
+		}
+		int j = 0;
+		for (int i = 0; i < number; i++, j++) {
+			boolean isPlus;
+			if (j < plusNumber)
+				isPlus = true;
+			else
+				isPlus = false;
+			Localization randomLoc = randomLocGenerator.generate(center,param);
+			ArrayList<Bicycle> stationPopulation = new ArrayList<Bicycle>();
+			for (int k = 0; k < typeDict.size(); k++) {
+				for (int l = 0; l < numberOfTypes_div[k]; l++) {
+					stationPopulation.add(this.bicycleFactory.newBicycle(typeDict.get(k)));
+				}
+			}
+			for (int k = 0; k < numberOfBicyclesPerStation[i] - stationPopulation.size(); k++) {
+				stationPopulation.add(remainderOfBicycles.get(0));
+				remainderOfBicycles.remove(0);
+			}
+			this.createEmptyStation(randomLoc, isPlus, numberOfSlots);
+			this.stationDatabase.get(stationDatabase.size()-1).populate(stationPopulation);
+		}
+	}
 	/**
 	 * Adds a given station to the network.
 	 * @param station station to add
