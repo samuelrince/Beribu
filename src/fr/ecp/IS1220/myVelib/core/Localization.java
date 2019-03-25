@@ -227,7 +227,7 @@ public class Localization {
 		if (radius < 0) {
 			throw new IllegalArgumentException("The radius should be > 0.");
 		}
-		double r = Math.random()*radius;
+		double r = Math.sqrt(Math.random())*radius;
 		double angle = Math.random()*2*Math.PI;
 		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
 				this.longitude + Math.sin(angle)*r/rayonTerre);
