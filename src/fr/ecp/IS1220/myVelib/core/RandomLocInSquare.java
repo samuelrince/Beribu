@@ -22,7 +22,8 @@ public class RandomLocInSquare implements RandomLocGenerator {
 		double x = Math.random()*side - side/2.;
 		double y = Math.random()*side - side/2.;
 		return new Localization(center.getLatitude() + x/Localization.rayonTerre,
-				center.getLongitude() + y/Localization.rayonTerre);
+				center.getLongitude() + y/(Math.cos(center.getLatitude())
+						*Localization.rayonTerre));
 	}
 
 }

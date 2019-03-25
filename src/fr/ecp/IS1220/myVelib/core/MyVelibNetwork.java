@@ -471,4 +471,13 @@ public class MyVelibNetwork {
 		// TODO Auto-generated method stub
 		return "\\MyVelib "+this.name+"/";
 	}
+	
+	public static void main(String[] args) {
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019,1,1);SD.setTime(12,0,0);
+		MyVelibNetwork network = new MyVelibNetwork("Paris");
+		network.createStations(new RandomLocInSquare(), new Localization(0,0), 5, 
+				10, 4, 10, 70, new double[] {70,30});
+		network.visual2D();
+	}
 }
