@@ -23,9 +23,15 @@ public class MyVelibNetwork {
 	 * @param name name of the network
 	 * @throws RuntimeException	occurs when the network already exists
 	 */
-	public MyVelibNetwork(String name) {
+	public MyVelibNetwork(String name) {		
+		for (MyVelibNetwork network:listOfNetworks)
+			if (network.getName().equals(name)) {
+				throw new IllegalArgumentException("A MyVelib network with this name"
+						+ " already exists.");
+			}		
 		this.name = name;
 		listOfNetworks.add(this);
+		System.out.println("New MyVelib network : "+this);
 		switchNetwork(this);
 	}
 
@@ -45,10 +51,23 @@ public class MyVelibNetwork {
 	}
 	
 	public static void switchNetwork(MyVelibNetwork network) {
-		if (listOfNetworks.contains(network))
+		if (listOfNetworks.contains(network)) {
 			instance = network;
+			System.out.println("Switched to network"+network.name);
+		}
 		else
 			throw new IllegalArgumentException("This MyVelib network does not exist.");
+	}
+	
+	public static void switchNetwork(String networkName) {
+		for (MyVelibNetwork network:listOfNetworks) {
+			if (network.getName().equals(networkName)) {
+			instance = network;
+			System.out.println("Switched to MyVelib network "+network.name+".");
+			return;
+			}
+		}
+		throw new IllegalArgumentException("This MyVelib network does not exist.");
 	}
 	
 	/**
