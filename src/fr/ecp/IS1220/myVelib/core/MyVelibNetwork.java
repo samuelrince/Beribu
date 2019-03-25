@@ -456,11 +456,13 @@ public class MyVelibNetwork {
 	
 	  public void visual2D() {
 		  JFrame frame = new JFrame();
-		  frame.setSize(new Dimension(620,650));
+		  frame.setSize(new Dimension(700,700));
 		  ArrayList<Localization> points=new ArrayList<Localization>();
 		  for (Station s:this.stationDatabase) {
 			  points.add(s.getLocalization());
+			  System.out.println(s.getLocalization());
 		  }
+		  System.out.println("bary "+Localization.barycenter(points));
 		  Panneau p=new Panneau(points);
 		  frame.setContentPane(p);
 		  frame.setVisible(true);
@@ -476,8 +478,8 @@ public class MyVelibNetwork {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019,1,1);SD.setTime(12,0,0);
 		MyVelibNetwork network = new MyVelibNetwork("Paris");
-		network.createStations(new RandomLocInSquare(), new Localization(0,0), 5, 
-				10, 4, 10, 70, new double[] {70,30});
+		network.createStations(new RandomLocInSquare(), new Localization(0,0), 10, 
+				100, 0, 10, 70, new double[] {70,30});
 		network.visual2D();
 	}
 }
