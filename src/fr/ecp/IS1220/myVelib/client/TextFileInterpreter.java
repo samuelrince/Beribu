@@ -10,6 +10,11 @@ public class TextFileInterpreter {
 	
 	public static String fileName;
 	
+	/**
+	 * This static method reads a (scenario) text file and use 
+	 * <code>CommandLineInterpreter</code> to interpret each line.
+	 * @param fileName	the file to load
+	 */
 	public static void textFileInterpreter(String fileName) {
 		TextFileInterpreter.fileName = fileName;
 		FileReader file = null;
