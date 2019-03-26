@@ -73,12 +73,6 @@ public class CommandLineInterface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 24);
-		SD.setTime(15, 45, 0);
-		new MyVelibNetwork("Paris");
-		
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");
 		Scanner scan = new Scanner(System.in);

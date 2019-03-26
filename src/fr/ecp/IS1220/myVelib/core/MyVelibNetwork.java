@@ -55,7 +55,7 @@ public class MyVelibNetwork {
 	public static void switchNetwork(MyVelibNetwork network) {
 		if (listOfNetworks.contains(network)) {
 			instance = network;
-			System.out.println("Switched to network"+network.name);
+			System.out.println("Switched to network "+network.name+".");
 		}
 		else
 			throw new NoSuchNetworkExistException("This MyVelib network does not exist.");
