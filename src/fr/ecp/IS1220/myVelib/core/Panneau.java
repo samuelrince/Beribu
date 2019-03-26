@@ -61,7 +61,7 @@ public class Panneau extends JPanel{
 		Localization ymax = new Localization(barycenter.getLatitude()+ySides[1],barycenter.getLongitude());
 		g.drawString("y="+Math.round(1000*xmin.distanceTo(xmax))/1000.+"km",20,50);
 		g.drawString("x="+Math.round(1000*ymin.distanceTo(ymax))/1000.+"km",620,660);
-		g.drawString("x=0,y=0",20,660);
+		g.drawString("x=0, y=0",20,660);
 	}
 
 }
