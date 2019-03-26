@@ -2,6 +2,8 @@ package fr.ecp.IS1220.myVelib.core;
 
 import java.util.ArrayList;
 
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+
 /**
  * This class provides a number of methods for computing station-related statistics.
  * @author Valentin
@@ -70,7 +72,7 @@ public class StationBalance {
 	 * @throws RuntimeException	when there is no data
 	 */
 	public static double occupationRate(Station station, Date start, Date end) 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		int minIndex = 0;
 		int maxIndex;
 		while (start.isAfter(station.getHistory().get(minIndex).getTimeStamp())){
@@ -83,7 +85,7 @@ public class StationBalance {
 			minIndex--;
 		maxIndex = minIndex;
 		if (!end.isAfter(station.getHistory().get(maxIndex).getTimeStamp()))
-			throw new RuntimeException(station+" did not exist yet during that time window.");
+			throw new NoSuchStationExistException(station+" did not exist yet during that time window.");
 		while (end.isAfter(station.getHistory().get(maxIndex).getTimeStamp())){
 			maxIndex++;
 			if (maxIndex == station.getHistory().size())				
@@ -183,7 +185,7 @@ public class StationBalance {
 	 * @throws RuntimeException	when there is no data
 	 */
 	public static double occupationRate(Station station) 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		Date start = new Date(1970,0,0,0,0,0);
 		Date end = new Date();
 		int minIndex = 0;
@@ -198,7 +200,7 @@ public class StationBalance {
 			minIndex--;
 		maxIndex = minIndex;
 		if (!end.isAfter(station.getHistory().get(maxIndex).getTimeStamp()))
-			throw new RuntimeException(station+" did not exist yet during that time window.");
+			throw new NoSuchStationExistException(station+" did not exist yet during that time window.");
 		while (end.isAfter(station.getHistory().get(maxIndex).getTimeStamp())){
 			maxIndex++;
 			if (maxIndex == station.getHistory().size())				
@@ -297,7 +299,7 @@ public class StationBalance {
 			station, new Date(1970,1,1,0,0,0), new Date()))/1000.*100+"%"+"\n"+"----------------------");
 	}
 	
-	public static void main(String[] args) throws RuntimeException, Exception {
+	public static void main(String[] args) throws Exception {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 02, 17);
 		SD.setTime(19, 22, 37);
