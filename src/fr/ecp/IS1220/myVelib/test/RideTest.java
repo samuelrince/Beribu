@@ -605,7 +605,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(45);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
