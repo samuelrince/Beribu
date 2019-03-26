@@ -4,6 +4,8 @@ package fr.ecp.IS1220.myVelib.core;
 import java.util.ArrayList;
 import java.util.Date;
 
+import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
+
 /**
  * This class represents a user.
  * @author Valentin
@@ -106,7 +108,7 @@ public class User {
 	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card
 	 * that belongs to another user)
 	 */
-	public void subscribe(Card card) throws IllegalArgumentException {
+	public void subscribe(Card card) throws Exception {
 		if (card.getUser() == this) {
 			this.card = card;
 			System.out.println(this+" has a new subscription of type "+card.getType()+ ".");			
@@ -114,7 +116,8 @@ public class User {
 			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user");
 		}
 	}
-	public void subscribe(String cardType) {
+	
+	public void subscribe(String cardType) throws Exception {
 		CardFactory cardFactory = new CardFactory();
 		this.subscribe(cardFactory.newCard(cardType, this));
 	}
@@ -172,7 +175,7 @@ public class User {
 			station.updateStatus();
 		} 
 		else {
-			throw new RuntimeException("User " + this.getName() + " has not finished their current ride.");
+			throw new NoNewRideException("User " + this.getName() + " has not finished their current ride.");
 		}
 	}
 	
@@ -206,7 +209,7 @@ public class User {
 				station.updateStatus();
 		} 
 		else {
-			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
+			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
 	
@@ -228,7 +231,7 @@ public class User {
 	 * @param station	the return station
 	 * @throws Exception	occurs when there is no parking slot available
 	 */
-	public void endCurrentRide(Station station) throws RuntimeException,Exception {
+	public void endCurrentRide(Station station) throws Exception {
 		if (station.isFull())
 			throw new IllegalArgumentException("This station is full.");
 		else {

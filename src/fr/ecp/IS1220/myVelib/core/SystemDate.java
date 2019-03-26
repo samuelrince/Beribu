@@ -3,6 +3,8 @@ package fr.ecp.IS1220.myVelib.core;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
+
 /**
  * This class represents a simulation of time. It is a singleton.
  * @author Valentin
@@ -44,14 +46,14 @@ public class SystemDate {
 			Date d1 = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
 			Date d2 = new Date(year, month, day, this.hour, this.minute, this.second);
 			if (d1.isAfter(d2) && !(d1.equals(d2))) {
-				throw new IllegalArgumentException("You cannot travel back time.");
+				throw new BadDateException("You cannot travel back time.");
 			}
 		}
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid.");
+			throw new BadDateException("The SystemDate is not valid.");
 		System.out.println("Current System day has been set to "+day+"/"
 				+month+"/"+year+".");
 	}
@@ -61,14 +63,14 @@ public class SystemDate {
 			Date d1 = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
 			Date d2 = new Date(this.year, this.month, this.day, hour, minute, second);
 			if (d1.isAfter(d2) && !(d1.equals(d2))) {
-				throw new IllegalArgumentException("You cannot travel back time.");
+				throw new BadDateException("You cannot travel back time.");
 			}
 		}
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid.");
+			throw new BadDateException("The SystemDate is not valid.");
 		System.out.println("Current System time has been set to "+hour+":"
 				+minute+":"+second+".");
 	}
@@ -79,7 +81,7 @@ public class SystemDate {
 
 	public void setYear(Integer year) {
 		if (year<1970) {
-			throw new IllegalArgumentException("Please enter a year after 1970.");
+			throw new BadDateException("Please enter a year after 1970.");
 		}
 		this.year = year;
 		if (!this.isValid())
@@ -92,12 +94,12 @@ public class SystemDate {
 
 	public void setMonth(Integer month) {
 		if (month<1 || month>12) {
-			throw new IllegalArgumentException("Please enter a valid month"
+			throw new BadDateException("Please enter a valid month"
 					+ " number between 1 and 12.");
 		}
 		this.month = month;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid.");
+			throw new BadDateException("The SystemDate is not valid.");
 	}
 
 	public Integer getDay() {
@@ -106,12 +108,12 @@ public class SystemDate {
 
 	public void setDay(Integer day) {
 		if (day<1 || day>31) {
-			throw new IllegalArgumentException("Please enter a valid day"
+			throw new BadDateException("Please enter a valid day"
 					+ " number between 1 and 31.");
 		}
 		this.day = day;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid.");
+			throw new BadDateException("The SystemDate is not valid.");
 	}
 
 	public Integer getHour() {
@@ -120,12 +122,12 @@ public class SystemDate {
 
 	public void setHour(Integer hour) {
 		if (hour<0 || hour>23) {
-			throw new IllegalArgumentException("Please enter a valid hour"
+			throw new BadDateException("Please enter a valid hour"
 					+ " between 0 and 23.");
 		}
 		this.hour = hour;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid.");
+			throw new BadDateException("The SystemDate is not valid.");
 	}
 
 	public Integer getMinute() {
@@ -134,12 +136,12 @@ public class SystemDate {
 
 	public void setMinute(Integer minute) {
 		if (minute<0 || minute>59) {
-			throw new IllegalArgumentException("Please enter a valid minute"
+			throw new BadDateException("Please enter a valid minute"
 					+ " between 0 and 59.");
 		}
 		this.minute = minute;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid.");
+			throw new BadDateException("The SystemDate is not valid.");
 	}
 
 	public Integer getSecond() {
@@ -148,7 +150,7 @@ public class SystemDate {
 
 	public void setSecond(Integer second) {
 		if (second<0 || second>59) {
-			throw new IllegalArgumentException("Please enter a valid second"
+			throw new BadDateException("Please enter a valid second"
 					+ " between 0 and 59.");
 		}
 		this.second = second;
@@ -159,7 +161,7 @@ public class SystemDate {
 		return "SystemDate: "+day+"/"+month+"/"+year+" at "+hour+":"+minute+":"+second;
 	}
 	
-	private boolean isValid() throws IllegalArgumentException {
+	private boolean isValid() throws BadDateException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
 		sdf.setLenient(false);
 		String dateStr = new String();
@@ -172,7 +174,7 @@ public class SystemDate {
 		try {
 			java.util.Date date = sdf.parse(dateStr);
 		} catch(ParseException e) {
-			throw new IllegalArgumentException("Please enter a valid date.");
+			throw new BadDateException("Please enter a valid date.");
 		}
 		return true;
 	}

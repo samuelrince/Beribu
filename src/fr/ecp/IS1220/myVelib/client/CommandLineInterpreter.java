@@ -309,8 +309,11 @@ public class CommandLineInterpreter {
 		
 		case "runTest": {
 			if (arguments.length == 1) {
-
-				return;
+				try {
+					TextFileInterpreter.textFileInterpreter(arguments[0]);
+				} catch (Exception e) {
+					System.err.println("Failed to load or interprete the scenario <" + arguments[0] + ">");
+				}
 			}
 			System.err.println("'runTest' takes 1 argument.");
 			break;

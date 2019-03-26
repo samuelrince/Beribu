@@ -1,5 +1,7 @@
 package fr.ecp.IS1220.myVelib.core;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadCardTypeException;
+
 /**
  * A card factory used when creating a new subscription (or changing of credit "Standard" card).
  * @author Valentin
@@ -15,6 +17,6 @@ public class CardFactory {
 		if (type.equalsIgnoreCase("vmax"))
 			return new Vmax(user);
 		else
-			throw new IllegalArgumentException("There is no such card type.");
+			throw new BadCardTypeException("There is no such card type.");
 	}
 }

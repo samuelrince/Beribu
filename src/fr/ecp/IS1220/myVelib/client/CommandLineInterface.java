@@ -20,8 +20,7 @@ public class CommandLineInterface {
 			}
 			for(int i = 0; i < chars.length; i++){
 				char c = chars[i];
-				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57)
-						&& !(c==39)) {
+				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57) && !(c==39) && !(c==46)) {
 					System.err.println("Invalid characters. Only letters of the "
 							+ "alphabet, numbers and ' are accepted.");
 					return false;

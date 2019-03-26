@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStringConversion;
 
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+
 /**
  * This class represents a localization.
  * @author Valentin
@@ -110,7 +112,7 @@ public class Localization {
 	 * and contains at least one available parking slot.
 	 * @return 		the closest Station with an available parking slot
 	 */
-	public Station getClosestAvailableStation() throws RuntimeException {
+	public Station getClosestAvailableStation() throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -123,7 +125,7 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no available station was found.");
+			throw new NoSuchStationExistException("Sorry, no available station was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}
@@ -135,7 +137,7 @@ public class Localization {
 	 * @param isPlus	true if the Station should be Plus, false otherwise
 	 * @return 		the closest Station of given type with an available parking slot
 	 */
-	public Station getClosestAvailableStation(boolean isPlus) throws RuntimeException {
+	public Station getClosestAvailableStation(boolean isPlus) throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -149,7 +151,7 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no available station was found.");
+			throw new NoSuchStationExistException("Sorry, no available station was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}

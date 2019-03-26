@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import fr.ecp.IS1220.myVelib.core.exception.NoBicycleAvailableException;
+import fr.ecp.IS1220.myVelib.core.exception.NoParkingSlotAvailableException;
+
 /**
  * This class represents a station.
  * @author Valentin
@@ -162,13 +165,13 @@ public class Station implements Comparable<Station>{
 	 * @return a free parking slot
 	 * @throws RuntimeException	when there is no available parking slot
 	 */
-	public ParkingSlot getFreeParkingSlot() throws RuntimeException {
+	public ParkingSlot getFreeParkingSlot() throws NoParkingSlotAvailableException {
 		for(int i = 0; i <= this.parkingSlots.size() - 1; i++) {
 			if (!this.parkingSlots.get(i).isBicycle() && this.parkingSlots.get(i).isOffline() == false) {
 				return this.parkingSlots.get(i);
 			}
 		}
-		throw new RuntimeException("No parking slot available in "+this+".");
+		throw new NoParkingSlotAvailableException("No parking slot available in "+this+".");
 	}
 	
 	public ParkingSlot getParkingSlot(int index) 
@@ -204,7 +207,7 @@ public class Station implements Comparable<Station>{
 	 * @return an available bicycle
 	 * @throws RuntimeException	When no bicycle is available
 	 */
-	public Bicycle getBicycle() throws RuntimeException {
+	public Bicycle getBicycle() throws NoBicycleAvailableException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
@@ -213,7 +216,7 @@ public class Station implements Comparable<Station>{
 				return bicycle;
 			}
 		}
-		throw new RuntimeException("No bicycle is available in "+this+".");
+		throw new NoBicycleAvailableException("No bicycle is available in "+this+".");
 	}
 		
 	/**
@@ -224,7 +227,7 @@ public class Station implements Comparable<Station>{
 	 * @return an available bicycle of given type
 	 * @throws RuntimeException	When no bicycle is available
 	 */
-	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
+	public Bicycle getBicycle(String bicycleType) throws NoBicycleAvailableException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
 			if (this.parkingSlots.get(i).isBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
@@ -236,7 +239,7 @@ public class Station implements Comparable<Station>{
 				}
 			}
 		}
-		throw new RuntimeException("No bicycle of type "+bicycleType+" is available in "+this+".");
+		throw new NoBicycleAvailableException("No bicycle of type "+bicycleType+" is available in "+this+".");
 	}
 	
 	/**
@@ -283,7 +286,7 @@ public class Station implements Comparable<Station>{
 	 */
 	public String getOneBicycleType() {
 		if (!this.isBicycle())
-			throw new RuntimeException("No bicycle is available in "+this+".");
+			throw new NoBicycleAvailableException("No bicycle is available in "+this+".");
 		for (int i = 0; i < Bicycle.getTypeDict().size(); i++) {
 			if (this.isBicycle(Bicycle.getTypeDict().get(i))) {
 				return Bicycle.getTypeDict().get(i);

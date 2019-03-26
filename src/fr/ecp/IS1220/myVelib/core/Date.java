@@ -3,6 +3,8 @@ package fr.ecp.IS1220.myVelib.core;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
+
 /**
  * This class represents a date and time.
  * @author Valentin
@@ -51,7 +53,7 @@ public class Date {
 	
 	public void setYear(Integer year) {
 		if (year<1970) {
-			throw new IllegalArgumentException("Please enter a year after 1970.");
+			throw new BadDateException("Please enter a year after 1970.");
 		}
 		this.year = year;
 		this.isValid();
@@ -63,7 +65,7 @@ public class Date {
 	
 	public void setMonth(Integer month) {
 		if (month<1 || month>12) {
-			throw new IllegalArgumentException("Please enter a valid month"
+			throw new BadDateException("Please enter a valid month"
 					+ " number between 1 and 12.");
 		}
 		this.month = month;
@@ -76,7 +78,7 @@ public class Date {
 
 	public void setDay(Integer day) {
 		if (day<1 || day>31) {
-			throw new IllegalArgumentException("Please enter a valid day"
+			throw new BadDateException("Please enter a valid day"
 					+ " number between 1 and 31.");
 		}
 		this.day = day;
@@ -89,7 +91,7 @@ public class Date {
 
 	public void setHour(Integer hour) {
 		if (hour<0 || hour>23) {
-			throw new IllegalArgumentException("Please enter a valid hour"
+			throw new BadDateException("Please enter a valid hour"
 					+ " between 0 and 23.");
 		}
 		this.hour = hour;
@@ -102,7 +104,7 @@ public class Date {
 
 	public void setMinute(Integer minute) {
 		if (minute<0 || minute>59) {
-			throw new IllegalArgumentException("Please enter a valid minute"
+			throw new BadDateException("Please enter a valid minute"
 					+ " between 0 and 59.");
 		}
 		this.minute = minute;
@@ -115,7 +117,7 @@ public class Date {
 
 	public void setSecond(Integer second) {
 		if (second<0 || second>59) {
-			throw new IllegalArgumentException("Please enter a valid second"
+			throw new BadDateException("Please enter a valid second"
 					+ " between 0 and 59.");
 		}
 		this.second = second;
@@ -232,7 +234,7 @@ public class Date {
 	 * @return								true if the date is valid
 	 * @throws IllegalArgumentException		if the date is not valid
 	 */
-	private boolean isValid() throws IllegalArgumentException {
+	private boolean isValid() throws BadDateException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
 		sdf.setLenient(false);
 		String dateStr = new String();
@@ -245,7 +247,7 @@ public class Date {
 		try {
 			java.util.Date date = sdf.parse(dateStr);
 		} catch(ParseException e) {
-			throw new IllegalArgumentException("Please enter a valid date.");
+			throw new BadDateException("Please enter a valid date.");
 		}
 		return true;
 	}

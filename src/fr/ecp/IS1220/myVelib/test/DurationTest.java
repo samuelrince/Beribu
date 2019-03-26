@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import fr.ecp.IS1220.myVelib.core.Date;
 import fr.ecp.IS1220.myVelib.core.Duration;
 import fr.ecp.IS1220.myVelib.core.SystemDate;
+import fr.ecp.IS1220.myVelib.core.exception.BadDurationException;
 
 /**
  * This class contains Junit tests for Duration class
@@ -33,8 +34,10 @@ class DurationTest {
 		SD.setTime(10, 10, 10);
 		Date date1 = new Date(2019, 01, 31, 19, 42, 57);
 		Date date2 = new Date(2019, 01, 31, 21, 33, 12);
-		Duration duration = new Duration(date1, date2);
+		Duration duration;
+		duration = new Duration(date1, date2);
 		assertTrue(duration.getDuration() == 6615);
+		
 	}
 	@Test
 	void addDuration002() {
