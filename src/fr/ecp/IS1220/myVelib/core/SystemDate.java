@@ -44,7 +44,7 @@ public class SystemDate {
 			Date d1 = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
 			Date d2 = new Date(year, month, day, this.hour, this.minute, this.second);
 			if (d1.isAfter(d2) && !(d1.equals(d2))) {
-				throw new IllegalArgumentException("You cannot travel back time");
+				throw new IllegalArgumentException("You cannot travel back time.");
 			}
 		}
 		this.year = year;
@@ -61,14 +61,14 @@ public class SystemDate {
 			Date d1 = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
 			Date d2 = new Date(this.year, this.month, this.day, hour, minute, second);
 			if (d1.isAfter(d2) && !(d1.equals(d2))) {
-				throw new IllegalArgumentException("You cannot travel back time");
+				throw new IllegalArgumentException("You cannot travel back time.");
 			}
 		}
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
+			throw new IllegalArgumentException("The SystemDate is not valid.");
 		System.out.println("Current System time has been set to "+hour+":"
 				+minute+":"+second+".");
 	}
@@ -79,11 +79,11 @@ public class SystemDate {
 
 	public void setYear(Integer year) {
 		if (year<1970) {
-			throw new IllegalArgumentException("Please enter a year after 1970");
+			throw new IllegalArgumentException("Please enter a year after 1970.");
 		}
 		this.year = year;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
+			throw new IllegalArgumentException("The SystemDate is not valid.");
 	}
 
 	public Integer getMonth() {
@@ -97,7 +97,7 @@ public class SystemDate {
 		}
 		this.month = month;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
+			throw new IllegalArgumentException("The SystemDate is not valid.");
 	}
 
 	public Integer getDay() {
@@ -111,7 +111,7 @@ public class SystemDate {
 		}
 		this.day = day;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
+			throw new IllegalArgumentException("The SystemDate is not valid.");
 	}
 
 	public Integer getHour() {
@@ -125,7 +125,7 @@ public class SystemDate {
 		}
 		this.hour = hour;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
+			throw new IllegalArgumentException("The SystemDate is not valid.");
 	}
 
 	public Integer getMinute() {
@@ -139,7 +139,7 @@ public class SystemDate {
 		}
 		this.minute = minute;
 		if (!this.isValid())
-			throw new IllegalArgumentException("The SystemDate is not valid");
+			throw new IllegalArgumentException("The SystemDate is not valid.");
 	}
 
 	public Integer getSecond() {
