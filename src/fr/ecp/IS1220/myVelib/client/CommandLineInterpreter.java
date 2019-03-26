@@ -91,6 +91,8 @@ public class CommandLineInterpreter {
 					SD.setDay(year, month, day);
 				} catch(BadDateException e) {
 					System.err.println(e.getMessage());
+				} catch(Exception e) {
+					System.err.println(e.getMessage() + "from" + e.getClass());
 				}
 			}
 			else
@@ -100,10 +102,16 @@ public class CommandLineInterpreter {
 		case "time": {
 			if (arguments.length == 3) {
 				SystemDate SD = SystemDate.getInstance();
-				Integer hour = Integer.valueOf(arguments[0]);
-				Integer minute = Integer.valueOf(arguments[1]);
-				Integer second = Integer.valueOf(arguments[2]);
-				SD.setTime(hour, minute, second);
+				try {
+					Integer hour = Integer.valueOf(arguments[0]);
+					Integer minute = Integer.valueOf(arguments[1]);
+					Integer second = Integer.valueOf(arguments[2]);
+					SD.setTime(hour, minute, second);	
+				} catch(BadDateException e) {
+					System.err.println(e.getMessage());
+				} catch(Exception e) {
+					System.err.println(e.getMessage() + "from" + e.getClass());
+				}
 			}
 			else
 				System.err.println("'time' takes 3 arguments.");
