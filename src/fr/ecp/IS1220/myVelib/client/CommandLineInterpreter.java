@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 import fr.ecp.IS1220.myVelib.core.*;
+import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
 
 public class CommandLineInterpreter {
 
@@ -82,7 +83,15 @@ public class CommandLineInterpreter {
 
 		case "date": {
 			if (arguments.length == 3) {
-
+				SystemDate SD = SystemDate.getInstance();
+				try {
+					Integer year = Integer.valueOf(arguments[0]);
+					Integer month = Integer.valueOf(arguments[1]);
+					Integer day = Integer.valueOf(arguments[2]);
+					SD.setDay(year, month, day);
+				} catch(BadDateException e) {
+					System.err.println(e.getMessage());
+				}
 			}
 			else
 				System.err.println("'date' takes 3 arguments.");
@@ -90,7 +99,11 @@ public class CommandLineInterpreter {
 		}
 		case "time": {
 			if (arguments.length == 3) {
-
+				SystemDate SD = SystemDate.getInstance();
+				Integer hour = Integer.valueOf(arguments[0]);
+				Integer minute = Integer.valueOf(arguments[1]);
+				Integer second = Integer.valueOf(arguments[2]);
+				SD.setTime(hour, minute, second);
 			}
 			else
 				System.err.println("'time' takes 3 arguments.");

@@ -102,8 +102,8 @@ public class CommandLineInterface {
 	    				+"\n"+"Put a space between each argument and no space inside ' '.");
 	    		continue;
 	    		}
-	    	for (int i = 0; i <tokens.length; i++)
-	    		System.out.println(tokens[i]);
+	    	//for (int i = 0; i <tokens.length; i++)
+	    		//System.out.println(tokens[i]);
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
 	}
