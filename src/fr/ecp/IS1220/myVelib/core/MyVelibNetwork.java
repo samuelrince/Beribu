@@ -492,8 +492,8 @@ public class MyVelibNetwork {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019,1,1);SD.setTime(12,0,0);
 		MyVelibNetwork network = new MyVelibNetwork("Paris");
-		network.createStations(new RandomLocInCircle(), new Localization(45,45), 10, 
-				10, 0, 10, 70, new double[] {70,30});
+		network.createStations(new RandomLocInSquare(), new Localization(45,45), 10, 
+				100, 0, 10, 70, new double[] {70,30});
 		network.visual2D();
 	}
 }
