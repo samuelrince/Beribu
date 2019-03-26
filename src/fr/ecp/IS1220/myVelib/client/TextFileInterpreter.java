@@ -54,8 +54,6 @@ public class TextFileInterpreter {
     				+"\n"+"Put a space between each argument and no space inside ' '.");
     		throw new RuntimeException("Invalid command detected in " + TextFileInterpreter.fileName);
     	}
-    	for (int i = 0; i <tokens.length; i++)
-    		System.out.println(tokens[i]);
     	CommandLineInterpreter.interprete(tokens);
 	}
 	
