@@ -376,6 +376,13 @@ public class MyVelibNetwork {
 		}
 	}
 	
+	public void newSubscriber(String name, String subType) {
+		User user = new User(name);
+		if (subType != "Standard")
+			user.subscribe(subType);
+		this.userDatabase.add(user);
+	}
+	
 	/**
 	 * Adds a given user to the network.
 	 * @param user user to add
@@ -410,20 +417,30 @@ public class MyVelibNetwork {
 	
 	/**
 	 * 
-	 * @param index index of user
-	 * @return the user at specified index in the network user data base
+	 * @param index ID of user
+	 * @return the user with specified ID in the network user data base
 	 */
-	public User user(int index) {
-		return this.userDatabase.get(index);
+	public User user(long userID) {
+		for (User user:this.userDatabase) {
+			if (user.getId() == userID)
+				return user;
+		}
+		throw new RuntimeException("No user with this ID in the MyVelib network "
+				+this.name+".");
 	}
 	
 	/**
 	 * 
-	 * @param index index of the station
-	 * @return the station at specified index in the network station data base
+	 * @param index ID of the station
+	 * @return the station with specified ID in the network station data base
 	 */
-	public Station station(int index) {
-		return this.stationDatabase.get(index);
+	public Station station(long stationID) {
+		for (Station station:this.stationDatabase) {
+			if (station.getId() == stationID)
+				return station;
+		}
+		throw new RuntimeException("No station with this ID in the MyVelib network "
+				+this.name+".");
 	}
 	/**
 	 * Returns a representation of the list of stations of the network and their
