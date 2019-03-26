@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
+
 /**
  * This class represents a MyVelib network. It is a singleton.
  * @author Valentin
@@ -43,7 +45,7 @@ public class MyVelibNetwork {
 	 */
 	public static synchronized MyVelibNetwork getInstance() throws RuntimeException {
 		if (instance==null) {
-			throw new RuntimeException("No MyVelib network has been created.");
+			throw new NoSuchNetworkExistException("No MyVelib network has been created.");
 		}
 		else {
 			return instance;
@@ -56,7 +58,7 @@ public class MyVelibNetwork {
 			System.out.println("Switched to network"+network.name);
 		}
 		else
-			throw new IllegalArgumentException("This MyVelib network does not exist.");
+			throw new NoSuchNetworkExistException("This MyVelib network does not exist.");
 	}
 	
 	public static void switchNetwork(String networkName) {
@@ -67,7 +69,7 @@ public class MyVelibNetwork {
 			return;
 			}
 		}
-		throw new IllegalArgumentException("This MyVelib network does not exist.");
+		throw new NoSuchNetworkExistException("This MyVelib network does not exist.");
 	}
 	
 	/**
@@ -366,8 +368,9 @@ public class MyVelibNetwork {
 	 * the network.
 	 * @param number number of users
 	 * @param subType type of subscription
+	 * @throws Exception 
 	 */
-	public void createSubscribers(int number,String subType) {
+	public void createSubscribers(int number,String subType) throws Exception {
 		for (int i = 0; i < number; i++) {
 			User user = new User();
 			if (subType != "Standard")

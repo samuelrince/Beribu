@@ -3,6 +3,8 @@ package fr.ecp.IS1220.myVelib.core;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadBicycleTypeException;
+
 /**
  * This abstract class represents a bicycle.
  * @author Valentin
@@ -56,7 +58,7 @@ public abstract class Bicycle {
 	 * @return the speed of this type of bicycle
 	 * @throws IllegalArgumentException occurs when a wrong bicycleType is entered
 	 */
-	public static double getSpeed(String bicycleType) throws IllegalArgumentException {
+	public static double getSpeed(String bicycleType) throws BadBicycleTypeException {
 		if (bicycleType.equalsIgnoreCase("MECHANICAL")) {
 			return 15/3.6;
 		}
@@ -64,7 +66,7 @@ public abstract class Bicycle {
 			return 20/3.6;
 		}
 		else {
-			throw new IllegalArgumentException("Not a valid bicycle type.");
+			throw new BadBicycleTypeException("Not a valid bicycle type.");
 		}
 	}
 	
