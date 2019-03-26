@@ -293,8 +293,8 @@ public class StationBalance {
 	+"Date of creation :"+station.getCreatedAt()+"\n"+"GPS coordinates : "+station.getLocalization()
 	+"\n"+"Number of slots : "+station.getParkingSlots().size()+"\n"+
 	"Total number of rentals : "+station.getRentCount()+"\n"+"Total number of returns : "
-	+station.getReturnCount()+"\n"+"Occupation rate : "+StationBalance.occupationRate(
-			station, new Date(1970,1,1,0,0,0), new Date())*100+"%"+"\n"+"----------------------");
+	+station.getReturnCount()+"\n"+"Occupation rate : "+Math.round(1000*StationBalance.occupationRate(
+			station, new Date(1970,1,1,0,0,0), new Date()))/1000.*100+"%"+"\n"+"----------------------");
 	}
 	
 	public static void main(String[] args) throws RuntimeException, Exception {

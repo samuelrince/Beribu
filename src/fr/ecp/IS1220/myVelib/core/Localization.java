@@ -12,7 +12,7 @@ import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStrin
 public class Localization {
 	private double latitude;
 	private double longitude;
-	final static double rayonTerre = 6371000;
+	final static double rayonTerre = 6371;
 
 	/**
 	 * Constructor of class Localization.
