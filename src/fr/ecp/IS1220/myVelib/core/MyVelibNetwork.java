@@ -456,21 +456,32 @@ public class MyVelibNetwork {
 		}
 		return res+"\n"+"----------------------";
 	}
-	
-	  public void visual2D() {
-		  JFrame frame = new JFrame();
-		  frame.setSize(new Dimension(700,700));
-		  ArrayList<Localization> points=new ArrayList<Localization>();
-		  for (Station s:this.stationDatabase) {
-			  points.add(s.getLocalization());
-			  System.out.println(s.getLocalization());
-		  }
-		  System.out.println("bary "+Localization.barycenter(points));
-		  Panneau p=new Panneau(points);
-		  frame.setContentPane(p);
-		  frame.setVisible(true);
-}
-	
+
+	/**
+	 * This method displays a new Jframe window showing the positions of all the stations of
+	 * the network.
+	 */
+	public void visual2D() {
+		JFrame frame = new JFrame();
+		frame.setSize(new Dimension(700,750));
+		ArrayList<Localization> points=new ArrayList<Localization>();
+		ArrayList<String> labels=new ArrayList<String>();
+		for (Station s:this.stationDatabase) {
+			points.add(s.getLocalization());
+			labels.add(s.getName());
+		}
+		
+		System.out.println("bary "+Localization.barycenter(points));
+		for (Station s:this.stationDatabase) {
+			System.out.println(s.getName()+" : "+s.getLocalization());	
+			System.out.println("distance to bary : "+s.getLocalization().distanceTo(Localization.barycenter(points)));
+		}
+		
+		Panneau p=new Panneau(points,labels);
+		frame.setContentPane(p);
+		frame.setVisible(true);
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -481,8 +492,8 @@ public class MyVelibNetwork {
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019,1,1);SD.setTime(12,0,0);
 		MyVelibNetwork network = new MyVelibNetwork("Paris");
-		network.createStations(new RandomLocInSquare(), new Localization(0,0), 10, 
-				100, 0, 10, 70, new double[] {70,30});
+		network.createStations(new RandomLocInCircle(), new Localization(45,45), 10, 
+				10, 0, 10, 70, new double[] {70,30});
 		network.visual2D();
 	}
 }

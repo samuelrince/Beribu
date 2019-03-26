@@ -14,7 +14,7 @@ import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 public class Localization {
 	private double latitude;
 	private double longitude;
-	final static double rayonTerre = 6371000;
+	final static double rayonTerre = 6371;
 
 	/**
 	 * Constructor of class Localization.
