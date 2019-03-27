@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 import fr.ecp.IS1220.myVelib.core.*;
+import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
 
 public class CommandLineInterpreter {
 
@@ -104,44 +105,34 @@ public class CommandLineInterpreter {
 
 		case "date": {
 			if (arguments.length == 3) {
-				int year = 0;
-				int month = 0;
-				int day = 0;
-				try {
-				year = Integer.parseInt(arguments[0]);
-				month = Integer.parseInt(arguments[1]);
-				day = Integer.parseInt(arguments[2]);
-				}
-				catch (NumberFormatException e) {System.err.println("'date' takes the following "
-					+ "types of argument :"+"\n"+"<int> <int> <int>");return;}
-				try {
 				SystemDate SD = SystemDate.getInstance();
-				SD.setDay(year, month, day);
+        Integer year = Integer.valueOf(arguments[0]);
+				Integer month = Integer.valueOf(arguments[1]);
+				Integer day = Integer.valueOf(arguments[2]);
+				try {
+					SD.setDay(year, month, day);
+				} catch(BadDateException e) {
+					System.err.println(e.getMessage());
+				} catch(Exception e) {
+					System.err.println(e.getMessage() + "from" + e.getClass());
 				}
-				catch(Exception e) {System.err.println(e);}
-				return;
 			}
 			System.err.println("'date' takes 3 arguments.");
 			break;
 		}
 		case "time": {
 			if (arguments.length == 3) {
-				int hour = 0;
-				int min = 0;
-				int sec = 0;
-				try {
-				hour = Integer.parseInt(arguments[0]);
-				min = Integer.parseInt(arguments[1]);
-				sec = Integer.parseInt(arguments[2]);
-				}
-				catch (NumberFormatException e) {System.err.println("'time' takes the following "
-					+ "types of argument :"+"\n"+"<int> <int> <int>");return;}
-				try {
 				SystemDate SD = SystemDate.getInstance();
-				SD.setTime(hour, min, sec);
+        Integer hour = Integer.valueOf(arguments[0]);
+				Integer minute = Integer.valueOf(arguments[1]);
+				Integer second = Integer.valueOf(arguments[2]);
+				try {
+					SD.setTime(hour, minute, second);	
+				} catch(BadDateException e) {
+					System.err.println(e.getMessage());
+				} catch(Exception e) {
+					System.err.println(e.getMessage() + "from" + e.getClass());
 				}
-				catch(Exception e) {System.err.println(e);}
-				return;
 			}
 			System.err.println("'time' takes 3 arguments.");
 			break;
