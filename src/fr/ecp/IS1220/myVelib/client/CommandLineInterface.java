@@ -93,7 +93,7 @@ public class CommandLineInterface {
 	    do {
 	    	System.out.print("Entrez une commande : ");
 	    	line = scan.nextLine();
-	    	System.out.println("Vous avez entré : "+line);
+	    	System.out.println("Vous avez entrÃ© : "+line);
 	    	String[] tokens = line.split(delims);
 	    	if (!check(tokens))
 	    		continue;

@@ -174,6 +174,16 @@ public class Station implements Comparable<Station>{
 		throw new NoParkingSlotAvailableException("No parking slot available in "+this+".");
 	}
 	
+	public ParkingSlot getParkingSlot(int index) 
+			throws IllegalArgumentException, RuntimeException {
+		if (index < 0)
+			throw new IllegalArgumentException("The parking slot index should be positive.");
+		if (index > this.parkingSlots.size()-1)
+			throw new RuntimeException("The station "+this.name+" contains only "
+				+this.parkingSlots.size()+" parking slots.");	
+		return this.parkingSlots.get(index);
+	}
+	
 	/**
 	 * Returns true if there is no free parking slot available in the station.
 	 * If there is at least one free parking slot (online and holding no bicycle),

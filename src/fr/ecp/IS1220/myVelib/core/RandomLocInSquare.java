@@ -21,9 +21,20 @@ public class RandomLocInSquare implements RandomLocGenerator {
 		}
 		double x = Math.random()*side - side/2.;
 		double y = Math.random()*side - side/2.;
-		return new Localization(center.getLatitude() + x/Localization.rayonTerre,
-				center.getLongitude() + y/(Math.cos(center.getLatitude())
-						*Localization.rayonTerre));
+		return new Localization(center.getLatitude() + y/Localization.rayonTerre*180/Math.PI,
+				center.getLongitude() + x/(Math.cos(center.getLatitude())
+						*Localization.rayonTerre)*180/Math.PI);
+	}
+	
+	public static void main(String[] args) {
+		RandomLocInSquare generator = new RandomLocInSquare();
+		Localization center = new Localization(0,0);
+		for (int i = 0; i<10; i++) {
+			Localization loc = generator.generate(center, 10);
+			System.out.println("deltaLAT: "+(loc.getLatitude()-center.getLatitude()));
+			System.out.println("deltaLONG: "+(loc.getLongitude()-center.getLongitude()));
+			System.out.println("distance: "+loc.distanceTo(center));
+		}
 	}
 
 }

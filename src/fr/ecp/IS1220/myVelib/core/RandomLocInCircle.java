@@ -21,9 +21,9 @@ public class RandomLocInCircle implements RandomLocGenerator {
 		}
 		double r = Math.sqrt(Math.random())*radius;
 		double angle = Math.random()*2*Math.PI;
-		return new Localization(center.getLatitude() + Math.cos(angle)*r/Localization.rayonTerre,
+		return new Localization(center.getLatitude() + Math.cos(angle)*r/Localization.rayonTerre*180/Math.PI,
 				center.getLongitude() + Math.sin(angle)*r/(Math.cos(center.getLatitude())
-						*Localization.rayonTerre));
+						*Localization.rayonTerre)*180/Math.PI);
 	}
 
 }
