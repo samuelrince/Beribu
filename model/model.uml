@@ -9585,6 +9585,8 @@
                 <packagedElement xmi:type="uml:Class" xmi:id="_H2HcZk8XEemZdeYqpkMVLg" name="RandomLocGenerator"/>
                 <packagedElement xmi:type="uml:Dependency" xmi:id="_JsdS8E8XEemZdeYqpkMVLg" name="&lt;&lt;throws>>" client="_H1E6kE8XEemZdeYqpkMVLg" supplier="_t95FsE8MEemZdeYqpkMVLg"/>
                 <packagedElement xmi:type="uml:Dependency" xmi:id="_NX2MUE8nEemZdeYqpkMVLg" name="&lt;&lt;throws>>" client="_H1E6kE8XEemZdeYqpkMVLg" supplier="_JUsf8E8nEemZdeYqpkMVLg"/>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_y6hvwFB1EemZdeYqpkMVLg" name="&lt;&lt;throws>>" client="_H1E6kE8XEemZdeYqpkMVLg" supplier="_efi5UFB1EemZdeYqpkMVLg"/>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_087FUFB1EemZdeYqpkMVLg" name="&lt;&lt;throws>>" client="_H1E6kE8XEemZdeYqpkMVLg" supplier="_Wb3VEE8oEemZdeYqpkMVLg"/>
               </packagedElement>
             </packagedElement>
           </packagedElement>
@@ -11115,6 +11117,73 @@
                       <ownedParameter xmi:type="uml:Parameter" xmi:id="_5ItwkE_WEemZdeYqpkMVLg" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
                     </ownedOperation>
                   </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_efi5UFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_efnx0FB1EemZdeYqpkMVLg" general="_IPh1YE8sEemZdeYqpkMVLg"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_3g5d8FB1EemZdeYqpkMVLg" general="_p0b9AE8MEemZdeYqpkMVLg"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_egn3YFB1EemZdeYqpkMVLg" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_egqToFB1EemZdeYqpkMVLg" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>-5769446111382187745L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_efyJ4FB1EemZdeYqpkMVLg" name="NoSuchUserExistException" specification="_efoY4FB1EemZdeYqpkMVLg">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ef--MFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" specification="_ef1NMFB1EemZdeYqpkMVLg">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause, enableSuppression, writableStackTrace);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_egIIIFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" specification="_egAMUFB1EemZdeYqpkMVLg">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_egVjgFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" specification="_egJWQFB1EemZdeYqpkMVLg">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_eglbIFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" specification="_egacAFB1EemZdeYqpkMVLg">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_efoY4FB1EemZdeYqpkMVLg" name="NoSuchUserExistException" visibility="public" method="_efyJ4FB1EemZdeYqpkMVLg"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ef1NMFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" visibility="public" method="_ef--MFB1EemZdeYqpkMVLg">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ef8h8FB1EemZdeYqpkMVLg" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ef9wEFB1EemZdeYqpkMVLg" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ef9wEVB1EemZdeYqpkMVLg" name="enableSuppression">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                      </ownedParameter>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ef-XIFB1EemZdeYqpkMVLg" name="writableStackTrace">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_egAMUFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" visibility="public" method="_egIIIFB1EemZdeYqpkMVLg">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_egG6AFB1EemZdeYqpkMVLg" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_egHhEFB1EemZdeYqpkMVLg" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_egJWQFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" visibility="public" method="_egVjgFB1EemZdeYqpkMVLg">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_egTHQFB1EemZdeYqpkMVLg" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_egacAFB1EemZdeYqpkMVLg" name="NoSuchUserExistException" visibility="public" method="_eglbIFB1EemZdeYqpkMVLg">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_egjl8FB1EemZdeYqpkMVLg" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
                 </packagedElement>
                 <packagedElement xmi:type="uml:Class" xmi:id="_Xj7MgE8sEemZdeYqpkMVLg" name="ParkingSlot" visibility="public">
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_Xj_d8E8sEemZdeYqpkMVLg" name="uniqId" visibility="private" isStatic="true" isUnique="false">
@@ -12131,4 +12200,9 @@
   <standard:Create xmi:id="_7P44cE_WEemZdeYqpkMVLg" base_BehavioralFeature="_7P11IE_WEemZdeYqpkMVLg"/>
   <standard:Create xmi:id="_7QDQgE_WEemZdeYqpkMVLg" base_BehavioralFeature="_7QANME_WEemZdeYqpkMVLg"/>
   <PapyrusJava:External xmi:id="_7SAYUE_WEemZdeYqpkMVLg" name="PathStrategy" base_Classifier="_7R8t8E_WEemZdeYqpkMVLg"/>
+  <standard:Create xmi:id="_efwUsFB1EemZdeYqpkMVLg" base_BehavioralFeature="_efoY4FB1EemZdeYqpkMVLg"/>
+  <standard:Create xmi:id="_ef764FB1EemZdeYqpkMVLg" base_BehavioralFeature="_ef1NMFB1EemZdeYqpkMVLg"/>
+  <standard:Create xmi:id="_egFr4FB1EemZdeYqpkMVLg" base_BehavioralFeature="_egAMUFB1EemZdeYqpkMVLg"/>
+  <standard:Create xmi:id="_egPc4FB1EemZdeYqpkMVLg" base_BehavioralFeature="_egJWQFB1EemZdeYqpkMVLg"/>
+  <standard:Create xmi:id="_eghJsFB1EemZdeYqpkMVLg" base_BehavioralFeature="_egacAFB1EemZdeYqpkMVLg"/>
 </xmi:XMI>
