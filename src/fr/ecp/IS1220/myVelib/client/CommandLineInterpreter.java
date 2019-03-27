@@ -6,6 +6,9 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseExceptio
 
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
 
 public class CommandLineInterpreter {
 
@@ -49,11 +52,11 @@ public class CommandLineInterpreter {
 				catch(ParseException e) {System.err.println("'setup' takes the following "
 					+ "types of argument :"+"\n"+"'<String>'");return;}
 				try {
-				MyVelibNetwork network = new MyVelibNetwork(networkName);
-				network.createStations(new RandomLocInSquare(), new Localization(0,0)
+					MyVelibNetwork network = new MyVelibNetwork(networkName);
+					network.createStations(new RandomLocInSquare(), new Localization(0,0)
 						, 4, 10, 3, 10, 75, new double[] {70,30});
 				}
-				catch(Exception e) {System.err.println(e);}
+				catch(Exception e) {System.err.println(e.getMessage());}
 				return;
 			}
 			if (arguments.length == 6) {
@@ -75,8 +78,8 @@ public class CommandLineInterpreter {
 				catch(ParseException e) {System.err.println("'addUser' takes the following "
 					+ "types of argument :"+"\n"+"'<String>' '<String>'");return;}
 				try {
-				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				network.newSubscriber(name,subType);
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					network.newSubscriber(name,subType);
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -94,9 +97,13 @@ public class CommandLineInterpreter {
 				catch(ParseException e) {System.err.println("'switch' takes the following "
 					+ "types of argument :"+"\n"+"'<String>'");return;}
 				try {
-				MyVelibNetwork.switchNetwork(networkName);
+					MyVelibNetwork.switchNetwork(networkName);
+				} catch(NoSuchNetworkExistException e) {
+					System.err.println("Network " + networkName + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'switch' takes 1 argument.");
@@ -106,7 +113,7 @@ public class CommandLineInterpreter {
 		case "date": {
 			if (arguments.length == 3) {
 				SystemDate SD = SystemDate.getInstance();
-        Integer year = Integer.valueOf(arguments[0]);
+				Integer year = Integer.valueOf(arguments[0]);
 				Integer month = Integer.valueOf(arguments[1]);
 				Integer day = Integer.valueOf(arguments[2]);
 				try {
@@ -116,6 +123,7 @@ public class CommandLineInterpreter {
 				} catch(Exception e) {
 					System.err.println(e.getMessage() + "from" + e.getClass());
 				}
+				return;
 			}
 			System.err.println("'date' takes 3 arguments.");
 			break;
@@ -123,7 +131,7 @@ public class CommandLineInterpreter {
 		case "time": {
 			if (arguments.length == 3) {
 				SystemDate SD = SystemDate.getInstance();
-        Integer hour = Integer.valueOf(arguments[0]);
+				Integer hour = Integer.valueOf(arguments[0]);
 				Integer minute = Integer.valueOf(arguments[1]);
 				Integer second = Integer.valueOf(arguments[2]);
 				try {
@@ -133,6 +141,7 @@ public class CommandLineInterpreter {
 				} catch(Exception e) {
 					System.err.println(e.getMessage() + "from" + e.getClass());
 				}
+				return;
 			}
 			System.err.println("'time' takes 3 arguments.");
 			break;
@@ -149,8 +158,12 @@ public class CommandLineInterpreter {
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
 				network.station(stationID).setOffline(true);
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			if (arguments.length == 2) {
@@ -165,8 +178,12 @@ public class CommandLineInterpreter {
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
 				network.station(stationID).getParkingSlot(slotIndex).setOffline(true);
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'offline' takes 1 or 2 arguments.");
@@ -184,8 +201,12 @@ public class CommandLineInterpreter {
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
 				network.station(stationID).setOffline(false);
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			if (arguments.length == 2) {
@@ -198,10 +219,14 @@ public class CommandLineInterpreter {
 				catch (NumberFormatException e) {System.err.println("'online' takes the following "
 						+ "types of argument :"+"\n"+"<long> <int>");return;}
 				try {
-				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				network.station(stationID).getParkingSlot(slotIndex).setOffline(false);
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					network.station(stationID).getParkingSlot(slotIndex).setOffline(false);
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'online' takes 1 or 2 arguments.");
@@ -239,10 +264,14 @@ public class CommandLineInterpreter {
 				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
 						+ "types of argument :"+"\n"+"<long>");return;}
 				try {
-				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				StationBalance.display(network.station(stationID));
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					StationBalance.display(network.station(stationID));
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'displayStation' takes 1 argument.");
@@ -258,10 +287,14 @@ public class CommandLineInterpreter {
 				catch (NumberFormatException e) {System.err.println("'displayUser' takes the following "
 						+ "types of argument :"+"\n"+"<long>");return;}
 				try {
-				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				UserBalance.display(network.user(userID));
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					UserBalance.display(network.user(userID));
+				} catch(NoSuchUserExistException e) {
+					System.err.println("User " + userID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'displayUser' takes 1 argument.");
@@ -286,12 +319,16 @@ public class CommandLineInterpreter {
 				catch(ParseException e) {System.err.println("'display' takes the following "
 						+ "types of argument :"+"\n"+"'<String>'");return;}
 				try {
-				MyVelibNetwork.switchNetwork(networkName);
-				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				System.out.println(network.stationDatabaseState());
-				System.out.println(network.userDatabaseRepresentation());
+					MyVelibNetwork.switchNetwork(networkName);
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					System.out.println(network.stationDatabaseState());
+					System.out.println(network.userDatabaseRepresentation());
+				} catch(NoSuchNetworkExistException e) {
+					System.err.println("Network " + networkName + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
 				}
-				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'display' takes 1 argument.");
@@ -305,6 +342,7 @@ public class CommandLineInterpreter {
 				} catch (Exception e) {
 					System.err.println("Failed to load or interprete the scenario <" + arguments[0] + ">");
 				}
+				return;
 			}
 			System.err.println("'runTest' takes 1 argument.");
 			break;

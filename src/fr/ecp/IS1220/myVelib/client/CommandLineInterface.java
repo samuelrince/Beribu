@@ -85,6 +85,7 @@ public class CommandLineInterface {
 		
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");
+		
 		Scanner scan = new Scanner(System.in);
 		String line;
 		// defining the words delimiters for splitting fileContent into words
