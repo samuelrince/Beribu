@@ -14,6 +14,10 @@ public class CommandLineInterface {
 	public static boolean check(String[] tokens) {
 		for (String word : tokens) {
 			char[] chars = word.toCharArray();
+			if (chars.length == 0) {
+				System.err.println("Invalid space. Put a space between each word only.");
+				return false;
+			}
 			if ((chars.length == 2 && chars[0]==39 && chars[1]==39)) {
 				System.err.println("Empty String argument detected.");
 				return false;
@@ -82,9 +86,8 @@ public class CommandLineInterface {
 	   
 	    do {
 
-	    	System.out.print("Entrez une commande : ");
+	    	System.out.print(">");
 	    	line = scan.nextLine();
-	    	System.out.println("Vous avez entré : "+line);
 	    	String[] tokens = line.split(delims);
 	    	if (!check(tokens))
 	    		continue;

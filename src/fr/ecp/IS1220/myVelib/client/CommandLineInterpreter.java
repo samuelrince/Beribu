@@ -1,6 +1,7 @@
 package fr.ecp.IS1220.myVelib.client;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
@@ -279,7 +280,20 @@ public class CommandLineInterpreter {
 		
 		case "sortStation": {
 			if (arguments.length == 1) {
-				
+				String sortPolicy = null;
+				try {
+				sortPolicy = parseString(arguments[0]);
+				}
+				catch(ParseException e) {System.err.println("'sortStation' takes the following "
+						+ "types of argument :"+"\n"+"'<String>'");return;}
+				try {
+				MyVelibNetwork network = MyVelibNetwork.getInstance();
+				ComparatorFactory comparatorFactory = new ComparatorFactory();
+				Comparator<Station> c = comparatorFactory.newComparator(sortPolicy);
+				String rep = " == Stations sorted by "+sortPolicy+" == ";
+				System.out.println(network+"\n"+rep+"\n"+network.sortStation(c));
+				}
+				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'sortStation' takes 1 argument.");
@@ -299,6 +313,7 @@ public class CommandLineInterpreter {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
 				System.out.println(network.stationDatabaseState());
 				System.out.println(network.userDatabaseRepresentation());
+				network.visual2D();
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;

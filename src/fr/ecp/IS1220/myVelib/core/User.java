@@ -108,7 +108,7 @@ public class User {
 	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card
 	 * that belongs to another user)
 	 */
-	public void subscribe(Card card) throws Exception {
+	public void subscribe(Card card) {
 		if (card.getUser() == this) {
 			this.card = card;
 			System.out.println(this+" has a new subscription of type "+card.getType()+ ".");			
@@ -117,7 +117,7 @@ public class User {
 		}
 	}
 	
-	public void subscribe(String cardType) throws Exception {
+	public void subscribe(String cardType) {
 		CardFactory cardFactory = new CardFactory();
 		this.subscribe(cardFactory.newCard(cardType, this));
 	}

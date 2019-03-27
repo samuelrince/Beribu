@@ -2,6 +2,8 @@ package fr.ecp.IS1220.myVelib.core;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JFrame;
 
@@ -379,7 +381,15 @@ public class MyVelibNetwork {
 		}
 	}
 	
-	public void newSubscriber(String name, String subType) {
+	
+	/**
+	 * Adds a new named user with the specified type of subscription to
+	 * the network.
+	 * @param name name of user
+	 * @param subType type of subscription
+	 * @throws Exception 
+	 */
+	public void newSubscriber(String name, String subType) throws Exception {
 		User user = new User(name);
 		if (subType != "Standard")
 			user.subscribe(subType);
@@ -409,7 +419,13 @@ public class MyVelibNetwork {
 	public ArrayList<Station> getStationDatabase() {
 		return stationDatabase;
 	}
-
+	
+	public ArrayList<Station> sortStation(Comparator<Station> c) {
+		ArrayList<Station> stations = (ArrayList<Station>) this.stationDatabase.clone();
+		Collections.sort(stations,c);
+		return stations;
+	}
+	
 	/**
 	 * 
 	 * @return list of users of the network
