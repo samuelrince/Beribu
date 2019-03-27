@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
 
 /**
  * This class represents a MyVelib network. It is a singleton.
@@ -379,7 +381,7 @@ public class MyVelibNetwork {
 		}
 	}
 	
-	public void newSubscriber(String name, String subType) {
+	public void newSubscriber(String name, String subType) throws Exception {
 		User user = new User(name);
 		if (subType != "Standard")
 			user.subscribe(subType);
@@ -428,7 +430,7 @@ public class MyVelibNetwork {
 			if (user.getId() == userID)
 				return user;
 		}
-		throw new RuntimeException("No user with this ID in the MyVelib network "
+		throw new NoSuchUserExistException("No user with this ID in the MyVelib network "
 				+this.name+".");
 	}
 	
@@ -442,7 +444,7 @@ public class MyVelibNetwork {
 			if (station.getId() == stationID)
 				return station;
 		}
-		throw new RuntimeException("No station with this ID in the MyVelib network "
+		throw new NoSuchStationExistException("No station with this ID in the MyVelib network "
 				+this.name+".");
 	}
 	/**
