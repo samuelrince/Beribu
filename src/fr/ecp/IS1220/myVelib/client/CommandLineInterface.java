@@ -76,18 +76,29 @@ public class CommandLineInterface {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		/*
+		SystemDate SD = SystemDate.getInstance();
+		SD.setDay(2019, 03, 24);
+		SD.setTime(15, 45, 0);
+		new MyVelibNetwork("Paris");
+		*/
+		
+		// Initialization
+		SystemDate SD = SystemDate.getInstance();
+		TextFileInterpreter.textFileInterpreter("my_velib.ini");
+		
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");
+		
 		Scanner scan = new Scanner(System.in);
 		String line;
 		// defining the words delimiters for splitting fileContent into words
 	    String delims = " ";
 	   
 	    do {
-
 	    	System.out.print(">");
 	    	line = scan.nextLine();
+
 	    	String[] tokens = line.split(delims);
 	    	if (!check(tokens))
 	    		continue;
@@ -99,8 +110,10 @@ public class CommandLineInterface {
 	    				+"\n"+"Put a space between each argument and no space inside ' '.");
 	    		continue;
 	    		}
+	    	/*
 	    	for (int i = 0; i <tokens.length; i++)
 	    		System.out.println(tokens[i]);
+	    	 */
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
 	}

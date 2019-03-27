@@ -8,6 +8,8 @@ import java.util.Comparator;
 import javax.swing.JFrame;
 
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
 
 /**
  * This class represents a MyVelib network. It is a singleton.
@@ -381,7 +383,6 @@ public class MyVelibNetwork {
 		}
 	}
 	
-	
 	/**
 	 * Adds a new named user with the specified type of subscription to
 	 * the network.
@@ -444,7 +445,7 @@ public class MyVelibNetwork {
 			if (user.getId() == userID)
 				return user;
 		}
-		throw new RuntimeException("No user with this ID in the MyVelib network "
+		throw new NoSuchUserExistException("No user with this ID in the MyVelib network "
 				+this.name+".");
 	}
 	
@@ -458,7 +459,7 @@ public class MyVelibNetwork {
 			if (station.getId() == stationID)
 				return station;
 		}
-		throw new RuntimeException("No station with this ID in the MyVelib network "
+		throw new NoSuchStationExistException("No station with this ID in the MyVelib network "
 				+this.name+".");
 	}
 	/**
