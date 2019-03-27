@@ -17,6 +17,7 @@ public class CardFactory {
 		if (type.equalsIgnoreCase("vmax"))
 			return new Vmax(user);
 		else
-			throw new BadCardTypeException("There is no such card type.");
+			throw new BadCardTypeException("No such card type. The accepted card types are"
+					+ " 'standard', 'vlibre' and 'vmax'.");
 	}
 }

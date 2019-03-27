@@ -14,6 +14,7 @@ public class BicycleFactory {
 			return new MechanicalBike();
 		if (bicycleType.equalsIgnoreCase("electrical"))
 			return new ElectricalBike();
-		throw new BadBicycleTypeException ("There is no such bicycle type.");
+		throw new BadBicycleTypeException ("No such bicycle type. The accepted bicycle types"
+				+ " are 'mechanical' and 'electrical'.");
 	}
 }
