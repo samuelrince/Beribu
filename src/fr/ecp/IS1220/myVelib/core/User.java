@@ -113,7 +113,7 @@ public class User {
 			this.card = card;
 			System.out.println(this+" has a new subscription of type "+card.getType()+ ".");			
 		} else {
-			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user");
+			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user.");
 		}
 	}
 	

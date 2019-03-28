@@ -442,7 +442,14 @@ public class Station implements Comparable<Station>{
 		for (int i = 0; i < quantity; i++) {
 			new ParkingSlot(this);
 		}
-		this.initializing = false;
+		if (this.initializing) {
+			System.out.println(quantity+" parking slots has been added to "+this+".");
+			this.initializing = false;
+		}
+	}
+	
+	public boolean initializing() {
+		return this.initializing;
 	}
 	
 	/**

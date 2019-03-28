@@ -505,12 +505,6 @@ public class MyVelibNetwork {
 			labels.add(s.getName());
 		}
 		
-		System.out.println("bary "+Localization.barycenter(points));
-		for (Station s:this.stationDatabase) {
-			System.out.println(s.getName()+" : "+s.getLocalization());	
-			System.out.println("distance to bary : "+s.getLocalization().distanceTo(Localization.barycenter(points)));
-		}
-		
 		Panneau p=new Panneau(points,labels);
 		frame.setContentPane(p);
 		frame.setVisible(true);
