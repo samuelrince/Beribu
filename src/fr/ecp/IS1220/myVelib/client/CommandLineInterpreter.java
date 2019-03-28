@@ -60,11 +60,60 @@ public class CommandLineInterpreter {
 				catch(Exception e) {System.err.println(e.getMessage());}
 				return;
 			}
-			if (arguments.length == 6) {
-
+			if (arguments.length == 9+Bicycle.getTypeDict().size()) {
+				String networkName = null;
+				int nstations = 0;
+				int nplus = 0;
+				int nslots = 0;
+				String shape = null;
+				double centerLat = 0;
+				double centerLong = 0;
+				double param = 0;
+				double populationPercent = 0;
+				double[] typePercent = new double[Bicycle.getTypeDict().size()];
+				try {
+					networkName = parseString(arguments[0]);
+					nstations = Integer.parseInt(arguments[1]);
+					nplus = Integer.parseInt(arguments[2]);
+					nslots = Integer.parseInt(arguments[3]);
+					shape = parseString(arguments[4]);
+					centerLat = Double.parseDouble(arguments[5]);
+					centerLong = Double.parseDouble(arguments[6]);
+					param = Double.parseDouble(arguments[7]);
+					populationPercent = Double.parseDouble(arguments[8]);
+					for (int i = 0; i < typePercent.length; i++)
+						typePercent[i] = Double.parseDouble(arguments[9+i]);
+				}
+				catch (ParseException e) {
+					String argList = "'<String>' <int> <int> <int> '<String>'"
+							+ " <double> <double> <double>";
+					for (int i = 0; i<Bicycle.getTypeDict().size(); i++)
+						argList += " <double>";
+					System.err.println("'setup' takes the following "
+							+ "types of argument :"+"\n"+argList);return;
+				}
+				catch (NumberFormatException e) {
+					String argList = "'<String>' <int> <int> <int> '<String>'"
+							+ " <double> <double> <double>";
+					for (int i = 0; i<Bicycle.getTypeDict().size(); i++)
+						argList += " <double>";
+					System.err.println("'setup' takes the following "
+							+ "types of argument :"+"\n"+argList);return;
+				}				
+				try {
+					MyVelibNetwork network = new MyVelibNetwork(networkName);
+					RandomLocGeneratorFactory rlgFactory = new RandomLocGeneratorFactory();
+					RandomLocGenerator rlg = rlgFactory.newRandomLocGenerator(shape);
+					Localization center = new Localization(centerLat,centerLong);
+					
+					network.createStations(rlg,center,param,nstations,nplus,nslots, 
+							populationPercent, typePercent);
+				}
+				catch(Exception e) {System.err.println(e);}
 				return;
 			}
-			System.err.println("'setup' takes 1 or 6 arguments.");
+			System.err.println("'setup' takes 1 or "+(9+Bicycle.getTypeDict().size())
+					+" arguments.");
 			break;
 		}
 		
@@ -236,11 +285,39 @@ public class CommandLineInterpreter {
 		
 		case "rentBike": {
 			if (arguments.length == 2) {
-
+				long userID = 0;
+				long stationID = 0;
+				try {
+				userID = Long.parseLong(arguments[0]);
+				stationID = Long.parseLong(arguments[1]);
+				}
+				catch (NumberFormatException e) {System.err.println("'rentBike' takes the following "
+						+ "types of argument :"+"\n"+"<long> <long>");return;}
+				try {
+				MyVelibNetwork network = MyVelibNetwork.getInstance();
+				network.user(userID).newRide(network.station(stationID));;
+				}
+				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			if (arguments.length == 3) {
-
+				long userID = 0;
+				long stationID = 0;
+				String bicycleType = null;
+				try {
+				userID = Long.parseLong(arguments[0]);
+				stationID = Long.parseLong(arguments[1]);
+				bicycleType = parseString(arguments[2]);
+				}
+				catch (NumberFormatException e) {System.err.println("'rentBike' takes the following "
+						+ "types of argument :"+"\n"+"<long> <long> '<String>'");return;}
+				catch (ParseException e) {System.err.println("'rentBike' takes the following "
+						+ "types of argument :"+"\n"+"<long> <long> '<String>'");return;}
+				try {
+				MyVelibNetwork network = MyVelibNetwork.getInstance();
+				network.user(userID).newRide(network.station(stationID),bicycleType);;
+				}
+				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'rentBike' takes 2 or 3 arguments.");
@@ -249,7 +326,19 @@ public class CommandLineInterpreter {
 		
 		case "returnBike": {
 			if (arguments.length == 2) {
-
+				long userID = 0;
+				long stationID = 0;
+				try {
+				userID = Long.parseLong(arguments[0]);
+				stationID = Long.parseLong(arguments[1]);
+				}
+				catch (NumberFormatException e) {System.err.println("'returnBike' takes the following "
+						+ "types of argument :"+"\n"+"<long> <long>");return;}
+				try {
+				MyVelibNetwork network = MyVelibNetwork.getInstance();
+				network.user(userID).endCurrentRide(network.station(stationID));;
+				}
+				catch(Exception e) {System.err.println(e);}
 				return;
 			}
 			System.err.println("'returnBike' takes 2 arguments.");
