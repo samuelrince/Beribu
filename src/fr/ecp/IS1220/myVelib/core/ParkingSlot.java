@@ -25,7 +25,8 @@ public class ParkingSlot {
 		this.station = station;
 		this.id = uniqId++;
 		station.addParkingSlot(this);
-		System.out.println("A parking slot has been added to "+station+".");
+		if (!this.station.initializing())
+			System.out.println("A parking slot has been added to "+station+".");
 	}
 	
 	/**

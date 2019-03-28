@@ -339,7 +339,7 @@ public class CommandLineInterpreter {
 				System.out.println(network.userDatabaseRepresentation());
 				network.visual2D();
 				} catch(NoSuchNetworkExistException e) {
-					System.err.println("Network " + networkName + " does not exist");
+					System.err.println("Network " + networkName + " does not exist.");
 				} catch(Exception e) {
 					System.err.println("Unexpected error");
 					System.err.println(e);
