@@ -194,7 +194,11 @@ public class User {
 	 */
 	public void newRide(Station station, String bicycleType) throws RuntimeException {
 		if (!this.isOnRide()) {
-			Bicycle bicycle = station.getBicycle(bicycleType);
+			Bicycle bicycle;
+			if (bicycleType == null)
+				bicycle = station.getBicycle();
+			else
+				bicycle = station.getBicycle(bicycleType);
 			Ride ride = new Ride(this,bicycle,station);
 			this.listOfRides.add(ride);
 			System.out.println(this+" has started"
@@ -212,6 +216,23 @@ public class User {
 			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
+	
+	/**
+	 * A tentative to implement safe threads for the action of renting a bike.
+	 */
+	public void rentBike(Station station) {
+		BikeRental br = new BikeRental(this,station);
+		br.start();
+	}
+	
+	/**
+	 * A tentative to implement safe threads for the action of renting a bike.
+	 */
+	public void rentBike(Station station, String bicycleType) {
+		BikeRental br = new BikeRental(this,station,bicycleType);
+		br.start();
+	}
+
 	
 	/**
 	 * This method returns the current (not finished) ride of a user if it exists.

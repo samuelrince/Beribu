@@ -24,9 +24,10 @@ public class CommandLineInterface {
 			}
 			for(int i = 0; i < chars.length; i++){
 				char c = chars[i];
-				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57) && !(c==39) && !(c==46)) {
+				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57) && !(c==39) && !(c==46)
+						&& !(c==45)) {
 					System.err.println("Invalid characters. Only letters of the "
-							+ "alphabet, numbers and ' are accepted.");
+							+ "alphabet, numbers, ., -, and string delimitors ' are accepted.");
 					return false;
 				}
 				if ((c==39 && !(i==0 || i==chars.length-1))
