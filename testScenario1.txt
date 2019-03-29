@@ -1,3 +1,4 @@
+delete all
 date 2019 2 17
 time 0 0 0
 setup 'Paris'
@@ -5,12 +6,10 @@ addUser 'Jean' 'Standard'
 addUser 'Jane' 'Vlibre'
 addUser 'John' 'Vmax'
 addUser 'Jack' 'Standard'
-displayStation 4
-displayUser 2
 time 9 22 37
 rentBike 0 1 
 time 9 28 42
-rentBike 3 0 'Electric'
+rentBike 3 0 'Electrical'
 time 9 31 49
 rentBike 1 9
 time 9 48 13
@@ -18,6 +17,8 @@ returnBike 3 9
 time 10 37 59
 returnBike 0 9
 time 10 57 03
-returnBike 1 10
-displayStation 9
+returnBike 1 8
 displayUser 1
+displayStation 9
+sortStation 'Paris'
+display 'Paris'

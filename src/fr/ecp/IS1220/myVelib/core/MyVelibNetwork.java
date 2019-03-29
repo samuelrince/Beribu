@@ -56,24 +56,41 @@ public class MyVelibNetwork {
 		}
 	}
 	
+	/**
+	 * Makes network the current instance of MyVelibNetwork.
+	 * @param network MyVelib the network to switch to
+	 */
 	public static void switchNetwork(MyVelibNetwork network) {
 		if (listOfNetworks.contains(network)) {
 			instance = network;
-			System.out.println("Switched to network "+network.name+".");
+			System.err.println("Switched to network "+network.name+".");
 		}
 		else
 			throw new NoSuchNetworkExistException("This MyVelib network does not exist.");
 	}
 	
+	/**
+	 * Makes the network named networkName the current instance of MyVelibNetwork.
+	 * @param networkName name of the MyVelib network to switch to
+	 */
 	public static void switchNetwork(String networkName) {
 		for (MyVelibNetwork network:listOfNetworks) {
 			if (network.getName().equals(networkName)) {
 			instance = network;
-			System.out.println("Switched to MyVelib network "+network.name+".");
+			System.err.println("Switched to MyVelib network "+network.name+".");
 			return;
 			}
 		}
 		throw new NoSuchNetworkExistException("This MyVelib network does not exist.");
+	}
+	
+	/**
+	 * Deletes all the networks created. <br>Use with caution.
+	 */
+	public static void deleteAll() {
+		int n = listOfNetworks.size();
+		listOfNetworks = new ArrayList<MyVelibNetwork>();;
+		System.err.println("The database is clean. "+n+" networks deleted.");
 	}
 	
 	/**
