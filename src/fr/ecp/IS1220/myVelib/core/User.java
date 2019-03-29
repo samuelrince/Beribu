@@ -1,6 +1,8 @@
 package fr.ecp.IS1220.myVelib.core;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,10 +14,12 @@ import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
  *
  */
 public class User implements java.io.Serializable {
+	private transient static final String hashAlgorithm = "SHA-512";
 	private static long uniqId;
 	private Date creationDate;
 	private long id;
 	private String name;
+	private String passwordHash;
 	private Localization localization;
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
@@ -28,8 +32,11 @@ public class User implements java.io.Serializable {
 	 */
 	public User(String name) {
 		super();
-		this.name = name;
 		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword("password");
+		} catch(NoSuchAlgorithmException e) {}
 		this.creationDate = new Date();
 		System.out.println("New user "+this+".");
 	}
@@ -38,6 +45,20 @@ public class User implements java.io.Serializable {
 		super();
 		this.id = uniqId++;
 		this.name = "Bob"+this.id;
+		try {
+			this.passwordHash = hashPassword("password");
+		} catch(NoSuchAlgorithmException e) {}
+		this.creationDate = new Date();
+		System.out.println("New user "+this+".");
+	}
+	
+	public User(String name, String password) {
+		super();
+		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
 		this.creationDate = new Date();
 		System.out.println("New user "+this+".");
 	}
@@ -48,6 +69,10 @@ public class User implements java.io.Serializable {
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public String getPasswordHash() {
+		return this.passwordHash;
 	}
 	
 	public Date getCreationDate() {
@@ -350,5 +375,20 @@ public class User implements java.io.Serializable {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return this.name+" (id."+this.id+")";
+	}
+	
+	private String hashPassword(String password) throws NoSuchAlgorithmException{
+		MessageDigest md = MessageDigest.getInstance(hashAlgorithm);
+		md.update(password.getBytes());
+		byte[] bytes = md.digest();
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i< bytes.length ;i++) {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) throws NoSuchAlgorithmException {
+		
 	}
 }

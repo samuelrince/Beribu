@@ -401,6 +401,13 @@ public class MyVelibNetwork implements java.io.Serializable {
 		this.userDatabase.add(user);
 	}
 	
+	public void newSubscriber(String name, String password, String subType) throws Exception {
+		User user = new User(name, password);
+		if (subType != "Standard")
+			user.subscribe(subType);
+		this.userDatabase.add(user);
+	}
+	
 	/**
 	 * Adds a given user to the network.
 	 * @param user user to add
