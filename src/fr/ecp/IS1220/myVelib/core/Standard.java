@@ -6,7 +6,7 @@ package fr.ecp.IS1220.myVelib.core;
  * @author Valentin
  *
  */
-public class Standard implements Card{
+public class Standard implements Card, java.io.Serializable {
 	private User user;
 	private Date creationDate;
 	private String type = "Standard";

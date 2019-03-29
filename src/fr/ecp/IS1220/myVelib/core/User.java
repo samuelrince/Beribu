@@ -11,7 +11,7 @@ import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
  * @author Valentin
  *
  */
-public class User {
+public class User implements java.io.Serializable {
 	private static long uniqId;
 	private Date creationDate;
 	private long id;

@@ -16,13 +16,17 @@ import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
  * @author Valentin
  *
  */
-public class MyVelibNetwork {
-	private static ArrayList<MyVelibNetwork> listOfNetworks = new ArrayList<MyVelibNetwork>();
-	private static MyVelibNetwork instance = null;
+public class MyVelibNetwork implements java.io.Serializable {
+	/**
+	 * Serial Version UID auto-generated
+	 */
+	private static final long serialVersionUID = 3903645760238322780L;
+	private transient static ArrayList<MyVelibNetwork> listOfNetworks = new ArrayList<MyVelibNetwork>();
+	private transient static MyVelibNetwork instance = null;
 	private String name;
 	private ArrayList<Station> stationDatabase = new ArrayList<Station>();
 	private ArrayList<User> userDatabase = new ArrayList<User>();
-	private BicycleFactory bicycleFactory = new BicycleFactory();
+	private transient BicycleFactory bicycleFactory = new BicycleFactory();
 	
 	/**
 	 * Constructor of class MyVelibNetwork.

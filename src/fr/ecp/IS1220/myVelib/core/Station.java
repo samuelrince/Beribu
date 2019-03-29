@@ -13,7 +13,7 @@ import fr.ecp.IS1220.myVelib.core.exception.NoParkingSlotAvailableException;
  * @author Valentin
  *
  */
-public class Station implements Comparable<Station>{
+public class Station implements Comparable<Station>, java.io.Serializable{
 	private static long uniqId;
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
@@ -532,7 +532,7 @@ public class Station implements Comparable<Station>{
 	 * at a given moment in time.
 	 * @author Valentin
 	 */
-	public class State{
+	public class State implements java.io.Serializable {
 		private Date timeStamp;
 		private ArrayList<ArrayList<Boolean>> parkingSlotStatus 
 		= new ArrayList<ArrayList<Boolean>>();
