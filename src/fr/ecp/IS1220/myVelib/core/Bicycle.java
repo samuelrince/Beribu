@@ -10,7 +10,7 @@ import fr.ecp.IS1220.myVelib.core.exception.BadBicycleTypeException;
  * @author Valentin
  *
  */
-public abstract class Bicycle {
+public abstract class Bicycle implements java.io.Serializable {
 	private long id;
 	private static long uniqId;
 	private boolean attached;

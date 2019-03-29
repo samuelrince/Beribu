@@ -5,7 +5,7 @@ package fr.ecp.IS1220.myVelib.core;
  * @author Valentin
  *
  */
-public class Vmax implements Card{
+public class Vmax implements Card, java.io.Serializable{
 	private User user;
 	private Date creationDate;
 	private String type = "Vmax";

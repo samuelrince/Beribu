@@ -5,7 +5,7 @@ package fr.ecp.IS1220.myVelib.core;
  * @author Valentin
  *
  */
-public class Ride {
+public class Ride implements java.io.Serializable {
 	private static long uniqId;
 	private long id;
 	private User user;

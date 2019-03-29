@@ -9,7 +9,7 @@ import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
  * @author Valentin
  *
  */
-public class ParkingSlot {
+public class ParkingSlot implements java.io.Serializable {
 	private static long uniqId;
 	private long id;
 	private Bicycle bicycle = null;

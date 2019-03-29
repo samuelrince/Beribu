@@ -11,10 +11,10 @@ import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
  * @author Valentin
  *
  */
-public class Localization {
+public class Localization implements java.io.Serializable {
 	private double latitude;
 	private double longitude;
-	final static double rayonTerre = 6371;
+	transient final static double rayonTerre = 6371;
 
 	/**
 	 * Constructor of class Localization.

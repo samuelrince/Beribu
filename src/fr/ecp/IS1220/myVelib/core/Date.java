@@ -10,7 +10,7 @@ import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
  * @author Valentin
  *
  */
-public class Date {
+public class Date implements java.io.Serializable {
 	private Integer year = null;
 	private Integer month = null;
 	private Integer day = null;
