@@ -124,6 +124,9 @@ public class Scenario1c {
 		System.out.println(stations);
 		System.out.println();
 		
+		System.err.println("Serialization start");
 		SerializeNetwork.saveNetworkSate(network);
+		System.err.println("Deserialization start");
+		
 	}
 }
