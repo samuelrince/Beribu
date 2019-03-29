@@ -1,5 +1,6 @@
 package fr.ecp.IS1220.myVelib.client;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -114,6 +115,33 @@ public class CommandLineInterpreter {
 			}
 			System.err.println("'setup' takes 1 or "+(9+Bicycle.getTypeDict().size())
 					+" arguments.");
+			break;
+		}
+		
+		case "createBackup": {
+			if (arguments.length == 0) {		
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					NetworkBackup.saveNetworkState(network);
+				} catch (NoSuchNetworkExistException e) {
+					System.err.println("Unable to find the current network");
+				} catch (IOException e) {
+					System.err.println("Unable to create backup file");
+				} catch (Exception e) {
+					System.err.println("Unexpected error");
+					e.printStackTrace();
+				}
+				return;
+			}	
+			System.err.println("'createBackup' takes no argument.");
+			break;
+		}
+		
+		case "loadBackup": {
+			if (arguments.length == 1) {		
+				
+			}	
+			System.err.println("'loadBackup' takes 1 argument.");
 			break;
 		}
 		
@@ -456,6 +484,9 @@ public class CommandLineInterpreter {
 			if (arguments.length == 0) {		
 				System.err.println("\n"+"exit"+"\n"+"setup <velibnetworkName>"+"\n"
 						+"setup <velibnetworkName> <nstations> <nslots> <radius> <nbikes>"+"\n"
+						+"createBackup"+"\n"
+						+"loadBackup <velibnetworkName>"+"\n"
+						+"loadBackup <networkBackupFileName>"+"\n"
 						+"addUser <userName> <cardType>"+"\n"+"switch <velibnetworkName>"+"\n"
 						+"time <hour> <min> <sec>"+"\n"+"date <year> <month> <day>"+"\n"+"offline <stationID>"+"\n"
 						+"online <stationID>"+"\n"+"rentBike <userID> <stationID>"+"\n"
