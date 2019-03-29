@@ -1,5 +1,12 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when a date is not valid.
+ * Can also occurs when SystemDate is set to an anterior date
+ * than the current instance
+ * @author Samuel
+ *
+ */
 public class BadDateException extends IllegalArgumentException {
 	
 	/**
