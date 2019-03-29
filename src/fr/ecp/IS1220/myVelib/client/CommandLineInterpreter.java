@@ -44,7 +44,19 @@ public class CommandLineInterpreter {
 			}
 			System.err.println("'currentSD' takes no argument.");
 			break;
-		}		
+		}	
+		case "delete": {
+			if (arguments.length == 1) {
+				if (arguments[0].equalsIgnoreCase("all"))
+					MyVelibNetwork.deleteAll();
+				else
+					System.err.println("Type 'delete all' to delete all the database,"
+							+ " including networks, users and stations.");
+				return;
+			}
+			System.err.println("'delete' takes 1 argument.");
+			break;
+		}	
 		case "setup": {
 			if (arguments.length == 1) {
 				String networkName = null;
