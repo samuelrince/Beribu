@@ -1,5 +1,10 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when there is no bicycle available
+ * @author Samuel
+ *
+ */
 public class NoBicycleAvailableException extends RuntimeException {
 
 	/**

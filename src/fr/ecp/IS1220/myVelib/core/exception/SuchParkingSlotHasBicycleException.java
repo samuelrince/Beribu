@@ -1,5 +1,11 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when a parking slot has a bicycle and cannot
+ * receive a new one
+ * @author Samuel
+ *
+ */
 public class SuchParkingSlotHasBicycleException extends RuntimeException {
 
 	/**
