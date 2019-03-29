@@ -162,6 +162,23 @@ public class CommandLineInterpreter {
 				catch(Exception e) {System.err.println(e);}
 				return;
 			}
+			if (arguments.length == 3) {
+				String name = null; 
+				String password = null;
+				String subType = null;
+				try {
+					name = parseString(arguments[0]);
+					password = parseString(arguments[1]);
+					subType = parseString(arguments[2]);
+				} catch(ParseException e) {System.err.println("'addUser' takes the following "
+						+ "types of argument :"+"\n"+"'<String>' '<String>' '<String>'");return;}
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					network.newSubscriber(name, password, subType);
+				}
+				catch(Exception e) {System.err.println(e);}
+				return;
+			}
 			System.err.println("'addUser' takes 2 arguments.");
 			break;
 		}
