@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException;
@@ -32,12 +33,12 @@ public class NetworkBackup {
 		SystemDate SD = SystemDate.getInstance();
 		File file = new File(network);
 		try {
-			FileOutputStream fileOut = new FileOutputStream(directory + file.getFileName() + ".ser");
+			FileOutputStream fileOut = new FileOutputStream(directory + file.getFileName());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(network);
 			out.close();
 			fileOut.close();
-			System.out.println("Network state has been saved in " + directory + file.getFileName() + ".ser");
+			System.out.println("Network state has been saved in " + directory + file.getFileName());
 		} catch(IOException i) {
 			throw i;
 		}
@@ -54,9 +55,9 @@ public class NetworkBackup {
 	 */
 	public static MyVelibNetwork loadNetworkState(String fileName) throws Exception {
 		MyVelibNetwork network = null;
-		if(!isInListOfBackups(fileName)) {
-			throw new NoSuchBackupExistException("Backup file: " + fileName + " does not exist");
-		}
+		File file = getFile(fileName);
+		SystemDate.delInstance();
+		SystemDate SD = SystemDate.getInstance();
 		try {
 			FileInputStream fileIn = new FileInputStream(directory + fileName);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -69,39 +70,39 @@ public class NetworkBackup {
 			System.err.println("MyVelibNetwork class not found");
 			throw c;
 		}
+		SD.setDay(file.getDateOfCreation().getYear(), file.getDateOfCreation().getMonth(), file.getDateOfCreation().getDay()); 
+		SD.setTime(file.getDateOfCreation().getHour(), file.getDateOfCreation().getMinute(), file.getDateOfCreation().getSecond());
+		System.err.println("Backup loaded");
 		return network;
 	}
 	
-	/**
-	 * This method is used to load the last backup of a network stored in the database
-	 * @param networkName	the network
-	 * @return	a MyVelibNetwork that corresponds to the backup expected
-	 * @throws IOException	occurs when the file cannot be loaded
-	 * @throws ClassNotFoundException 	occurs when the class MyVelibNetwork is not found
-	 * @throws NoSuchBackupExistException	occurs when the backup file wanted does not exist
-	 * @throws NoSuchNetworkExistException	occurs when the network asked does not exist
-	 */
-	public static MyVelibNetwork loadLastBackupOf(String networkName) throws Exception {
+	public static MyVelibNetwork loadBackup(String name) throws Exception {
 		for(File file: backupDatabase) {
-			if (file.getNeworkName() == networkName) {
-				return loadNetworkState(file.getFileName());
+			if (name.equals(file.getFileName())) {
+				return loadNetworkState(name);
+			} else if (name.equals(file.getNeworkName())) {
+				return loadNetworkState(file.fileName);
 			}
 		}
-		throw new NoSuchNetworkExistException("The network " + networkName + " does not exist in backup database");
+		throw new NoSuchNetworkExistException("The network or filename " + name + " does not exist in backup database");
 	}
 	
-	/**
-	 * This method is used to check if a file exist in the database
-	 * @param fileName	the file name to check
-	 * @return	True if the file is in the database and false otherwise
-	 */
-	protected static boolean isInListOfBackups(String fileName) {
+	public static void display() {
+		if (backupDatabase.size() == 0)
+			System.out.println("No backup");
+		System.out.println("List of available backups :");
 		for (File file: backupDatabase) {
-			if (fileName ==  file.getFileName()) {
-				return true;
+			System.out.println("- " + file.fileName + " name: " + file.networkName + " date: " + file.dateOfCreation);
+		}
+	}
+	
+	private static File getFile(String fileName) throws NoSuchBackupExistException {
+		for (File file: backupDatabase) {
+			if (fileName.equals(file.getFileName())) {
+				return file;
 			}
 		}
-		return false;
+		throw new NoSuchBackupExistException("This file does not exist");
 	}
 	
 	/**
@@ -126,7 +127,7 @@ public class NetworkBackup {
 							dateOfCreation.getDay() + "_" +
 							dateOfCreation.getHour() + "-" +
 							dateOfCreation.getMinute() + "-" +
-							dateOfCreation.getSecond();
+							dateOfCreation.getSecond() + ".ser";
 		}
 
 		public String getFileName() {
