@@ -87,6 +87,12 @@ public class CommandLineInterface {
 		// Initialization
 		SystemDate SD = SystemDate.getInstance();
 		TextFileInterpreter.textFileInterpreter("my_velib.ini");
+		try {
+			NetworkBackup.scanBackup();
+		} catch(Exception e) {
+			System.err.println("No backup loaded");
+		}
+		
 		
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");

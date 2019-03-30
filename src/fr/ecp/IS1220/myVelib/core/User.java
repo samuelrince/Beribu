@@ -387,8 +387,4 @@ public class User implements java.io.Serializable {
         }
 		return sb.toString();
 	}
-	
-	public static void main(String[] args) throws NoSuchAlgorithmException {
-		
-	}
 }
