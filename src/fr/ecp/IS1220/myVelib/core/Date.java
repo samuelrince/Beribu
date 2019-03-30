@@ -37,7 +37,7 @@ public class Date implements java.io.Serializable {
 	 * @param second	represent the second
 	 */
 	public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second) {
-		this.currentDate();
+		//this.currentDate();
 		this.year = year;
 		this.month = month;
 		this.day = day;

@@ -25,9 +25,9 @@ public class CommandLineInterface {
 			for(int i = 0; i < chars.length; i++){
 				char c = chars[i];
 				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57) && !(c==39) && !(c==46)
-						&& !(c==45)) {
+						&& !(c==45) && !(c==95)) {
 					System.err.println("Invalid characters. Only letters of the "
-							+ "alphabet, numbers, ., -, and string delimitors ' are accepted.");
+							+ "alphabet, numbers, ., -, _, and string delimitors ' are accepted.");
 					return false;
 				}
 				if ((c==39 && !(i==0 || i==chars.length-1))
@@ -87,6 +87,12 @@ public class CommandLineInterface {
 		// Initialization
 		SystemDate SD = SystemDate.getInstance();
 		TextFileInterpreter.textFileInterpreter("my_velib.ini");
+		try {
+			NetworkBackup.scanBackup();
+		} catch(Exception e) {
+			System.err.println("No backup loaded");
+		}
+		
 		
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");

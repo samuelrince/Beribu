@@ -8,6 +8,7 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseExceptio
 
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
@@ -151,9 +152,39 @@ public class CommandLineInterpreter {
 		
 		case "loadBackup": {
 			if (arguments.length == 1) {		
-				
+				String arg = null;
+				try {
+					arg = parseString(arguments[0]);
+				} catch(ParseException e) {System.err.println("'loadBackup' takes the following "
+						+ "type of argument :"+"\n"+"'<String>'");return;}
+				MyVelibNetwork.deleteAll();
+				arg = "Paris";
+				try {
+					MyVelibNetwork network = NetworkBackup.loadBackup(arg);
+				} catch(IOException i) {
+					System.err.println("Failed to load the backup file");
+				} catch(ClassNotFoundException c) {
+					System.err.println("MyVelibNetwork class not found");
+				} catch(NoSuchBackupExistException b) {
+					System.err.println("The expected backup file (" + arg + ") does not exist");
+				} catch(NoSuchNetworkExistException n) {
+					System.err.println("The expected network backup (" + arg + ") does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					e.printStackTrace();
+				}
+				return;
 			}	
 			System.err.println("'loadBackup' takes 1 argument.");
+			break;
+		}
+		
+		case "listBackup" : {
+			if (arguments.length == 0) {
+				NetworkBackup.display();
+				return;
+			}
+			System.err.println("'createBackup' takes no argument.");
 			break;
 		}
 		
