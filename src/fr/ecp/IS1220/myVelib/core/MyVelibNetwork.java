@@ -380,12 +380,28 @@ public class MyVelibNetwork implements java.io.Serializable {
 	}
 	
 	/**
+	 * Check is a user is already in the database
+	 * @param user	the user to check
+	 * @return	true if the user is already in the database, false otherwise
+	 */
+	private boolean userExistInDatabase(User user) {
+		for (User usr: this.userDatabase) {
+			if (user.equals(usr) || user.getName().equals(usr.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Adds a number of new Standard users to the network.
 	 * @param number number of users
 	 */
 	public void createUsers(int number) {
-		for (int i = 0; i < number; i++)
+		for (int i = 0; i < number; i++) {
+			User u = new User();
 			this.userDatabase.add(new User());
+		}
 	}
 	
 	/**
@@ -430,7 +446,8 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 * @param user user to add
 	 */
 	public void addUser(User user) {
-		this.userDatabase.add(user);
+		if (!userExistInDatabase(user))
+			this.userDatabase.add(user);
 	}
 	
 	/**
@@ -475,6 +492,15 @@ public class MyVelibNetwork implements java.io.Serializable {
 		}
 		throw new NoSuchUserExistException("No user with this ID in the MyVelib network "
 				+this.name+".");
+	}
+	
+	public User userAuth(String name, String passHash) {
+		for (User user: this.userDatabase) {
+			if (name.equals(user.getName()) && passHash.equals(user.getPasswordHash())) {
+				return user;
+			}
+		}
+		throw new NoSuchUserExistException("The combination of username and password does not exist");
 	}
 	
 	/**
