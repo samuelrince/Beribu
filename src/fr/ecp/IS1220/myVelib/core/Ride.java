@@ -158,7 +158,26 @@ public class Ride implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Ride [" + id + "], of " + user.getName() + " on bike NÂ°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
+		String endStation;
+		String endDate;
+		String duration;
+		String cost;
+		if (this.isCurrent()) {
+			endStation = "-";
+			endDate = "-";
+			duration ="-";
+			cost = "-";
+		}
+		else {
+			endStation = this.endStation.getName();
+			endDate = this.endTime.toString();
+			duration = this.duration.toString();
+			cost = Double.toString(this.price);
+		}
+		return "Ride [id." + id + "] of " + user.getName() + ":\n"+
+	bicycle.getType()+" bike n°" + bicycle.getId() + " rented in " + startStation.getName() + 
+	" on "+startTime.toString()+", returned in " + endStation + " on "+endDate+"\n"+
+	"Cost: "+cost+"€ / Duration:"+duration;
 	}
 	
 	protected static void resetUniqID() {uniqId=0;}
