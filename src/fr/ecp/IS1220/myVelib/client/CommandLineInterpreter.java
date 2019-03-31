@@ -161,9 +161,8 @@ public class CommandLineInterpreter {
 				} catch(ParseException e) {System.err.println("'loadBackup' takes the following "
 						+ "type of argument :"+"\n"+"'<String>'");return;}
 				MyVelibNetwork.deleteAll();
-				arg = "Paris";
-				try {
-					MyVelibNetwork network = NetworkBackup.loadBackup(arg);
+				try {	
+					MyVelibNetwork.loadNetworkFromBackup(NetworkBackup.loadBackup(arg));
 				} catch(IOException i) {
 					System.err.println("Failed to load the backup file");
 				} catch(ClassNotFoundException c) {
@@ -442,7 +441,7 @@ public class CommandLineInterpreter {
 				try {
 				stationID = Long.parseLong(arguments[0]);
 				}
-				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
+				catch (NumberFormatException e) {System.err.println("'startStationGUI' takes the following "
 						+ "types of argument :"+"\n"+"<long>");return;}
 				try {
 					MyVelibNetwork network = MyVelibNetwork.getInstance();
@@ -452,11 +451,34 @@ public class CommandLineInterpreter {
 					System.err.println("Station " + stationID + " does not exist");
 				} catch(Exception e) {
 					System.err.println("Unexpected error");
-					System.err.println(e);
+					e.printStackTrace();
 				}
 				return;
 			}
 			System.err.println("'startStationGUI' takes 1 argument.");
+			break;
+		}
+		
+		case "startUserGUI" : {
+			if (arguments.length == 1) {
+				long userID = 0;
+				try {
+					userID = Long.valueOf(arguments[0]);
+				} catch (NumberFormatException e) {System.err.println("'startUserGui' takes the following "
+						+ "types of argument :"+"\n"+"<long>");return;}
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					User user = network.user(userID);
+					SwingUtilities.invokeLater (new Runnable (){public void run () {new UserGUI(user);}});
+				} catch(NoSuchUserExistException e) {
+					System.err.println("User " + userID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					e.printStackTrace();
+				}
+				return;
+			}
+			System.err.println("'startUserGUI' takes 1 argument.");
 			break;
 		}
 		
@@ -537,13 +559,14 @@ public class CommandLineInterpreter {
 				catch(ParseException e) {System.err.println("'display' takes the following "
 						+ "types of argument :"+"\n"+"'<String>'");return;}
 				try {
-				MyVelibNetwork.switchNetwork(networkName);
-				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				System.out.println(network.stationDatabaseState());
-				System.out.println(network.userDatabaseRepresentation());
-				network.visual2D();
+					MyVelibNetwork.switchNetwork(networkName);
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					System.out.println(network.stationDatabaseState());
+					System.out.println(network.userDatabaseRepresentation());
+					network.visual2D();
 				} catch(NoSuchNetworkExistException e) {
 					System.err.println("Network " + networkName + " does not exist.");
+					e.printStackTrace();
 				} catch(Exception e) {
 					System.err.println("Unexpected error");
 					System.err.println(e);
@@ -573,6 +596,7 @@ public class CommandLineInterpreter {
 						+"setup <velibnetworkName>"+"\n"
 						+"setup <velibnetworkName> <nstations> <nslots> <radius> <nbikes>"+"\n"
 						+"createBackup"+"\n"
+						+"listBackup"+"\n"
 						+"loadBackup <velibnetworkName>"+"\n"
 						+"loadBackup <networkBackupFileName>"+"\n"
 						+"addUser <userName> <cardType>"+"\n"
@@ -588,7 +612,8 @@ public class CommandLineInterpreter {
 						+"sortStation <sortpolicy>"+"\n"
 						+"display <velibnetworkName>"+"\n"
 						+"runTest <testScenarioN.txt>"+"\n"
-						+"startStationGUI <stationID>");
+						+"startStationGUI <stationID>"+"\n"
+						+"startUserGUI <userID>"+"\n");
 				return;
 			}
 			System.err.println("'help' takes no argument.");

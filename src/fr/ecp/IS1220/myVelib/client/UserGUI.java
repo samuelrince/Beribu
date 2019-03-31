@@ -75,7 +75,7 @@ public class UserGUI extends JFrame {
 		this.setSize(500, 300);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		int margin = 30;

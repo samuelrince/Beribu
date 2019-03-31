@@ -126,6 +126,8 @@ public class Scenario1c {
 		
 		NetworkBackup.saveNetworkState(network);
 		NetworkBackup.display();
-		NetworkBackup.loadBackup("Network_Paris_2019-2-17_10-56-3.ser");
+		//MyVelibNetwork.deleteAll();
+		//NetworkBackup.loadBackup("Network_Paris_2019-2-17_10-56-3.ser");
+		NetworkBackup.loadBackup("Paris");
 	}
 }
