@@ -14,39 +14,39 @@ import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
 
 public class StationGUI extends JFrame {
-	public static Station station;
-	public static MyVelibNetwork network;
-	public static User user = null;
+	public Station station;
+	public MyVelibNetwork network;
+	public User user = null;
 	
 	// Login
-	public static JPanel loginPanel = new JPanel();
-	public static JTextField nameTF = new JTextField();
-	public static JPasswordField passTF = new JPasswordField();
+	public JPanel loginPanel = new JPanel();
+	public JTextField nameTF = new JTextField();
+	public JPasswordField passTF = new JPasswordField();
 	
 	// New Ride
-	public static JPanel stationNewRidePanel = new JPanel();
-	public static JComboBox<Bicycle> bicycleComboBox = new JComboBox<Bicycle>();
+	public JPanel stationNewRidePanel = new JPanel();
+	public JComboBox<Bicycle> bicycleComboBox = new JComboBox<Bicycle>();
 	
 	// Create an account
-	public static JPanel accountPanel = new JPanel();
-	public static JTextField nameAccTF = new JTextField();
-	public static JPasswordField passAccTF = new JPasswordField();
-	public static JPasswordField passAccConfTF = new JPasswordField();
-	public static JComboBox<String> cardTypesComboBox = new JComboBox<String>(CardFactory.types);
+	public JPanel accountPanel = new JPanel();
+	public JTextField nameAccTF = new JTextField();
+	public JPasswordField passAccTF = new JPasswordField();
+	public JPasswordField passAccConfTF = new JPasswordField();
+	public JComboBox<String> cardTypesComboBox = new JComboBox<String>(CardFactory.types);
 	
 	//Drop Bicycle
-	public static JPanel dropPanel = new JPanel();
+	public JPanel dropPanel = new JPanel();
 	
 	//Buttons
-	public static JButton cancelBTN = new JButton("Cancel");
-	public static JButton cancelRideBTN = new JButton("Cancel");
+	public JButton cancelBTN = new JButton("Cancel");
+	public JButton cancelRideBTN = new JButton("Cancel");
 	
 	
 	public StationGUI(MyVelibNetwork network, Station station){
 		super(station.toString()+" // "+MyVelibNetwork.getInstance().getName());
-		StationGUI.station = station;
-		StationGUI.network = network;
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.station = station;
+		this.network = network;
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setSize(400, 400);
 	    this.setLocationRelativeTo(null);
 
@@ -54,7 +54,7 @@ public class StationGUI extends JFrame {
 	     * Define the LoginPanel
 	     */
 	    JPanel b1 = new JPanel();
-	    //Welcome Lable
+	    //Welcome Label
 	    b1.setLayout(new BoxLayout(b1, BoxLayout.LINE_AXIS));
 	    JLabel welcomeLabel = new JLabel("Welcome to MyVelib");
 	    b1.add(welcomeLabel);
@@ -82,10 +82,10 @@ public class StationGUI extends JFrame {
 	    createBTN.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				StationGUI.user = null;
-				StationGUI.nameTF.setText("");
-				StationGUI.passTF.setText("");
-				StationGUI.this.setContentPane(StationGUI.accountPanel);
+				StationGUI.this.user = null;
+				StationGUI.this.nameTF.setText("");
+				StationGUI.this.passTF.setText("");
+				StationGUI.this.setContentPane(StationGUI.this.accountPanel);
 				StationGUI.this.setVisible(true);
 			}
 		});
@@ -268,24 +268,24 @@ public class StationGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			User user = null;
-			String name = StationGUI.nameTF.getText();
+			String name = StationGUI.this.nameTF.getText();
 			String passHash = "";
 			try {
-				passHash = PasswordHash.hashPassword(StationGUI.passTF.getText());
+				passHash = PasswordHash.hashPassword(StationGUI.this.passTF.getText());
 			} catch (NoSuchAlgorithmException e1) {}
 			try {
-				user = StationGUI.network.userAuth(name, passHash);
+				user = StationGUI.this.network.userAuth(name, passHash);
 			} catch(NoSuchUserExistException u) {
 				System.err.println(u.getMessage());
 				MyJDialog dialog = new MyJDialog(new JFrame(), "", "Wrong combination of username and password");
 		        dialog.setSize(300, 150);
 			}
 			if (user != null) {
-				StationGUI.user = user;
+				StationGUI.this.user = user;
 				if (user.isOnRide()) {
-					StationGUI.this.setContentPane(StationGUI.dropPanel);
+					StationGUI.this.setContentPane(StationGUI.this.dropPanel);
 				} else {
-					StationGUI.this.setContentPane(StationGUI.stationNewRidePanel);
+					StationGUI.this.setContentPane(StationGUI.this.stationNewRidePanel);
 				}
 				StationGUI.this.setVisible(true);
 				System.out.println("User logged in");
@@ -296,14 +296,14 @@ public class StationGUI extends JFrame {
 	class StartRideListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			User u = StationGUI.user;
-			Bicycle bike = (Bicycle) StationGUI.bicycleComboBox.getSelectedItem();
-			u.newRide(StationGUI.station, bike);
-			StationGUI.user = null;
-			StationGUI.nameTF.setText("");
-			StationGUI.passTF.setText("");
+			User u = StationGUI.this.user;
+			Bicycle bike = (Bicycle) StationGUI.this.bicycleComboBox.getSelectedItem();
+			u.newRide(StationGUI.this.station, bike);
+			StationGUI.this.user = null;
+			StationGUI.this.nameTF.setText("");
+			StationGUI.this.passTF.setText("");
 			try {
-				StationGUI.station.getParkingSlotAttachedTo(bike).detachBicycle();
+				StationGUI.this.station.getParkingSlotAttachedTo(bike).detachBicycle();
 			} catch (NoSuchPaddingException e1) {
 				e1.printStackTrace();
 				return;
@@ -311,8 +311,8 @@ public class StationGUI extends JFrame {
 				e1.printStackTrace();
 				return;
 			}
-			StationGUI.bicycleComboBox.removeItem(bike);
-			StationGUI.this.setContentPane(StationGUI.loginPanel);
+			StationGUI.this.bicycleComboBox.removeItem(bike);
+			StationGUI.this.setContentPane(StationGUI.this.loginPanel);
 			StationGUI.this.setVisible(true);
 			System.out.println("User log out");
 			MyJDialog dialog = new MyJDialog(new JFrame(), "", "You can take your bike and go!");
@@ -323,13 +323,13 @@ public class StationGUI extends JFrame {
 	class CancelListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			StationGUI.user = null;
-			StationGUI.nameTF.setText("");
-			StationGUI.passTF.setText("");
-			StationGUI.nameAccTF.setText("");
-			StationGUI.passAccTF.setText("");
-			StationGUI.passAccConfTF.setText("");
-			StationGUI.this.setContentPane(StationGUI.loginPanel);
+			StationGUI.this.user = null;
+			StationGUI.this.nameTF.setText("");
+			StationGUI.this.passTF.setText("");
+			StationGUI.this.nameAccTF.setText("");
+			StationGUI.this.passAccTF.setText("");
+			StationGUI.this.passAccConfTF.setText("");
+			StationGUI.this.setContentPane(StationGUI.this.loginPanel);
 			StationGUI.this.setVisible(true);
 		}
 	}
@@ -337,11 +337,11 @@ public class StationGUI extends JFrame {
 	class CreateAccountListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String name = StationGUI.nameAccTF.getText();
-			String pass = StationGUI.passAccTF.getText();
-			String passConf = StationGUI.passAccConfTF.getText();
-			String cardType = (String) StationGUI.cardTypesComboBox.getSelectedItem();
-			MyVelibNetwork network = StationGUI.network;
+			String name = StationGUI.this.nameAccTF.getText();
+			String pass = StationGUI.this.passAccTF.getText();
+			String passConf = StationGUI.this.passAccConfTF.getText();
+			String cardType = (String) StationGUI.this.cardTypesComboBox.getSelectedItem();
+			MyVelibNetwork network = StationGUI.this.network;
 			if (!name.isEmpty() && pass.equals(passConf) && !cardType.isEmpty()) {
 				try {
 					network.newSubscriber(name, pass, cardType);
@@ -358,10 +358,10 @@ public class StationGUI extends JFrame {
 			}
 			MyJDialog dialog = new MyJDialog(new JFrame(), "", "Your account is successfully created");
 	        dialog.setSize(300, 150);
-			StationGUI.nameAccTF.setText("");
-			StationGUI.passAccTF.setText("");
-			StationGUI.passAccConfTF.setText("");
-			StationGUI.this.setContentPane(StationGUI.loginPanel);
+			StationGUI.this.nameAccTF.setText("");
+			StationGUI.this.passAccTF.setText("");
+			StationGUI.this.passAccConfTF.setText("");
+			StationGUI.this.setContentPane(StationGUI.this.loginPanel);
 			StationGUI.this.setVisible(true);
 		}
 	}
@@ -369,24 +369,24 @@ public class StationGUI extends JFrame {
 	class DropBikeListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (StationGUI.user == null || !StationGUI.user.isOnRide())
+			if (StationGUI.this.user == null || !StationGUI.this.user.isOnRide())
 				return;
-			if (StationGUI.station.isFull()) {
+			if (StationGUI.this.station.isFull()) {
 				MyJDialog dialog = new MyJDialog(new JFrame(), "", "This station is full, please find another one");
 		        dialog.setSize(300, 150);
 		        return;
 			}
 			Bicycle bike = user.getCurrentRide().getBicycle();
 			try {
-				user.endCurrentRide(StationGUI.station);
+				user.endCurrentRide(StationGUI.this.station);
 			} catch (Exception e1) {e1.printStackTrace(); return;}
 			MyJDialog dialog = new MyJDialog(new JFrame(), "", "You have succesfully dropped your bike.");
 	        dialog.setSize(300, 150);
-			StationGUI.user = null;
-			StationGUI.nameTF.setText("");
-			StationGUI.passTF.setText("");
-			StationGUI.bicycleComboBox.addItem(bike);
-			StationGUI.this.setContentPane(StationGUI.loginPanel);
+			StationGUI.this.user = null;
+			StationGUI.this.nameTF.setText("");
+			StationGUI.this.passTF.setText("");
+			StationGUI.this.bicycleComboBox.addItem(bike);
+			StationGUI.this.setContentPane(StationGUI.this.loginPanel);
 			StationGUI.this.setVisible(true);
 		}	
 	}
