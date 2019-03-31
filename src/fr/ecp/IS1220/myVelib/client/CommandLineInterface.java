@@ -77,33 +77,19 @@ public class CommandLineInterface {
 	}
 	
 	public static void main(String[] args) {
-		/*
-		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 03, 24);
-		SD.setTime(15, 45, 0);
-		new MyVelibNetwork("Paris");
-		*/
-		
 		// Initialization
 		SystemDate SD = SystemDate.getInstance();
 		TextFileInterpreter.textFileInterpreter("my_velib.ini");
+		System.err.println("The 'Default' network has been loaded.");
 		try {
 			NetworkBackup.scanBackup();
 		} catch(Exception e) {
-			System.err.println("No backup loaded");
-		}
-		
+			System.err.println("No backup file loaded");
+		}	
 		
 		System.out.println("\n"+"Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");
-		
-		System.err.println("No network loaded. \n"
-				+ "Please setup a network using one of the following commands: \n"
-				+ "- setup 'Paris' 					(to setup a default network) \n"
-				+ "- runTest testScenario1.txt 				(to setup a network based on a scenario)\n"
-				+ "- loadBackup 'Paris' or loadBackup '<fileName>'		(to setup a network based on a backup)");
-		
-	
+
 		Scanner scan = new Scanner(System.in);
 		String line;
 		// defining the words delimiters for splitting fileContent into words
@@ -131,7 +117,7 @@ public class CommandLineInterface {
 	    	
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
-	   
+	    System.out.println("CLUI exit");
 	}
 	
 }

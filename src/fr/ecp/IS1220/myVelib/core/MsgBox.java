@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
-public class MsgBox {
+public class MsgBox implements java.io.Serializable {
 	private User user;
 	private ArrayList<String> messages = new ArrayList<String>();
 	private ArrayList<Date> timeStamps = new ArrayList<Date>();

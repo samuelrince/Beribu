@@ -14,6 +14,10 @@ import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
 
 public class StationGUI extends JFrame {
+	/**
+	 * Serial Version UID auto-generated
+	 */
+	private static final long serialVersionUID = -679348530541363020L;
 	public Station station;
 	public MyVelibNetwork network;
 	public User user = null;

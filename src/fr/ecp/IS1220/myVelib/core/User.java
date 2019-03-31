@@ -23,7 +23,7 @@ public class User implements java.io.Serializable {
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
 	private Travel plannedRide;
-	public MsgBox msgBox = new MsgBox(this);
+	public transient MsgBox msgBox = new MsgBox(this);
 	
 	/**
 	 * Constructor of User class.
@@ -71,6 +71,18 @@ public class User implements java.io.Serializable {
 		System.out.println("New user "+this+".");
 	}
 
+	public User(String name, String password, Localization loc) {
+		super();
+		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
+		this.creationDate = new Date();
+		this.localization = loc;
+		System.out.println("New user "+this+".");
+	}
+	
 	public User(Localization loc) {
 		super();
 		this.id = uniqId++;

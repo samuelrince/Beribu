@@ -60,6 +60,12 @@ public class MyVelibNetwork implements java.io.Serializable {
 		}
 	}
 	
+	public static MyVelibNetwork loadNetworkFromBackup(MyVelibNetwork network) {
+		listOfNetworks.add(network);
+		instance = network;
+		return instance;
+	}
+	
 	/**
 	 * Makes network the current instance of MyVelibNetwork.
 	 * @param network MyVelib the network to switch to
@@ -80,8 +86,8 @@ public class MyVelibNetwork implements java.io.Serializable {
 	public static void switchNetwork(String networkName) {
 		for (MyVelibNetwork network:listOfNetworks) {
 			if (network.getName().equals(networkName)) {
-			instance = network;
-			System.err.println("Switched to MyVelib network "+network.name+".");
+				instance = network;
+				System.err.println("Switched to MyVelib network "+network.name+".");
 			return;
 			}
 		}
@@ -93,7 +99,6 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 */
 	public static void deleteAll() {
 		int n = listOfNetworks.size();
-		//listOfNetworks = new ArrayList<MyVelibNetwork>();
 		for (MyVelibNetwork network: listOfNetworks) {
 			network.rideDatabaseReset();
 			network.parkingSlotDatabaseReset();
@@ -105,9 +110,11 @@ public class MyVelibNetwork implements java.io.Serializable {
 		ParkingSlot.resetUniqID();
 		Bicycle.resetUniqID();
 		Ride.resetUniqID();
+		listOfNetworks = new ArrayList<MyVelibNetwork>();
+		SystemDate old = SystemDate.getInstance();
+		old.delInstance();
 		SystemDate SD = SystemDate.getInstance();
-		SD.delInstance();
-		SD.setDay(1970, 1, 1);
+		SD.setDay(1970, 1, 2);
 		SD.setTime(0, 0, 0);
 		System.err.println("The database is clean. "+n+" networks deleted.");
 	}
