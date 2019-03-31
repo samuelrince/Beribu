@@ -93,7 +93,6 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 */
 	public static void deleteAll() {
 		int n = listOfNetworks.size();
-		//listOfNetworks = new ArrayList<MyVelibNetwork>();
 		for (MyVelibNetwork network: listOfNetworks) {
 			network.rideDatabaseReset();
 			network.parkingSlotDatabaseReset();
@@ -105,6 +104,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 		ParkingSlot.resetUniqID();
 		Bicycle.resetUniqID();
 		Ride.resetUniqID();
+		listOfNetworks = new ArrayList<MyVelibNetwork>();
 		SystemDate SD = SystemDate.getInstance();
 		SD.delInstance();
 		SD.setDay(1970, 1, 1);
