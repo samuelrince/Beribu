@@ -50,8 +50,9 @@ public class CommandLineInterpreter {
 		}	
 		case "delete": {
 			if (arguments.length == 1) {
-				if (arguments[0].equalsIgnoreCase("all"))
+				if (arguments[0].equalsIgnoreCase("all")) {
 					MyVelibNetwork.deleteAll();
+				}
 				else
 					System.err.println("Type 'delete all' to delete all the database,"
 							+ " including networks, users and stations.");
@@ -463,7 +464,7 @@ public class CommandLineInterpreter {
 			if (arguments.length == 1) {
 				long stationID = 0;
 				try {
-				stationID = Long.parseLong(arguments[0]);
+					stationID = Long.parseLong(arguments[0]);
 				}
 				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
 						+ "types of argument :"+"\n"+"<long>");return;}
@@ -568,17 +569,26 @@ public class CommandLineInterpreter {
 		
 		case "help": {
 			if (arguments.length == 0) {		
-				System.err.println("\n"+"exit"+"\n"+"setup <velibnetworkName>"+"\n"
+				System.err.println("\n"+"exit"+"\n"
+						+"setup <velibnetworkName>"+"\n"
 						+"setup <velibnetworkName> <nstations> <nslots> <radius> <nbikes>"+"\n"
 						+"createBackup"+"\n"
 						+"loadBackup <velibnetworkName>"+"\n"
 						+"loadBackup <networkBackupFileName>"+"\n"
-						+"addUser <userName> <cardType>"+"\n"+"switch <velibnetworkName>"+"\n"
-						+"time <hour> <min> <sec>"+"\n"+"date <year> <month> <day>"+"\n"+"offline <stationID>"+"\n"
-						+"online <stationID>"+"\n"+"rentBike <userID> <stationID>"+"\n"
-						+"returnBike <userID> <stationID>"+"\n"+"displayStation <stationID>"+"\n"
-						+"displayUser <userID>"+"\n"+"sortStation <sortpolicy>"+"\n"
-						+"display <velibnetworkName>"+"\n"+"runTest <testScenarioN.txt>");
+						+"addUser <userName> <cardType>"+"\n"
+						+"switch <velibnetworkName>"+"\n"
+						+"time <hour> <min> <sec>"+"\n"
+						+"date <year> <month> <day>"+"\n"
+						+"offline <stationID>"+"\n"
+						+"online <stationID>"+"\n"
+						+"rentBike <userID> <stationID>"+"\n"
+						+"returnBike <userID> <stationID>"+"\n"
+						+"displayStation <stationID>"+"\n"
+						+"displayUser <userID>"+"\n"
+						+"sortStation <sortpolicy>"+"\n"
+						+"display <velibnetworkName>"+"\n"
+						+"runTest <testScenarioN.txt>"+"\n"
+						+"startStationGUI <stationID>");
 				return;
 			}
 			System.err.println("'help' takes no argument.");

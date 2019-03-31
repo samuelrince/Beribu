@@ -1,7 +1,6 @@
 package fr.ecp.IS1220.myVelib.core;
 
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +13,6 @@ import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
  *
  */
 public class User implements java.io.Serializable {
-	private transient static final String hashAlgorithm = "SHA-512";
 	private static long uniqId;
 	private Date creationDate;
 	private long id;
@@ -412,4 +410,6 @@ public class User implements java.io.Serializable {
 	private String hashPassword(String password) throws NoSuchAlgorithmException{
 		return PasswordHash.hashPassword(password);
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
 }

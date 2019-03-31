@@ -97,6 +97,12 @@ public class CommandLineInterface {
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");
 		
+		System.err.println("No network loaded. \n"
+				+ "Please setup a network usign one of the following commands: \n"
+				+ "- setup 'Paris' 					(to setup a default network) \n"
+				+ "- runTest testScenario1.txt 				(to setup a network based on a scenario)\n"
+				+ "- loadBackup 'Paris' or loadBackup '<fileName>'		(to setup a network based on a backup)");
+		
 	
 		Scanner scan = new Scanner(System.in);
 		String line;

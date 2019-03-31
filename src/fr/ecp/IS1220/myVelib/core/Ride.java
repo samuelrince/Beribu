@@ -160,4 +160,8 @@ public class Ride implements java.io.Serializable {
 	public String toString() {
 		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {this.bicycle = null; this.endStation = null; this.endStation = null; this.user = null;}
 }
