@@ -80,6 +80,7 @@ public class NetworkBackup {
 	
 	public static MyVelibNetwork loadBackup(String name) throws Exception {
 		for(BackupFile file: backupDatabase) {
+			System.out.println(file.getFileName());
 			if (name.equals(file.getFileName())) {
 				return loadNetworkState(name);
 			} else if (name.equals(file.getNeworkName())) {
