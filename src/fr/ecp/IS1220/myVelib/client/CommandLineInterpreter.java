@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import javax.swing.SwingUtilities;
+
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 import fr.ecp.IS1220.myVelib.core.*;
@@ -430,6 +432,30 @@ public class CommandLineInterpreter {
 				return;
 			}
 			System.err.println("'returnBike' takes 2 arguments.");
+			break;
+		}
+		
+		case "startStationGUI" : {
+			if (arguments.length == 1) {
+				long stationID = 0;
+				try {
+				stationID = Long.parseLong(arguments[0]);
+				}
+				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
+						+ "types of argument :"+"\n"+"<long>");return;}
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					Station station = network.station(stationID);
+					SwingUtilities.invokeLater (new Runnable (){public void run () {new StationGUI(network, station);}});
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
+				}
+				return;
+			}
+			System.err.println("'startStationGUI' takes 1 argument.");
 			break;
 		}
 		

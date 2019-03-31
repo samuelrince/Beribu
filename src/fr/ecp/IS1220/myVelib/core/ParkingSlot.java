@@ -55,7 +55,7 @@ public class ParkingSlot implements java.io.Serializable {
 	 */
 	public void attachBicycle(Bicycle bicycle) throws RuntimeException,
 	IllegalArgumentException {
-		if (this.isBicycle()) {
+		if (this.hasBicycle()) {
 			throw new SuchParkingSlotHasBicycleException("This parking slot already holds a bicycle.");
 		}
 		if (this.isOffline) {
@@ -77,7 +77,7 @@ public class ParkingSlot implements java.io.Serializable {
 	 * @throws RuntimeException when the parking slot state is not valid
 	 */
 	public void detachBicycle() throws RuntimeException {
-		if (!this.isBicycle()) {
+		if (!this.hasBicycle()) {
 			throw new SuchParkingSlotHasBicycleException("This parking slot holds on bicycle.");
 		}
 		if (this.isOffline) {
@@ -121,7 +121,7 @@ public class ParkingSlot implements java.io.Serializable {
 	 * 
 	 * @return true if a bicycle is attached to the parking slot, false otherwise
 	 */
-	public boolean isBicycle() {
+	public boolean hasBicycle() {
 		if (this.getBicycle() != null) {
 			return true;
 		}

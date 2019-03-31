@@ -150,7 +150,6 @@ public class User implements java.io.Serializable {
 	public ArrayList<Ride> getListOfRides() {
 		return this.listOfRides;
 	}
-	
 
 	/**
 	 * This private method returns true if the user is currently on a ride, false otherwise.
@@ -242,6 +241,33 @@ public class User implements java.io.Serializable {
 		}
 	}
 	
+	public void newRide(Station station, Bicycle bike) throws RuntimeException {
+		if (!this.isOnRide()) {
+			boolean bikeAttachedToStation = false;
+			for (ParkingSlot ps: station.getParkingSlots()) {
+				if (bike.equals(ps.getBicycle()))
+					bikeAttachedToStation = true;
+			}
+			if (!bikeAttachedToStation)
+				throw new NoNewRideException("Wrong bike selection");
+			Ride ride = new Ride(this,bike,station);
+			this.listOfRides.add(ride);
+			System.out.println(this+" has started"
+					+ " a new ride from "+station+".");
+			if (this.plannedRide != null) {
+				if (this.plannedRide.isOngoing()){
+					this.plannedRide.setBicycleType(bike.getType());
+					this.plannedRide.setSuggestedStartStation(station);
+				}
+			}
+				station.incRentCount();
+				station.updateStatus();
+		} 
+		else {
+			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
+		}
+	}
+	
 	/**
 	 * A tentative to implement safe threads for the action of renting a bike.
 	 */
@@ -289,6 +315,12 @@ public class User implements java.io.Serializable {
 				station.updateStatus();
 			}
 		}
+	}
+	
+	public Ride getLastRide() {
+		if (this.listOfRides.size() > 0)
+			return this.listOfRides.get(this.listOfRides.size() - 1);
+		return null;
 	}
 	
 	/**
@@ -378,13 +410,6 @@ public class User implements java.io.Serializable {
 	}
 	
 	private String hashPassword(String password) throws NoSuchAlgorithmException{
-		MessageDigest md = MessageDigest.getInstance(hashAlgorithm);
-		md.update(password.getBytes());
-		byte[] bytes = md.digest();
-		StringBuilder sb = new StringBuilder();
-		for(int i=0; i< bytes.length ;i++) {
-            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-        }
-		return sb.toString();
+		return PasswordHash.hashPassword(password);
 	}
 }
