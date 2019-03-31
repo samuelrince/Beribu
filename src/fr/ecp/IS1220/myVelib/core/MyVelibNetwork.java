@@ -94,6 +94,11 @@ public class MyVelibNetwork implements java.io.Serializable {
 	public static void deleteAll() {
 		int n = listOfNetworks.size();
 		listOfNetworks = new ArrayList<MyVelibNetwork>();;
+		Station.resetUniqID();
+		User.resetUniqID();
+		ParkingSlot.resetUniqID();
+		Bicycle.resetUniqID();
+		Ride.resetUniqID();
 		System.err.println("The database is clean. "+n+" networks deleted.");
 	}
 	
@@ -508,7 +513,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 * @param index ID of the station
 	 * @return the station with specified ID in the network station data base
 	 */
-	public Station station(long stationID) {
+	public Station station(long stationID) throws NoSuchStationExistException {
 		for (Station station:this.stationDatabase) {
 			if (station.getId() == stationID)
 				return station;

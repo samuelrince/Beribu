@@ -412,4 +412,6 @@ public class User implements java.io.Serializable {
 	private String hashPassword(String password) throws NoSuchAlgorithmException{
 		return PasswordHash.hashPassword(password);
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
 }

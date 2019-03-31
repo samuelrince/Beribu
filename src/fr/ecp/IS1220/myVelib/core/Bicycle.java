@@ -105,5 +105,5 @@ public abstract class Bicycle implements java.io.Serializable {
 		return true;
 	}
 	
-	
+	protected static void resetUniqID() {uniqId=0;}
 }

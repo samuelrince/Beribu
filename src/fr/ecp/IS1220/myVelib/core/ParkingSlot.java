@@ -130,4 +130,6 @@ public class ParkingSlot implements java.io.Serializable {
 		}
 	}
 	
+	protected static void resetUniqID() {uniqId=0;}
+	
 }

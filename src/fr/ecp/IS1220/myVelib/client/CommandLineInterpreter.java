@@ -50,8 +50,9 @@ public class CommandLineInterpreter {
 		}	
 		case "delete": {
 			if (arguments.length == 1) {
-				if (arguments[0].equalsIgnoreCase("all"))
+				if (arguments[0].equalsIgnoreCase("all")) {
 					MyVelibNetwork.deleteAll();
+				}
 				else
 					System.err.println("Type 'delete all' to delete all the database,"
 							+ " including networks, users and stations.");
@@ -463,7 +464,7 @@ public class CommandLineInterpreter {
 			if (arguments.length == 1) {
 				long stationID = 0;
 				try {
-				stationID = Long.parseLong(arguments[0]);
+					stationID = Long.parseLong(arguments[0]);
 				}
 				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
 						+ "types of argument :"+"\n"+"<long>");return;}
