@@ -18,5 +18,4 @@ returnBike 3 9
 time 10 37 59
 returnBike 0 9
 time 10 57 03
-returnBike 1 10
-echo 'You can type displayUser 0 or displayStation 0'
+returnBike 1 9

@@ -94,11 +94,13 @@ public class MyVelibNetwork implements java.io.Serializable {
 	public static void deleteAll() {
 		int n = listOfNetworks.size();
 		listOfNetworks = new ArrayList<MyVelibNetwork>();;
-		Station.resetUniqID();
+		/*Station.resetUniqID();
 		User.resetUniqID();
 		ParkingSlot.resetUniqID();
 		Bicycle.resetUniqID();
-		Ride.resetUniqID();
+		Ride.resetUniqID();*/
+		SystemDate SD = SystemDate.getInstance();
+		SD.forceReset();
 		System.err.println("The database is clean. "+n+" networks deleted.");
 	}
 	
