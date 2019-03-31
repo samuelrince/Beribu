@@ -126,7 +126,7 @@ class RideTest {
 		s2.getParkingSlots().get(0).attachBicycle(b2);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
-		System.out.println(s2.getParkingSlots().get(0).isBicycle());
+		System.out.println(s2.getParkingSlots().get(0).hasBicycle());
 		assertThrows(RuntimeException.class, () -> {
 			u.getCurrentRide().end(s2.getParkingSlots().get(0));
 		});

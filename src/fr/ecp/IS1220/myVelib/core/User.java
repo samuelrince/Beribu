@@ -242,6 +242,33 @@ public class User implements java.io.Serializable {
 		}
 	}
 	
+	public void newRide(Station station, Bicycle bike) throws RuntimeException {
+		if (!this.isOnRide()) {
+			boolean bikeAttachedToStation = false;
+			for (ParkingSlot ps: station.getParkingSlots()) {
+				if (bike.equals(ps.getBicycle()))
+					bikeAttachedToStation = true;
+			}
+			if (!bikeAttachedToStation)
+				throw new NoNewRideException("Wrong bike selection");
+			Ride ride = new Ride(this,bike,station);
+			this.listOfRides.add(ride);
+			System.out.println(this+" has started"
+					+ " a new ride from "+station+".");
+			if (this.plannedRide != null) {
+				if (this.plannedRide.isOngoing()){
+					this.plannedRide.setBicycleType(bike.getType());
+					this.plannedRide.setSuggestedStartStation(station);
+				}
+			}
+				station.incRentCount();
+				station.updateStatus();
+		} 
+		else {
+			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
+		}
+	}
+	
 	/**
 	 * A tentative to implement safe threads for the action of renting a bike.
 	 */

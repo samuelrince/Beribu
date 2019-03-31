@@ -117,7 +117,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	public int numberOfBicycles() {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle()
+			if (this.parkingSlots.get(i).hasBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				number++;
 			}
@@ -134,7 +134,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	public int numberOfBicycles(String bicycleType) {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType()))
 					number++;
@@ -151,7 +151,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	public int numberOfFreeSlots() {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (!this.parkingSlots.get(i).isBicycle()
+			if (!this.parkingSlots.get(i).hasBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				number++;
 			}
@@ -167,7 +167,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public ParkingSlot getFreeParkingSlot() throws NoParkingSlotAvailableException {
 		for(int i = 0; i <= this.parkingSlots.size() - 1; i++) {
-			if (!this.parkingSlots.get(i).isBicycle() && this.parkingSlots.get(i).isOffline() == false) {
+			if (!this.parkingSlots.get(i).hasBicycle() && this.parkingSlots.get(i).isOffline() == false) {
 				return this.parkingSlots.get(i);
 			}
 		}
@@ -192,7 +192,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (!parkingSlots.get(i).isBicycle()
+			if (!parkingSlots.get(i).hasBicycle()
 			&& !parkingSlots.get(i).isOffline()) {
 				return false;
 			}
@@ -209,7 +209,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public Bicycle getBicycle() throws NoBicycleAvailableException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
 				Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
 				this.parkingSlots.get(i).detachBicycle();
@@ -229,7 +229,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public Bicycle getBicycle(String bicycleType) throws NoBicycleAvailableException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
@@ -249,7 +249,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public boolean isBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
 				return true;
 			}
@@ -265,7 +265,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public boolean isBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle()
+			if (this.parkingSlots.get(i).hasBicycle()
 			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					return true;
@@ -549,7 +549,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 			for (int i = 0; i < Station.this.parkingSlots.size(); i++) {
 				ParkingSlot parkingSlot = Station.this.parkingSlots.get(i);
 				this.parkingSlotStatus.add(new ArrayList<Boolean>(
-						Arrays.asList(parkingSlot.isOffline(), parkingSlot.isBicycle())));
+						Arrays.asList(parkingSlot.isOffline(), parkingSlot.hasBicycle())));
 			}
 		}
 		
