@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.crypto.NoSuchPaddingException;
+
 import fr.ecp.IS1220.myVelib.core.exception.NoBicycleAvailableException;
 import fr.ecp.IS1220.myVelib.core.exception.NoParkingSlotAvailableException;
 
@@ -450,6 +452,15 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	
 	public boolean initializing() {
 		return this.initializing;
+	}
+	
+	public ParkingSlot getParkingSlotAttachedTo(Bicycle bike) throws NoSuchPaddingException {
+		for (ParkingSlot ps: this.parkingSlots) {
+			if (ps.getBicycle().equals(bike)) {
+				return ps;
+			}
+		}
+		throw new NoSuchPaddingException("This bike is not attached to any parking slot");
 	}
 	
 	/**

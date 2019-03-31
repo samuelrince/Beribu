@@ -150,7 +150,6 @@ public class User implements java.io.Serializable {
 	public ArrayList<Ride> getListOfRides() {
 		return this.listOfRides;
 	}
-	
 
 	/**
 	 * This private method returns true if the user is currently on a ride, false otherwise.
@@ -316,6 +315,12 @@ public class User implements java.io.Serializable {
 				station.updateStatus();
 			}
 		}
+	}
+	
+	public Ride getLastRide() {
+		if (this.listOfRides.size() > 0)
+			return this.listOfRides.get(this.listOfRides.size() - 1);
+		return null;
 	}
 	
 	/**

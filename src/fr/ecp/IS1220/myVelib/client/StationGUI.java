@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
@@ -33,8 +34,12 @@ public class StationGUI extends JFrame {
 	public static JPasswordField passAccConfTF = new JPasswordField();
 	public static JComboBox<String> cardTypesComboBox = new JComboBox<String>(CardFactory.types);
 	
+	//Drop Bicycle
+	public static JPanel dropPanel = new JPanel();
+	
 	//Buttons
 	public static JButton cancelBTN = new JButton("Cancel");
+	public static JButton cancelRideBTN = new JButton("Cancel");
 	
 	
 	public StationGUI(MyVelibNetwork network, Station station){
@@ -124,10 +129,10 @@ public class StationGUI extends JFrame {
 	    JPanel c4 = new JPanel();
 	    //Buttons
 	    c4.setLayout(new BoxLayout(c4, BoxLayout.LINE_AXIS));
-	    cancelBTN.addActionListener(new CancelListener());
+	    cancelRideBTN.addActionListener(new CancelListener());
 	    JButton startBTN = new JButton("Start Ride");
 	    startBTN.addActionListener(new StartRideListener());
-	    c4.add(cancelBTN);
+	    c4.add(cancelRideBTN);
 	    c4.add(startBTN);
 	    
 	    //Add to StationNewRidePanel
@@ -196,6 +201,31 @@ public class StationGUI extends JFrame {
 	    accountPanel.setMaximumSize(new Dimension(200, 200));
 	    
 	    
+	    /*
+	     * Define Drop Panel 
+	     */
+	    JPanel f1 = new JPanel();
+	    //Drop label
+	    f1.setLayout(new BoxLayout(f1, BoxLayout.LINE_AXIS));
+	    JLabel dropLabel = new JLabel("Drop your bicycle");
+	    f1.add(dropLabel);
+	    
+	    JPanel f2 = new JPanel();
+	    // Buttons
+	    f2.setLayout(new BoxLayout(f2, BoxLayout.LINE_AXIS));
+	    cancelBTN.addActionListener(new CancelListener());
+	    JButton dropBTN = new JButton("Drop Bike");
+	    dropBTN.addActionListener(new DropBikeListener());
+	    f2.add(cancelBTN);
+	    f2.add(dropBTN);
+	    
+	    //Drop panel
+	    dropPanel.setLayout(new BoxLayout(dropPanel, BoxLayout.PAGE_AXIS));
+	    dropPanel.add(f1);
+	    dropPanel.add(f2);
+	    dropPanel.setMaximumSize(new Dimension(200, 200));
+	    
+	    
 	    this.setResizable(false);
 	    this.setContentPane(loginPanel);
 	    this.setVisible(true);
@@ -252,7 +282,11 @@ public class StationGUI extends JFrame {
 			}
 			if (user != null) {
 				StationGUI.user = user;
-				StationGUI.this.setContentPane(StationGUI.stationNewRidePanel);
+				if (user.isOnRide()) {
+					StationGUI.this.setContentPane(StationGUI.dropPanel);
+				} else {
+					StationGUI.this.setContentPane(StationGUI.stationNewRidePanel);
+				}
 				StationGUI.this.setVisible(true);
 				System.out.println("User logged in");
 			}
@@ -268,6 +302,16 @@ public class StationGUI extends JFrame {
 			StationGUI.user = null;
 			StationGUI.nameTF.setText("");
 			StationGUI.passTF.setText("");
+			try {
+				StationGUI.station.getParkingSlotAttachedTo(bike).detachBicycle();
+			} catch (NoSuchPaddingException e1) {
+				e1.printStackTrace();
+				return;
+			} catch (RuntimeException e1) {
+				e1.printStackTrace();
+				return;
+			}
+			StationGUI.bicycleComboBox.removeItem(bike);
 			StationGUI.this.setContentPane(StationGUI.loginPanel);
 			StationGUI.this.setVisible(true);
 			System.out.println("User log out");
@@ -320,6 +364,31 @@ public class StationGUI extends JFrame {
 			StationGUI.this.setContentPane(StationGUI.loginPanel);
 			StationGUI.this.setVisible(true);
 		}
+	}
+	
+	class DropBikeListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (StationGUI.user == null || !StationGUI.user.isOnRide())
+				return;
+			if (StationGUI.station.isFull()) {
+				MyJDialog dialog = new MyJDialog(new JFrame(), "", "This station is full, please find another one");
+		        dialog.setSize(300, 150);
+		        return;
+			}
+			Bicycle bike = user.getCurrentRide().getBicycle();
+			try {
+				user.endCurrentRide(StationGUI.station);
+			} catch (Exception e1) {e1.printStackTrace(); return;}
+			MyJDialog dialog = new MyJDialog(new JFrame(), "", "You have succesfully dropped your bike.");
+	        dialog.setSize(300, 150);
+			StationGUI.user = null;
+			StationGUI.nameTF.setText("");
+			StationGUI.passTF.setText("");
+			StationGUI.bicycleComboBox.addItem(bike);
+			StationGUI.this.setContentPane(StationGUI.loginPanel);
+			StationGUI.this.setVisible(true);
+		}	
 	}
 
 	public static void main(final String[] args){
