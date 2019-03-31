@@ -569,17 +569,26 @@ public class CommandLineInterpreter {
 		
 		case "help": {
 			if (arguments.length == 0) {		
-				System.err.println("\n"+"exit"+"\n"+"setup <velibnetworkName>"+"\n"
+				System.err.println("\n"+"exit"+"\n"
+						+"setup <velibnetworkName>"+"\n"
 						+"setup <velibnetworkName> <nstations> <nslots> <radius> <nbikes>"+"\n"
 						+"createBackup"+"\n"
 						+"loadBackup <velibnetworkName>"+"\n"
 						+"loadBackup <networkBackupFileName>"+"\n"
-						+"addUser <userName> <cardType>"+"\n"+"switch <velibnetworkName>"+"\n"
-						+"time <hour> <min> <sec>"+"\n"+"date <year> <month> <day>"+"\n"+"offline <stationID>"+"\n"
-						+"online <stationID>"+"\n"+"rentBike <userID> <stationID>"+"\n"
-						+"returnBike <userID> <stationID>"+"\n"+"displayStation <stationID>"+"\n"
-						+"displayUser <userID>"+"\n"+"sortStation <sortpolicy>"+"\n"
-						+"display <velibnetworkName>"+"\n"+"runTest <testScenarioN.txt>");
+						+"addUser <userName> <cardType>"+"\n"
+						+"switch <velibnetworkName>"+"\n"
+						+"time <hour> <min> <sec>"+"\n"
+						+"date <year> <month> <day>"+"\n"
+						+"offline <stationID>"+"\n"
+						+"online <stationID>"+"\n"
+						+"rentBike <userID> <stationID>"+"\n"
+						+"returnBike <userID> <stationID>"+"\n"
+						+"displayStation <stationID>"+"\n"
+						+"displayUser <userID>"+"\n"
+						+"sortStation <sortpolicy>"+"\n"
+						+"display <velibnetworkName>"+"\n"
+						+"runTest <testScenarioN.txt>"+"\n"
+						+"startStationGUI <stationID>");
 				return;
 			}
 			System.err.println("'help' takes no argument.");

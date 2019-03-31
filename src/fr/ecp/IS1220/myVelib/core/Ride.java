@@ -162,4 +162,6 @@ public class Ride implements java.io.Serializable {
 	}
 	
 	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {this.bicycle = null; this.endStation = null; this.endStation = null; this.user = null;}
 }

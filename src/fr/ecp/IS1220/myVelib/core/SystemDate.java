@@ -161,15 +161,6 @@ public class SystemDate {
 		return "SystemDate: "+day+"/"+month+"/"+year+" at "+hour+":"+minute+":"+second;
 	}
 	
-	protected void forceReset() {
-		this.year = 1970;
-		this.month = 1;
-		this.day = 1;
-		this.hour = 0;
-		this.minute = 0;
-		this.second = 0;
-	}
-	
 	private boolean isValid() throws BadDateException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
 		sdf.setLenient(false);

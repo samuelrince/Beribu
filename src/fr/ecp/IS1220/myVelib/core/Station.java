@@ -624,6 +624,13 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	
 	protected static void resetUniqID() {uniqId=0;}
 	
+	protected void forceReset() {
+		this.history = null;
+		this.createdAt = null;
+		this.parkingSlots = null;
+		this.targetOf = null;
+	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

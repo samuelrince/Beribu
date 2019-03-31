@@ -93,15 +93,63 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 */
 	public static void deleteAll() {
 		int n = listOfNetworks.size();
-		listOfNetworks = new ArrayList<MyVelibNetwork>();;
-		/*Station.resetUniqID();
+		//listOfNetworks = new ArrayList<MyVelibNetwork>();
+		for (MyVelibNetwork network: listOfNetworks) {
+			network.rideDatabaseReset();
+			network.parkingSlotDatabaseReset();
+			network.userDatabaseReset();
+			network.stationDatabaseReset();
+		}
+		Station.resetUniqID();
 		User.resetUniqID();
 		ParkingSlot.resetUniqID();
 		Bicycle.resetUniqID();
-		Ride.resetUniqID();*/
+		Ride.resetUniqID();
 		SystemDate SD = SystemDate.getInstance();
-		SD.forceReset();
+		SD.delInstance();
+		SD.setDay(1970, 1, 1);
+		SD.setTime(0, 0, 0);
 		System.err.println("The database is clean. "+n+" networks deleted.");
+	}
+	
+	private void networkReset() {
+		this.rideDatabaseReset();
+		this.userDatabaseReset();
+		this.parkingSlotDatabaseReset();
+		this.stationDatabaseReset();
+	}
+	
+	private void rideDatabaseReset() {
+		for (User user: this.userDatabase) {
+			for (Ride ride: user.getListOfRides()) {
+				ride.forceReset();
+				ride = null;
+			}
+		}
+	}
+	
+	private void userDatabaseReset() {
+		for (User user: this.userDatabase) {
+			user = null;
+		}
+		this.userDatabase = null;
+	}
+	
+	private void parkingSlotDatabaseReset() {
+		for (Station station: this.stationDatabase) {
+			for (ParkingSlot ps: station.getParkingSlots()) {
+				ps.forceReset();
+				ps = null;
+			}
+		}
+	}
+	
+	private void stationDatabaseReset() {
+		for (Station station: this.stationDatabase) {
+			station.forceReset();
+			station = null;
+		}
+		this.stationDatabase = null;
 	}
 	
 	/**
