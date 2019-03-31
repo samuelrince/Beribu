@@ -1,0 +1,13 @@
+delete all
+date 2019 1 1
+time 0 0 0
+setup 'Tokyo' 50 20 30 'square' 35.6828387 139.7594549 30 65 90 10
+addUser 'Takahashi' 'Standard'
+addUser 'Clement' 'Vlibre'
+addUser 'Ezekiel' 'Vmax'
+addUser 'Thomas' 'Standard'
+addUser 'Diego' 'Vmax'
+addUser 'Jean' 'Standard'
+addUser 'Valentin' 'Standard'
+addUser 'Samuel' 'Vlibre'
+display 'Tokyo'
