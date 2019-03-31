@@ -471,7 +471,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 * the network.
 	 * @param number number of users
 	 * @param subType type of subscription
-	 * @throws Exception 
+	 * @throws Exception can occur at user creation
 	 */
 	public void createSubscribers(int number,String subType) throws Exception {
 		for (int i = 0; i < number; i++) {
@@ -487,7 +487,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 * the network.
 	 * @param name name of user
 	 * @param subType type of subscription
-	 * @throws Exception 
+	 * @throws Exception can occur at user creation
 	 */
 	public void newSubscriber(String name, String subType) throws Exception {
 		User user = new User(name);
@@ -509,7 +509,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 * @param name name of user
 	 * @param subType type of subscription
 	 * @param loc localization of the user
-	 * @throws Exception 
+	 * @throws Exception can occur at user creation
 	 */
 	public void newSubscriber(String name, String subType, Localization loc) throws Exception {
 		User user = new User(name,loc);
@@ -528,7 +528,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	}
 	
 	/**
-	 * 
+	 * Returns the network name
 	 * @return name of the network
 	 */
 	public String getName() {
@@ -558,8 +558,8 @@ public class MyVelibNetwork implements java.io.Serializable {
 	}
 	
 	/**
-	 * 
-	 * @param index ID of user
+	 * Returns the right user
+	 * @param userID index ID of user
 	 * @return the user with specified ID in the network user data base
 	 */
 	public User user(long userID) {
@@ -581,8 +581,8 @@ public class MyVelibNetwork implements java.io.Serializable {
 	}
 	
 	/**
-	 * 
-	 * @param index ID of the station
+	 * Returns the right station 
+	 * @param stationID index ID of the station
 	 * @return the station with specified ID in the network station data base
 	 */
 	public Station station(long stationID) throws NoSuchStationExistException {

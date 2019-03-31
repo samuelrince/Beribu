@@ -312,6 +312,7 @@ public class User implements java.io.Serializable {
 	
 	/**
 	 * A tentative to implement safe threads for the action of renting a bike.
+	 * @param station The station where to rent the bike
 	 */
 	public void rentBike(Station station) {
 		BikeRental br = new BikeRental(this,station);
