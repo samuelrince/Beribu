@@ -157,7 +157,7 @@ public class Localization {
 	}
 	
 	public ArrayList<Station> getStationsInRadius(double radius) 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		ArrayList<Station> stationsInRadius = new ArrayList<Station>();
 		for (int i = 0; i < listOfStations.size(); i++) {
@@ -166,6 +166,9 @@ public class Localization {
 				stationsInRadius.add(listOfStations.get(i));			
 			}
 		}
+		if (stationsInRadius.size() == 0)
+			throw new NoSuchStationExistException("Sorry, no station in a radius of "+radius
+					+"km around this localization "+this+".");
 		return stationsInRadius;
 	}
 	

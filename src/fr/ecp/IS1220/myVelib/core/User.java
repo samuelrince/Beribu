@@ -21,6 +21,7 @@ public class User {
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
 	private Travel plannedRide;
+	public MsgBox msgBox = new MsgBox(this);
 	
 	/**
 	 * Constructor of User class.
@@ -34,6 +35,15 @@ public class User {
 		System.out.println("New user "+this+".");
 	}
 	
+	public User(String name, Localization loc) {
+		super();
+		this.name = name;
+		this.id = uniqId++;
+		this.creationDate = new Date();
+		this.localization = loc;
+		System.out.println("New user "+this+".");
+	}
+	
 	public User() {
 		super();
 		this.id = uniqId++;
@@ -42,6 +52,15 @@ public class User {
 		System.out.println("New user "+this+".");
 	}
 
+	public User(Localization loc) {
+		super();
+		this.id = uniqId++;
+		this.name = "Bob"+this.id;
+		this.creationDate = new Date();
+		this.localization = loc;
+		System.out.println("New user "+this+".");
+	}
+	
 	public long getId() {
 		return this.id;
 	}
@@ -119,13 +138,24 @@ public class User {
 	
 	public void subscribe(String cardType) {
 		CardFactory cardFactory = new CardFactory();
-		this.subscribe(cardFactory.newCard(cardType, this));
+		if (!this.getCard().getType().equalsIgnoreCase(cardType))
+			this.subscribe(cardFactory.newCard(cardType, this));
 	}
 	
 	public ArrayList<Ride> getListOfRides() {
 		return this.listOfRides;
 	}
 	
+	public String getHistory() {
+		String res = "History of "+this.getName()+"\n";
+		if (this.listOfRides.size() == 0)
+			res += "\n"+"-empty-";
+		else {
+			for (int i =0 ; i < this.listOfRides.size(); i++) 
+				res += "\n"+this.listOfRides.get(i);
+		}
+		return res;
+	}
 
 	/**
 	 * This private method returns true if the user is currently on a ride, false otherwise.
@@ -342,8 +372,12 @@ public class User {
 		}
 	}
 
+	public MsgBox getMsgBox() {
+		return this.msgBox;
+	}
+	
 	public void notifyUser(String message) {
-		System.out.println("For "+this+" : "+message);
+		this.msgBox.add(message);
 	}
 	
 	@Override
