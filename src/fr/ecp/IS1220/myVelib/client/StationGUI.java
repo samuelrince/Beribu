@@ -29,8 +29,8 @@ public class StationGUI extends JFrame {
 	// Create an account
 	public static JPanel accountPanel = new JPanel();
 	public static JTextField nameAccTF = new JTextField();
-	public static JTextField passAccTF = new JTextField();
-	public static JTextField passAccConfTF = new JTextField();
+	public static JPasswordField passAccTF = new JPasswordField();
+	public static JPasswordField passAccConfTF = new JPasswordField();
 	public static JComboBox<String> cardTypesComboBox = new JComboBox<String>(CardFactory.types);
 	
 	//Buttons
@@ -77,7 +77,11 @@ public class StationGUI extends JFrame {
 	    createBTN.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(nameTF.getText());
+				StationGUI.user = null;
+				StationGUI.nameTF.setText("");
+				StationGUI.passTF.setText("");
+				StationGUI.this.setContentPane(StationGUI.accountPanel);
+				StationGUI.this.setVisible(true);
 			}
 		});
 	    b4.add(createBTN);
@@ -193,7 +197,7 @@ public class StationGUI extends JFrame {
 	    
 	    
 	    this.setResizable(false);
-	    this.setContentPane(accountPanel);
+	    this.setContentPane(loginPanel);
 	    this.setVisible(true);
 	}
 	
@@ -203,7 +207,7 @@ public class StationGUI extends JFrame {
 	 
 	    public MyJDialog(JFrame parent, String title, String message) {
 	        super(parent, title);
-	        this.setLocationRelativeTo(StationGUI.nameTF);
+	        this.setLocationRelativeTo(null);
 	        // Create a message
 	        JPanel messagePane = new JPanel();
 	        messagePane.add(new JLabel(message));
@@ -278,6 +282,38 @@ public class StationGUI extends JFrame {
 			StationGUI.user = null;
 			StationGUI.nameTF.setText("");
 			StationGUI.passTF.setText("");
+			StationGUI.nameAccTF.setText("");
+			StationGUI.passAccTF.setText("");
+			StationGUI.passAccConfTF.setText("");
+			StationGUI.this.setContentPane(StationGUI.loginPanel);
+			StationGUI.this.setVisible(true);
+		}
+	}
+	
+	class CreateAccountListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String name = StationGUI.nameAccTF.getText();
+			String pass = StationGUI.passAccTF.getText();
+			String passConf = StationGUI.passAccConfTF.getText();
+			String cardType = (String) StationGUI.cardTypesComboBox.getSelectedItem();
+			MyVelibNetwork network = StationGUI.network;
+			if (!name.isEmpty() && pass.equals(passConf) && !cardType.isEmpty()) {
+				try {
+					network.newSubscriber(name, pass, cardType);
+				} catch (Exception e1) {
+					System.err.println("Failed to create new user");
+					MyJDialog dialog = new MyJDialog(new JFrame(), "", "An error occured please try again");
+			        dialog.setSize(300, 150);
+			        return;
+				}
+			} else {
+				MyJDialog dialog = new MyJDialog(new JFrame(), "", "Please fill all fields to create your account");
+		        dialog.setSize(300, 150);
+		        return;
+			}
+			MyJDialog dialog = new MyJDialog(new JFrame(), "", "Your account is successfully created");
+	        dialog.setSize(300, 150);
 			StationGUI.nameAccTF.setText("");
 			StationGUI.passAccTF.setText("");
 			StationGUI.passAccConfTF.setText("");
