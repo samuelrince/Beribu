@@ -13,8 +13,8 @@ public class BadSortPolicyException extends IllegalArgumentException {
 	
 	/**
 	 * Constructs a <code>BadSortPolicyException</code>
-	 * @param message
-	 * @param cause
+	 * @param message	the detail message
+	 * @param cause		the cause
 	 */
 	public BadSortPolicyException(String message, Throwable cause) {
 		super(message, cause);
@@ -23,7 +23,7 @@ public class BadSortPolicyException extends IllegalArgumentException {
 
 	/**
 	 * Constructs a <code>BadSortPolicyException</code>
-	 * @param s
+	 * @param s		the detail message
 	 */
 	public BadSortPolicyException(String s) {
 		super(s);

@@ -18,8 +18,8 @@ public class BadCardTypeException extends IllegalArgumentException {
 	
 	/**
 	 * Constructs a <code>BadCardTypeException</code>
-	 * @param message
-	 * @param cause
+	 * @param message	the detail message
+	 * @param cause		the cause
 	 */
 	public BadCardTypeException(String message, Throwable cause) {
 		super(message, cause);
@@ -28,7 +28,7 @@ public class BadCardTypeException extends IllegalArgumentException {
 
 	/**
 	 * Constructs a <code>BadCardTypeException</code>
-	 * @param s
+	 * @param s		the detail message
 	 */
 	public BadCardTypeException(String s) {
 		super(s);
