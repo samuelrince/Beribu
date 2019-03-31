@@ -98,7 +98,7 @@ public class CommandLineInterface {
 				+ " for a list of commands, or start entering your command lines now!");
 		
 		System.err.println("No network loaded. \n"
-				+ "Please se a network usign one of the following commands: \n"
+				+ "Please setup a network usign one of the following commands: \n"
 				+ "- setup 'Paris' 					(to setup a default network) \n"
 				+ "- runTest testScenario1.txt 				(to setup a network based on a scenario)\n"
 				+ "- loadBackup 'Paris' or loadBackup '<fileName>'		(to setup a network based on a backup)");
