@@ -288,7 +288,7 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 	 */
 	public String getOneBicycleType() {
 		if (!this.isBicycle())
-			throw new NoBicycleAvailableException("No bicycle is available in "+this+".");
+			throw new NoBicycleAvailableException("Sorry, no bicycle is available in "+this+".");
 		for (int i = 0; i < Bicycle.getTypeDict().size(); i++) {
 			if (this.isBicycle(Bicycle.getTypeDict().get(i))) {
 				return Bicycle.getTypeDict().get(i);

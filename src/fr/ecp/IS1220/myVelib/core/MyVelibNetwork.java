@@ -497,6 +497,21 @@ public class MyVelibNetwork implements java.io.Serializable {
 	}
 	
 	/**
+	 * Adds a new named user with the specified type of subscription and a localization to
+	 * the network.
+	 * @param name name of user
+	 * @param subType type of subscription
+	 * @param loc localization of the user
+	 * @throws Exception 
+	 */
+	public void newSubscriber(String name, String subType, Localization loc) throws Exception {
+		User user = new User(name,loc);
+		if (subType != "Standard")
+			user.subscribe(subType);
+		this.userDatabase.add(user);
+	}
+	
+	/**
 	 * Adds a given user to the network.
 	 * @param user user to add
 	 */
@@ -606,7 +621,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 */
 	public void visual2D() {
 		JFrame frame = new JFrame();
-		frame.setSize(new Dimension(700,750));
+		frame.setSize(new Dimension(630,660));
 		ArrayList<Localization> points=new ArrayList<Localization>();
 		ArrayList<String> labels=new ArrayList<String>();
 		for (Station s:this.stationDatabase) {
@@ -615,6 +630,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 		}
 		
 		Panneau p=new Panneau(points,labels);
+		p.repaint();
 		frame.setContentPane(p);
 		frame.setVisible(true);
 	}
