@@ -104,6 +104,12 @@ public class User implements java.io.Serializable {
 		return this.passwordHash;
 	}
 	
+	public void setPasswordHash(String password) {
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
+	}
+	
 	public Date getCreationDate() {
 		return this.creationDate;
 	}
