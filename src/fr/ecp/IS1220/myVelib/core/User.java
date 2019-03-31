@@ -1,6 +1,7 @@
 package fr.ecp.IS1220.myVelib.core;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,11 +12,12 @@ import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
  * @author Valentin
  *
  */
-public class User {
+public class User implements java.io.Serializable {
 	private static long uniqId;
 	private Date creationDate;
 	private long id;
 	private String name;
+	private String passwordHash;
 	private Localization localization;
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
@@ -29,8 +31,11 @@ public class User {
 	 */
 	public User(String name) {
 		super();
-		this.name = name;
 		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword("password");
+		} catch(NoSuchAlgorithmException e) {}
 		this.creationDate = new Date();
 		System.out.println("New user "+this+".");
 	}
@@ -48,6 +53,20 @@ public class User {
 		super();
 		this.id = uniqId++;
 		this.name = "Bob"+this.id;
+		try {
+			this.passwordHash = hashPassword("password");
+		} catch(NoSuchAlgorithmException e) {}
+		this.creationDate = new Date();
+		System.out.println("New user "+this+".");
+	}
+	
+	public User(String name, String password) {
+		super();
+		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
 		this.creationDate = new Date();
 		System.out.println("New user "+this+".");
 	}
@@ -67,6 +86,10 @@ public class User {
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public String getPasswordHash() {
+		return this.passwordHash;
 	}
 	
 	public Date getCreationDate() {
@@ -156,6 +179,7 @@ public class User {
 		}
 		return res;
 	}
+
 
 	/**
 	 * This private method returns true if the user is currently on a ride, false otherwise.
@@ -247,6 +271,33 @@ public class User {
 		}
 	}
 	
+	public void newRide(Station station, Bicycle bike) throws RuntimeException {
+		if (!this.isOnRide()) {
+			boolean bikeAttachedToStation = false;
+			for (ParkingSlot ps: station.getParkingSlots()) {
+				if (bike.equals(ps.getBicycle()))
+					bikeAttachedToStation = true;
+			}
+			if (!bikeAttachedToStation)
+				throw new NoNewRideException("Wrong bike selection");
+			Ride ride = new Ride(this,bike,station);
+			this.listOfRides.add(ride);
+			System.out.println(this+" has started"
+					+ " a new ride from "+station+".");
+			if (this.plannedRide != null) {
+				if (this.plannedRide.isOngoing()){
+					this.plannedRide.setBicycleType(bike.getType());
+					this.plannedRide.setSuggestedStartStation(station);
+				}
+			}
+				station.incRentCount();
+				station.updateStatus();
+		} 
+		else {
+			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
+		}
+	}
+	
 	/**
 	 * A tentative to implement safe threads for the action of renting a bike.
 	 */
@@ -294,6 +345,12 @@ public class User {
 				station.updateStatus();
 			}
 		}
+	}
+	
+	public Ride getLastRide() {
+		if (this.listOfRides.size() > 0)
+			return this.listOfRides.get(this.listOfRides.size() - 1);
+		return null;
 	}
 	
 	/**
@@ -385,4 +442,10 @@ public class User {
 		// TODO Auto-generated method stub
 		return this.name+" (id."+this.id+")";
 	}
+	
+	private String hashPassword(String password) throws NoSuchAlgorithmException{
+		return PasswordHash.hashPassword(password);
+	}
+	
+	protected static void resetUniqID() {uniqId=0;}
 }

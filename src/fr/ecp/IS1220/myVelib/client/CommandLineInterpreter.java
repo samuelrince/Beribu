@@ -1,12 +1,16 @@
 package fr.ecp.IS1220.myVelib.client;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
+
+import javax.swing.SwingUtilities;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
@@ -46,8 +50,9 @@ public class CommandLineInterpreter {
 		}	
 		case "delete": {
 			if (arguments.length == 1) {
-				if (arguments[0].equalsIgnoreCase("all"))
+				if (arguments[0].equalsIgnoreCase("all")) {
 					MyVelibNetwork.deleteAll();
+				}
 				else
 					System.err.println("Type 'delete all' to delete all the database,"
 							+ " including networks, users and stations.");
@@ -129,6 +134,63 @@ public class CommandLineInterpreter {
 			break;
 		}
 		
+		case "createBackup": {
+			if (arguments.length == 0) {		
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					NetworkBackup.saveNetworkState(network);
+				} catch (NoSuchNetworkExistException e) {
+					System.err.println("Unable to find the current network");
+				} catch (IOException e) {
+					System.err.println("Unable to create backup file");
+				} catch (Exception e) {
+					System.err.println("Unexpected error");
+					e.printStackTrace();
+				}
+				return;
+			}	
+			System.err.println("'createBackup' takes no argument.");
+			break;
+		}
+		
+		case "loadBackup": {
+			if (arguments.length == 1) {		
+				String arg = null;
+				try {
+					arg = parseString(arguments[0]);
+				} catch(ParseException e) {System.err.println("'loadBackup' takes the following "
+						+ "type of argument :"+"\n"+"'<String>'");return;}
+				MyVelibNetwork.deleteAll();
+				arg = "Paris";
+				try {
+					MyVelibNetwork network = NetworkBackup.loadBackup(arg);
+				} catch(IOException i) {
+					System.err.println("Failed to load the backup file");
+				} catch(ClassNotFoundException c) {
+					System.err.println("MyVelibNetwork class not found");
+				} catch(NoSuchBackupExistException b) {
+					System.err.println("The expected backup file (" + arg + ") does not exist");
+				} catch(NoSuchNetworkExistException n) {
+					System.err.println("The expected network backup (" + arg + ") does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					e.printStackTrace();
+				}
+				return;
+			}	
+			System.err.println("'loadBackup' takes 1 argument.");
+			break;
+		}
+		
+		case "listBackup" : {
+			if (arguments.length == 0) {
+				NetworkBackup.display();
+				return;
+			}
+			System.err.println("'createBackup' takes no argument.");
+			break;
+		}
+		
 		case "addUser": {
 			if (arguments.length == 2) {
 				String name = null;
@@ -142,6 +204,23 @@ public class CommandLineInterpreter {
 				try {
 					MyVelibNetwork network = MyVelibNetwork.getInstance();
 					network.newSubscriber(name,subType);
+				}
+				catch(Exception e) {System.err.println(e);}
+				return;
+			}
+			if (arguments.length == 3) {
+				String name = null; 
+				String password = null;
+				String subType = null;
+				try {
+					name = parseString(arguments[0]);
+					password = parseString(arguments[1]);
+					subType = parseString(arguments[2]);
+				} catch(ParseException e) {System.err.println("'addUser' takes the following "
+						+ "types of argument :"+"\n"+"'<String>' '<String>' '<String>'");return;}
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					network.newSubscriber(name, password, subType);
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -357,11 +436,35 @@ public class CommandLineInterpreter {
 			break;
 		}
 		
-		case "displayStation": {
+		case "startStationGUI" : {
 			if (arguments.length == 1) {
 				long stationID = 0;
 				try {
 				stationID = Long.parseLong(arguments[0]);
+				}
+				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
+						+ "types of argument :"+"\n"+"<long>");return;}
+				try {
+					MyVelibNetwork network = MyVelibNetwork.getInstance();
+					Station station = network.station(stationID);
+					SwingUtilities.invokeLater (new Runnable (){public void run () {new StationGUI(network, station);}});
+				} catch(NoSuchStationExistException e) {
+					System.err.println("Station " + stationID + " does not exist");
+				} catch(Exception e) {
+					System.err.println("Unexpected error");
+					System.err.println(e);
+				}
+				return;
+			}
+			System.err.println("'startStationGUI' takes 1 argument.");
+			break;
+		}
+		
+		case "displayStation": {
+			if (arguments.length == 1) {
+				long stationID = 0;
+				try {
+					stationID = Long.parseLong(arguments[0]);
 				}
 				catch (NumberFormatException e) {System.err.println("'displayStation' takes the following "
 						+ "types of argument :"+"\n"+"<long>");return;}
@@ -466,14 +569,26 @@ public class CommandLineInterpreter {
 		
 		case "help": {
 			if (arguments.length == 0) {		
-				System.err.println("\n"+"exit"+"\n"+"setup <velibnetworkName>"+"\n"
+				System.err.println("\n"+"exit"+"\n"
+						+"setup <velibnetworkName>"+"\n"
 						+"setup <velibnetworkName> <nstations> <nslots> <radius> <nbikes>"+"\n"
-						+"addUser <userName> <cardType>"+"\n"+"switch <velibnetworkName>"+"\n"
-						+"time <hour> <min> <sec>"+"\n"+"date <year> <month> <day>"+"\n"+"offline <stationID>"+"\n"
-						+"online <stationID>"+"\n"+"rentBike <userID> <stationID>"+"\n"
-						+"returnBike <userID> <stationID>"+"\n"+"displayStation <stationID>"+"\n"
-						+"displayUser <userID>"+"\n"+"sortStation <sortpolicy>"+"\n"
-						+"display <velibnetworkName>"+"\n"+"runTest <testScenarioN.txt>");
+						+"createBackup"+"\n"
+						+"loadBackup <velibnetworkName>"+"\n"
+						+"loadBackup <networkBackupFileName>"+"\n"
+						+"addUser <userName> <cardType>"+"\n"
+						+"switch <velibnetworkName>"+"\n"
+						+"time <hour> <min> <sec>"+"\n"
+						+"date <year> <month> <day>"+"\n"
+						+"offline <stationID>"+"\n"
+						+"online <stationID>"+"\n"
+						+"rentBike <userID> <stationID>"+"\n"
+						+"returnBike <userID> <stationID>"+"\n"
+						+"displayStation <stationID>"+"\n"
+						+"displayUser <userID>"+"\n"
+						+"sortStation <sortpolicy>"+"\n"
+						+"display <velibnetworkName>"+"\n"
+						+"runTest <testScenarioN.txt>"+"\n"
+						+"startStationGUI <stationID>");
 				return;
 			}
 			System.err.println("'help' takes no argument.");

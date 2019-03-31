@@ -8,7 +8,7 @@ import fr.ecp.IS1220.myVelib.core.exception.BadDurationException;
  * @author Valentin
  *
  */
-public class Duration {
+public class Duration implements java.io.Serializable {
 	//duration in seconds
 	private int duration;
 

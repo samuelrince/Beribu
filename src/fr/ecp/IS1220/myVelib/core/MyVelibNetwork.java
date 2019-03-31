@@ -16,13 +16,17 @@ import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
  * @author Valentin
  *
  */
-public class MyVelibNetwork {
-	private static ArrayList<MyVelibNetwork> listOfNetworks = new ArrayList<MyVelibNetwork>();
-	private static MyVelibNetwork instance = null;
+public class MyVelibNetwork implements java.io.Serializable {
+	/**
+	 * Serial Version UID auto-generated
+	 */
+	private static final long serialVersionUID = 3903645760238322780L;
+	private transient static ArrayList<MyVelibNetwork> listOfNetworks = new ArrayList<MyVelibNetwork>();
+	private transient static MyVelibNetwork instance = null;
 	private String name;
 	private ArrayList<Station> stationDatabase = new ArrayList<Station>();
 	private ArrayList<User> userDatabase = new ArrayList<User>();
-	private BicycleFactory bicycleFactory = new BicycleFactory();
+	private transient BicycleFactory bicycleFactory = new BicycleFactory();
 	
 	/**
 	 * Constructor of class MyVelibNetwork.
@@ -89,8 +93,63 @@ public class MyVelibNetwork {
 	 */
 	public static void deleteAll() {
 		int n = listOfNetworks.size();
-		listOfNetworks = new ArrayList<MyVelibNetwork>();;
+		//listOfNetworks = new ArrayList<MyVelibNetwork>();
+		for (MyVelibNetwork network: listOfNetworks) {
+			network.rideDatabaseReset();
+			network.parkingSlotDatabaseReset();
+			network.userDatabaseReset();
+			network.stationDatabaseReset();
+		}
+		Station.resetUniqID();
+		User.resetUniqID();
+		ParkingSlot.resetUniqID();
+		Bicycle.resetUniqID();
+		Ride.resetUniqID();
+		SystemDate SD = SystemDate.getInstance();
+		SD.delInstance();
+		SD.setDay(1970, 1, 1);
+		SD.setTime(0, 0, 0);
 		System.err.println("The database is clean. "+n+" networks deleted.");
+	}
+	
+	private void networkReset() {
+		this.rideDatabaseReset();
+		this.userDatabaseReset();
+		this.parkingSlotDatabaseReset();
+		this.stationDatabaseReset();
+	}
+	
+	private void rideDatabaseReset() {
+		for (User user: this.userDatabase) {
+			for (Ride ride: user.getListOfRides()) {
+				ride.forceReset();
+				ride = null;
+			}
+		}
+	}
+	
+	private void userDatabaseReset() {
+		for (User user: this.userDatabase) {
+			user = null;
+		}
+		this.userDatabase = null;
+	}
+	
+	private void parkingSlotDatabaseReset() {
+		for (Station station: this.stationDatabase) {
+			for (ParkingSlot ps: station.getParkingSlots()) {
+				ps.forceReset();
+				ps = null;
+			}
+		}
+	}
+	
+	private void stationDatabaseReset() {
+		for (Station station: this.stationDatabase) {
+			station.forceReset();
+			station = null;
+		}
+		this.stationDatabase = null;
 	}
 	
 	/**
@@ -376,12 +435,28 @@ public class MyVelibNetwork {
 	}
 	
 	/**
+	 * Check is a user is already in the database
+	 * @param user	the user to check
+	 * @return	true if the user is already in the database, false otherwise
+	 */
+	private boolean userExistInDatabase(User user) {
+		for (User usr: this.userDatabase) {
+			if (user.equals(usr) || user.getName().equals(usr.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Adds a number of new Standard users to the network.
 	 * @param number number of users
 	 */
 	public void createUsers(int number) {
-		for (int i = 0; i < number; i++)
+		for (int i = 0; i < number; i++) {
+			User u = new User();
 			this.userDatabase.add(new User());
+		}
 	}
 	
 	/**
@@ -414,6 +489,13 @@ public class MyVelibNetwork {
 		this.userDatabase.add(user);
 	}
 	
+	public void newSubscriber(String name, String password, String subType) throws Exception {
+		User user = new User(name, password);
+		if (subType != "Standard")
+			user.subscribe(subType);
+		this.userDatabase.add(user);
+	}
+	
 	/**
 	 * Adds a new named user with the specified type of subscription and a localization to
 	 * the network.
@@ -434,7 +516,8 @@ public class MyVelibNetwork {
 	 * @param user user to add
 	 */
 	public void addUser(User user) {
-		this.userDatabase.add(user);
+		if (!userExistInDatabase(user))
+			this.userDatabase.add(user);
 	}
 	
 	/**
@@ -481,12 +564,21 @@ public class MyVelibNetwork {
 				+this.name+".");
 	}
 	
+	public User userAuth(String name, String passHash) {
+		for (User user: this.userDatabase) {
+			if (name.equals(user.getName()) && passHash.equals(user.getPasswordHash())) {
+				return user;
+			}
+		}
+		throw new NoSuchUserExistException("The combination of username and password does not exist");
+	}
+	
 	/**
 	 * 
 	 * @param index ID of the station
 	 * @return the station with specified ID in the network station data base
 	 */
-	public Station station(long stationID) {
+	public Station station(long stationID) throws NoSuchStationExistException {
 		for (Station station:this.stationDatabase) {
 			if (station.getId() == stationID)
 				return station;

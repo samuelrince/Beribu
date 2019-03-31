@@ -123,5 +123,9 @@ public class Scenario1c {
 		System.out.println(" == Stations sorted by least occupied == ");
 		System.out.println(stations);
 		System.out.println();
+		
+		NetworkBackup.saveNetworkState(network);
+		NetworkBackup.display();
+		NetworkBackup.loadBackup("Network_Paris_2019-2-17_10-56-3.ser");
 	}
 }

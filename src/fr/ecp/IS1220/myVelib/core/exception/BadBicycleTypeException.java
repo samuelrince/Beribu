@@ -1,5 +1,10 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when a wrong type of bicycle is called
+ * @author Samuel
+ *
+ */
 public class BadBicycleTypeException extends IllegalArgumentException {
 	
 	/**

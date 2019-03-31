@@ -1,5 +1,10 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when a new ride cannot be instantiated 
+ * @author Samuel
+ *
+ */
 public class NoNewRideException extends RuntimeException {
 
 	/**

@@ -10,7 +10,7 @@ import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
  * @author Valentin
  *
  */
-public class Date {
+public class Date implements java.io.Serializable {
 	private Integer year = null;
 	private Integer month = null;
 	private Integer day = null;
@@ -37,7 +37,7 @@ public class Date {
 	 * @param second	represent the second
 	 */
 	public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second) {
-		this.currentDate();
+		//this.currentDate();
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -151,37 +151,37 @@ public class Date {
 	 */
 	public boolean isAfter(Date otherDate) {
 		if (this.year != otherDate.year) {
-			if (this.year < otherDate.year)
+			if (this.year <= otherDate.year)
 				return false;
 			if (this.year > otherDate.year)
 				return true;
 		}
 		if (this.month != otherDate.month) {
-			if (this.month < otherDate.month)
+			if (this.month <= otherDate.month)
 				return false;
 			if (this.month > otherDate.month)
 				return true;
 		}
 		if (this.day != otherDate.day) {
-			if (this.day < otherDate.day)
+			if (this.day <= otherDate.day)
 				return false;
 			if (this.day > otherDate.day)
 				return true;
 		}
 		if (this.hour != otherDate.hour) {
-			if (this.hour < otherDate.hour)
+			if (this.hour <= otherDate.hour)
 				return false;
 			if (this.hour > otherDate.hour)
 				return true;
 		}
 		if (this.minute != otherDate.minute) {
-			if (this.minute < otherDate.minute)
+			if (this.minute <= otherDate.minute)
 				return false;
 			if (this.minute > otherDate.minute)
 				return true;
 		}
 		if (this.second != otherDate.second) {
-			if (this.second < otherDate.second)
+			if (this.second <= otherDate.second)
 				return false;
 			if (this.second > otherDate.second)
 				return true;

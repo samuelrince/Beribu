@@ -8,6 +8,7 @@ import fr.ecp.IS1220.myVelib.core.exception.BadCardTypeException;
  *
  */
 public class CardFactory {
+	public static final String[] types = {"Standard", "VLibre", "VMax"};
 
 	public Card newCard(String type, User user) {
 		if (type.equalsIgnoreCase("standard"))

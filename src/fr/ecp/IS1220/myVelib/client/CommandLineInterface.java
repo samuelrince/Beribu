@@ -25,9 +25,9 @@ public class CommandLineInterface {
 			for(int i = 0; i < chars.length; i++){
 				char c = chars[i];
 				if(!(c>=65 && c<=90)&&!(c>=97 && c<=122) && !(c>=48 && c<=57) && !(c==39) && !(c==46)
-						&& !(c==45)) {
+						&& !(c==45) && !(c==95)) {
 					System.err.println("Invalid characters. Only letters of the "
-							+ "alphabet, numbers, ., -, and string delimitors ' are accepted.");
+							+ "alphabet, numbers, ., -, _, and string delimitors ' are accepted.");
 					return false;
 				}
 				if ((c==39 && !(i==0 || i==chars.length-1))
@@ -87,19 +87,32 @@ public class CommandLineInterface {
 		// Initialization
 		SystemDate SD = SystemDate.getInstance();
 		TextFileInterpreter.textFileInterpreter("my_velib.ini");
+		try {
+			NetworkBackup.scanBackup();
+		} catch(Exception e) {
+			System.err.println("No backup loaded");
+		}
+		
 		
 		System.out.println("Welcome to the MyVelib command line user interface."+"\n"+"Type 'help'"
 				+ " for a list of commands, or start entering your command lines now!");
 		
+		System.err.println("No network loaded. \n"
+				+ "Please setup a network usign one of the following commands: \n"
+				+ "- setup 'Paris' 					(to setup a default network) \n"
+				+ "- runTest testScenario1.txt 				(to setup a network based on a scenario)\n"
+				+ "- loadBackup 'Paris' or loadBackup '<fileName>'		(to setup a network based on a backup)");
+		
+	
 		Scanner scan = new Scanner(System.in);
 		String line;
 		// defining the words delimiters for splitting fileContent into words
 	    String delims = " ";
-	   
+		
 	    do {
 	    	System.out.print(">");
 	    	line = scan.nextLine();
-
+	    	
 	    	String[] tokens = line.split(delims);
 	    	if (!check(tokens))
 	    		continue;
@@ -110,13 +123,15 @@ public class CommandLineInterface {
 	    		System.err.println("Invalid use of '.Use ' to delimitate String arguments."
 	    				+"\n"+"Put a space between each argument and no space inside ' '.");
 	    		continue;
-	    		}
+	    	}
 	    	/*
 	    	for (int i = 0; i <tokens.length; i++)
 	    		System.out.println(tokens[i]);
 	    	 */
+	    	
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
+	   
 	}
 	
 }

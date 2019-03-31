@@ -5,7 +5,7 @@ package fr.ecp.IS1220.myVelib.core;
  * @author Valentin
  *
  */
-public class Vlibre implements Card{
+public class Vlibre implements Card, java.io.Serializable {
 	private User user;
 	private Date creationDate;
 	private String type = "Vlibre";

@@ -5,7 +5,7 @@ package fr.ecp.IS1220.myVelib.core;
  * @author Valentin
  *
  */
-public class Ride {
+public class Ride implements java.io.Serializable {
 	private static long uniqId;
 	private long id;
 	private User user;
@@ -160,4 +160,8 @@ public class Ride {
 	public String toString() {
 		return "Ride [" + id + "], of " + user.getName() + " on bike N°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {this.bicycle = null; this.endStation = null; this.endStation = null; this.user = null;}
 }

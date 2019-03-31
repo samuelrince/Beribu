@@ -9,7 +9,7 @@ import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
  * @author Valentin
  *
  */
-public class ParkingSlot {
+public class ParkingSlot implements java.io.Serializable {
 	private static long uniqId;
 	private long id;
 	private Bicycle bicycle = null;
@@ -55,7 +55,7 @@ public class ParkingSlot {
 	 */
 	public void attachBicycle(Bicycle bicycle) throws RuntimeException,
 	IllegalArgumentException {
-		if (this.isBicycle()) {
+		if (this.hasBicycle()) {
 			throw new SuchParkingSlotHasBicycleException("This parking slot already holds a bicycle.");
 		}
 		if (this.isOffline) {
@@ -77,7 +77,7 @@ public class ParkingSlot {
 	 * @throws RuntimeException when the parking slot state is not valid
 	 */
 	public void detachBicycle() throws RuntimeException {
-		if (!this.isBicycle()) {
+		if (!this.hasBicycle()) {
 			throw new SuchParkingSlotHasBicycleException("This parking slot holds on bicycle.");
 		}
 		if (this.isOffline) {
@@ -121,7 +121,7 @@ public class ParkingSlot {
 	 * 
 	 * @return true if a bicycle is attached to the parking slot, false otherwise
 	 */
-	public boolean isBicycle() {
+	public boolean hasBicycle() {
 		if (this.getBicycle() != null) {
 			return true;
 		}
@@ -129,5 +129,9 @@ public class ParkingSlot {
 			return false;
 		}
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {this.bicycle = null;this.station = null;}
 	
 }

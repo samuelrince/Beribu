@@ -1,5 +1,10 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when a station does not exist
+ * @author Samuel
+ *
+ */
 public class NoSuchStationExistException extends RuntimeException {
 	
 	/**
