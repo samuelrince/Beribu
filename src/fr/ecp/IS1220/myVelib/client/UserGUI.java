@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.JOptionPane;
+
 import fr.ecp.IS1220.myVelib.core.*;
 
 public class UserGUI extends JFrame {
@@ -62,23 +62,26 @@ public class UserGUI extends JFrame {
 	private JTextArea historyTxt = new JTextArea();
 	private JScrollPane historyScrollPan = new JScrollPane(historyTxt);
 	
-	private JTextField sourceLatTxt = new JTextField(1);
-	private JTextField sourceLongTxt = new JTextField(1);
-	private JTextField destLatTxt = new JTextField(1);
-	private JTextField destLongTxt = new JTextField(1);
+	private JTextField sourceLatTxt = new JTextField();
+	private JTextField sourceLongTxt = new JTextField();
+	private JTextField destLatTxt = new JTextField();
+	private JTextField destLongTxt = new JTextField();
 
 
 	public UserGUI(User user){
 		super("MyVelibApp v.1.0 - welcome"+user.getName()+"!");
 		this.user = user;
-
+		
+		
 		this.setSize(500, 300);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2,0);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
-		int margin = 30;
+		int margin = 50;
 		int height = (int)this.getSize().getHeight();
     	int width = (int)this.getSize().getWidth();
     	int length = Math.min(height, width)-margin;
@@ -103,6 +106,7 @@ public class UserGUI extends JFrame {
 		planRidePan.setBackground(Color.CYAN);  
 		newRidePan.setBackground(Color.CYAN); 
 		home.setLayout(new BorderLayout(3,3));
+		newRidePan.setLayout(new BoxLayout(newRidePan, BoxLayout.PAGE_AXIS));
 		historyScrollPan.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		alertBtn.addActionListener(new alertBtnListener());
@@ -126,7 +130,9 @@ public class UserGUI extends JFrame {
 		bgYellowMenuItem.addActionListener(new bgColorMenuItemListener());
 		bgCyanMenuItem.addActionListener(new bgColorMenuItemListener());
 		bgGreyMenuItem.addActionListener(new bgColorMenuItemListener());
+		helpMenuItem.addActionListener(new helpMenuItemListener());
 		fbMenuItem.addActionListener(new fbMenuItemListener());
+		passwordMenuItem.addActionListener(new passwordMenuItemListener());
 		GPSauthorCheckBox.addActionListener(new GPSauthorActionListener());
 		
 		home.add(alertBtn, BorderLayout.NORTH);
@@ -134,6 +140,11 @@ public class UserGUI extends JFrame {
 		home.add(planRideBtn, BorderLayout.CENTER);
 		home.add(statBtn, BorderLayout.EAST);
 		home.add(subBtn, BorderLayout.WEST);
+		backBtn1.setHorizontalAlignment(SwingConstants.LEFT);
+		backBtn2.setHorizontalAlignment(SwingConstants.LEFT);
+		backBtn3.setHorizontalAlignment(SwingConstants.LEFT);
+		backBtn4.setHorizontalAlignment(SwingConstants.LEFT);
+		backBtn5.setHorizontalAlignment(SwingConstants.LEFT);
 		planRidePan.add(backBtn1);
 		statPan.add(backBtn2);
 		subPan.add(backBtn3);
@@ -150,7 +161,18 @@ public class UserGUI extends JFrame {
 		subPan.add(standardBtn);
 		subPan.add(vlibreBtn);
 		subPan.add(vmaxBtn);
+		
+		//
+		newRidePan.add(myPositionCheckBox);
+		newRidePan.add(sourceLatTxt);
+		newRidePan.add(sourceLongTxt);
+		newRidePan.add(destLatTxt);
+		newRidePan.add(destLongTxt);
+		newRidePan.add(bikeTypeComboBox);
+		newRidePan.add(pathStratComboBox);
 		newRidePan.add(confirmRideBtn);
+		
+		//
 		
 		bgColorMenu.add(bgYellowMenuItem);
 		bgColorMenu.add(bgCyanMenuItem);
@@ -169,28 +191,17 @@ public class UserGUI extends JFrame {
 		statPan.add(statTxt);
 		travelTxt.setEditable(false);
 		planRidePan.add(travelTxt);
-		sourceLatTxt.setBorder(BorderFactory.createLineBorder(Color.black));
-		newRidePan.add(sourceLatTxt);
-		sourceLongTxt.setBorder(BorderFactory.createLineBorder(Color.black));
-		newRidePan.add(sourceLongTxt);
-		destLatTxt.setBorder(BorderFactory.createLineBorder(Color.black));
-		newRidePan.add(destLatTxt);
-		destLongTxt.setBorder(BorderFactory.createLineBorder(Color.black));
-		newRidePan.add(destLongTxt);
 		historyTxt.setEditable(false);
 		
 		bikeTypeComboBox.addItem("-bicycle type-");
 		bikeTypeComboBox.addItem("Mechanical");
 		bikeTypeComboBox.addItem("Electrical");
-		newRidePan.add(bikeTypeComboBox);
 		pathStratComboBox.addItem("-path strategy-");
 		pathStratComboBox.addItem("Minimal walking");
 		pathStratComboBox.addItem("Fastest path");
 		pathStratComboBox.addItem("Prefer Plus");
 		pathStratComboBox.addItem("Avoid Plus");
 		pathStratComboBox.addItem("Preserve distribution");
-		newRidePan.add(pathStratComboBox);
-		newRidePan.add(myPositionCheckBox);
 		
 		newRidePan.setVisible(false);
 		planRidePan.add(newRidePan);
@@ -217,6 +228,7 @@ public class UserGUI extends JFrame {
 	    public void actionPerformed(ActionEvent e) { 
 			UserGUI.this.setVisible(false);
 			UserGUI.this.setContentPane(planPanneau);
+			planPanneau.setAlignmentX(CENTER_ALIGNMENT);
 			UserGUI.this.setVisible(true);
 	    }
 	  }
@@ -247,10 +259,10 @@ public class UserGUI extends JFrame {
 			sourceLongTxt.setBorder(BorderFactory.createLineBorder(Color.black));
 			destLatTxt.setBorder(BorderFactory.createLineBorder(Color.black));
 			destLongTxt.setBorder(BorderFactory.createLineBorder(Color.black));
-			sourceLatTxt.setText("");
-			sourceLongTxt.setText("");
-			destLatTxt.setText("");
-			destLongTxt.setText("");
+			sourceLatTxt.setText("-source Latitude-");
+			sourceLongTxt.setText("-source Longitude-");
+			destLatTxt.setText("-destination Latitude-");
+			destLongTxt.setText("-destination Longitude-");
 			bikeTypeComboBox.setSelectedIndex(0);
 			pathStratComboBox.setSelectedIndex(0);
 			if (user.getPlannedRide() != null ) {
@@ -260,6 +272,8 @@ public class UserGUI extends JFrame {
 						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.WARNING_MESSAGE);
 				if(option == JOptionPane.YES_OPTION){
+					startBtn.setEnabled(false);
+					discardBtn.setEnabled(false);
 					user.discardPlannedRide();
 					travelTxt.setText("No ride planned for the moment.");
 					newRidePan.setVisible(true);
@@ -446,13 +460,58 @@ public class UserGUI extends JFrame {
 	    }
 	  }
 	
-	class GPSauthorActionListener implements ActionListener{
+	class GPSauthorActionListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) { 
 	    	if (GPSauthorCheckBox.isSelected())
 	    		GPSauthor = true;
 	    	else
 	    		GPSauthor = false;
 	    }
+	}
+
+	class passwordMenuItemListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) { 
+			JPanel panel = new JPanel();
+			JPanel panel1 = new JPanel();
+			JPanel panel2 = new JPanel();
+			panel.setLayout(new BoxLayout(panel,BoxLayout.PAGE_AXIS));
+			panel1.setLayout(new BoxLayout(panel1,BoxLayout.LINE_AXIS));
+			panel2.setLayout(new BoxLayout(panel2,BoxLayout.LINE_AXIS));
+			JLabel label1 = new JLabel("Enter a new password:");
+			JPasswordField pass1 = new JPasswordField(10);
+			JLabel label2 = new JLabel("Confirm new password:");
+			JPasswordField pass2 = new JPasswordField(10);
+			panel1.add(label1);
+			panel1.add(pass1);
+			panel2.add(label2);
+			panel2.add(pass2);
+			panel.add(panel1);
+			panel.add(panel2);
+			String[] options = new String[]{"OK", "Cancel"};
+			int option = JOptionPane.showOptionDialog(null, panel, "New password",
+					JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+					null, options, options[1]);
+			if(option == 0) {
+				char[] password1 = pass1.getPassword();
+				char[] password2 = pass2.getPassword();
+				if (!password1.equals(password2)) {
+					 JOptionPane.showMessageDialog(null, "Passwords don't match.", "Passwords don't match", JOptionPane.WARNING_MESSAGE);
+					 return;
+				}
+				if (password1.length<5) {
+					 JOptionPane.showMessageDialog(null, "Your password should be at least 5 characters long.", "Password too short", JOptionPane.WARNING_MESSAGE);
+					 return;
+				}
+				user.setPasswordHash(new String(password1));
+				JOptionPane.showMessageDialog(null, "Your password has been sucessfully changed.", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+
+	class helpMenuItemListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			 JOptionPane.showMessageDialog(null, "Looking for help? \nSend an e-mail to samuel.rince@student.ecp.fr or valentin.vierge@student.ecp.fr.", "Help", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	class bgColorMenuItemListener implements ActionListener {
@@ -483,7 +542,7 @@ public class UserGUI extends JFrame {
 			 JOptionPane.showMessageDialog(null, "Thank you for your feedback!", "Thank you", JOptionPane.INFORMATION_MESSAGE,img);
 		}
 	}
-
+	
 
 	public static void main(final String[] args) throws Exception{
 		SystemDate SD = SystemDate.getInstance();

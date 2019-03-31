@@ -426,7 +426,9 @@ public class CommandLineInterpreter {
 						+ "types of argument :"+"\n"+"<long> <long>");return;}
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				network.user(userID).endCurrentRide(network.station(stationID));;
+				network.user(userID).endCurrentRide(network.station(stationID));
+				System.out.println(network.user(userID).getListOfRides().get(
+						network.user(userID).getListOfRides().size()-1));
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
