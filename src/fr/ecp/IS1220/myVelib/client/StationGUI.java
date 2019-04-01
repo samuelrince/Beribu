@@ -52,7 +52,7 @@ public class StationGUI extends JFrame {
 		this.station = station;
 		this.network = network;
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setSize(400, 400);
+	    this.setSize(400, 300);
 	    this.setLocationRelativeTo(null);
 
 	    /*
