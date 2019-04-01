@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import fr.ecp.IS1220.myVelib.core.*;
 
-public class Scenario1c {
+public class Scenario1 {
 
 	public static void main(String[] args) throws RuntimeException, Exception {
 		//Creation of an instance of SystemDate.
@@ -123,11 +123,5 @@ public class Scenario1c {
 		System.out.println(" == Stations sorted by least occupied == ");
 		System.out.println(stations);
 		System.out.println();
-		
-		NetworkBackup.saveNetworkState(network);
-		NetworkBackup.display();
-		//MyVelibNetwork.deleteAll();
-		//NetworkBackup.loadBackup("Network_Paris_2019-2-17_10-56-3.ser");
-		NetworkBackup.loadBackup("Paris");
 	}
 }

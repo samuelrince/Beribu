@@ -12,6 +12,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchUserAlreadyExistException;
 
 public class StationGUI extends JFrame {
 	/**
@@ -28,7 +29,7 @@ public class StationGUI extends JFrame {
 	public JPasswordField passTF = new JPasswordField();
 	
 	// New Ride
-	public JPanel stationNewRidePanel = new JPanel();
+	public JPanel ridePanel = new JPanel();
 	public JComboBox<Bicycle> bicycleComboBox = new JComboBox<Bicycle>();
 	
 	// Create an account
@@ -140,12 +141,12 @@ public class StationGUI extends JFrame {
 	    c4.add(startBTN);
 	    
 	    //Add to StationNewRidePanel
-	    stationNewRidePanel.setLayout(new BoxLayout(stationNewRidePanel, BoxLayout.PAGE_AXIS));
-	    stationNewRidePanel.add(c1);
-	    stationNewRidePanel.add(c2);
-	    stationNewRidePanel.add(c3);
-	    stationNewRidePanel.add(c4);
-	    stationNewRidePanel.setMinimumSize(new Dimension(200, 200));
+	    ridePanel.setLayout(new BoxLayout(ridePanel, BoxLayout.PAGE_AXIS));
+	    ridePanel.add(c1);
+	    ridePanel.add(c2);
+	    ridePanel.add(c3);
+	    ridePanel.add(c4);
+	    ridePanel.setMinimumSize(new Dimension(200, 200));
 	    
 	    
 	    /*
@@ -289,7 +290,7 @@ public class StationGUI extends JFrame {
 				if (user.isOnRide()) {
 					StationGUI.this.setContentPane(StationGUI.this.dropPanel);
 				} else {
-					StationGUI.this.setContentPane(StationGUI.this.stationNewRidePanel);
+					StationGUI.this.setContentPane(StationGUI.this.ridePanel);
 				}
 				StationGUI.this.setVisible(true);
 				System.out.println("User logged in");
@@ -349,6 +350,8 @@ public class StationGUI extends JFrame {
 			if (!name.isEmpty() && pass.equals(passConf) && !cardType.isEmpty()) {
 				try {
 					network.newSubscriber(name, pass, cardType);
+				} catch (SuchUserAlreadyExistException a) {
+					System.err.println("This user name already exist, please try another one");
 				} catch (Exception e1) {
 					System.err.println("Failed to create new user");
 					MyJDialog dialog = new MyJDialog(new JFrame(), "", "An error occured please try again");

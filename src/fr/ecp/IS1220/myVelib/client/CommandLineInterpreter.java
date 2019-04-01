@@ -10,10 +10,14 @@ import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseExceptio
 
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
+import fr.ecp.IS1220.myVelib.core.exception.NoBicycleAvailableException;
+import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchUserAlreadyExistException;
 
 public class CommandLineInterpreter {
 
@@ -42,7 +46,7 @@ public class CommandLineInterpreter {
 		}
 		case "currentSD": {
 			if (arguments.length == 0) {
-				System.out.println(SystemDate.getInstance());
+				System.out.println(SystemDate.getInstance().toString());
 				return;
 			}
 			System.err.println("'currentSD' takes no argument.");
@@ -203,6 +207,8 @@ public class CommandLineInterpreter {
 				try {
 					MyVelibNetwork network = MyVelibNetwork.getInstance();
 					network.newSubscriber(name,subType);
+				} catch (SuchUserAlreadyExistException a) {
+					System.err.println("This user name already exist, please try another one");
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -220,6 +226,8 @@ public class CommandLineInterpreter {
 				try {
 					MyVelibNetwork network = MyVelibNetwork.getInstance();
 					network.newSubscriber(name, password, subType);
+				} catch (SuchUserAlreadyExistException a) {
+					System.err.println("This user name already exist, please try another one");
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -259,7 +267,7 @@ public class CommandLineInterpreter {
 				try {
 					SD.setDay(year, month, day);
 				} catch(BadDateException e) {
-					System.err.println(e.getMessage());
+					System.err.println(e.getMessage() + "From CLUI");
 				} catch(Exception e) {
 					System.err.println(e.getMessage() + "from" + e.getClass());
 				}
@@ -386,6 +394,14 @@ public class CommandLineInterpreter {
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
 				network.user(userID).newRide(network.station(stationID));;
+				} catch (NoSuchStationExistException n) {
+					System.err.println("The station " + stationID + " does not exist");
+				} catch (SuchStationIsOfflineException o) {
+					System.err.println("The station " + stationID + " is offline");
+				} catch(NoBicycleAvailableException b) {
+					System.err.println("The station " + stationID + " does not have any bike");
+				} catch(NoNewRideException r) {
+					System.err.println("User " + userID + " is already on a ride");
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -406,6 +422,14 @@ public class CommandLineInterpreter {
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
 				network.user(userID).newRide(network.station(stationID),bicycleType);;
+				} catch (NoSuchStationExistException n) {
+					System.err.println("The station " + stationID + " does not exist");
+				} catch (SuchStationIsOfflineException o) {
+					System.err.println("The station " + stationID + " is offline");
+				} catch(NoBicycleAvailableException b) {
+					System.err.println("The station " + stationID + " does not have any bike of type " + bicycleType);
+				} catch(NoNewRideException r) {
+					System.err.println("User " + userID + " is already on a ride");
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -426,9 +450,13 @@ public class CommandLineInterpreter {
 						+ "types of argument :"+"\n"+"<long> <long>");return;}
 				try {
 				MyVelibNetwork network = MyVelibNetwork.getInstance();
-				network.user(userID).endCurrentRide(network.station(stationID));
-				System.out.println(network.user(userID).getListOfRides().get(
-						network.user(userID).getListOfRides().size()-1));
+				network.user(userID).endCurrentRide(network.station(stationID));;
+				} catch (SuchStationIsFullException f) {
+					System.err.println("The station " + stationID + " is full" );
+				} catch (NoSuchStationExistException n) {
+					System.err.println("The station " + stationID + " does not exist");
+				} catch (SuchStationIsOfflineException o) {
+					System.err.println("The station " + stationID + " is offline");
 				}
 				catch(Exception e) {System.err.println(e);}
 				return;
@@ -602,12 +630,14 @@ public class CommandLineInterpreter {
 						+"loadBackup <velibnetworkName>"+"\n"
 						+"loadBackup <networkBackupFileName>"+"\n"
 						+"addUser <userName> <cardType>"+"\n"
+						+"addUser <userName> <password> <cardType>"+"\n"
 						+"switch <velibnetworkName>"+"\n"
 						+"time <hour> <min> <sec>"+"\n"
 						+"date <year> <month> <day>"+"\n"
 						+"offline <stationID>"+"\n"
 						+"online <stationID>"+"\n"
 						+"rentBike <userID> <stationID>"+"\n"
+						+"rentBike <userID> <stationID> <bicycleType>"+"\n"
 						+"returnBike <userID> <stationID>"+"\n"
 						+"displayStation <stationID>"+"\n"
 						+"displayUser <userID>"+"\n"
