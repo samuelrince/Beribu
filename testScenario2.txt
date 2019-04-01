@@ -57,3 +57,5 @@ displayStation 9
 displayStation 1
 displayUser 0
 displayUser 2
+sortStation 'least occupied'
+sortStation 'most used'
