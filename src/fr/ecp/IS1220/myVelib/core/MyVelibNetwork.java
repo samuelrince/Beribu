@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchUserAlreadyExistException;
 
 /**
  * This class represents a MyVelib network. It is a singleton.
@@ -448,7 +449,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	 */
 	private boolean userExistInDatabase(User user) {
 		for (User usr: this.userDatabase) {
-			if (user.equals(usr) || user.getName().equals(usr.getName())) {
+			if (user.getName().equals(usr.getName())) {
 				return true;
 			}
 		}
@@ -462,7 +463,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 	public void createUsers(int number) {
 		for (int i = 0; i < number; i++) {
 			User u = new User();
-			this.userDatabase.add(new User());
+			this.addUser(new User());
 		}
 	}
 	
@@ -478,7 +479,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 			User user = new User();
 			if (subType != "Standard")
 				user.subscribe(subType);
-			this.userDatabase.add(user);
+			this.addUser(user);
 		}
 	}
 	
@@ -493,14 +494,14 @@ public class MyVelibNetwork implements java.io.Serializable {
 		User user = new User(name);
 		if (subType != "Standard")
 			user.subscribe(subType);
-		this.userDatabase.add(user);
+		this.addUser(user);
 	}
 	
 	public void newSubscriber(String name, String password, String subType) throws Exception {
 		User user = new User(name, password);
 		if (subType != "Standard")
 			user.subscribe(subType);
-		this.userDatabase.add(user);
+		this.addUser(user);
 	}
 	
 	/**
@@ -515,16 +516,19 @@ public class MyVelibNetwork implements java.io.Serializable {
 		User user = new User(name,loc);
 		if (subType != "Standard")
 			user.subscribe(subType);
-		this.userDatabase.add(user);
+		this.addUser(user);
 	}
 	
 	/**
 	 * Adds a given user to the network.
 	 * @param user user to add
 	 */
-	public void addUser(User user) {
-		if (!userExistInDatabase(user))
+	public void addUser(User user) throws SuchUserAlreadyExistException {
+		if (!userExistInDatabase(user)) {
 			this.userDatabase.add(user);
+			return;
+		}
+		throw new SuchUserAlreadyExistException("This user already exist in the database");
 	}
 	
 	/**

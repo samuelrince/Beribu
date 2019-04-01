@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
 
 /**
  * This class represents a user.
@@ -232,6 +233,9 @@ public class User implements java.io.Serializable {
 	 */
 	public void newRide(Station station) throws RuntimeException {
 		if (!this.isOnRide()) {
+			if (station.isOffline()) {
+				throw new SuchStationIsOfflineException("The station is offline");
+			}
 			Bicycle bicycle = station.getBicycle();
 			Ride ride = new Ride(this,bicycle,station);
 			this.listOfRides.add(ride);
@@ -354,7 +358,7 @@ public class User implements java.io.Serializable {
 	 */
 	public void endCurrentRide(Station station) throws Exception {
 		if (station.isFull())
-			throw new IllegalArgumentException("This station is full.");
+			throw new SuchStationIsFullException("The station is full.");
 		else {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
