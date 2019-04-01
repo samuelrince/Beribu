@@ -52,3 +52,8 @@ time 20 01 00
 rentBike 2 7
 time 23 00 00
 returnBike 2 1
+displayStation 4
+displayStation 9
+displayStation 1
+displayUser 0
+displayUser 2
