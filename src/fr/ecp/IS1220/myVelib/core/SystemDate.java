@@ -52,6 +52,9 @@ public class SystemDate {
 		this.year = year;
 		this.month = month;
 		this.day = day;
+		this.hour = new Integer(0);
+		this.minute = new Integer(0);
+		this.second = new Integer(0);
 		if (!this.isValid())
 			throw new BadDateException("The SystemDate is not valid.");
 		System.out.println("Current System day has been set to "+day+"/"

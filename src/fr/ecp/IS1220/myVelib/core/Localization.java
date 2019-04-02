@@ -244,6 +244,7 @@ public class Localization implements java.io.Serializable {
 	/**
 	 * Acts exactly as randomLocInCircle.generate(this,radius).
 	 * @param radius the radius of the circular area
+	 * @return A localization
 	 */
 	public Localization generateLocInRadius(double radius) throws IllegalArgumentException {
 		if (radius < 0) {

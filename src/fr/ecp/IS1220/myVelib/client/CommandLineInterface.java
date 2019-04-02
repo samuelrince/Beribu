@@ -79,7 +79,7 @@ public class CommandLineInterface {
 	
 	public static void main(String[] args) {
 		// Initialization
-		SystemDate SD = SystemDate.getInstance();
+		SystemDate SD 	 = SystemDate.getInstance();
 		TextFileInterpreter.textFileInterpreter("my_velib.ini");
 		System.err.println("The 'Default' network has been loaded.");
 		try {
