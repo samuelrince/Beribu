@@ -1,7 +1,7 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
- * This Exception occurs when a duration is not valid
+ * This Exception occurs when a duration is not valid.
  * @author Samuel
  *
  */

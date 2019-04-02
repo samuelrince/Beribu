@@ -1,7 +1,7 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
- * This Exception occurs when a parking slot is offline
+ * This Exception occurs when a parking slot is offline.
  * @author Samuel
  *
  */

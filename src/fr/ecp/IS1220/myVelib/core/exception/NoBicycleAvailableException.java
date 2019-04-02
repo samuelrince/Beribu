@@ -1,7 +1,7 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
- * This Exception occurs when there is no bicycle available
+ * This Exception occurs when there is no bicycle available.
  * @author Samuel
  *
  */

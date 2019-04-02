@@ -1,0 +1,7 @@
+delete all
+setup 'Paris' 2 0 1 'square' 48 2 10 40 100 0
+addUser 'Bob' 'vlibre'
+addUser 'Jane' 'vlibre'
+locateUser 0 47.9999999999 1.9999999999
+display 'Paris'
+startUserGUI 0

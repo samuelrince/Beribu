@@ -1,7 +1,7 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
- * This Exception occurs when a wrong type of bicycle is called
+ * This Exception occurs when the type of bicycle called does not exist.
  * @author Samuel
  *
  */

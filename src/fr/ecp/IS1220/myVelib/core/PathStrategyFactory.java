@@ -1,5 +1,7 @@
 package fr.ecp.IS1220.myVelib.core;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadPathStrategyException;
+
 /**
  * A path strategy factory
  * @author Valentin
@@ -20,7 +22,7 @@ public class PathStrategyFactory {
 			return new PreserveDistribution();
 		
 		else
-			throw new IllegalArgumentException("No such path strategy. The accepted path strategies "
+			throw new BadPathStrategyException("No such path strategy. The accepted path strategies "
 					+ "are 'minimal walking', 'fastest path', 'prefer plus', "
 					+ "'avoid plus' and 'preserve distribution'.");
 	}

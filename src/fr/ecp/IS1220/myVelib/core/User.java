@@ -23,7 +23,7 @@ public class User implements java.io.Serializable {
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
 	private Travel plannedRide;
-	public transient MsgBox msgBox = new MsgBox(this);
+	private transient MsgBox msgBox = new MsgBox(this);
 	
 	/**
 	 * Constructor of User class.
@@ -234,7 +234,7 @@ public class User implements java.io.Serializable {
 			if (this.plannedRide != null) {
 				if (this.plannedRide.isOngoing()){
 					this.plannedRide.setBicycleType(bicycle.getType());
-					this.plannedRide.setSuggestedStartStation(station);
+					this.plannedRide.setStartStation(station);
 				}
 			}
 			station.incRentCount();
@@ -272,7 +272,7 @@ public class User implements java.io.Serializable {
 			if (this.plannedRide != null) {
 				if (this.plannedRide.isOngoing()){
 					this.plannedRide.setBicycleType(bicycle.getType());
-					this.plannedRide.setSuggestedStartStation(station);
+					this.plannedRide.setStartStation(station);
 				}
 			}
 				station.incRentCount();
@@ -299,7 +299,7 @@ public class User implements java.io.Serializable {
 			if (this.plannedRide != null) {
 				if (this.plannedRide.isOngoing()){
 					this.plannedRide.setBicycleType(bike.getType());
-					this.plannedRide.setSuggestedStartStation(station);
+					this.plannedRide.setStartStation(station);
 				}
 			}
 				station.incRentCount();
@@ -309,24 +309,7 @@ public class User implements java.io.Serializable {
 			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
-	
-	/**
-	 * A tentative to implement safe threads for the action of renting a bike.
-	 */
-	public void rentBike(Station station) {
-		BikeRental br = new BikeRental(this,station);
-		br.start();
-	}
-	
-	/**
-	 * A tentative to implement safe threads for the action of renting a bike.
-	 */
-	public void rentBike(Station station, String bicycleType) {
-		BikeRental br = new BikeRental(this,station,bicycleType);
-		br.start();
-	}
 
-	
 	/**
 	 * This method returns the current (not finished) ride of a user if it exists.
 	 * @return Ride		Ride object or <b>null</b> if not current ride
@@ -431,8 +414,12 @@ public class User implements java.io.Serializable {
 	
 	public void discardPlannedRide() {
 		if (this.plannedRide != null) {
-			this.plannedRide.suggestedStartStation.removeTargetOf(this.plannedRide);
-			this.plannedRide.suggestedEndStation.removeTargetOf(this.plannedRide);
+			if (this.plannedRide.getSuggestedStartStation() != null)
+				this.plannedRide.getSuggestedStartStation().removeTargetOf(this.plannedRide);
+			if (this.plannedRide.getSuggestedEndStation() != null)
+				this.plannedRide.getSuggestedEndStation().removeTargetOf(this.plannedRide);
+			if (this.plannedRide.getObserver() != null)
+				this.plannedRide.removeObserver();
 			this.plannedRide = null;
 			System.out.println(this+"has discarded their planned ride.");
 		}

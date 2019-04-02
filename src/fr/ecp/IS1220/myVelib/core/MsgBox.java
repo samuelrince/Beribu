@@ -2,11 +2,18 @@ package fr.ecp.IS1220.myVelib.core;
 
 import java.util.ArrayList;
 
+import fr.ecp.IS1220.myVelib.client.UserGUI.AlertUpdate;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
+/**
+ * An observable class which stores the notifications of a user.
+ * @author Valentin
+ *
+ */
 public class MsgBox implements java.io.Serializable {
 	private User user;
+	private AlertUpdate observer;
 	private ArrayList<String> messages = new ArrayList<String>();
 	private ArrayList<Date> timeStamps = new ArrayList<Date>();
 	public int uncheckedCount = 0;
@@ -22,6 +29,8 @@ public class MsgBox implements java.io.Serializable {
 		this.messages.add(message);
 		this.timeStamps.add(new Date());
 		this.uncheckedCount++;
+		if (this.observer != null)
+			this.observer.update();
 	}
 	
 	public int getUncheckedCount() {
@@ -39,4 +48,7 @@ public class MsgBox implements java.io.Serializable {
 		return res;
 	}
 
+	public void addObserver(AlertUpdate alertUpdate) {
+		this.observer = alertUpdate;
+	}
 }
