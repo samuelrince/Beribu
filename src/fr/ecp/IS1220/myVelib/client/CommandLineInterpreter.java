@@ -465,6 +465,52 @@ public class CommandLineInterpreter {
 			break;
 		}
 		
+		case "notifyUser": {
+			if (arguments.length == 2) {
+				long userID = 0;
+				String message = null;
+				try {
+				userID = Long.parseLong(arguments[0]);
+				message = parseString(arguments[1]);
+				}
+				catch (NumberFormatException e) {System.err.println("'notifyUser' takes the following "
+						+ "types of argument :"+"\n"+"<long> '<String>'");return;}
+				catch (ParseException e) {System.err.println("'notifyUser' takes the following "
+						+ "types of argument :"+"\n"+"<long> '<String>'");return;}
+				try {
+				MyVelibNetwork network = MyVelibNetwork.getInstance();
+				network.user(userID).notifyUser(message);;
+				}
+				catch(Exception e) {System.err.println(e);}
+				return;
+			}
+			System.err.println("'notifyUser' takes 2 arguments.");
+			break;
+		}
+		
+		case "locateUser": {
+			if (arguments.length == 3) {
+				long userID = 0;
+				double latitude = 0;
+				double longitude = 0;
+				try {
+				userID = Long.parseLong(arguments[0]);
+				latitude = Double.parseDouble(arguments[1]);
+				longitude = Double.parseDouble(arguments[2]);
+				}
+				catch (NumberFormatException e) {System.err.println("'locateUser' takes the following "
+						+ "types of argument :"+"\n"+"<long> <double> <double>");return;}
+				try {
+				MyVelibNetwork network = MyVelibNetwork.getInstance();
+				network.user(userID).setLocalisation(new Localization(latitude,longitude));
+				}
+				catch(Exception e) {System.err.println(e);}
+				return;
+			}
+			System.err.println("locateUser' takes 3 arguments.");
+			break;
+		}
+		
 		case "startStationGUI" : {
 			if (arguments.length == 1) {
 				long stationID = 0;

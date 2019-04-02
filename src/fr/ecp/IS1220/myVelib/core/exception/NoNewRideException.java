@@ -1,7 +1,7 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
- * This Exception occurs when a new ride cannot be instantiated 
+ * This Exception occurs when a new ride cannot be instantiated.
  * @author Samuel
  *
  */

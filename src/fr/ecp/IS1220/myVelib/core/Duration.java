@@ -53,7 +53,23 @@ public class Duration implements java.io.Serializable {
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
 				endStation.getLocalization());
-		this.duration = (int) (distance/Bicycle.getSpeed(bicycleType));
+		this.duration = (int) (distance*1000/Bicycle.getSpeed(bicycleType));
+	}
+	
+	
+	/**
+	 * Constructor of class Duration. The value assigned corresponds to the 
+	 * time that would be taken to go from one given localization to another with a 
+	 * given speed.
+	 * @param startLoc start localization
+	 * @param endLoc end localization
+	 * @param speed speed (in km/h)
+	 */
+	public Duration(Localization startLoc, Localization endLoc, double speed) {
+		if (speed <= 0)
+			throw new IllegalArgumentException("The speed should be >0.");
+		double distance = startLoc.distanceTo(endLoc);
+		this.duration = (int) (3.6*distance*1000/speed);
 	}
 	
 	/**

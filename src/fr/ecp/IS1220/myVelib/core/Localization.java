@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStringConversion;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadLocalizationException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 
 /**
@@ -23,6 +24,10 @@ public class Localization implements java.io.Serializable {
 	 */
 	public Localization(double latitude, double longitude) {
 		super();
+		this.latitude = latitude;
+		if (!(latitude <= 90 && latitude >= -90) || !(longitude <= 180 && longitude >= -180))
+			throw new BadLocalizationException("A latitude should be between -90° and 90°. "
+					+ "\nA longitude should be between -180° and 180°.");
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -156,6 +161,13 @@ public class Localization implements java.io.Serializable {
 		return listOfStations.get(stationIndex);
 	}
 	
+	/**
+	 * This method browses the public list of stations on the network and returns the ones
+	 * situated in a given radius around this localization.
+	 * @param radius (in km)
+	 * @return a list of stations in the radius
+	 * @throws NoSuchStationExistException
+	 */
 	public ArrayList<Station> getStationsInRadius(double radius) 
 			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
@@ -179,7 +191,7 @@ public class Localization implements java.io.Serializable {
 	 * @return 		the closest Station with an available Bicycle
 	 */
 	public Station getClosestStationWithBicycle() 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -193,7 +205,7 @@ public class Localization implements java.io.Serializable {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no station with an available"
+			throw new NoSuchStationExistException("Sorry, no station with an available"
 					+ " bicycle was found.");
 		}
 		return listOfStations.get(stationIndex);
@@ -208,7 +220,7 @@ public class Localization implements java.io.Serializable {
 	 * @return 		the closest Station with an available Bicycle of given type
 	 */
 	public Station getClosestStationWithBicycle(String bicycleType) 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -222,7 +234,7 @@ public class Localization implements java.io.Serializable {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no station with an available"
+			throw new NoSuchStationExistException("Sorry, no station with an available"
 					+ " bicycle of type "+ bicycleType +" was found.");
 		}
 		return listOfStations.get(stationIndex);
@@ -250,9 +262,11 @@ public class Localization implements java.io.Serializable {
 	 * @return the barycenter of these localizations
 	 */
 	public static Localization barycenter(ArrayList<Localization> locs) {
-		if (locs.size() < 2)
-			throw new IllegalArgumentException("Need at least 2 localizations to compute"
-					+ " their barycenter.");
+		if (locs.size() < 1)
+			throw new IllegalArgumentException("Need at least 1 localization to compute"
+					+ " a barycenter.");
+		if (locs.size() == 1)
+			return locs.get(0);
 		double latMean = 0;
 		double longMean = 0;
 		for (int i = 0; i < locs.size(); i++) {
@@ -263,4 +277,5 @@ public class Localization implements java.io.Serializable {
 		longMean /= locs.size();
 		return new Localization(latMean,longMean);
 	}
+	
 }

@@ -1,7 +1,7 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
- * This Exception occurs when a user does not exist
+ * This Exception occurs when the user does not exist.
  * @author Samuel
  *
  */

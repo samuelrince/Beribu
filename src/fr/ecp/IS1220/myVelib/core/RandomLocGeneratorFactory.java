@@ -1,6 +1,6 @@
 package fr.ecp.IS1220.myVelib.core;
 
-import fr.ecp.IS1220.myVelib.core.exception.BadBicycleTypeException;
+import fr.ecp.IS1220.myVelib.core.exception.BadShapeException;
 
 /**
  * A RandomLocGenerator factory.
@@ -14,7 +14,7 @@ public class RandomLocGeneratorFactory {
 			return new RandomLocInCircle();
 		if (shape.equalsIgnoreCase("square"))
 			return new RandomLocInSquare();
-		throw new IllegalArgumentException ("No localization generator for such an area shape. "
+		throw new BadShapeException ("No localization generator for such an area shape. "
 				+ "The accepted shapes are 'square' and 'circle'.");
 	}
 }

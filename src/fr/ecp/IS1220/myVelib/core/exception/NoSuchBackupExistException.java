@@ -1,5 +1,10 @@
 package fr.ecp.IS1220.myVelib.core.exception;
 
+/**
+ * This Exception occurs when the backup file does not exist.
+ * @author Samuel
+ *
+ */
 public class NoSuchBackupExistException extends RuntimeException {
 
 	/**

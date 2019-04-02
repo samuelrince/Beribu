@@ -291,7 +291,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 		int n_mod = numberOfBicycles%number;
 		for (int i = 0; i < n_mod ; i++)
 			numberOfBicyclesPerStation[i] = n_div + 1;
-		for (int i = 0; i < number-n_mod ; i++)
+		for (int i = n_mod; i < number; i++)
 			numberOfBicyclesPerStation[i] = n_div;
 		int[] numberOfTypes = new int[typePercentage.length];
 		int numberCheck = 0;
@@ -392,7 +392,7 @@ public class MyVelibNetwork implements java.io.Serializable {
 		int n_mod = numberOfBicycles%number;
 		for (int i = 0; i < n_mod ; i++)
 			numberOfBicyclesPerStation[i] = n_div + 1;
-		for (int i = 0; i < number-n_mod ; i++)
+		for (int i = n_mod; i < number; i++)
 			numberOfBicyclesPerStation[i] = n_div;
 		int[] numberOfTypes = new int[typePercentage.length];
 		int numberCheck = 0;
@@ -633,6 +633,8 @@ public class MyVelibNetwork implements java.io.Serializable {
 	public void visual2D() {
 		JFrame frame = new JFrame();
 		frame.setSize(new Dimension(630,660));
+		frame.setTitle("Map of MyVelibNetwork "+this.name);
+		frame.setAlwaysOnTop(true);
 		ArrayList<Localization> points=new ArrayList<Localization>();
 		ArrayList<String> labels=new ArrayList<String>();
 		for (Station s:this.stationDatabase) {

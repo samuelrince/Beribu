@@ -3,15 +3,19 @@ package fr.ecp.IS1220.myVelib.client;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
 import fr.ecp.IS1220.myVelib.core.*;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 
 public class UserGUI extends JFrame {
 	private User user;
 	int alertCount;
 	boolean GPSauthor = false;
+	TravelAutoRefresh travelAutoRefresh;
 	
 	private JPanel home = new JPanel();
 	private JPanel alertPan = new JPanel();
@@ -26,7 +30,7 @@ public class UserGUI extends JFrame {
 	private JButton backBtn3 = new JButton("back");
 	private JButton backBtn4 = new JButton("back");
 	private JButton backBtn5 = new JButton("back");
-	private JButton alertBtn = new JButton("ALERTS: "+alertCount);
+	private JButton alertBtn = new JButton("ALERTS: ");
 	private JButton planBtn = new JButton("PLAN OF STATIONS");
 	private JButton planRideBtn = new JButton("PLAN A RIDE");
 	private JButton statBtn = new JButton("MY STATISTICS");
@@ -61,6 +65,7 @@ public class UserGUI extends JFrame {
 	private JTextArea travelTxt = new JTextArea();
 	private JTextArea historyTxt = new JTextArea();
 	private JScrollPane historyScrollPan = new JScrollPane(historyTxt);
+	private JScrollPane alertScrollPan = new JScrollPane(alertTxt);
 	
 	private JTextField sourceLatTxt = new JTextField();
 	private JTextField sourceLongTxt = new JTextField();
@@ -69,7 +74,7 @@ public class UserGUI extends JFrame {
 
 
 	public UserGUI(User user){
-		super("MyVelibApp v.1.0 - welcome"+user.getName()+"!");
+		super("MyVelibApp v.1.0 - welcome "+user.getName()+"!");
 		this.user = user;
 		
 		
@@ -78,7 +83,7 @@ public class UserGUI extends JFrame {
 		this.setLocation(dim.width/2-this.getSize().width/2,0);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		int margin = 50;
@@ -92,12 +97,17 @@ public class UserGUI extends JFrame {
 			points.add(s.getLocalization());
 			labels.add(s.getName());
 		}
-		planPanneau = new Panneau(points,labels,length,margin);
+		try {planPanneau = new Panneau(points,labels,length,margin);}
+		catch(Exception e) {planBtn.setText("PLAN OF STATIONS (unavailable)");
+		planBtn.setEnabled(false);}
 		
-		this.alertCount = user.msgBox.getUncheckedCount();
+		this.alertCount = user.getMsgBox().getUncheckedCount();
 		alertBtn.setText(("ALERTS: "+alertCount));
-		if (this.alertCount == 0)
+		if (this.alertCount == 0) 
 			alertBtn.setEnabled(false);
+		else
+			alertBtn.setEnabled(true);
+		new AlertUpdate(user);
 
 		home.setBackground(Color.CYAN);  
 		alertPan.setBackground(Color.CYAN);  
@@ -105,9 +115,14 @@ public class UserGUI extends JFrame {
 		subPan.setBackground(Color.CYAN);  
 		planRidePan.setBackground(Color.CYAN);  
 		newRidePan.setBackground(Color.CYAN); 
+		standardBtn.setBackground(Color.CYAN);
+		vlibreBtn.setBackground(Color.CYAN);
+		vmaxBtn.setBackground(Color.CYAN);
 		home.setLayout(new BorderLayout(3,3));
 		newRidePan.setLayout(new BoxLayout(newRidePan, BoxLayout.PAGE_AXIS));
+		alertPan.setLayout(new BoxLayout(alertPan, BoxLayout.PAGE_AXIS));
 		historyScrollPan.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		alertScrollPan.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		alertBtn.addActionListener(new alertBtnListener());
 		planBtn.addActionListener(new planBtnListener());
@@ -186,7 +201,7 @@ public class UserGUI extends JFrame {
 		menuBar.add(optionsMenu);
 		
 		alertTxt.setEditable(false);
-		alertPan.add(alertTxt);
+		alertTxt.setLineWrap(true);
 		statTxt.setEditable(false);
 		statPan.add(statTxt);
 		travelTxt.setEditable(false);
@@ -207,6 +222,8 @@ public class UserGUI extends JFrame {
 		planRidePan.add(newRidePan);
 		historyScrollPan.setVisible(true);
 		statPan.add(historyScrollPan);
+		alertScrollPan.setVisible(true);
+		alertPan.add(alertScrollPan);
 		planPanneau.setVisible(true);
 		
 		this.setJMenuBar(menuBar);
@@ -218,7 +235,8 @@ public class UserGUI extends JFrame {
 	    public void actionPerformed(ActionEvent e) { 
 	    	String alerts = user.getMsgBox().retrieve();
 	    	alertTxt.setText(alerts);
-	    	
+	    	alertBtn.setText("ALERTS: "+0);
+			alertBtn.setEnabled(false);
 	    	UserGUI.this.setContentPane(alertPan);
 	    	UserGUI.this.setVisible(true);
 	    }
@@ -265,9 +283,10 @@ public class UserGUI extends JFrame {
 			destLongTxt.setText("-destination Longitude-");
 			bikeTypeComboBox.setSelectedIndex(0);
 			pathStratComboBox.setSelectedIndex(0);
+			myPositionCheckBox.setSelected(false);
 			if (user.getPlannedRide() != null ) {
 				option = JOptionPane.showConfirmDialog(null, 
-						"You are about to discard your current planned ride. Confirm?", 
+						"You are about to discard your currently planned ride. Confirm?", 
 						"Discard previous planned ride", 
 						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.WARNING_MESSAGE);
@@ -289,14 +308,15 @@ public class UserGUI extends JFrame {
 	class startBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			user.getPlannedRide().start();
-			startBtn.setText("STARTED");
+			startBtn.setText("READY TO GO");
 			startBtn.setEnabled(false);
 		}
 	}
 	
 	class discardBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			user.discardPlannedRide();
+			travelAutoRefresh.exit();
+			user.discardPlannedRide();			
 			travelTxt.setText("No ride planned for the moment.");
 			startBtn.setText("START");
 			discardBtn.setEnabled(false);
@@ -347,8 +367,15 @@ public class UserGUI extends JFrame {
 			newRidePan.setVisible(false);
 			startBtn.setEnabled(true);
 			discardBtn.setEnabled(true);
+			new TravelUpdate(user);
+			travelAutoRefresh = new TravelAutoRefresh(user);
+			Thread refreshThread = new Thread(travelAutoRefresh);
+			refreshThread.start();
 			}
-			catch (Exception ex) {JOptionPane.showMessageDialog(null, "Sorry, we couldn't find a ride with these parameters.", 
+			catch (NoSuchStationExistException ex) {JOptionPane.showMessageDialog(null, "Sorry, we couldn't find a ride with these parameters.", 
+					"Failure", JOptionPane.ERROR_MESSAGE);
+			}
+			catch (Exception ex) {JOptionPane.showMessageDialog(null, "Sorry, unexpected error.", 
 					"Failure", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -451,10 +478,6 @@ public class UserGUI extends JFrame {
 	
 	class backBtnListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) { 
-	    	alertCount = user.msgBox.getUncheckedCount();
-	    	alertBtn.setText("ALERTS: "+alertCount);
-	    	if (alertCount == 0)
-				alertBtn.setEnabled(false);
 	    	UserGUI.this.setContentPane(home);
 	    	UserGUI.this.setVisible(true);
 	    }
@@ -529,6 +552,9 @@ public class UserGUI extends JFrame {
 			subPan.setBackground(color);  
 			planRidePan.setBackground(color);  
 			newRidePan.setBackground(color); 
+			standardBtn.setBackground(color);
+			vlibreBtn.setBackground(color);
+			vmaxBtn.setBackground(color);
 
 		}
 	}
@@ -543,19 +569,94 @@ public class UserGUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * An observer class used to automatically update the user message box
+	 * displayed in the UserGUI.
+	 * @author Valentin
+	 *
+	 */
+	public class AlertUpdate {
+
+		public AlertUpdate(User user) {
+			user.getMsgBox().addObserver(this);
+		}
+
+		public void update() {
+			UserGUI.this.alertCount = user.getMsgBox().getUncheckedCount();
+			alertBtn.setText(("ALERTS: "+alertCount));
+			if (UserGUI.this.alertCount == 0)
+				alertBtn.setEnabled(false);
+			else
+				alertBtn.setEnabled(true);
+		}
+	}
+	
+	/**
+	 * An observer class used to automatically update the user message box
+	 * displayed in the UserGUI.
+	 * @author Valentin
+	 *
+	 */
+	public class TravelUpdate {
+
+		public TravelUpdate(User user) {
+			if (user.getPlannedRide() != null)
+				user.getPlannedRide().addObserver(this);
+			else
+				throw new RuntimeException("No planned ride to observe.");
+		}
+
+		public void update() {
+			if (UserGUI.this.getContentPane() == planRidePan) {
+				JOptionPane.showMessageDialog(null, "Your planned ride has been updated.","Update", JOptionPane.WARNING_MESSAGE);
+				travelTxt.setText(user.getPlannedRide().toString());
+			}
+		}
+	}
+			
+	class TravelAutoRefresh implements Runnable {
+		User user;
+		boolean exit = false;
+		
+		public TravelAutoRefresh(User user) {
+			this.user = user;
+		}
+		
+		public void exit() {
+			this.exit = true;
+		}
+		
+		public void run() {
+			while(!exit) {
+				Travel plannedRide = user.getPlannedRide();
+				if (plannedRide == null) {
+					this.exit = true;
+					break;
+				}
+				plannedRide.update();
+				if (user.isOnRide())
+					startBtn.setText("ONGOING...");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	public static void main(final String[] args) throws Exception{
 		SystemDate SD = SystemDate.getInstance();
 		SD.setDay(2019, 02, 17);SD.setTime(0, 0, 0);
 		MyVelibNetwork network = new MyVelibNetwork("Paris");
-		network.createStations(new Localization(48.86101631231847,2.33583927154541), 5., 10, 4, 10, 70., new double[] {70,30});
-		network.createSubscribers(10,"vlibre");
-		User user = network.user(0);
-		user.notifyUser("Notification 1");
-		user.notifyUser("Notification 2");
-		user.setLocalisation(new Localization(48.86101631231847,2.33583927154541));
-		user.planRide(new Localization(48,2), new Localization(48,3),"electrical");
-		SwingUtilities.invokeLater (new Runnable (){public void run () {new UserGUI(user);}});
+		network.createStations(new Localization(48.86101631231847,2.33583927154541), 5., 10, 3, 10, 70, new double[] {70,30});
+		network.createSubscribers(2,"vlibre");
+		User user1 = network.user(0);
+		User user2 = network.user(0);
+		user1.setLocalisation(new Localization(48.86101631231847,2.33583927154541));
+		user1.planRide(new Localization(48,2), new Localization(48,3),"mechanical");
+		SwingUtilities.invokeLater (new Runnable (){public void run () {new UserGUI(user1);}});
 	}
 
 }

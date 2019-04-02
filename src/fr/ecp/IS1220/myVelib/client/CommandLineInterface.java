@@ -1,5 +1,6 @@
 package fr.ecp.IS1220.myVelib.client;
 
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Scanner;
 import fr.ecp.IS1220.myVelib.core.*;
@@ -117,7 +118,10 @@ public class CommandLineInterface {
 	    	
 	    	CommandLineInterpreter.interprete(tokens);
 	    }while(!CommandLineInterface.exit);
-	    System.out.println("CLUI exit");
+	    Frame[] frames = Frame.getFrames();
+	    for (Frame frame:frames)
+	    	frame.dispose();
+	    System.err.println("CLUI terminated.");
 	}
 	
 }
