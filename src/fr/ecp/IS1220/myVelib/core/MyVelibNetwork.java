@@ -643,7 +643,6 @@ public class MyVelibNetwork implements java.io.Serializable {
 		}
 		
 		Panneau p=new Panneau(points,labels);
-		p.repaint();
 		frame.setContentPane(p);
 		frame.setVisible(true);
 	}
