@@ -149,9 +149,9 @@ public class Travel {
 			this.suggestedEndStation.addTargetOf(this);
 			this.previsionDuration = new Duration(this.suggestedStartStation,
 					this.suggestedEndStation, this.pathStrategy.getBicycleType());
+			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.pathStrategy.getBicycleType());		
 			this.previsionDuration.add(new Duration(this.source,this.suggestedStartStation.getLocalization(),4));
 			this.previsionDuration.add(new Duration(this.destination,this.suggestedEndStation.getLocalization(),4));
-			this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.pathStrategy.getBicycleType());		
 		}
 		catch(NoSuchStationExistException e) {
 			this.suggestedStartStation = null;
@@ -281,9 +281,9 @@ public class Travel {
 				this.suggestedEndStation.addTargetOf(this);
 				this.previsionDuration = new Duration(this.suggestedStartStation,
 						this.suggestedEndStation, this.bicycleType);
+				this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
 				this.previsionDuration.add(new Duration(this.source,this.suggestedStartStation.getLocalization(),4));
 				this.previsionDuration.add(new Duration(this.destination,this.suggestedEndStation.getLocalization(),4));
-				this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
 			}
 			catch(NoSuchStationExistException e) {
 				this.suggestedEndStation = null;
