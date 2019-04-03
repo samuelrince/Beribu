@@ -22,7 +22,9 @@ public class UserGUI extends JFrame {
 	private JPanel planRidePan = new JPanel();
 	private JPanel statPan = new JPanel();
 	private JPanel subPan = new JPanel();
+	private JPanel subTypePan = new JPanel();
 	private JPanel newRidePan = new JPanel();
+	private JPanel statContentPan = new JPanel();
 	private Panneau planPanneau;
 	
 	Icon bellIcon = new ImageIcon("bell.png");
@@ -44,7 +46,7 @@ public class UserGUI extends JFrame {
 	private JButton startBtn = new JButton("START");
 	private JButton newRideBtn = new JButton("NEW RIDE");
 	private JButton confirmRideBtn = new JButton("Confirm");
-	private JRadioButton standardBtn = new JRadioButton("standard");
+	private JRadioButton standardBtn = new JRadioButton("Standard");
 	private JRadioButton vlibreBtn = new JRadioButton("Vlibre");
 	private JRadioButton vmaxBtn = new JRadioButton("Vmax");
 	private ButtonGroup subtypeBtnGroup = new ButtonGroup();
@@ -71,6 +73,7 @@ public class UserGUI extends JFrame {
 	private JTextArea historyTxt = new JTextArea();
 	private JScrollPane historyScrollPan = new JScrollPane(historyTxt);
 	private JScrollPane alertScrollPan = new JScrollPane(alertTxt);
+	private JLabel subTypeLabel = new JLabel();
 	
 	private JTextField sourceLatTxt = new JTextField();
 	private JTextField sourceLongTxt = new JTextField();
@@ -113,6 +116,9 @@ public class UserGUI extends JFrame {
 		else
 			alertBtn.setEnabled(true);
 		new AlertUpdate(user);
+		
+		subTypeLabel.setText("Your subscription is currently '"+
+				user.getCard().getType()+"'.");
 
 		home.setBackground(Color.CYAN);  
 		alertPan.setBackground(Color.CYAN);  
@@ -122,11 +128,15 @@ public class UserGUI extends JFrame {
 		newRidePan.setBackground(Color.CYAN); 
 		planPanneau.setBackground(Color.CYAN);
 		standardBtn.setBackground(Color.CYAN);
+		statContentPan.setBackground(Color.CYAN);
 		vlibreBtn.setBackground(Color.CYAN);
 		vmaxBtn.setBackground(Color.CYAN);
 		home.setLayout(new BorderLayout(3,3));
 		newRidePan.setLayout(new BoxLayout(newRidePan, BoxLayout.PAGE_AXIS));
 		alertPan.setLayout(new BoxLayout(alertPan, BoxLayout.PAGE_AXIS));
+		subPan.setLayout(new BoxLayout(subPan, BoxLayout.PAGE_AXIS));
+		statPan.setLayout(new BoxLayout(statPan, BoxLayout.PAGE_AXIS));
+		subTypePan.setLayout(new BoxLayout(subTypePan, BoxLayout.LINE_AXIS));
 		historyScrollPan.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		alertScrollPan.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
@@ -172,27 +182,30 @@ public class UserGUI extends JFrame {
 		subBtn.setHorizontalTextPosition(SwingConstants.CENTER);
 		subBtn.setFont(new Font("Arial", Font.BOLD, 15));
 		home.add(subBtn, BorderLayout.WEST);
-		backBtn1.setHorizontalAlignment(SwingConstants.LEFT);
-		backBtn2.setHorizontalAlignment(SwingConstants.LEFT);
-		backBtn3.setHorizontalAlignment(SwingConstants.LEFT);
-		backBtn4.setHorizontalAlignment(SwingConstants.LEFT);
-		backBtn5.setHorizontalAlignment(SwingConstants.LEFT);
+		backBtn1.setAlignmentX(CENTER_ALIGNMENT);
 		planRidePan.add(backBtn1);
+		backBtn2.setAlignmentX(CENTER_ALIGNMENT);
 		statPan.add(backBtn2);
+		backBtn3.setAlignmentX(CENTER_ALIGNMENT);
 		subPan.add(backBtn3);
+		backBtn4.setAlignmentX(CENTER_ALIGNMENT);
 		alertPan.add(backBtn4);
+		backBtn5.setAlignmentX(LEFT_ALIGNMENT);
 		planPanneau.add(backBtn5);
 		planRidePan.add(newRideBtn);
 		discardBtn.setBackground(Color.RED);
 		planRidePan.add(discardBtn);
 		startBtn.setBackground(Color.GREEN);
 		planRidePan.add(startBtn);
+		standardBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		subtypeBtnGroup.add(standardBtn);
+		vlibreBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		subtypeBtnGroup.add(vlibreBtn);
+		vmaxBtn.setFont(new Font("Arial", Font.PLAIN, 20));
 		subtypeBtnGroup.add(vmaxBtn);
-		subPan.add(standardBtn);
-		subPan.add(vlibreBtn);
-		subPan.add(vmaxBtn);
+		subTypePan.add(standardBtn);
+		subTypePan.add(vlibreBtn);
+		subTypePan.add(vmaxBtn);
 		
 		//
 		newRidePan.add(myPositionCheckBox);
@@ -220,10 +233,13 @@ public class UserGUI extends JFrame {
 		alertTxt.setEditable(false);
 		alertTxt.setLineWrap(true);
 		statTxt.setEditable(false);
-		statPan.add(statTxt);
+		statContentPan.add(statTxt);
 		travelTxt.setEditable(false);
 		planRidePan.add(travelTxt);
+		historyTxt.setLineWrap(true);
 		historyTxt.setEditable(false);
+		subTypeLabel.setAlignmentX(CENTER_ALIGNMENT);
+		subPan.add(subTypeLabel);
 		
 		bikeTypeComboBox.addItem("-bicycle type-");
 		bikeTypeComboBox.addItem("Mechanical");
@@ -238,10 +254,12 @@ public class UserGUI extends JFrame {
 		newRidePan.setVisible(false);
 		planRidePan.add(newRidePan);
 		historyScrollPan.setVisible(true);
-		statPan.add(historyScrollPan);
+		statContentPan.add(historyScrollPan);
 		alertScrollPan.setVisible(true);
 		alertPan.add(alertScrollPan);
 		planPanneau.setVisible(true);
+		subPan.add(subTypePan);
+		statPan.add(statContentPan);
 		
 		this.setJMenuBar(menuBar);
 		this.setContentPane(home);
@@ -502,6 +520,8 @@ public class UserGUI extends JFrame {
 					 JOptionPane.QUESTION_MESSAGE);
 			 if(option == JOptionPane.YES_OPTION){
 				 user.subscribe(subtype);
+				 subTypeLabel.setText("Your subscription is currently '"+
+							user.getCard().getType()+"'.");
 				 JOptionPane.showMessageDialog(null, "Operation confirmed", "", JOptionPane.INFORMATION_MESSAGE);
 			 }
 			 else {
@@ -591,6 +611,7 @@ public class UserGUI extends JFrame {
 			subPan.setBackground(color);  
 			planRidePan.setBackground(color);  
 			newRidePan.setBackground(color); 
+			statContentPan.setBackground(color);
 			standardBtn.setBackground(color);
 			vlibreBtn.setBackground(color);
 			vmaxBtn.setBackground(color);
