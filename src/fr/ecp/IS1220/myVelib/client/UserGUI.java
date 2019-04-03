@@ -17,6 +17,8 @@ public class UserGUI extends JFrame {
 	boolean GPSauthor = false;
 	TravelAutoRefresh travelAutoRefresh;
 	
+	private static final String RESSOURCE_DIRECTORY = "ressources/";
+	
 	private JPanel home = new JPanel();
 	private JPanel alertPan = new JPanel();
 	private JPanel planRidePan = new JPanel();
@@ -27,11 +29,11 @@ public class UserGUI extends JFrame {
 	private JPanel statContentPan = new JPanel();
 	private Panneau planPanneau;
 	
-	Icon bellIcon = new ImageIcon("bell.png");
-	Icon mapIcon = new ImageIcon("map.png");
-	Icon cardIcon = new ImageIcon("card.png");
-	Icon statIcon = new ImageIcon("statistics.png");
-	Icon bicycleIcon = new ImageIcon("bicycle.png");
+	Icon bellIcon = new ImageIcon(RESSOURCE_DIRECTORY + "bell.png");
+	Icon mapIcon = new ImageIcon(RESSOURCE_DIRECTORY + "map.png");
+	Icon cardIcon = new ImageIcon(RESSOURCE_DIRECTORY + "card.png");
+	Icon statIcon = new ImageIcon(RESSOURCE_DIRECTORY + "statistics.png");
+	Icon bicycleIcon = new ImageIcon(RESSOURCE_DIRECTORY + "bicycle.png");
 	private JButton backBtn1 = new JButton("back");
 	private JButton backBtn2 = new JButton("back");
 	private JButton backBtn3 = new JButton("back");

@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.myVelib.core;
+package fr.ecp.IS1220.myVelib.core.exception;
 
 /**
  * This Exception occurs when a station is full

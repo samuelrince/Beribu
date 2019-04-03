@@ -45,6 +45,7 @@ public class StationGUI extends JFrame {
 	//Buttons
 	public JButton cancelBTN = new JButton("Cancel");
 	public JButton cancelRideBTN = new JButton("Cancel");
+	public JButton cancelAccountBTN = new JButton("Cancel");
 	
 	
 	public StationGUI(MyVelibNetwork network, Station station){
@@ -188,10 +189,10 @@ public class StationGUI extends JFrame {
 	    JPanel d6 = new JPanel();
 	    //Buttons
 	    d6.setLayout(new BoxLayout(d6, BoxLayout.LINE_AXIS));
-	    cancelBTN.addActionListener(new CancelListener());
+	    cancelAccountBTN.addActionListener(new CancelListener());
 	    JButton createAccBTN = new JButton("Create account");
 	    createAccBTN.addActionListener(new CreateAccountListener());
-	    d6.add(cancelBTN);
+	    d6.add(cancelAccountBTN);
 	    d6.add(createAccBTN);
 	    
 	    
