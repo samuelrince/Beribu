@@ -162,6 +162,7 @@ public class Ride implements java.io.Serializable {
 		String endDate;
 		String duration;
 		String cost;
+		String isPlus = "";
 		if (this.isCurrent()) {
 			endStation = "-";
 			endDate = "-";
@@ -170,13 +171,15 @@ public class Ride implements java.io.Serializable {
 		}
 		else {
 			endStation = this.endStation.getName();
+			if (this.endStation.isPlus())
+				isPlus = " (Plus)";
 			endDate = this.endTime.toString();
 			duration = this.duration.toString();
 			cost = Double.toString(this.price);
 		}
 		return "Ride [id." + id + "] of " + user.getName() + ":\n"+
 	bicycle.getType()+" bike n°" + bicycle.getId() + " rented in " + startStation.getName() + 
-	" on "+startTime.toString()+", returned in " + endStation + " on "+endDate+"\n"+
+	" on "+startTime.toString()+", returned in " + endStation +isPlus+ " on "+endDate+"\n"+
 	"Cost: "+cost+"€ / Duration:"+duration;
 	}
 	

@@ -87,7 +87,7 @@ public class UserGUI extends JFrame {
 		
 		this.setSize(600, 350);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width/2-this.getSize().width/2,0);
+		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/4);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -253,6 +253,7 @@ public class UserGUI extends JFrame {
 		
 		newRidePan.setVisible(false);
 		planRidePan.add(newRidePan);
+		historyScrollPan.setPreferredSize(new Dimension(400,100));
 		historyScrollPan.setVisible(true);
 		statContentPan.add(historyScrollPan);
 		alertScrollPan.setVisible(true);
@@ -342,7 +343,7 @@ public class UserGUI extends JFrame {
 			pathStratComboBox.setSelectedIndex(0);
 			myPositionCheckBox.setSelected(false);
 			if (user.getPlannedRide() != null ) {
-				option = JOptionPane.showConfirmDialog(null, 
+				option = JOptionPane.showConfirmDialog(UserGUI.this, 
 						"You are about to discard your currently planned ride. Confirm?", 
 						"Discard previous planned ride", 
 						JOptionPane.YES_NO_OPTION, 
@@ -429,10 +430,10 @@ public class UserGUI extends JFrame {
 			Thread refreshThread = new Thread(travelAutoRefresh);
 			refreshThread.start();
 			}
-			catch (NoSuchStationExistException ex) {JOptionPane.showMessageDialog(null, "Sorry, we couldn't find a ride with these parameters.", 
+			catch (NoSuchStationExistException ex) {JOptionPane.showMessageDialog(UserGUI.this, "Sorry, we couldn't find a ride with these parameters.", 
 					"Failure", JOptionPane.ERROR_MESSAGE);
 			}
-			catch (Exception ex) {JOptionPane.showMessageDialog(null, "Sorry, unexpected error.", 
+			catch (Exception ex) {JOptionPane.showMessageDialog(UserGUI.this, "Sorry, unexpected error.", 
 					"Failure", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -443,7 +444,7 @@ public class UserGUI extends JFrame {
 			if (myPositionCheckBox.isSelected()) {
 				if (!GPSauthor) {
 					int option;
-					option = JOptionPane.showConfirmDialog(null, 
+					option = JOptionPane.showConfirmDialog(UserGUI.this, 
 							"This action requires access to your position. Do you accept to"
 									+ " share your position with MyVelibApp?", 
 									"GPS authorisation", 
@@ -466,7 +467,7 @@ public class UserGUI extends JFrame {
 
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Sorry, your position was not found.", 
+					JOptionPane.showMessageDialog(UserGUI.this, "Sorry, your position was not found.", 
 							"Failure", JOptionPane.ERROR_MESSAGE);
 					myPositionCheckBox.setSelected(false);
 				}
@@ -513,7 +514,7 @@ public class UserGUI extends JFrame {
 				 subtype = "vmax";
 			 if (subtype.equalsIgnoreCase(user.getCard().getType()))
 				 return;
-			 option = JOptionPane.showConfirmDialog(null, 
+			 option = JOptionPane.showConfirmDialog(UserGUI.this, 
 					 "Do you really want to make your subscription '"+subtype+"'?", 
 					 "Change of subcription", 
 					 JOptionPane.YES_NO_OPTION, 
@@ -522,7 +523,7 @@ public class UserGUI extends JFrame {
 				 user.subscribe(subtype);
 				 subTypeLabel.setText("Your subscription is currently '"+
 							user.getCard().getType()+"'.");
-				 JOptionPane.showMessageDialog(null, "Operation confirmed", "", JOptionPane.INFORMATION_MESSAGE);
+				 JOptionPane.showMessageDialog(UserGUI.this, "Operation confirmed", "", JOptionPane.INFORMATION_MESSAGE);
 			 }
 			 else {
 				 if (user.getCard().getType().equalsIgnoreCase("standard"))
@@ -570,29 +571,29 @@ public class UserGUI extends JFrame {
 			panel.add(panel1);
 			panel.add(panel2);
 			String[] options = new String[]{"OK", "Cancel"};
-			int option = JOptionPane.showOptionDialog(null, panel, "New password",
+			int option = JOptionPane.showOptionDialog(UserGUI.this, panel, "New password",
 					JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 					null, options, options[1]);
 			if(option == 0) {
 				char[] password1 = pass1.getPassword();
 				char[] password2 = pass2.getPassword();
 				if (!password1.equals(password2)) {
-					 JOptionPane.showMessageDialog(null, "Passwords don't match.", "Passwords don't match", JOptionPane.WARNING_MESSAGE);
+					 JOptionPane.showMessageDialog(UserGUI.this, "Passwords don't match.", "Passwords don't match", JOptionPane.WARNING_MESSAGE);
 					 return;
 				}
 				if (password1.length<5) {
-					 JOptionPane.showMessageDialog(null, "Your password should be at least 5 characters long.", "Password too short", JOptionPane.WARNING_MESSAGE);
+					 JOptionPane.showMessageDialog(UserGUI.this, "Your password should be at least 5 characters long.", "Password too short", JOptionPane.WARNING_MESSAGE);
 					 return;
 				}
 				user.setPasswordHash(new String(password1));
-				JOptionPane.showMessageDialog(null, "Your password has been sucessfully changed.", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(UserGUI.this, "Your password has been sucessfully changed.", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
 
 	class helpMenuItemListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			 JOptionPane.showMessageDialog(null, "Looking for help? \nSend an e-mail to samuel.rince@student.ecp.fr or valentin.vierge@student.ecp.fr.", "Help", JOptionPane.INFORMATION_MESSAGE);
+			 JOptionPane.showMessageDialog(UserGUI.this, "Looking for help? \nSend an e-mail to samuel.rince@student.ecp.fr or valentin.vierge@student.ecp.fr.", "Help", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -623,9 +624,9 @@ public class UserGUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			ImageIcon img = new ImageIcon("heart.png");
 			String[] grade = {"20"};
-			JOptionPane.showInputDialog(null,user.getName()+", how would you rate MyVelibApp out of 20?",
+			JOptionPane.showInputDialog(UserGUI.this,user.getName()+", how would you rate MyVelibApp out of 20?",
 					"Feedback",JOptionPane.QUESTION_MESSAGE,null,grade,grade[0]);
-			 JOptionPane.showMessageDialog(null, "Thank you for your feedback!", "Thank you", JOptionPane.INFORMATION_MESSAGE,img);
+			 JOptionPane.showMessageDialog(UserGUI.this, "Thank you for your feedback!", "Thank you", JOptionPane.INFORMATION_MESSAGE,img);
 		}
 	}
 	
@@ -668,7 +669,7 @@ public class UserGUI extends JFrame {
 
 		public void update() {
 			if (UserGUI.this.getContentPane() == planRidePan) {
-				JOptionPane.showMessageDialog(null, "Your planned ride has been updated.","Update", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(UserGUI.this, "Your planned ride has been updated.","Update", JOptionPane.WARNING_MESSAGE);
 				travelTxt.setText(user.getPlannedRide().toString());
 			}
 		}
@@ -708,13 +709,22 @@ public class UserGUI extends JFrame {
 
 	public static void main(final String[] args) throws Exception{
 		SystemDate SD = SystemDate.getInstance();
-		SD.setDay(2019, 02, 17);SD.setTime(0, 0, 0);
+		SD.setDay(2019, 02, 17);SD.setTime(10, 0, 0);
 		MyVelibNetwork network = new MyVelibNetwork("Paris");
 		network.createStations(new Localization(48.86101631231847,2.33583927154541), 5., 10, 3, 10, 70, new double[] {70,30});
-		network.createSubscribers(2,"vlibre");
+		network.newSubscriber("Bob","vlibre");
+		network.newSubscriber("Marie","vlibre");
 		User user1 = network.user(0);
 		User user2 = network.user(0);
 		user1.notifyUser("hey");
+		SD.setDay(2019, 02, 17);SD.setTime(10, 2, 0);
+		user1.notifyUser("ça va?");
+		user1.newRide(network.station(0));
+		SD.setDay(2019, 02, 17);SD.setTime(10, 48, 0);
+		user1.endCurrentRide(network.station(1));
+		user1.newRide(network.station(0));
+		SD.setDay(2019, 02, 17);SD.setTime(11, 53, 0);
+		user1.endCurrentRide(network.station(1));
 		user1.setLocalisation(new Localization(48.86101631231847,2.33583927154541));
 		user1.planRide(new Localization(48,2), new Localization(48,3),"mechanical");
 		SwingUtilities.invokeLater (new Runnable (){public void run () {new UserGUI(user1);}});

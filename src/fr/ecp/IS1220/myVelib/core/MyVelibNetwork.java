@@ -497,6 +497,13 @@ public class MyVelibNetwork implements java.io.Serializable {
 		this.addUser(user);
 	}
 	
+	/**
+	 * Adds a new named user with the specified type of subscription and password to
+	 * the network.
+	 * @param name name of user
+	 * @param subType type of subscription
+	 * @throws Exception can occur at user creation
+	 */
 	public void newSubscriber(String name, String password, String subType) throws Exception {
 		User user = new User(name, password);
 		if (subType != "Standard")

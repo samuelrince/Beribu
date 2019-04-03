@@ -189,12 +189,12 @@ public class User implements java.io.Serializable {
 	}
 	
 	public String getHistory() {
-		String res = "History of "+this.getName()+"\n";
+		String res = "History of "+this.getName();
 		if (this.listOfRides.size() == 0)
-			res += "\n"+"-empty-";
+			res += "\n"+"\n"+"-empty-";
 		else {
 			for (int i =0 ; i < this.listOfRides.size(); i++) 
-				res += "\n"+this.listOfRides.get(i);
+				res += "\n"+"\n"+this.listOfRides.get(i);
 		}
 		return res;
 	}
