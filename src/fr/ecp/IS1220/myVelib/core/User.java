@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsFullException;
 import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
 
 /**

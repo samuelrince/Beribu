@@ -16,6 +16,7 @@ import fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchUserExistException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsFullException;
 import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
 import fr.ecp.IS1220.myVelib.core.exception.SuchUserAlreadyExistException;
 

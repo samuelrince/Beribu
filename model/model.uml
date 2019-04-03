@@ -6891,6 +6891,9 @@
                 <packagedElement xmi:type="uml:Class" xmi:id="_u75i4FPqEemkbfqE8dfePQ" name="BackupFile"/>
                 <packagedElement xmi:type="uml:Dependency" xmi:id="_zSfIoFPqEemkbfqE8dfePQ" name="&lt;&lt;throws>>" client="_XBCCAFPmEemkbfqE8dfePQ" supplier="_j_e4oFPqEemkbfqE8dfePQ"/>
                 <packagedElement xmi:type="uml:Dependency" xmi:id="_7_GTcFPqEemkbfqE8dfePQ" name="&lt;&lt;throws>>" client="_XBCCAFPmEemkbfqE8dfePQ" supplier="_JUsf8E8nEemZdeYqpkMVLg"/>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_MQ0-sFYeEem6dMjjpUurcQ" name="&lt;&lt;throws>>" client="_5XACEFPlEemkbfqE8dfePQ" supplier="_ahXhkFYdEem6dMjjpUurcQ"/>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_cWAnoFYgEem6dMjjpUurcQ" name="&lt;&lt;throws>>" client="_5WivEFPlEemkbfqE8dfePQ" supplier="_abUj8FYdEem6dMjjpUurcQ"/>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_ejevUFYhEem6dMjjpUurcQ" name="&lt;&lt;throws>>" client="_H1E6kE8XEemZdeYqpkMVLg" supplier="_Y9q9YFYhEem6dMjjpUurcQ"/>
               </packagedElement>
               <packagedElement xmi:type="uml:Package" xmi:id="_TbPxoFPnEemkbfqE8dfePQ" name="client">
                 <packagedElement xmi:type="uml:Class" xmi:id="_TbRm0FPnEemkbfqE8dfePQ" name="CommandLineInterface" visibility="public">
@@ -9260,13 +9263,17 @@
                     <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_6j0jABydEduyofBvg4RL2w"/>
                     <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_OO2a4E8pEemZdeYqpkMVLg" name="defaultValue">
                       <language>JAVA</language>
-                      <body>6371000</body>
+                      <body>6371</body>
                     </defaultValue>
                   </ownedAttribute>
+                  <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_Zf7LUFYgEem6dMjjpUurcQ" name="Localization implements Serializable" client="_OOnKUE8pEemZdeYqpkMVLg" supplier="_h0rqcFPpEemkbfqE8dfePQ" contract="_h0rqcFPpEemkbfqE8dfePQ"/>
                   <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_OPJ84E8pEemZdeYqpkMVLg" name="Localization" specification="_OO5eME8pEemZdeYqpkMVLg">
                     <language>JAVA</language>
                     <body>&#xD;
     super();&#xD;
+    this.latitude = latitude;&#xD;
+    if (!(latitude &lt;= 90 &amp;&amp; latitude >= -90) || !(longitude &lt;= 180 &amp;&amp; longitude >= -180))&#xD;
+        throw new BadLocalizationException(&quot;A latitude should be between -90° and 90°. &quot; + &quot;\nA longitude should be between -180° and 180°.&quot;);&#xD;
     this.latitude = latitude;&#xD;
     this.longitude = longitude;&#xD;
 </body>
@@ -9395,6 +9402,8 @@
             stationsInRadius.add(listOfStations.get(i));&#xD;
         }&#xD;
     }&#xD;
+    if (stationsInRadius.size() == 0)&#xD;
+        throw new NoSuchStationExistException(&quot;Sorry, no station in a radius of &quot; + radius + &quot;km around this localization &quot; + this + &quot;.&quot;);&#xD;
     return stationsInRadius;&#xD;
 </body>
                   </ownedBehavior>
@@ -9411,7 +9420,7 @@
         }&#xD;
     }&#xD;
     if (stationIndex == -1) {&#xD;
-        throw new RuntimeException(&quot;Sorry, no station with an available&quot; + &quot; bicycle was found.&quot;);&#xD;
+        throw new NoSuchStationExistException(&quot;Sorry, no station with an available&quot; + &quot; bicycle was found.&quot;);&#xD;
     }&#xD;
     return listOfStations.get(stationIndex);&#xD;
 </body>
@@ -9429,7 +9438,7 @@
         }&#xD;
     }&#xD;
     if (stationIndex == -1) {&#xD;
-        throw new RuntimeException(&quot;Sorry, no station with an available&quot; + &quot; bicycle of type &quot; + bicycleType + &quot; was found.&quot;);&#xD;
+        throw new NoSuchStationExistException(&quot;Sorry, no station with an available&quot; + &quot; bicycle of type &quot; + bicycleType + &quot; was found.&quot;);&#xD;
     }&#xD;
     return listOfStations.get(stationIndex);&#xD;
 </body>
@@ -9443,6 +9452,24 @@
     double r = Math.sqrt(Math.random()) * radius;&#xD;
     double angle = Math.random() * 2 * Math.PI;&#xD;
     return new Localization(this.latitude + Math.cos(angle) * r / rayonTerre, this.longitude + Math.sin(angle) * r / (Math.cos(this.latitude) * rayonTerre));&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ZgwRwFYgEem6dMjjpUurcQ" name="barycenter" specification="_ZgrZQFYgEem6dMjjpUurcQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    if (locs.size() &lt; 1)&#xD;
+        throw new IllegalArgumentException(&quot;Need at least 1 localization to compute&quot; + &quot; a barycenter.&quot;);&#xD;
+    if (locs.size() == 1)&#xD;
+        return locs.get(0);&#xD;
+    double latMean = 0;&#xD;
+    double longMean = 0;&#xD;
+    for (int i = 0; i &lt; locs.size(); i++) {&#xD;
+        latMean += locs.get(i).getLatitude();&#xD;
+        longMean += locs.get(i).getLongitude();&#xD;
+    }&#xD;
+    latMean /= locs.size();&#xD;
+    longMean /= locs.size();&#xD;
+    return new Localization(latMean, longMean);&#xD;
 </body>
                   </ownedBehavior>
                   <ownedOperation xmi:type="uml:Operation" xmi:id="_OO5eME8pEemZdeYqpkMVLg" name="Localization" visibility="public" method="_OPJ84E8pEemZdeYqpkMVLg">
@@ -9502,7 +9529,7 @@
                       <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
                     </ownedParameter>
                   </ownedOperation>
-                  <ownedOperation xmi:type="uml:Operation" xmi:id="_OQjrEE8pEemZdeYqpkMVLg" name="getStationsInRadius" visibility="public" method="_OQ5CQE8pEemZdeYqpkMVLg" raisedException="_OQuqME8pEemZdeYqpkMVLg">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_OQjrEE8pEemZdeYqpkMVLg" name="getStationsInRadius" visibility="public" method="_OQ5CQE8pEemZdeYqpkMVLg" raisedException="_OQuqME8pEemZdeYqpkMVLg _Wb3VEE8oEemZdeYqpkMVLg">
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_OQmuYE8pEemZdeYqpkMVLg" type="_OQARcE8pEemZdeYqpkMVLg" direction="return">
                       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OQpKoE8pEemZdeYqpkMVLg"/>
                       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OQq_0E8pEemZdeYqpkMVLg" value="*"/>
@@ -9511,10 +9538,10 @@
                       <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_6j0jABydEduyofBvg4RL2w"/>
                     </ownedParameter>
                   </ownedOperation>
-                  <ownedOperation xmi:type="uml:Operation" xmi:id="_OQ7egE8pEemZdeYqpkMVLg" name="getClosestStationWithBicycle" visibility="public" method="_ORCMME8pEemZdeYqpkMVLg" raisedException="_OQuqME8pEemZdeYqpkMVLg">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_OQ7egE8pEemZdeYqpkMVLg" name="getClosestStationWithBicycle" visibility="public" method="_ORCMME8pEemZdeYqpkMVLg" raisedException="_OQuqME8pEemZdeYqpkMVLg _Wb3VEE8oEemZdeYqpkMVLg">
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_OQ-h0E8pEemZdeYqpkMVLg" type="_OQARcE8pEemZdeYqpkMVLg" direction="return"/>
                   </ownedOperation>
-                  <ownedOperation xmi:type="uml:Operation" xmi:id="_ORFPgE8pEemZdeYqpkMVLg" name="getClosestStationWithBicycle" visibility="public" method="_ORMkQE8pEemZdeYqpkMVLg" raisedException="_OQuqME8pEemZdeYqpkMVLg">
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_ORFPgE8pEemZdeYqpkMVLg" name="getClosestStationWithBicycle" visibility="public" method="_ORMkQE8pEemZdeYqpkMVLg" raisedException="_OQuqME8pEemZdeYqpkMVLg _Wb3VEE8oEemZdeYqpkMVLg">
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_ORHEsE8pEemZdeYqpkMVLg" type="_OQARcE8pEemZdeYqpkMVLg" direction="return"/>
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_ORJg8E8pEemZdeYqpkMVLg" name="bicycleType" type="_GTyZREzuEemApJ4NBozkFQ"/>
                   </ownedOperation>
@@ -9522,6 +9549,13 @@
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_ORRcwE8pEemZdeYqpkMVLg" type="_OOnKUE8pEemZdeYqpkMVLg" direction="return"/>
                     <ownedParameter xmi:type="uml:Parameter" xmi:id="_ORT5AE8pEemZdeYqpkMVLg" name="radius">
                       <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_6j0jABydEduyofBvg4RL2w"/>
+                    </ownedParameter>
+                  </ownedOperation>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_ZgrZQFYgEem6dMjjpUurcQ" name="barycenter" visibility="public" isStatic="true" method="_ZgwRwFYgEem6dMjjpUurcQ">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZgsnYFYgEem6dMjjpUurcQ" type="_OOnKUE8pEemZdeYqpkMVLg" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_ZguckFYgEem6dMjjpUurcQ" name="locs" type="_OOnKUE8pEemZdeYqpkMVLg">
+                      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZgvDoFYgEem6dMjjpUurcQ"/>
+                      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZgvqsFYgEem6dMjjpUurcQ" value="*"/>
                     </ownedParameter>
                   </ownedOperation>
                 </packagedElement>
@@ -10706,6 +10740,340 @@
                       <ownedParameter xmi:type="uml:Parameter" xmi:id="_egjl8FB1EemZdeYqpkMVLg" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
                     </ownedOperation>
                   </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_abUj8FYdEem6dMjjpUurcQ" name="BadLocalizationException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_acQYEFYdEem6dMjjpUurcQ" general="_abyeAFYdEem6dMjjpUurcQ"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_qxjLgFYdEem6dMjjpUurcQ" general="_t95FsE8MEemZdeYqpkMVLg"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_aew5gFYdEem6dMjjpUurcQ" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_ae7RkFYdEem6dMjjpUurcQ" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>-3432639608022878929L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ac4DIFYdEem6dMjjpUurcQ" name="BadLocalizationException" specification="_acaJEFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_adnC8FYdEem6dMjjpUurcQ" name="BadLocalizationException" specification="_adJv8FYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_aeGyMFYdEem6dMjjpUurcQ" name="BadLocalizationException" specification="_adu-wFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(s);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_aenvkFYdEem6dMjjpUurcQ" name="BadLocalizationException" specification="_aeP8IFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_acaJEFYdEem6dMjjpUurcQ" name="BadLocalizationException" visibility="public" method="_ac4DIFYdEem6dMjjpUurcQ"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_adJv8FYdEem6dMjjpUurcQ" name="BadLocalizationException" visibility="public" method="_adnC8FYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_adegEFYdEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_adkmsFYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_adu-wFYdEem6dMjjpUurcQ" name="BadLocalizationException" visibility="public" method="_aeGyMFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_aeDH0FYdEem6dMjjpUurcQ" name="s" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_aeP8IFYdEem6dMjjpUurcQ" name="BadLocalizationException" visibility="public" method="_aenvkFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_aejeIFYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_abyeAFYdEem6dMjjpUurcQ" name="IllegalArgumentException"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_afIs8FYdEem6dMjjpUurcQ" name="BadPathStrategyException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_afOzkFYdEem6dMjjpUurcQ" general="_abyeAFYdEem6dMjjpUurcQ"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_vr17QFYdEem6dMjjpUurcQ" general="_t95FsE8MEemZdeYqpkMVLg"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_ahCxcFYdEem6dMjjpUurcQ" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_ahI4EFYdEem6dMjjpUurcQ" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>4366961143252548286L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_afi8oFYdEem6dMjjpUurcQ" name="BadPathStrategyException" specification="_afTFAFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_agKAoFYdEem6dMjjpUurcQ" name="BadPathStrategyException" specification="_afsGkFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_aglecFYdEem6dMjjpUurcQ" name="BadPathStrategyException" specification="_agTKkFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(s);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ag61oFYdEem6dMjjpUurcQ" name="BadPathStrategyException" specification="_agszMFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_afTFAFYdEem6dMjjpUurcQ" name="BadPathStrategyException" visibility="public" method="_afi8oFYdEem6dMjjpUurcQ"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_afsGkFYdEem6dMjjpUurcQ" name="BadPathStrategyException" visibility="public" method="_agKAoFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_agAPoFYdEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_agG9UFYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_agTKkFYdEem6dMjjpUurcQ" name="BadPathStrategyException" visibility="public" method="_aglecFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_agibIFYdEem6dMjjpUurcQ" name="s" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_agszMFYdEem6dMjjpUurcQ" name="BadPathStrategyException" visibility="public" method="_ag61oFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ag3yUFYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ahXhkFYdEem6dMjjpUurcQ" name="BadShapeException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_ahcaEFYdEem6dMjjpUurcQ" general="_abyeAFYdEem6dMjjpUurcQ"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_tY2k8FYdEem6dMjjpUurcQ" general="_t95FsE8MEemZdeYqpkMVLg"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_ahhSkFYdEem6dMjjpUurcQ" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_ahnZMFYdEem6dMjjpUurcQ" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>6260110092420903653L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ah67MFYdEem6dMjjpUurcQ" name="BadShapeException" specification="_ahs4wFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_aigKAFYdEem6dMjjpUurcQ" name="BadShapeException" specification="_aiDeEFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ai4kgFYdEem6dMjjpUurcQ" name="BadShapeException" specification="_aioF0FYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(s);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ajNUoFYdEem6dMjjpUurcQ" name="BadShapeException" specification="_ai-EEFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ahs4wFYdEem6dMjjpUurcQ" name="BadShapeException" visibility="public" method="_ah67MFYdEem6dMjjpUurcQ"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_aiDeEFYdEem6dMjjpUurcQ" name="BadShapeException" visibility="public" method="_aigKAFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_aiVK4FYdEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_aib4kFYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_aioF0FYdEem6dMjjpUurcQ" name="BadShapeException" visibility="public" method="_ai4kgFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ai1hMFYdEem6dMjjpUurcQ" name="s" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ai-EEFYdEem6dMjjpUurcQ" name="BadShapeException" visibility="public" method="_ajNUoFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ajJDMFYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ajZh4FYdEem6dMjjpUurcQ" name="BadSortPolicyException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_ajfogFYdEem6dMjjpUurcQ" general="_abyeAFYdEem6dMjjpUurcQ"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_alOt4FYdEem6dMjjpUurcQ" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_alVbkFYdEem6dMjjpUurcQ" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>8038711527057393098L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_ajyjcFYdEem6dMjjpUurcQ" name="BadSortPolicyException" specification="_ajjS4FYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_akXyQFYdEem6dMjjpUurcQ" name="BadSortPolicyException" specification="_aj-wsFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_akwz0FYdEem6dMjjpUurcQ" name="BadSortPolicyException" specification="_akd44FYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(s);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_alInQFYdEem6dMjjpUurcQ" name="BadSortPolicyException" specification="_ak3hgFYdEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ajjS4FYdEem6dMjjpUurcQ" name="BadSortPolicyException" visibility="public" method="_ajyjcFYdEem6dMjjpUurcQ"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_aj-wsFYdEem6dMjjpUurcQ" name="BadSortPolicyException" visibility="public" method="_akXyQFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_akOoUFYdEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_akUH4FYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_akd44FYdEem6dMjjpUurcQ" name="BadSortPolicyException" visibility="public" method="_akwz0FYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_akuXkFYdEem6dMjjpUurcQ" name="s" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ak3hgFYdEem6dMjjpUurcQ" name="BadSortPolicyException" visibility="public" method="_alInQFYdEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_alE84FYdEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_ekx3MFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_ek2IoFYeEem6dMjjpUurcQ" general="_IPh1YE8sEemZdeYqpkMVLg"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_66NmQFYfEem6dMjjpUurcQ" general="_p0b9AE8MEemZdeYqpkMVLg"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_emj_4FYeEem6dMjjpUurcQ" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_emsiwFYeEem6dMjjpUurcQ" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>-2619602615502997521L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_elBHwFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" specification="_ek2vsFYeEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_elVQ0FYeEem6dMjjpUurcQ" name="SuchStationIsFullException" specification="_elDkAFYeEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause, enableSuppression, writableStackTrace);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_elmWkFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" specification="_elXGAFYeEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_emFewFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" specification="_eluSYFYeEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_emcEEFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" specification="_emQd4FYeEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_ek2vsFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" visibility="public" method="_elBHwFYeEem6dMjjpUurcQ"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_elDkAFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" visibility="public" method="_elVQ0FYeEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_elPKMFYeEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_elQ_YFYeEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_elS0kFYeEem6dMjjpUurcQ" name="enableSuppression">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                      </ownedParameter>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_elUCsFYeEem6dMjjpUurcQ" name="writableStackTrace">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_elXGAFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" visibility="public" method="_elmWkFYeEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_elg3AFYeEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ellIcFYeEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_eluSYFYeEem6dMjjpUurcQ" name="SuchStationIsFullException" visibility="public" method="_emFewFYeEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_emB0YFYeEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_emQd4FYeEem6dMjjpUurcQ" name="SuchStationIsFullException" visibility="public" method="_emcEEFYeEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ema18FYeEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_Y9q9YFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" visibility="public">
+                    <generalization xmi:type="uml:Generalization" xmi:id="_Y9sykFYhEem6dMjjpUurcQ" general="_IPh1YE8sEemZdeYqpkMVLg"/>
+                    <generalization xmi:type="uml:Generalization" xmi:id="_hYOH0FYhEem6dMjjpUurcQ" general="_p0b9AE8MEemZdeYqpkMVLg"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_Y-BisFYhEem6dMjjpUurcQ" name="serialVersionUID" visibility="private" isLeaf="true" isStatic="true" isUnique="false">
+                      <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_8heigBydEduyofBvg4RL2w"/>
+                      <defaultValue xmi:type="uml:OpaqueExpression" xmi:id="_Y-CJwFYhEem6dMjjpUurcQ" name="defaultValue">
+                        <language>JAVA</language>
+                        <body>-3810169490418535751L</body>
+                      </defaultValue>
+                    </ownedAttribute>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Y9wc8FYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" specification="_Y9tZoFYhEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super();&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Y90HUlYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" specification="_Y9xEAFYhEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(arg0, arg1, arg2, arg3);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Y93xsFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" specification="_Y90uYFYhEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message, cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Y98qMFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" specification="_Y94YwFYhEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(message);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Y-AUkFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" specification="_Y99RQFYhEem6dMjjpUurcQ">
+                      <language>JAVA</language>
+                      <body>&#xD;
+    super(cause);&#xD;
+// TODO Auto-generated constructor stub&#xD;
+</body>
+                    </ownedBehavior>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_Y9tZoFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" visibility="public" method="_Y9wc8FYhEem6dMjjpUurcQ"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_Y9xEAFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" visibility="public" method="_Y90HUlYhEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y9zgQFYhEem6dMjjpUurcQ" name="arg0" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y9zgQVYhEem6dMjjpUurcQ" name="arg1" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y90HUFYhEem6dMjjpUurcQ" name="arg2">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                      </ownedParameter>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y90HUVYhEem6dMjjpUurcQ" name="arg3">
+                        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_vAIV4I7PEdySGvm5GN66HA"/>
+                      </ownedParameter>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_Y90uYFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" visibility="public" method="_Y93xsFYhEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y918gVYhEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y93KoFYhEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_Y94YwFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" visibility="public" method="_Y98qMFYhEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y98DIFYhEem6dMjjpUurcQ" name="message" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                    </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_Y99RQFYhEem6dMjjpUurcQ" name="SuchUserAlreadyExistException" visibility="public" method="_Y-AUkFYhEem6dMjjpUurcQ">
+                      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y9_tgFYhEem6dMjjpUurcQ" name="cause" type="_yAqv4U8SEemZdeYqpkMVLg"/>
+                    </ownedOperation>
+                  </packagedElement>
                 </packagedElement>
                 <packagedElement xmi:type="uml:Class" xmi:id="_Xj7MgE8sEemZdeYqpkMVLg" name="ParkingSlot" visibility="public">
                   <ownedAttribute xmi:type="uml:Property" xmi:id="_Xj_d8E8sEemZdeYqpkMVLg" name="uniqId" visibility="private" isStatic="true" isUnique="false">
@@ -11535,6 +11903,48 @@
                 <packagedElement xmi:type="uml:Class" xmi:id="_7R8t8E_WEemZdeYqpkMVLg" name="PathStrategy"/>
                 <packagedElement xmi:type="uml:Dependency" xmi:id="__pDREE_WEemZdeYqpkMVLg" name="&lt;&lt;throws>>" client="_7PLGwE_WEemZdeYqpkMVLg" supplier="_5HqAoE_WEemZdeYqpkMVLg"/>
                 <packagedElement xmi:type="uml:Dependency" xmi:id="_F5KkQE_XEemZdeYqpkMVLg" name="&lt;&lt;throws>>" client="_7PLGwE_WEemZdeYqpkMVLg" supplier="_t95FsE8MEemZdeYqpkMVLg"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_BlO-sFYeEem6dMjjpUurcQ" name="PathStrategyFactory" visibility="public">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Blak4FYeEem6dMjjpUurcQ" name="newPathStrategy" specification="_BlT3MFYeEem6dMjjpUurcQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    if (pathStrategy.equalsIgnoreCase(&quot;minimal walking&quot;))&#xD;
+        return new MinimalWalking();&#xD;
+    if (pathStrategy.equalsIgnoreCase(&quot;fastest path&quot;))&#xD;
+        return new FastestPath();&#xD;
+    if (pathStrategy.equalsIgnoreCase(&quot;prefer plus&quot;))&#xD;
+        return new PreferPlus();&#xD;
+    if (pathStrategy.equalsIgnoreCase(&quot;avoid plus&quot;))&#xD;
+        return new AvoidPlus();&#xD;
+    if (pathStrategy.equalsIgnoreCase(&quot;preserve distribution&quot;))&#xD;
+        return new PreserveDistribution();&#xD;
+    else&#xD;
+        throw new BadPathStrategyException(&quot;No such path strategy. The accepted path strategies &quot; + &quot;are 'minimal walking', 'fastest path', 'prefer plus', &quot; + &quot;'avoid plus' and 'preserve distribution'.&quot;);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_BlT3MFYeEem6dMjjpUurcQ" name="newPathStrategy" visibility="public" method="_Blak4FYeEem6dMjjpUurcQ">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_BlVsYFYeEem6dMjjpUurcQ" type="_7R8t8E_WEemZdeYqpkMVLg" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_BlYvsFYeEem6dMjjpUurcQ" name="pathStrategy" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_E-6QQFYeEem6dMjjpUurcQ" name="&lt;&lt;throws>>" client="_BlO-sFYeEem6dMjjpUurcQ" supplier="_afIs8FYdEem6dMjjpUurcQ"/>
+                <packagedElement xmi:type="uml:Class" xmi:id="_KKchAFYeEem6dMjjpUurcQ" name="RandomLocGeneratorFactory" visibility="public">
+                  <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_KK0UcFYeEem6dMjjpUurcQ" name="newRandomLocGenerator" specification="_KKhZgFYeEem6dMjjpUurcQ">
+                    <language>JAVA</language>
+                    <body>&#xD;
+    if (shape.equalsIgnoreCase(&quot;circle&quot;))&#xD;
+        return new RandomLocInCircle();&#xD;
+    if (shape.equalsIgnoreCase(&quot;square&quot;))&#xD;
+        return new RandomLocInSquare();&#xD;
+    throw new BadShapeException(&quot;No localization generator for such an area shape. &quot; + &quot;The accepted shapes are 'square' and 'circle'.&quot;);&#xD;
+</body>
+                  </ownedBehavior>
+                  <ownedOperation xmi:type="uml:Operation" xmi:id="_KKhZgFYeEem6dMjjpUurcQ" name="newRandomLocGenerator" visibility="public" method="_KK0UcFYeEem6dMjjpUurcQ">
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_KKwDAFYeEem6dMjjpUurcQ" type="_KKjOsFYeEem6dMjjpUurcQ" direction="return"/>
+                    <ownedParameter xmi:type="uml:Parameter" xmi:id="_KKzGUFYeEem6dMjjpUurcQ" name="shape" type="_GTyZREzuEemApJ4NBozkFQ"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Class" xmi:id="_KKjOsFYeEem6dMjjpUurcQ" name="RandomLocGenerator"/>
+                <packagedElement xmi:type="uml:Dependency" xmi:id="_LOyA8FYgEem6dMjjpUurcQ" name="&lt;&lt;throws>>" client="_7PLGwE_WEemZdeYqpkMVLg" supplier="_ekx3MFYeEem6dMjjpUurcQ"/>
               </packagedElement>
             </packagedElement>
           </packagedElement>
@@ -11805,4 +12215,33 @@
   <standard:Create xmi:id="_j_rF4FPqEemkbfqE8dfePQ" base_BehavioralFeature="_j_qe0FPqEemkbfqE8dfePQ"/>
   <PapyrusJava:External xmi:id="_u76xAFPqEemkbfqE8dfePQ" name="BackupFile" base_Classifier="_u75i4FPqEemkbfqE8dfePQ"/>
   <PapyrusJava:External xmi:id="_u7-bYFPqEemkbfqE8dfePQ" name="fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException" base_Classifier="_j_e4oFPqEemkbfqE8dfePQ"/>
+  <PapyrusJava:External xmi:id="_acHOIFYdEem6dMjjpUurcQ" name="IllegalArgumentException" base_Classifier="_abyeAFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_acsc8FYdEem6dMjjpUurcQ" base_BehavioralFeature="_acaJEFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_adXLUFYdEem6dMjjpUurcQ" base_BehavioralFeature="_adJv8FYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_ad8aIFYdEem6dMjjpUurcQ" base_BehavioralFeature="_adu-wFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_aecwcFYdEem6dMjjpUurcQ" base_BehavioralFeature="_aeP8IFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_aferMFYdEem6dMjjpUurcQ" base_BehavioralFeature="_afTFAFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_af5h8FYdEem6dMjjpUurcQ" base_BehavioralFeature="_afsGkFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_agbtcFYdEem6dMjjpUurcQ" base_BehavioralFeature="_agTKkFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_agy50FYdEem6dMjjpUurcQ" base_BehavioralFeature="_agszMFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_ah2pwFYdEem6dMjjpUurcQ" base_BehavioralFeature="_ahs4wFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_aiOdMFYdEem6dMjjpUurcQ" base_BehavioralFeature="_aiDeEFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_aiwosFYdEem6dMjjpUurcQ" base_BehavioralFeature="_aioF0FYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_ajEKsFYdEem6dMjjpUurcQ" base_BehavioralFeature="_ai-EEFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_ajuSAFYdEem6dMjjpUurcQ" base_BehavioralFeature="_ajjS4FYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_akH6oFYdEem6dMjjpUurcQ" base_BehavioralFeature="_aj-wsFYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_aknp4FYdEem6dMjjpUurcQ" base_BehavioralFeature="_akd44FYdEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_alArcFYdEem6dMjjpUurcQ" base_BehavioralFeature="_ak3hgFYdEem6dMjjpUurcQ"/>
+  <PapyrusJava:External xmi:id="_KKtmwFYeEem6dMjjpUurcQ" name="RandomLocGenerator" base_Classifier="_KKjOsFYeEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_ek_SkFYeEem6dMjjpUurcQ" base_BehavioralFeature="_ek2vsFYeEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_elMG4FYeEem6dMjjpUurcQ" base_BehavioralFeature="_elDkAFYeEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_eleawFYeEem6dMjjpUurcQ" base_BehavioralFeature="_elXGAFYeEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_el-xEFYeEem6dMjjpUurcQ" base_BehavioralFeature="_eluSYFYeEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_emZAwFYeEem6dMjjpUurcQ" base_BehavioralFeature="_emQd4FYeEem6dMjjpUurcQ"/>
+  <PapyrusJava:Transient xmi:id="_ZgOtUFYgEem6dMjjpUurcQ" base_Property="_OOywgE8pEemZdeYqpkMVLg"/>
+  <standard:Create xmi:id="_Y9v14FYhEem6dMjjpUurcQ" base_BehavioralFeature="_Y9tZoFYhEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_Y9y5MFYhEem6dMjjpUurcQ" base_BehavioralFeature="_Y9xEAFYhEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_Y918gFYhEem6dMjjpUurcQ" base_BehavioralFeature="_Y90uYFYhEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_Y961AFYhEem6dMjjpUurcQ" base_BehavioralFeature="_Y94YwFYhEem6dMjjpUurcQ"/>
+  <standard:Create xmi:id="_Y9-fYFYhEem6dMjjpUurcQ" base_BehavioralFeature="_Y99RQFYhEem6dMjjpUurcQ"/>
 </xmi:XMI>
