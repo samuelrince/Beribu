@@ -25,16 +25,21 @@ public class UserGUI extends JFrame {
 	private JPanel newRidePan = new JPanel();
 	private Panneau planPanneau;
 	
+	Icon bellIcon = new ImageIcon("bell.png");
+	Icon mapIcon = new ImageIcon("map.png");
+	Icon cardIcon = new ImageIcon("card.png");
+	Icon statIcon = new ImageIcon("statistics.png");
+	Icon bicycleIcon = new ImageIcon("bicycle.png");
 	private JButton backBtn1 = new JButton("back");
 	private JButton backBtn2 = new JButton("back");
 	private JButton backBtn3 = new JButton("back");
 	private JButton backBtn4 = new JButton("back");
 	private JButton backBtn5 = new JButton("back");
-	private JButton alertBtn = new JButton("ALERTS: ");
-	private JButton planBtn = new JButton("PLAN OF STATIONS");
-	private JButton planRideBtn = new JButton("PLAN A RIDE");
-	private JButton statBtn = new JButton("MY STATISTICS");
-	private JButton subBtn = new JButton("MY SUBSCRIPTION");
+	private JButton alertBtn = new JButton("ALERTS: ",bellIcon);
+	private JButton planBtn = new JButton("PLAN OF STATIONS", mapIcon);
+	private JButton planRideBtn = new JButton("PLAN A RIDE",bicycleIcon);
+	private JButton statBtn = new JButton("MY STATISTICS",statIcon);
+	private JButton subBtn = new JButton("MY SUBSCRIPTION",cardIcon);
 	private JButton discardBtn = new JButton("DISCARD");
 	private JButton startBtn = new JButton("START");
 	private JButton newRideBtn = new JButton("NEW RIDE");
@@ -77,8 +82,7 @@ public class UserGUI extends JFrame {
 		super("MyVelibApp v.1.0 - welcome "+user.getName()+"!");
 		this.user = user;
 		
-		
-		this.setSize(500, 300);
+		this.setSize(600, 350);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2,0);
 		this.setResizable(false);
@@ -86,18 +90,19 @@ public class UserGUI extends JFrame {
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
-		int margin = 50;
-		int height = (int)this.getSize().getHeight();
-    	int width = (int)this.getSize().getWidth();
-    	int length = Math.min(height, width)-margin;
+    	int width = (int) this.getSize().getWidth();
+    	int height = (int) this.getSize().getHeight();
+    	int length = (int) (0.7*Math.min(height, width));
+    	int marginX = width/2-length/2;
+    	int marginY = (int) (0.7*(height/2-length/2));
     	ArrayList<Localization> points = new ArrayList<Localization>();
 		ArrayList<String> labels = new ArrayList<String>();
 		ArrayList<Station> stationDatabase = MyVelibNetwork.getInstance().getStationDatabase();
 		for (Station s:stationDatabase) {
 			points.add(s.getLocalization());
-			labels.add(s.getName());
+			labels.add(s.getName()+"(slots:"+s.numberOfFreeSlots()+",bicycles:"+s.numberOfBicycles()+")");
 		}
-		try {planPanneau = new Panneau(points,labels,length,margin);}
+		try {planPanneau = new Panneau(points,labels,length,marginX,marginY);}
 		catch(Exception e) {planBtn.setText("PLAN OF STATIONS (unavailable)");
 		planBtn.setEnabled(false);}
 		
@@ -115,6 +120,7 @@ public class UserGUI extends JFrame {
 		subPan.setBackground(Color.CYAN);  
 		planRidePan.setBackground(Color.CYAN);  
 		newRidePan.setBackground(Color.CYAN); 
+		planPanneau.setBackground(Color.CYAN);
 		standardBtn.setBackground(Color.CYAN);
 		vlibreBtn.setBackground(Color.CYAN);
 		vmaxBtn.setBackground(Color.CYAN);
@@ -150,10 +156,21 @@ public class UserGUI extends JFrame {
 		passwordMenuItem.addActionListener(new passwordMenuItemListener());
 		GPSauthorCheckBox.addActionListener(new GPSauthorActionListener());
 		
+		alertBtn.setFont(new Font("Arial", Font.BOLD, 15));
 		home.add(alertBtn, BorderLayout.NORTH);
+		planBtn.setFont(new Font("Arial", Font.BOLD, 15));
 		home.add(planBtn, BorderLayout.SOUTH);
+		planRideBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+		planRideBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		planRideBtn.setFont(new Font("Arial", Font.BOLD, 16));
 		home.add(planRideBtn, BorderLayout.CENTER);
+		statBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+		statBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		statBtn.setFont(new Font("Arial", Font.BOLD, 15));
 		home.add(statBtn, BorderLayout.EAST);
+		subBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+		subBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+		subBtn.setFont(new Font("Arial", Font.BOLD, 15));
 		home.add(subBtn, BorderLayout.WEST);
 		backBtn1.setHorizontalAlignment(SwingConstants.LEFT);
 		backBtn2.setHorizontalAlignment(SwingConstants.LEFT);
@@ -245,8 +262,30 @@ public class UserGUI extends JFrame {
 	class planBtnListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) { 
 			UserGUI.this.setVisible(false);
+	    	
+			int width = (int) UserGUI.this.getSize().getWidth();
+	    	int height = (int) UserGUI.this.getSize().getHeight();
+	    	int length = (int) (0.7*Math.min(height, width));
+	    	int marginX = width/2-length/2;
+	    	int marginY = (int) (0.7*(height/2-length/2));
+	    	ArrayList<Localization> points = new ArrayList<Localization>();
+			ArrayList<String> labels = new ArrayList<String>();
+			ArrayList<Station> stationDatabase = MyVelibNetwork.getInstance().getStationDatabase();
+			for (Station s:stationDatabase) {
+				points.add(s.getLocalization());
+				labels.add(s.getName()+"(slots:"+s.numberOfFreeSlots()+",bicycles:"+s.numberOfBicycles()+")");
+			}
+			try {
+				if (GPSauthorCheckBox.isSelected() && user.getLocalization() != null)
+					planPanneau = new Panneau(points,labels,length,marginX,marginY,user.getLocalization());
+				else
+					planPanneau = new Panneau(points,labels,length,marginX,marginY);
+			}
+			catch(Exception exc) {planBtn.setText("PLAN OF STATIONS (unavailable)");
+			planBtn.setEnabled(false);}
+			
+			planPanneau.add(backBtn5);
 			UserGUI.this.setContentPane(planPanneau);
-			planPanneau.setAlignmentX(CENTER_ALIGNMENT);
 			UserGUI.this.setVisible(true);
 	    }
 	  }
@@ -654,6 +693,7 @@ public class UserGUI extends JFrame {
 		network.createSubscribers(2,"vlibre");
 		User user1 = network.user(0);
 		User user2 = network.user(0);
+		user1.notifyUser("hey");
 		user1.setLocalisation(new Localization(48.86101631231847,2.33583927154541));
 		user1.planRide(new Localization(48,2), new Localization(48,3),"mechanical");
 		SwingUtilities.invokeLater (new Runnable (){public void run () {new UserGUI(user1);}});
