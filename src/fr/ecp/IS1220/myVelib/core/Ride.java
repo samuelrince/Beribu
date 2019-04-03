@@ -5,7 +5,7 @@ package fr.ecp.IS1220.myVelib.core;
  * @author Valentin
  *
  */
-public class Ride {
+public class Ride implements java.io.Serializable {
 	private static long uniqId;
 	private long id;
 	private User user;
@@ -158,6 +158,32 @@ public class Ride {
 
 	@Override
 	public String toString() {
-		return "Ride [" + id + "], of " + user.getName() + " on bike NÂ°" + bicycle.getId() + " start at station (" + startStation.getId() + ") " + startTime.toString();
+		String endStation;
+		String endDate;
+		String duration;
+		String cost;
+		String isPlus = "";
+		if (this.isCurrent()) {
+			endStation = "-";
+			endDate = "-";
+			duration ="-";
+			cost = "-";
+		}
+		else {
+			endStation = this.endStation.getName();
+			if (this.endStation.isPlus())
+				isPlus = " (Plus)";
+			endDate = this.endTime.toString();
+			duration = this.duration.toString();
+			cost = Double.toString(this.price);
+		}
+		return "Ride [id." + id + "] of " + user.getName() + ":\n"+
+	bicycle.getType()+" bike n°" + bicycle.getId() + " rented in " + startStation.getName() + 
+	" on "+startTime.toString()+", returned in " + endStation +isPlus+ " on "+endDate+"\n"+
+	"Cost: "+cost+"€ / Duration:"+duration;
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {this.bicycle = null; this.endStation = null; this.endStation = null; this.user = null;}
 }

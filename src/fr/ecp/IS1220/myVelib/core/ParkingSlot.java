@@ -1,11 +1,15 @@
 package fr.ecp.IS1220.myVelib.core;
 
+import fr.ecp.IS1220.myVelib.core.exception.SuchParkingSlotHasBicycleException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchParkingSlotIsOfflineException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
+
 /**
  * This class represents a parking slot.
  * @author Valentin
  *
  */
-public class ParkingSlot {
+public class ParkingSlot implements java.io.Serializable {
 	private static long uniqId;
 	private long id;
 	private Bicycle bicycle = null;
@@ -21,7 +25,8 @@ public class ParkingSlot {
 		this.station = station;
 		this.id = uniqId++;
 		station.addParkingSlot(this);
-		System.out.println("A parking slot has been added to "+station+".");
+		if (!this.station.initializing())
+			System.out.println("A parking slot has been added to "+station+".");
 	}
 	
 	/**
@@ -50,11 +55,11 @@ public class ParkingSlot {
 	 */
 	public void attachBicycle(Bicycle bicycle) throws RuntimeException,
 	IllegalArgumentException {
-		if (this.isBicycle()) {
-			throw new RuntimeException("This parking slot already holds a bicycle.");
+		if (this.hasBicycle()) {
+			throw new SuchParkingSlotHasBicycleException("This parking slot already holds a bicycle.");
 		}
 		if (this.isOffline) {
-			throw new RuntimeException("This parking slot is offline.");
+			throw new SuchParkingSlotIsOfflineException("This parking slot is offline.");
 		}
 		if (bicycle == null) {
 			throw new IllegalArgumentException("The argument can't be null.");
@@ -71,12 +76,12 @@ public class ParkingSlot {
 	 * Detaches the bicycle currently attached to the parking slot if it is online.
 	 * @throws RuntimeException when the parking slot state is not valid
 	 */
-	public void detachBicycle() throws RuntimeException{
-		if (!this.isBicycle()) {
-			throw new RuntimeException("This parking slot holds on bicycle.");
+	public void detachBicycle() throws RuntimeException {
+		if (!this.hasBicycle()) {
+			throw new SuchParkingSlotHasBicycleException("This parking slot holds on bicycle.");
 		}
 		if (this.isOffline) {
-			throw new RuntimeException("This parking slot is offline.");
+			throw new SuchParkingSlotIsOfflineException("This parking slot is offline.");
 		}
 		this.bicycle.setAttached(false);
 		this.bicycle = null;
@@ -94,9 +99,9 @@ public class ParkingSlot {
 	 * Sets the parking slot in the state specified in argument.
 	 * @param isOffline true to set the parking slot offline, false to set it online
 	 */
-	public void setOffline(boolean isOffline) {
+	public void setOffline(boolean isOffline) throws SuchStationIsOfflineException {
 		if (!isOffline && this.station.isOffline()) {
-			throw new RuntimeException("This parking slot can't be"
+			throw new SuchStationIsOfflineException("This parking slot can't be"
 					+ " set online because the station is offline.");
 		}
 		this.isOffline = isOffline;
@@ -116,7 +121,7 @@ public class ParkingSlot {
 	 * 
 	 * @return true if a bicycle is attached to the parking slot, false otherwise
 	 */
-	public boolean isBicycle() {
+	public boolean hasBicycle() {
 		if (this.getBicycle() != null) {
 			return true;
 		}
@@ -124,5 +129,9 @@ public class ParkingSlot {
 			return false;
 		}
 	}
+	
+	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {this.bicycle = null;this.station = null;}
 	
 }

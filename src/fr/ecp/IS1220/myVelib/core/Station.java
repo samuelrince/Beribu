@@ -5,12 +5,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.crypto.NoSuchPaddingException;
+
+import fr.ecp.IS1220.myVelib.core.exception.NoBicycleAvailableException;
+import fr.ecp.IS1220.myVelib.core.exception.NoParkingSlotAvailableException;
+
 /**
  * This class represents a station.
  * @author Valentin
  *
  */
-public class Station implements Comparable<Station>{
+public class Station implements Comparable<Station>, java.io.Serializable{
 	private static long uniqId;
 	private ArrayList<State> history = new ArrayList<State>();
 	private long id;
@@ -114,7 +119,7 @@ public class Station implements Comparable<Station>{
 	public int numberOfBicycles() {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle()
+			if (this.parkingSlots.get(i).hasBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				number++;
 			}
@@ -131,7 +136,7 @@ public class Station implements Comparable<Station>{
 	public int numberOfBicycles(String bicycleType) {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType()))
 					number++;
@@ -148,7 +153,7 @@ public class Station implements Comparable<Station>{
 	public int numberOfFreeSlots() {
 		int number = 0;
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (!this.parkingSlots.get(i).isBicycle()
+			if (!this.parkingSlots.get(i).hasBicycle()
 			&& this.parkingSlots.get(i).isOffline() == false) {
 				number++;
 			}
@@ -162,13 +167,23 @@ public class Station implements Comparable<Station>{
 	 * @return a free parking slot
 	 * @throws RuntimeException	when there is no available parking slot
 	 */
-	public ParkingSlot getFreeParkingSlot() throws RuntimeException {
+	public ParkingSlot getFreeParkingSlot() throws NoParkingSlotAvailableException {
 		for(int i = 0; i <= this.parkingSlots.size() - 1; i++) {
-			if (!this.parkingSlots.get(i).isBicycle() && this.parkingSlots.get(i).isOffline() == false) {
+			if (!this.parkingSlots.get(i).hasBicycle() && this.parkingSlots.get(i).isOffline() == false) {
 				return this.parkingSlots.get(i);
 			}
 		}
-		throw new RuntimeException("No parking slot available in "+this+".");
+		throw new NoParkingSlotAvailableException("No parking slot available in "+this+".");
+	}
+	
+	public ParkingSlot getParkingSlot(int index) 
+			throws IllegalArgumentException, RuntimeException {
+		if (index < 0)
+			throw new IllegalArgumentException("The parking slot index should be positive.");
+		if (index > this.parkingSlots.size()-1)
+			throw new RuntimeException("The station "+this.name+" contains only "
+				+this.parkingSlots.size()+" parking slots.");	
+		return this.parkingSlots.get(index);
 	}
 	
 	/**
@@ -179,7 +194,7 @@ public class Station implements Comparable<Station>{
 	 */
 	public boolean isFull() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (!parkingSlots.get(i).isBicycle()
+			if (!parkingSlots.get(i).hasBicycle()
 			&& !parkingSlots.get(i).isOffline()) {
 				return false;
 			}
@@ -194,16 +209,16 @@ public class Station implements Comparable<Station>{
 	 * @return an available bicycle
 	 * @throws RuntimeException	When no bicycle is available
 	 */
-	public Bicycle getBicycle() throws RuntimeException {
+	public Bicycle getBicycle() throws NoBicycleAvailableException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
 				Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
 				this.parkingSlots.get(i).detachBicycle();
 				return bicycle;
 			}
 		}
-		throw new RuntimeException("No bicycle is available in "+this+".");
+		throw new NoBicycleAvailableException("No bicycle is available in "+this+".");
 	}
 		
 	/**
@@ -214,9 +229,9 @@ public class Station implements Comparable<Station>{
 	 * @return an available bicycle of given type
 	 * @throws RuntimeException	When no bicycle is available
 	 */
-	public Bicycle getBicycle(String bicycleType) throws RuntimeException {
+	public Bicycle getBicycle(String bicycleType) throws NoBicycleAvailableException {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					Bicycle bicycle = this.parkingSlots.get(i).getBicycle();
@@ -226,7 +241,7 @@ public class Station implements Comparable<Station>{
 				}
 			}
 		}
-		throw new RuntimeException("No bicycle of type "+bicycleType+" is available in "+this+".");
+		throw new NoBicycleAvailableException("No bicycle of type "+bicycleType+" is available in "+this+".");
 	}
 	
 	/**
@@ -236,7 +251,7 @@ public class Station implements Comparable<Station>{
 	 */
 	public boolean isBicycle() {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle() 
+			if (this.parkingSlots.get(i).hasBicycle() 
 			&& !this.parkingSlots.get(i).isOffline()) {
 				return true;
 			}
@@ -252,7 +267,7 @@ public class Station implements Comparable<Station>{
 	 */
 	public boolean isBicycle(String bicycleType) {
 		for (int i = 0; i <= this.parkingSlots.size()-1; i++) {
-			if (this.parkingSlots.get(i).isBicycle()
+			if (this.parkingSlots.get(i).hasBicycle()
 			&& !this.parkingSlots.get(i).isOffline()) {
 				if (bicycleType.equalsIgnoreCase(this.parkingSlots.get(i).getBicycle().getType())) {
 					return true;
@@ -273,7 +288,7 @@ public class Station implements Comparable<Station>{
 	 */
 	public String getOneBicycleType() {
 		if (!this.isBicycle())
-			throw new RuntimeException("No bicycle is available in "+this+".");
+			throw new NoBicycleAvailableException("Sorry, no bicycle is available in "+this+".");
 		for (int i = 0; i < Bicycle.getTypeDict().size(); i++) {
 			if (this.isBicycle(Bicycle.getTypeDict().get(i))) {
 				return Bicycle.getTypeDict().get(i);
@@ -429,7 +444,23 @@ public class Station implements Comparable<Station>{
 		for (int i = 0; i < quantity; i++) {
 			new ParkingSlot(this);
 		}
-		this.initializing = false;
+		if (this.initializing) {
+			System.out.println(quantity+" parking slots has been added to "+this+".");
+			this.initializing = false;
+		}
+	}
+	
+	public boolean initializing() {
+		return this.initializing;
+	}
+	
+	public ParkingSlot getParkingSlotAttachedTo(Bicycle bike) throws NoSuchPaddingException {
+		for (ParkingSlot ps: this.parkingSlots) {
+			if (ps.getBicycle().equals(bike)) {
+				return ps;
+			}
+		}
+		throw new NoSuchPaddingException("This bike is not attached to any parking slot");
 	}
 	
 	/**
@@ -512,7 +543,7 @@ public class Station implements Comparable<Station>{
 	 * at a given moment in time.
 	 * @author Valentin
 	 */
-	public class State{
+	public class State implements java.io.Serializable {
 		private Date timeStamp;
 		private ArrayList<ArrayList<Boolean>> parkingSlotStatus 
 		= new ArrayList<ArrayList<Boolean>>();
@@ -529,7 +560,7 @@ public class Station implements Comparable<Station>{
 			for (int i = 0; i < Station.this.parkingSlots.size(); i++) {
 				ParkingSlot parkingSlot = Station.this.parkingSlots.get(i);
 				this.parkingSlotStatus.add(new ArrayList<Boolean>(
-						Arrays.asList(parkingSlot.isOffline(), parkingSlot.isBicycle())));
+						Arrays.asList(parkingSlot.isOffline(), parkingSlot.hasBicycle())));
 			}
 		}
 		
@@ -589,6 +620,15 @@ public class Station implements Comparable<Station>{
 	 */
 	public State getCurrentState() {
 		return this.history.get(this.history.size()-1);
+	}
+	
+	protected static void resetUniqID() {uniqId=0;}
+	
+	protected void forceReset() {
+		this.history = null;
+		this.createdAt = null;
+		this.parkingSlots = null;
+		this.targetOf = null;
 	}
 	
 	@Override

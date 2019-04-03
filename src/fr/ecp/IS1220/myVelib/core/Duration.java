@@ -1,12 +1,14 @@
 package fr.ecp.IS1220.myVelib.core;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadDurationException;
+
 /**
  * This class represents a duration. It is used mainly for purposes of validity
  * check and string representation.
  * @author Valentin
  *
  */
-public class Duration {
+public class Duration implements java.io.Serializable {
 	//duration in seconds
 	private int duration;
 
@@ -25,7 +27,7 @@ public class Duration {
 	 * @throws RuntimeException	occurs when the duration is negative (wrong
 	 * dates)
 	 */
-	public Duration(Date startDate, Date endDate) throws IllegalArgumentException {
+	public Duration(Date startDate, Date endDate) throws BadDurationException {
 		int yearInSeconds = (endDate.getYear()-startDate.getYear())*32140800;
 		int monthInSeconds = (endDate.getMonth()-startDate.getMonth())*2678400;
 		int dayInSeconds = (endDate.getDay()-startDate.getDay())*86400;
@@ -36,7 +38,7 @@ public class Duration {
 		if (t>=0) {
 			this.duration = yearInSeconds+monthInSeconds+dayInSeconds+hourInSeconds+minuteInSeconds+secondsInSeconds;
 		} else {
-			throw new IllegalArgumentException("The end date should be posterior to the start date.");
+			throw new BadDurationException("The end date should be posterior to the start date.");
 		}
 	}
 	
@@ -51,7 +53,23 @@ public class Duration {
 	public Duration(Station startStation, Station endStation, String bicycleType) {
 		double distance = startStation.getLocalization().distanceTo(
 				endStation.getLocalization());
-		this.duration = (int) (distance/Bicycle.getSpeed(bicycleType));
+		this.duration = (int) (distance*1000/Bicycle.getSpeed(bicycleType));
+	}
+	
+	
+	/**
+	 * Constructor of class Duration. The value assigned corresponds to the 
+	 * time that would be taken to go from one given localization to another with a 
+	 * given speed.
+	 * @param startLoc start localization
+	 * @param endLoc end localization
+	 * @param speed speed (in km/h)
+	 */
+	public Duration(Localization startLoc, Localization endLoc, double speed) {
+		if (speed <= 0)
+			throw new IllegalArgumentException("The speed should be >0.");
+		double distance = startLoc.distanceTo(endLoc);
+		this.duration = (int) (3.6*distance*1000/speed);
 	}
 	
 	/**
@@ -70,7 +88,7 @@ public class Duration {
 		if (duration >= 0)
 			this.duration = duration;
 		else
-			throw new IllegalArgumentException("The duration can't be negative.");
+			throw new BadDurationException("The duration can't be negative.");
 	}
 
 	/**

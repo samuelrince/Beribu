@@ -88,7 +88,11 @@ class UserTest {
 		SD.setDay(2019, 3, 11); SD.setTime(10, 11, 11);
 		User u = new User("Jean");
 		Card c = new Vlibre(u);
-		u.subscribe(c);
+		try {
+			u.subscribe(c);
+		} catch (Exception e) {
+			fail("Subscription failed");
+		}
 		assertTrue(u.getCard() == c);
 	}
 	@Test 
@@ -99,7 +103,11 @@ class UserTest {
 		User u2 = new User("Paul");
 		Card c1 = new Vlibre(u1);
 		Card c2 = new Vlibre(u2);
-		u1.subscribe(c1);
+		try {
+			u1.subscribe(c1);
+		} catch (Exception e) {
+			fail("Subscription failed");
+		}
 		assertFalse(u1.getCard() == c2);
 	}
 	@Test 

@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.ToStringConversion;
 
+import fr.ecp.IS1220.myVelib.core.exception.BadLocalizationException;
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+
 /**
  * This class represents a localization.
  * @author Valentin
  *
  */
-public class Localization {
+public class Localization implements java.io.Serializable {
 	private double latitude;
 	private double longitude;
-	final static double rayonTerre = 6371000;
+	transient final static double rayonTerre = 6371;
 
 	/**
 	 * Constructor of class Localization.
@@ -21,6 +24,10 @@ public class Localization {
 	 */
 	public Localization(double latitude, double longitude) {
 		super();
+		this.latitude = latitude;
+		if (!(latitude <= 90 && latitude >= -90) || !(longitude <= 180 && longitude >= -180))
+			throw new BadLocalizationException("A latitude should be between -90° and 90°. "
+					+ "\nA longitude should be between -180° and 180°.");
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -110,7 +117,7 @@ public class Localization {
 	 * and contains at least one available parking slot.
 	 * @return 		the closest Station with an available parking slot
 	 */
-	public Station getClosestAvailableStation() throws RuntimeException {
+	public Station getClosestAvailableStation() throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -123,7 +130,7 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no available station was found.");
+			throw new NoSuchStationExistException("Sorry, no available station was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}
@@ -135,7 +142,7 @@ public class Localization {
 	 * @param isPlus	true if the Station should be Plus, false otherwise
 	 * @return 		the closest Station of given type with an available parking slot
 	 */
-	public Station getClosestAvailableStation(boolean isPlus) throws RuntimeException {
+	public Station getClosestAvailableStation(boolean isPlus) throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -149,13 +156,20 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no available station was found.");
+			throw new NoSuchStationExistException("Sorry, no available station was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}
 	
+	/**
+	 * This method browses the public list of stations on the network and returns the ones
+	 * situated in a given radius around this localization.
+	 * @param radius (in km)
+	 * @return a list of stations in the radius
+	 * @throws NoSuchStationExistException
+	 */
 	public ArrayList<Station> getStationsInRadius(double radius) 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		ArrayList<Station> stationsInRadius = new ArrayList<Station>();
 		for (int i = 0; i < listOfStations.size(); i++) {
@@ -164,6 +178,9 @@ public class Localization {
 				stationsInRadius.add(listOfStations.get(i));			
 			}
 		}
+		if (stationsInRadius.size() == 0)
+			throw new NoSuchStationExistException("Sorry, no station in a radius of "+radius
+					+"km around this localization "+this+".");
 		return stationsInRadius;
 	}
 	
@@ -174,7 +191,7 @@ public class Localization {
 	 * @return 		the closest Station with an available Bicycle
 	 */
 	public Station getClosestStationWithBicycle() 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -188,7 +205,7 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no station with an available"
+			throw new NoSuchStationExistException("Sorry, no station with an available"
 					+ " bicycle was found.");
 		}
 		return listOfStations.get(stationIndex);
@@ -203,7 +220,7 @@ public class Localization {
 	 * @return 		the closest Station with an available Bicycle of given type
 	 */
 	public Station getClosestStationWithBicycle(String bicycleType) 
-			throws RuntimeException {
+			throws NoSuchStationExistException {
 		ArrayList<Station> listOfStations = MyVelibNetwork.getInstance().getStationDatabase();
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int stationIndex = -1;
@@ -217,19 +234,48 @@ public class Localization {
 			}
 		}
 		if (stationIndex == -1) {
-			throw new RuntimeException("Sorry, no station with an available"
+			throw new NoSuchStationExistException("Sorry, no station with an available"
 					+ " bicycle of type "+ bicycleType +" was found.");
 		}
 		return listOfStations.get(stationIndex);
 	}
 	
+	
+	/**
+	 * Acts exactly as randomLocInCircle.generate(this,radius).
+	 * @param radius the radius of the circular area
+	 * @return A localization
+	 */
 	public Localization generateLocInRadius(double radius) throws IllegalArgumentException {
 		if (radius < 0) {
 			throw new IllegalArgumentException("The radius should be > 0.");
 		}
-		double r = Math.random()*radius;
+		double r = Math.sqrt(Math.random())*radius;
 		double angle = Math.random()*2*Math.PI;
 		return new Localization(this.latitude + Math.cos(angle)*r/rayonTerre,
-				this.longitude + Math.sin(angle)*r/rayonTerre);
+				this.longitude + Math.sin(angle)*r/(Math.cos(this.latitude)*rayonTerre));
 	}
+	
+	/**
+	 * Returns a localization which is the barycenter of the localizations given in argument.
+	 * @param locs the localizations to compute the barycenter of
+	 * @return the barycenter of these localizations
+	 */
+	public static Localization barycenter(ArrayList<Localization> locs) {
+		if (locs.size() < 1)
+			throw new IllegalArgumentException("Need at least 1 localization to compute"
+					+ " a barycenter.");
+		if (locs.size() == 1)
+			return locs.get(0);
+		double latMean = 0;
+		double longMean = 0;
+		for (int i = 0; i < locs.size(); i++) {
+			latMean += locs.get(i).getLatitude();
+			longMean += locs.get(i).getLongitude();
+		}
+		latMean /= locs.size();
+		longMean /= locs.size();
+		return new Localization(latMean,longMean);
+	}
+	
 }

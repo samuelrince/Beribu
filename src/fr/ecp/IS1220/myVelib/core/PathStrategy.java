@@ -2,6 +2,8 @@ package fr.ecp.IS1220.myVelib.core;
 
 import java.util.ArrayList;
 
+import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
+
 /**
  * This interface represents a path strategy.
  * @author Valentin
@@ -19,7 +21,7 @@ public interface PathStrategy {
 	 * @return two stations, one for bike rental and one for bike return
 	 */
 	public ArrayList<Station> findPath(Localization source, 
-			Localization destination);
+			Localization destination) throws NoSuchStationExistException;
 	
 	/**
 	 * Returns a couple of stations, one for bike rental and one for bike return,
@@ -32,7 +34,7 @@ public interface PathStrategy {
 	 * @return two stations, one for bike rental and one for bike return
 	 */
 	public ArrayList<Station> findPath(Localization source, 
-			Localization destination, String bicycleType);
+			Localization destination, String bicycleType) throws NoSuchStationExistException;
 	
 	/**
 	 * Returns the type of bicycle associated to the computed path. <br>

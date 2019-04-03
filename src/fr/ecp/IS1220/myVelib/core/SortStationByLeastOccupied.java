@@ -3,7 +3,7 @@ package fr.ecp.IS1220.myVelib.core;
 import java.util.Comparator;
 
 /**
- * This calss is used to sort Station by least occupied criterion
+ * This class is used to sort Station by least occupied criterion.
  * @author samuel
  *
  */

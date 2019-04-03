@@ -126,7 +126,7 @@ class RideTest {
 		s2.getParkingSlots().get(0).attachBicycle(b2);
 		u.newRide(s1);
 		SD.setTime(13, 24, 56);
-		System.out.println(s2.getParkingSlots().get(0).isBicycle());
+		System.out.println(s2.getParkingSlots().get(0).hasBicycle());
 		assertThrows(RuntimeException.class, () -> {
 			u.getCurrentRide().end(s2.getParkingSlots().get(0));
 		});
@@ -288,7 +288,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vlibre(u));
+		try {
+			u.subscribe(new Vlibre(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -319,7 +323,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -380,7 +388,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vlibre(u));
+		try {
+			u.subscribe(new Vlibre(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -411,7 +423,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 13, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -442,7 +458,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vlibre(u));
+		try {
+			u.subscribe(new Vlibre(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(45);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
@@ -474,7 +494,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(75);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
@@ -506,7 +530,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vlibre(u));
+		try {
+			u.subscribe(new Vlibre(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(45);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
@@ -538,7 +566,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(45);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
@@ -573,7 +605,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(45);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
@@ -597,7 +633,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		u.addTimeCreditBalance(45);
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
@@ -680,7 +720,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vlibre(u));
+		try {
+			u.subscribe(new Vlibre(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), false);
 		new ParkingSlot(s1);
@@ -706,7 +750,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vlibre(u));
+		try {
+			u.subscribe(new Vlibre(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -734,7 +782,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), false);
 		new ParkingSlot(s1);
@@ -760,7 +812,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -792,7 +848,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);
@@ -814,7 +874,11 @@ class RideTest {
 		SD.setDay(2019, 3, 8);
 		SD.setTime(13, 15, 13);
 		User u = new User("Jean");
-		u.subscribe(new Vmax(u));
+		try {
+			u.subscribe(new Vmax(u));
+		} catch (Exception e1) {
+			fail("Subscription failed");
+		}
 		Station s1 = new Station(new Localization(2.0, 3.0), true);
 		Station s2 = new Station(new Localization(2.1, 3.1), true);
 		new ParkingSlot(s1);

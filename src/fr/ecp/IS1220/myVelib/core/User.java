@@ -1,24 +1,30 @@
 package fr.ecp.IS1220.myVelib.core;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import fr.ecp.IS1220.myVelib.core.exception.NoNewRideException;
+import fr.ecp.IS1220.myVelib.core.exception.SuchStationIsOfflineException;
 
 /**
  * This class represents a user.
  * @author Valentin
  *
  */
-public class User {
+public class User implements java.io.Serializable {
 	private static long uniqId;
 	private Date creationDate;
 	private long id;
 	private String name;
+	private String passwordHash;
 	private Localization localization;
 	private Duration timeCreditBalance = new Duration();
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
 	private Travel plannedRide;
+	private transient MsgBox msgBox = new MsgBox(this);
 	
 	/**
 	 * Constructor of User class.
@@ -26,9 +32,21 @@ public class User {
 	 */
 	public User(String name) {
 		super();
+		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword("password");
+		} catch(NoSuchAlgorithmException e) {}
+		this.creationDate = new Date();
+		System.out.println("New user "+this+".");
+	}
+	
+	public User(String name, Localization loc) {
+		super();
 		this.name = name;
 		this.id = uniqId++;
 		this.creationDate = new Date();
+		this.localization = loc;
 		System.out.println("New user "+this+".");
 	}
 	
@@ -36,16 +54,61 @@ public class User {
 		super();
 		this.id = uniqId++;
 		this.name = "Bob"+this.id;
+		try {
+			this.passwordHash = hashPassword("password");
+		} catch(NoSuchAlgorithmException e) {}
+		this.creationDate = new Date();
+		System.out.println("New user "+this+".");
+	}
+	
+	public User(String name, String password) {
+		super();
+		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
 		this.creationDate = new Date();
 		System.out.println("New user "+this+".");
 	}
 
+	public User(String name, String password, Localization loc) {
+		super();
+		this.id = uniqId++;
+		this.name = name;
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
+		this.creationDate = new Date();
+		this.localization = loc;
+		System.out.println("New user "+this+".");
+	}
+	
+	public User(Localization loc) {
+		super();
+		this.id = uniqId++;
+		this.name = "Bob"+this.id;
+		this.creationDate = new Date();
+		this.localization = loc;
+		System.out.println("New user "+this+".");
+	}
+	
 	public long getId() {
 		return this.id;
 	}
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public String getPasswordHash() {
+		return this.passwordHash;
+	}
+	
+	public void setPasswordHash(String password) {
+		try {
+			this.passwordHash = hashPassword(password);
+		} catch(NoSuchAlgorithmException e) {}
 	}
 	
 	public Date getCreationDate() {
@@ -106,23 +169,36 @@ public class User {
 	 * @throws RuntimeException		When a user tries to subscribe to a wrong card (a card
 	 * that belongs to another user)
 	 */
-	public void subscribe(Card card) throws IllegalArgumentException {
+	public void subscribe(Card card) {
 		if (card.getUser() == this) {
 			this.card = card;
 			System.out.println(this+" has a new subscription of type "+card.getType()+ ".");			
 		} else {
-			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user");
+			throw new IllegalArgumentException("A user cannot subscribe to a card that belongs to another user.");
 		}
 	}
+	
 	public void subscribe(String cardType) {
 		CardFactory cardFactory = new CardFactory();
-		this.subscribe(cardFactory.newCard(cardType, this));
+		if (!this.getCard().getType().equalsIgnoreCase(cardType))
+			this.subscribe(cardFactory.newCard(cardType, this));
 	}
 	
 	public ArrayList<Ride> getListOfRides() {
 		return this.listOfRides;
 	}
 	
+	public String getHistory() {
+		String res = "History of "+this.getName();
+		if (this.listOfRides.size() == 0)
+			res += "\n"+"\n"+"-empty-";
+		else {
+			for (int i =0 ; i < this.listOfRides.size(); i++) 
+				res += "\n"+"\n"+this.listOfRides.get(i);
+		}
+		return res;
+	}
+
 
 	/**
 	 * This private method returns true if the user is currently on a ride, false otherwise.
@@ -157,6 +233,9 @@ public class User {
 	 */
 	public void newRide(Station station) throws RuntimeException {
 		if (!this.isOnRide()) {
+			if (station.isOffline()) {
+				throw new SuchStationIsOfflineException("The station is offline");
+			}
 			Bicycle bicycle = station.getBicycle();
 			Ride ride = new Ride(this,bicycle,station);
 			this.listOfRides.add(ride);
@@ -165,14 +244,14 @@ public class User {
 			if (this.plannedRide != null) {
 				if (this.plannedRide.isOngoing()){
 					this.plannedRide.setBicycleType(bicycle.getType());
-					this.plannedRide.setSuggestedStartStation(station);
+					this.plannedRide.setStartStation(station);
 				}
 			}
 			station.incRentCount();
 			station.updateStatus();
 		} 
 		else {
-			throw new RuntimeException("User " + this.getName() + " has not finished their current ride.");
+			throw new NoNewRideException("User " + this.getName() + " has not finished their current ride.");
 		}
 	}
 	
@@ -191,7 +270,11 @@ public class User {
 	 */
 	public void newRide(Station station, String bicycleType) throws RuntimeException {
 		if (!this.isOnRide()) {
-			Bicycle bicycle = station.getBicycle(bicycleType);
+			Bicycle bicycle;
+			if (bicycleType == null)
+				bicycle = station.getBicycle();
+			else
+				bicycle = station.getBicycle(bicycleType);
 			Ride ride = new Ride(this,bicycle,station);
 			this.listOfRides.add(ride);
 			System.out.println(this+" has started"
@@ -199,17 +282,44 @@ public class User {
 			if (this.plannedRide != null) {
 				if (this.plannedRide.isOngoing()){
 					this.plannedRide.setBicycleType(bicycle.getType());
-					this.plannedRide.setSuggestedStartStation(station);
+					this.plannedRide.setStartStation(station);
 				}
 			}
 				station.incRentCount();
 				station.updateStatus();
 		} 
 		else {
-			throw new RuntimeException("User " + this.getName() + " has not finished his last ride.");
+			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
 		}
 	}
 	
+	public void newRide(Station station, Bicycle bike) throws RuntimeException {
+		if (!this.isOnRide()) {
+			boolean bikeAttachedToStation = false;
+			for (ParkingSlot ps: station.getParkingSlots()) {
+				if (bike.equals(ps.getBicycle()))
+					bikeAttachedToStation = true;
+			}
+			if (!bikeAttachedToStation)
+				throw new NoNewRideException("Wrong bike selection");
+			Ride ride = new Ride(this,bike,station);
+			this.listOfRides.add(ride);
+			System.out.println(this+" has started"
+					+ " a new ride from "+station+".");
+			if (this.plannedRide != null) {
+				if (this.plannedRide.isOngoing()){
+					this.plannedRide.setBicycleType(bike.getType());
+					this.plannedRide.setStartStation(station);
+				}
+			}
+				station.incRentCount();
+				station.updateStatus();
+		} 
+		else {
+			throw new NoNewRideException("User " + this.getName() + " has not finished his last ride.");
+		}
+	}
+
 	/**
 	 * This method returns the current (not finished) ride of a user if it exists.
 	 * @return Ride		Ride object or <b>null</b> if not current ride
@@ -228,9 +338,9 @@ public class User {
 	 * @param station	the return station
 	 * @throws Exception	occurs when there is no parking slot available
 	 */
-	public void endCurrentRide(Station station) throws RuntimeException,Exception {
+	public void endCurrentRide(Station station) throws Exception {
 		if (station.isFull())
-			throw new IllegalArgumentException("This station is full.");
+			throw new SuchStationIsFullException("The station is full.");
 		else {
 			if (this.getCurrentRide() != null) {
 				this.getCurrentRide().end(station.getFreeParkingSlot());
@@ -240,6 +350,12 @@ public class User {
 				station.updateStatus();
 			}
 		}
+	}
+	
+	public Ride getLastRide() {
+		if (this.listOfRides.size() > 0)
+			return this.listOfRides.get(this.listOfRides.size() - 1);
+		return null;
 	}
 	
 	/**
@@ -308,8 +424,12 @@ public class User {
 	
 	public void discardPlannedRide() {
 		if (this.plannedRide != null) {
-			this.plannedRide.suggestedStartStation.removeTargetOf(this.plannedRide);
-			this.plannedRide.suggestedEndStation.removeTargetOf(this.plannedRide);
+			if (this.plannedRide.getSuggestedStartStation() != null)
+				this.plannedRide.getSuggestedStartStation().removeTargetOf(this.plannedRide);
+			if (this.plannedRide.getSuggestedEndStation() != null)
+				this.plannedRide.getSuggestedEndStation().removeTargetOf(this.plannedRide);
+			if (this.plannedRide.getObserver() != null)
+				this.plannedRide.removeObserver();
 			this.plannedRide = null;
 			System.out.println(this+"has discarded their planned ride.");
 		}
@@ -318,8 +438,12 @@ public class User {
 		}
 	}
 
+	public MsgBox getMsgBox() {
+		return this.msgBox;
+	}
+	
 	public void notifyUser(String message) {
-		System.out.println("For "+this+" : "+message);
+		this.msgBox.add(message);
 	}
 	
 	@Override
@@ -327,4 +451,10 @@ public class User {
 		// TODO Auto-generated method stub
 		return this.name+" (id."+this.id+")";
 	}
+	
+	private String hashPassword(String password) throws NoSuchAlgorithmException{
+		return PasswordHash.hashPassword(password);
+	}
+	
+	protected static void resetUniqID() {uniqId=0;}
 }

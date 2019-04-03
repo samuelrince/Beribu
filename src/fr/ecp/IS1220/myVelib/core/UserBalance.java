@@ -83,11 +83,13 @@ public class UserBalance {
 				+"\n"+"Total charges : "+UserBalance.totalCharges(user)+"€"
 				+"\n"+"----------------------");
 	}
-//	public static double cumulatedTimeCredit(User user) {
-//		double cumulatedTimeCredit = 0;
-//		for ( int i = 0; i < UserBalance.numberOfRides(user); i++) {
-//			cumulatedTimeCredit += user.getListOfRides().get(i).getTimeCreditOperation();
-//		}
-//		return cumulatedTimeCredit;
-//	}
+	
+	public static String representation(User user) {
+		return "----------------------"+"\n"+"Statistics of user "+user+"\n"+"\n"
+				+"Type of subscription : "+user.getCard().getType()+"\n"+"Time credit balance : "
+				+user.getTimeCreditBalance()+"\n"+"Total number of rides : "+user.getListOfRides().size()
+				+"\n"+"Total time spent on bicycle : "+UserBalance.timeSpentOnBicycle(user)
+				+"\n"+"Total charges : "+UserBalance.totalCharges(user)+"€"
+				+"\n"+"----------------------";
+	}
 }
