@@ -245,7 +245,7 @@ public class StationGUI extends JFrame {
 	    dropPanel.add(f2);
 	    dropPanel.setMaximumSize(new Dimension(200, 200));
 	    
-	    
+	    this.setAlwaysOnTop(true);
 	    this.setResizable(false);
 	    this.setContentPane(loginPanel);
 	    this.setVisible(true);

@@ -12,6 +12,7 @@ import fr.ecp.IS1220.myVelib.core.statistic.StationBalance;
 import fr.ecp.IS1220.myVelib.core.statistic.UserBalance;
 import fr.ecp.IS1220.myVelib.core.system.Localization;
 import fr.ecp.IS1220.myVelib.core.system.MyVelibNetwork;
+import fr.ecp.IS1220.myVelib.core.system.NetworkBackup;
 import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 
 /**
