@@ -360,6 +360,8 @@ public class User implements java.io.Serializable {
 				System.out.println(this+" has ended"
 						+ " their ride in "+station+".");
 				station.updateStatus();
+				this.notifyUser("Thank you for using MyVelib network!\n You will"
+						+ " find a sum up of your last ride in 'My Statistics'.");
 			}
 		}
 	}
