@@ -4,6 +4,7 @@ addUser 'Bob' 'vlibre'
 addUser 'Jane' 'vlibre'
 addUser 'Paula' 'standard'
 addUser 'Antonio' 'vmax'
-locateUser 0 47.9999999999 1.9999999999
+rentBike 1 1
+locateUser 0 48 2
 display 'City'
 startUserGUI 0
