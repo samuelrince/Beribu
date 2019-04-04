@@ -132,14 +132,5 @@ public class Panneau extends JPanel{
 		g.drawString("x="+Math.round(1000*ymin.distanceTo(ymax))/1000.+"km",length+marginX-30,length+marginY+10);
 		g.drawString("x=0, y=0",marginX-30,length+marginY+10);
 	}
-	
-	public void addPoint(Graphics g,Localization loc, String label) {
-		g.setColor(Color.RED);
-		int xPixel = (int) (xPixel_bary + xRatio*(loc.getLongitude()-barycenter.getLongitude()));
-		int yPixel = (int) (yPixel_bary - yRatio*(loc.getLatitude()-barycenter.getLatitude()));
-		g.fillOval(xPixel, yPixel, 5, 5);
-		g.drawString(label,xPixel,yPixel);
-		g.setColor(Color.BLACK);
-	}
 
 }

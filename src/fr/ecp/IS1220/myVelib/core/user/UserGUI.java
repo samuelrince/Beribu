@@ -330,6 +330,7 @@ public class UserGUI extends JFrame {
 	    	}
 	    	else {
 	    		travelTxt.setText("No ride planned for the moment.");
+	    		startBtn.setText("START");
 	    		startBtn.setEnabled(false);
 	    		discardBtn.setEnabled(false);
 	    	}
@@ -702,6 +703,8 @@ public class UserGUI extends JFrame {
 			while(!exit) {
 				Travel plannedRide = user.getPlannedRide();
 				if (plannedRide == null) {
+					startBtn.setText("START");
+					startBtn.setEnabled(false);
 					this.exit = true;
 					break;
 				}
