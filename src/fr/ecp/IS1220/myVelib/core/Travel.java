@@ -10,7 +10,7 @@ import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
  * @author Valentin
  *
  */
-public class Travel {
+public class Travel implements java.io.Serializable {
 	private User user;
 	private Localization source;
 	private Localization destination;
