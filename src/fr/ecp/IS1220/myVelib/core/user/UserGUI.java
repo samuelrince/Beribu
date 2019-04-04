@@ -706,7 +706,7 @@ public class UserGUI extends JFrame {
 					break;
 				}
 				plannedRide.update();
-				if (user.isOnRide())
+				if (plannedRide.isLinked())
 					startBtn.setText("ONGOING...");
 				try {
 					Thread.sleep(2000);

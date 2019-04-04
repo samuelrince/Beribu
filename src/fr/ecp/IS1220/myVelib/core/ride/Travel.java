@@ -25,6 +25,7 @@ public class Travel implements java.io.Serializable {
 	private double previsionCost = -1;
 	private Duration previsionDuration;
 	private boolean ongoing = false;
+	private boolean linked = false;
 	private TravelUpdate travelUpdate;
 	
 	/**
@@ -212,18 +213,25 @@ public class Travel implements java.io.Serializable {
 	public boolean isOngoing() {
 		return this.ongoing;
 	}
+	public boolean isLinked() {
+		return this.linked;
+	}
 	
 	/**
 	 * This method is automatically called only when a user rents a bike with a planned ride started with this.start().
 	 * It sets the suggested rent station of the planned ride on the actual rent station of the user 
-	 * and updates the planned ride if necessary.
+	 * and indicated that the ride is linked with this Travel.
 	 * @param station the rent station
 	 */
 	public void setStartStation(Station station) {
 		if (this.suggestedStartStation != null)
 			this.suggestedStartStation.removeTargetOf(this);
 		this.suggestedStartStation = station;
+		this.linked = true;
+		this.bicycleType = user.getCurrentRide().getBicycle().getType();
 		this.update();
+		if (this.travelUpdate != null)
+			this.travelUpdate.update();
 	}
 	
 	/**
@@ -235,7 +243,7 @@ public class Travel implements java.io.Serializable {
 	 */
 	public void update() {
 		boolean flag = false;
-		if (!this.user.isOnRide()) {
+		if (!(this.user.isOnRide() && this.linked)) {
 			Station previousStartStation = this.suggestedStartStation;
 			Station previousEndStation = this.suggestedEndStation;
 			if (previousStartStation != null)
@@ -284,8 +292,8 @@ public class Travel implements java.io.Serializable {
 				this.suggestedEndStation = this.destination.getClosestAvailableStation();
 				this.suggestedEndStation.addTargetOf(this);
 				this.previsionDuration = new Duration(this.suggestedStartStation,
-						this.suggestedEndStation, this.pathStrategy.getBicycleType());
-				this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.pathStrategy.getBicycleType());
+						this.suggestedEndStation, this.bicycleType);
+				this.previsionCost = this.user.getCard().cost(this.previsionDuration,this.bicycleType);
 				this.previsionDuration.add(new Duration(this.source,this.suggestedStartStation.getLocalization(),4));
 				this.previsionDuration.add(new Duration(this.destination,this.suggestedEndStation.getLocalization(),4));
 			}
@@ -337,7 +345,7 @@ public class Travel implements java.io.Serializable {
 		String duration = "not found";
 		String cost = "not found";
 		String btype;
-		if (this.ongoing) {
+		if (this.linked) {
 			btype = "Bicycle type : "+this.bicycleType;
 			rentalString = "Rental station : ";
 		}
