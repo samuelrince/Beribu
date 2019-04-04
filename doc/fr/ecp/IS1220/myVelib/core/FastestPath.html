@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>fr.ecp.IS1220.myVelib.core.FastestPath</li>
+<li>fr.ecp.IS1220.myVelib.core.ride.FastestPath</li>
 </ul>
 </li>
 </ul>
@@ -159,7 +159,7 @@ implements <a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html"
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../fr/ecp/IS1220/myVelib/core/Station.html" title="class in fr.ecp.IS1220.myVelib.core">Station</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../fr/ecp/IS1220/myVelib/core/FastestPath.html#findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-">findPath</a></span>(<a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;source,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../fr/ecp/IS1220/myVelib/core/FastestPath.html#findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-">findPath</a></span>(<a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;source,
         <a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;destination)</code>
 <div class="block">Returns a couple of stations, one for bike rental and one for bike return,
  which lets the user go from one localization to another according to the
@@ -168,7 +168,7 @@ implements <a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html"
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.ArrayList&lt;<a href="../../../../../fr/ecp/IS1220/myVelib/core/Station.html" title="class in fr.ecp.IS1220.myVelib.core">Station</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../fr/ecp/IS1220/myVelib/core/FastestPath.html#findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-java.lang.String-">findPath</a></span>(<a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;source,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../fr/ecp/IS1220/myVelib/core/FastestPath.html#findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-java.lang.String-">findPath</a></span>(<a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;source,
         <a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;destination,
         java.lang.String&nbsp;bicycleType)</code>
 <div class="block">Returns a couple of stations, one for bike rental and one for bike return,
@@ -221,7 +221,7 @@ implements <a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html"
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-">
+<a name="findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -229,14 +229,14 @@ implements <a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html"
 <h4>findPath</h4>
 <pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../fr/ecp/IS1220/myVelib/core/Station.html" title="class in fr.ecp.IS1220.myVelib.core">Station</a>&gt;&nbsp;findPath(<a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;source,
                                              <a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;destination)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-">PathStrategy</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-">PathStrategy</a></code></span></div>
 <div class="block">Returns a couple of stations, one for bike rental and one for bike return,
  which lets the user go from one localization to another according to the
  given path strategy. This method should be used if the user is indifferent
  to the type of bike for the ride.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-">findPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html" title="interface in fr.ecp.IS1220.myVelib.core">PathStrategy</a></code></dd>
+<dd><code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-">findPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html" title="interface in fr.ecp.IS1220.myVelib.core">PathStrategy</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>source</code> - the start point of the user</dd>
 <dd><code>destination</code> - the destination of the user</dd>
@@ -245,7 +245,7 @@ implements <a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html"
 </dl>
 </li>
 </ul>
-<a name="findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-java.lang.String-">
+<a name="findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -254,14 +254,14 @@ implements <a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html"
 <pre>public&nbsp;java.util.ArrayList&lt;<a href="../../../../../fr/ecp/IS1220/myVelib/core/Station.html" title="class in fr.ecp.IS1220.myVelib.core">Station</a>&gt;&nbsp;findPath(<a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;source,
                                              <a href="../../../../../fr/ecp/IS1220/myVelib/core/Localization.html" title="class in fr.ecp.IS1220.myVelib.core">Localization</a>&nbsp;destination,
                                              java.lang.String&nbsp;bicycleType)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-java.lang.String-">PathStrategy</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-java.lang.String-">PathStrategy</a></code></span></div>
 <div class="block">Returns a couple of stations, one for bike rental and one for bike return,
  which lets the user go from one localization to another according to the
  given path strategy. This method should be used if the user wants to specify
  a type of bike for the ride.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.Localization-fr.ecp.IS1220.myVelib.core.Localization-java.lang.String-">findPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html" title="interface in fr.ecp.IS1220.myVelib.core">PathStrategy</a></code></dd>
+<dd><code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html#findPath-fr.ecp.IS1220.myVelib.core.system.Localization-fr.ecp.IS1220.myVelib.core.system.Localization-java.lang.String-">findPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../fr/ecp/IS1220/myVelib/core/PathStrategy.html" title="interface in fr.ecp.IS1220.myVelib.core">PathStrategy</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>source</code> - the start point of the user</dd>
 <dd><code>destination</code> - the destination of the user</dd>

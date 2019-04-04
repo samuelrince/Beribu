@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.core.Date;
-import fr.ecp.IS1220.myVelib.core.Localization;
-import fr.ecp.IS1220.myVelib.core.MechanicalBike;
-import fr.ecp.IS1220.myVelib.core.ParkingSlot;
-import fr.ecp.IS1220.myVelib.core.Station;
-import fr.ecp.IS1220.myVelib.core.StationBalance;
-import fr.ecp.IS1220.myVelib.core.SystemDate;
-import fr.ecp.IS1220.myVelib.core.User;
+import fr.ecp.IS1220.myVelib.core.bicycle.MechanicalBike;
+import fr.ecp.IS1220.myVelib.core.station.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.station.Station;
+import fr.ecp.IS1220.myVelib.core.statistic.StationBalance;
+import fr.ecp.IS1220.myVelib.core.system.Date;
+import fr.ecp.IS1220.myVelib.core.system.Localization;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
+import fr.ecp.IS1220.myVelib.core.user.User;
 
 /**
  * This class contains Junit tests for StationBalance class

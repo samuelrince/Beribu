@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.core.Localization;
-import fr.ecp.IS1220.myVelib.core.SystemDate;
+import fr.ecp.IS1220.myVelib.core.system.Localization;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 
 /**
  * This class contains Junit tests for Localization class

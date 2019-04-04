@@ -5,6 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import fr.ecp.IS1220.myVelib.core.*;
+import fr.ecp.IS1220.myVelib.core.station.Station;
+import fr.ecp.IS1220.myVelib.core.statistic.SortStationByLeastOccupied;
+import fr.ecp.IS1220.myVelib.core.statistic.SortStationByMostUsed;
+import fr.ecp.IS1220.myVelib.core.statistic.StationBalance;
+import fr.ecp.IS1220.myVelib.core.statistic.UserBalance;
+import fr.ecp.IS1220.myVelib.core.system.Localization;
+import fr.ecp.IS1220.myVelib.core.system.MyVelibNetwork;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 
 public class Scenario1 {
 

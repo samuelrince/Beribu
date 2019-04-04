@@ -5,19 +5,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.core.Bicycle;
-import fr.ecp.IS1220.myVelib.core.Date;
-import fr.ecp.IS1220.myVelib.core.Duration;
-import fr.ecp.IS1220.myVelib.core.ElectricalBike;
-import fr.ecp.IS1220.myVelib.core.Localization;
-import fr.ecp.IS1220.myVelib.core.MechanicalBike;
-import fr.ecp.IS1220.myVelib.core.ParkingSlot;
-import fr.ecp.IS1220.myVelib.core.Ride;
-import fr.ecp.IS1220.myVelib.core.Station;
-import fr.ecp.IS1220.myVelib.core.SystemDate;
-import fr.ecp.IS1220.myVelib.core.User;
-import fr.ecp.IS1220.myVelib.core.Vlibre;
-import fr.ecp.IS1220.myVelib.core.Vmax;
+import fr.ecp.IS1220.myVelib.core.bicycle.Bicycle;
+import fr.ecp.IS1220.myVelib.core.bicycle.ElectricalBike;
+import fr.ecp.IS1220.myVelib.core.bicycle.MechanicalBike;
+import fr.ecp.IS1220.myVelib.core.card.Vlibre;
+import fr.ecp.IS1220.myVelib.core.card.Vmax;
+import fr.ecp.IS1220.myVelib.core.ride.Ride;
+import fr.ecp.IS1220.myVelib.core.station.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.station.Station;
+import fr.ecp.IS1220.myVelib.core.system.Date;
+import fr.ecp.IS1220.myVelib.core.system.Duration;
+import fr.ecp.IS1220.myVelib.core.system.Localization;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
+import fr.ecp.IS1220.myVelib.core.user.User;
 
 /**
  * This class contains Junit tests for Ride class

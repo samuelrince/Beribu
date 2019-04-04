@@ -4,6 +4,10 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Scanner;
 import fr.ecp.IS1220.myVelib.core.*;
+import fr.ecp.IS1220.myVelib.core.system.CommandLineInterpreter;
+import fr.ecp.IS1220.myVelib.core.system.NetworkBackup;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
+import fr.ecp.IS1220.myVelib.core.system.TextFileInterpreter;
 
 public class CommandLineInterface {
 	private static boolean exit = false;

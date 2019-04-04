@@ -9,20 +9,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.core.AvoidPlus;
-import fr.ecp.IS1220.myVelib.core.ElectricalBike;
-import fr.ecp.IS1220.myVelib.core.FastestPath;
-import fr.ecp.IS1220.myVelib.core.Localization;
-import fr.ecp.IS1220.myVelib.core.MechanicalBike;
-import fr.ecp.IS1220.myVelib.core.MinimalWalking;
-import fr.ecp.IS1220.myVelib.core.MyVelibNetwork;
-import fr.ecp.IS1220.myVelib.core.ParkingSlot;
-import fr.ecp.IS1220.myVelib.core.PreferPlus;
-import fr.ecp.IS1220.myVelib.core.PreserveDistribution;
-import fr.ecp.IS1220.myVelib.core.Station;
-import fr.ecp.IS1220.myVelib.core.SystemDate;
-import fr.ecp.IS1220.myVelib.core.Travel;
-import fr.ecp.IS1220.myVelib.core.User;
+import fr.ecp.IS1220.myVelib.core.bicycle.ElectricalBike;
+import fr.ecp.IS1220.myVelib.core.bicycle.MechanicalBike;
+import fr.ecp.IS1220.myVelib.core.ride.AvoidPlus;
+import fr.ecp.IS1220.myVelib.core.ride.FastestPath;
+import fr.ecp.IS1220.myVelib.core.ride.MinimalWalking;
+import fr.ecp.IS1220.myVelib.core.ride.PreferPlus;
+import fr.ecp.IS1220.myVelib.core.ride.PreserveDistribution;
+import fr.ecp.IS1220.myVelib.core.ride.Travel;
+import fr.ecp.IS1220.myVelib.core.station.ParkingSlot;
+import fr.ecp.IS1220.myVelib.core.station.Station;
+import fr.ecp.IS1220.myVelib.core.system.Localization;
+import fr.ecp.IS1220.myVelib.core.system.MyVelibNetwork;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
+import fr.ecp.IS1220.myVelib.core.user.User;
 
 /**
  * This class contains Junit tests for Travel class

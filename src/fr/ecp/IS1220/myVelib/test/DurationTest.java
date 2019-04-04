@@ -8,10 +8,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import fr.ecp.IS1220.myVelib.core.Date;
-import fr.ecp.IS1220.myVelib.core.Duration;
-import fr.ecp.IS1220.myVelib.core.SystemDate;
 import fr.ecp.IS1220.myVelib.core.exception.BadDurationException;
+import fr.ecp.IS1220.myVelib.core.system.Date;
+import fr.ecp.IS1220.myVelib.core.system.Duration;
+import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 
 /**
  * This class contains Junit tests for Duration class
