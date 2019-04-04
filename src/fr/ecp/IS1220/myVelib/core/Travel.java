@@ -2,7 +2,7 @@ package fr.ecp.IS1220.myVelib.core;
 
 import java.util.ArrayList;
 
-import fr.ecp.IS1220.myVelib.client.UserGUI.TravelUpdate;
+import fr.ecp.IS1220.myVelib.core.UserGUI.TravelUpdate;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchStationExistException;
 
 /**

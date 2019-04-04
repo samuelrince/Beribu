@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.myVelib.client;
+package fr.ecp.IS1220.myVelib.core;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

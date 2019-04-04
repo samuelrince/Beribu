@@ -2,7 +2,7 @@ package fr.ecp.IS1220.myVelib.core;
 
 import java.util.ArrayList;
 
-import fr.ecp.IS1220.myVelib.client.UserGUI.AlertUpdate;
+import fr.ecp.IS1220.myVelib.core.UserGUI.AlertUpdate;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 

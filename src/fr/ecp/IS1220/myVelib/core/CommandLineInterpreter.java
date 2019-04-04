@@ -1,4 +1,4 @@
-package fr.ecp.IS1220.myVelib.client;
+package fr.ecp.IS1220.myVelib.core;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
+import fr.ecp.IS1220.myVelib.client.CommandLineInterface;
 import fr.ecp.IS1220.myVelib.core.*;
 import fr.ecp.IS1220.myVelib.core.exception.BadDateException;
 import fr.ecp.IS1220.myVelib.core.exception.NoBicycleAvailableException;

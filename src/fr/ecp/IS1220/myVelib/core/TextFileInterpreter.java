@@ -1,10 +1,10 @@
-package fr.ecp.IS1220.myVelib.client;
+package fr.ecp.IS1220.myVelib.core;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import fr.ecp.IS1220.myVelib.core.SystemDate;
+import fr.ecp.IS1220.myVelib.client.CommandLineInterface;
 
 public class TextFileInterpreter {
 	
