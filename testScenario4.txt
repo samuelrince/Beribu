@@ -1,5 +1,5 @@
 delete all
-day 2019 4 1
+date 2019 4 1
 time 10 0 0
 setup 'City' 3 0 1 'square' 48 2 10 60 100 0
 addUser 'Bob' 'vlibre'
