@@ -9,6 +9,12 @@ import fr.ecp.IS1220.myVelib.core.system.NetworkBackup;
 import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 import fr.ecp.IS1220.myVelib.core.system.TextFileInterpreter;
 
+/**
+ * This <code>CommandLineInterface</code> class handles the CLUI feature.
+ * You have to launch this class to access the Command Line User Interface.
+ * Look at the documentation part in the report to find more details on 
+ * available commands.
+ */
 public class CommandLineInterface {
 	private static boolean exit = false;
 	

@@ -14,8 +14,11 @@ import fr.ecp.IS1220.myVelib.core.system.Localization;
 import fr.ecp.IS1220.myVelib.core.system.MyVelibNetwork;
 import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 
+/**
+ * This class is used to demonstrate some usages of the program.
+ */
 public class Scenario1 {
-
+	
 	public static void main(String[] args) throws RuntimeException, Exception {
 		//Creation of an instance of SystemDate.
 		SystemDate SD = SystemDate.getInstance();

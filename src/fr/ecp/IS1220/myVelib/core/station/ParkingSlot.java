@@ -131,8 +131,14 @@ public class ParkingSlot implements java.io.Serializable {
 		}
 	}
 	
+	/**
+	 * Reset the uniqID to 0. Used in MyVelibNetwork.deleteAll().
+	 */
 	public static void resetUniqID() {uniqId=0;}
 	
+	/**
+	 * Force reset of ParkingSlot. Used in MyVelibNetwork.deleteAll().
+	 */
 	public void forceReset() {this.bicycle = null;this.station = null;}
 	
 }

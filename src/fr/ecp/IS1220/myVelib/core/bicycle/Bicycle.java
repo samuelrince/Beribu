@@ -21,7 +21,7 @@ public abstract class Bicycle implements java.io.Serializable {
 		this.id = uniqId++;
 	}
 	/**
-	 * 
+	 * Return the bicycle id.
 	 * @return id of the bicycle
 	 */
 	public long getId() {
@@ -29,7 +29,7 @@ public abstract class Bicycle implements java.io.Serializable {
 	}
 		
 	/**
-	 * 
+	 * Returns if the bike is attached.
 	 * @return true if the bicycle is attached to a parking slot, false otherwise
 	 */
 	public boolean getAttached() {
@@ -41,13 +41,13 @@ public abstract class Bicycle implements java.io.Serializable {
 	}
 	
 	/**
-	 * 
+	 * Returns the bicycle type.
 	 * @return type of the bicycle
 	 */
 	public abstract String getType();
 	
 	/**
-	 * 
+	 * Returns the speed.
 	 * @return speed of the bicycle, corresponding to its type
 	 */
 	public abstract double getSpeed();
@@ -71,7 +71,7 @@ public abstract class Bicycle implements java.io.Serializable {
 	}
 	
 	/**
-	 * 
+	 * Returns the dictionary of bicycle types.
 	 * @return the dictionary of bicycle types
 	 */
 	public static ArrayList<String> getTypeDict(){
@@ -105,5 +105,8 @@ public abstract class Bicycle implements java.io.Serializable {
 		return true;
 	}
 	
+	/**
+	 * Reset the uniqID to 0. Used in MyVelibNetwork.deleteAll().
+	 */
 	public static void resetUniqID() {uniqId=0;}
 }

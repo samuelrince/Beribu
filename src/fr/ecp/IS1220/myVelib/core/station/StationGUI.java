@@ -21,6 +21,13 @@ import fr.ecp.IS1220.myVelib.core.system.SystemDate;
 import fr.ecp.IS1220.myVelib.core.user.PasswordHash;
 import fr.ecp.IS1220.myVelib.core.user.User;
 
+/**
+ * <code>StationGUI</code> gives a graphical interface of stations. It 
+ * particularly allows user to start/stop a ride. It also provides an 
+ * account creation feature.
+ * @author Samuel
+ *
+ */
 public class StationGUI extends JFrame {
 	/**
 	 * Serial Version UID auto-generated
@@ -244,6 +251,11 @@ public class StationGUI extends JFrame {
 	    this.setVisible(true);
 	}
 	
+	/**
+	 * Used to generate dialog box to notify the user.
+	 * @author Samuel
+	 *
+	 */
 	public class MyJDialog extends JDialog {
 		 
 	    private static final long serialVersionUID = 1L;
@@ -277,6 +289,16 @@ public class StationGUI extends JFrame {
 	    }
 	}
 	
+	/**
+	 * This class contains a method actionPerformed which is called whenever
+	 * the login button is pressed.
+	 * It checks if the user exist and has a the right combination of username
+	 * and password. Depending on the state of the user whether if he/she is on
+	 * a ride or not, the method display a new panel after logging in (dropPanel
+	 * or ridePanel).  
+	 * @author Samuel
+	 *
+	 */
 	class LoginButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -306,6 +328,14 @@ public class StationGUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * This class contains a method actionPerformed which is called whenever
+	 * the start ride button is pressed. 
+	 * When the user has choose his bicycle the method initialize the ride in 
+	 * the network.
+	 * @author Samuel
+	 *
+	 */
 	class StartRideListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -333,6 +363,12 @@ public class StationGUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * This class contains a method actionPerformed which is called whenever
+	 * the cancel button is pressed. It brings back the user to the login panel. 
+	 * @author Samuel
+	 *
+	 */
 	class CancelListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -347,6 +383,14 @@ public class StationGUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * This class contains a method actionPerformed which is called whenever
+	 * the create account button is pressed. 
+	 * Checks all the informations given by the user and create the account in
+	 * the network.
+	 * @author Samuel
+	 *
+	 */
 	class CreateAccountListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -381,6 +425,14 @@ public class StationGUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * This class contains a method actionPerformed which is called whenever
+	 * the drop bike button is pressed.
+	 * It stop the current ride of the user logged in and put the bike on a 
+	 * free space. 
+	 * @author Samuel
+	 *
+	 */
 	class DropBikeListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {

@@ -627,6 +627,9 @@ public class Station implements Comparable<Station>, java.io.Serializable{
 		return this.history.get(this.history.size()-1);
 	}
 	
+	/**
+	 * Reset the uniqID to 0. Used in MyVelibNetwork.deleteAll().
+	 */
 	public static void resetUniqID() {uniqId=0;}
 	
 	public void forceReset() {
