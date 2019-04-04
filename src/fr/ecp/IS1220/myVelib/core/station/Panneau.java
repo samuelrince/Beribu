@@ -50,7 +50,8 @@ public class Panneau extends JPanel{
 	 * @param locs points to represent
 	 * @param labels labels of the point
 	 * @param length length of the sides of the map (in pixels)
-	 * @param margin length of the margins around the map in the main frame (in pixels)
+	 * @param marginX length of the margins around the map in the main frame (in pixels)
+	 * @param marginY length of the margins around the map in the main frame (in pixels)
 	 */
 	public Panneau(ArrayList<Localization> locs, ArrayList<String> labels,
 			int length, int marginX,int marginY) {

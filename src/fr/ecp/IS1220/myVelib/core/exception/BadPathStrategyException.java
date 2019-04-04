@@ -18,8 +18,8 @@ public class BadPathStrategyException extends IllegalArgumentException {
 	
 	/**
 	 * Constructs a <code>BadPathStrategyException</code>
-	 * @param message
-	 * @param cause
+	 * @param message	the detail message
+	 * @param cause		the cause
 	 */
 	public BadPathStrategyException(String message, Throwable cause) {
 		super(message, cause);
@@ -28,7 +28,7 @@ public class BadPathStrategyException extends IllegalArgumentException {
 
 	/**
 	 * Constructs a <code>BadPathStrategyException</code>
-	 * @param s
+	 * @param s	the detail message
 	 */
 	public BadPathStrategyException(String s) {
 		super(s);
@@ -45,7 +45,7 @@ public class BadPathStrategyException extends IllegalArgumentException {
 	}
 	
 	/**
-	 * 
+	 * Serail Version UID auto-generated
 	 */
 	private static final long serialVersionUID = 4366961143252548286L;
 }

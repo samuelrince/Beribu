@@ -1,1 +1,10 @@
+fr.ecp.IS1220.myVelib.client
+fr.ecp.IS1220.myVelib.core.bicycle
+fr.ecp.IS1220.myVelib.core.card
 fr.ecp.IS1220.myVelib.core.exception
+fr.ecp.IS1220.myVelib.core.ride
+fr.ecp.IS1220.myVelib.core.station
+fr.ecp.IS1220.myVelib.core.statistic
+fr.ecp.IS1220.myVelib.core.system
+fr.ecp.IS1220.myVelib.core.user
+fr.ecp.IS1220.myVelib.test

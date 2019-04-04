@@ -23,8 +23,8 @@ public class BadShapeException extends IllegalArgumentException {
 	
 	/**
 	 * Constructs a <code>BadShapeException</code>
-	 * @param message
-	 * @param cause
+	 * @param message	the detail message
+	 * @param cause		the cause
 	 */
 	public BadShapeException(String message, Throwable cause) {
 		super(message, cause);
@@ -33,7 +33,7 @@ public class BadShapeException extends IllegalArgumentException {
 
 	/**
 	 * Constructs a <code>BadShapeException</code>
-	 * @param s
+	 * @param s		the detail message
 	 */
 	public BadShapeException(String s) {
 		super(s);

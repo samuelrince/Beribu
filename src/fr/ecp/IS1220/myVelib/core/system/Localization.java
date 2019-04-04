@@ -167,7 +167,7 @@ public class Localization implements java.io.Serializable {
 	 * situated in a given radius around this localization.
 	 * @param radius (in km)
 	 * @return a list of stations in the radius
-	 * @throws NoSuchStationExistException
+	 * @throws NoSuchStationExistException		occurs when their is no station in the area
 	 */
 	public ArrayList<Station> getStationsInRadius(double radius) 
 			throws NoSuchStationExistException {
