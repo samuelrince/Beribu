@@ -637,7 +637,7 @@ public class UserGUI extends JFrame {
 			String[] grade = {"20"};
 			JOptionPane.showInputDialog(UserGUI.this,user.getName()+", how would you rate MyVelibApp out of 20?",
 					"Feedback",JOptionPane.QUESTION_MESSAGE,null,grade,grade[0]);
-			 JOptionPane.showMessageDialog(UserGUI.this, "Thank you for your feedback!", "Thank you", JOptionPane.INFORMATION_MESSAGE,img);
+			JOptionPane.showMessageDialog(UserGUI.this, "Thank you for your feedback!", "Thank you", JOptionPane.INFORMATION_MESSAGE,img);
 		}
 	}
 	
@@ -706,7 +706,7 @@ public class UserGUI extends JFrame {
 					break;
 				}
 				plannedRide.update();
-				if (user.isOnRide())
+				if (plannedRide.isLinked())
 					startBtn.setText("ONGOING...");
 				try {
 					Thread.sleep(2000);

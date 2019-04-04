@@ -58,7 +58,7 @@ public class Ride implements java.io.Serializable {
 		this.duration = new Duration(this.startTime,this.endTime);
 		this.pay();
 		if (this.user.getPlannedRide() != null) {
-			if (this.user.getPlannedRide().isOngoing()){
+			if (this.user.getPlannedRide().isLinked()){
 				this.user.discardPlannedRide();
 			}
 		}
