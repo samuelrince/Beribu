@@ -349,10 +349,12 @@ public class Travel implements java.io.Serializable {
 			cost = Double.toString(this.previsionCost)+"€";
 		
 		return  "----------------------"+"\n"+"Planned ride of "+this.user+" : "+"\n"+
-				"\n"+rentalString+startStation+"\n"+
-				"Suggested return station : "+ endStation+"\n"+
-				btype+"\n"+
-				"Estimated duration : " +duration+"\n"+
-				"Estimated cost : " +cost+"\n"+"----------------------";
+		"\n"+"From : "+this.source+"\n"+
+		"To : "+this.destination+"\n"+
+		"\n"+rentalString+startStation+"\n"+
+		"Suggested return station : "+ endStation+"\n"+
+		btype+"\n"+
+		"Estimated duration : " +duration+"\n"+
+		"Estimated cost : " +cost+"\n"+"----------------------";
 	}
 }
