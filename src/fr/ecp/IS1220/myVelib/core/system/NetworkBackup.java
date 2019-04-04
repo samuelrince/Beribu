@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchBackupExistException;
 import fr.ecp.IS1220.myVelib.core.exception.NoSuchNetworkExistException;
+import fr.ecp.IS1220.myVelib.core.*;
 
 /**
  * This class handles the network backup system.
@@ -44,7 +45,7 @@ public class NetworkBackup {
 		} catch(IOException i) {
 			throw i;
 		}
-		backupDatabase.add(file);
+		scanBackup();
 	}
 	
 	/**
@@ -119,12 +120,22 @@ public class NetworkBackup {
 	    } 
 	} 
 	
+	private static boolean backupIsInDatabase(BackupFile bf) {
+		for (BackupFile file: backupDatabase) {
+			if(bf.getFileName().equals(file.getFileName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void scanBackup() {
 		File dir = new File(directory);
 		File[] files = dir.listFiles();
 		for (File file: files) {
 			BackupFile bf = new BackupFile(file.getName());
-			backupDatabase.add(bf);
+			if (!backupIsInDatabase(bf))
+				backupDatabase.add(bf);
 		}
 	}
 	

@@ -647,7 +647,7 @@ public class UserGUI extends JFrame {
 	 * @author Valentin
 	 *
 	 */
-	public class AlertUpdate {
+	public class AlertUpdate implements java.io.Serializable {
 
 		public AlertUpdate(User user) {
 			user.getMsgBox().addObserver(this);

@@ -471,7 +471,7 @@ public class CommandLineInterpreter {
 				} catch (SuchStationIsOfflineException o) {
 					System.err.println("The station " + stationID + " is offline");
 				}
-				catch(Exception e) {System.err.println(e);}
+				catch(Exception e) {e.printStackTrace();}
 				return;
 			}
 			System.err.println("'returnBike' takes 2 arguments.");

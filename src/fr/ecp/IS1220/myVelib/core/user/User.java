@@ -36,7 +36,7 @@ public class User implements java.io.Serializable {
 	private Card card = new Standard(this);
 	private ArrayList<Ride> listOfRides = new ArrayList<Ride>();
 	private Travel plannedRide;
-	private transient MsgBox msgBox = new MsgBox(this);
+	private MsgBox msgBox = new MsgBox(this);
 	
 	/**
 	 * Constructor of User class.
